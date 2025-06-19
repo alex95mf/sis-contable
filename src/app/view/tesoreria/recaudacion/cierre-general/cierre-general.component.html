@@ -11,7 +11,7 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
         </div>
     </div>
     <div class="col-2">
-        <button [disabled]="formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Consultar reporte" (click)="getCajasDia()"><i class="fas fa-search"></i> Consultar reporte</button>
+        <button disabled="formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Consultar reporte" (click)="getCajasDia()"><i class="fas fa-search"></i> Consultar reporte</button>
     </div>
 
     <div class="col-3"></div>
@@ -105,7 +105,7 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                                 $ {{ d.totalOtro | number: '1.2-2' }}
                             </td>
                             <td class="text-center">
-                                <button [disabled]="d.estado=='A'" class="btn btn-sm btn-primary" placement="left" ngbTooltip="Reabrir caja" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                <button disabled="d.estado=='A'" class="btn btn-sm btn-primary" placement="left" ngbTooltip="Reabrir caja" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
                                 <button class="btn btn-sm btn-warning ml-1" placement="left" ngbTooltip="Inspeccionar caja" (click)="checkCaja(d)"><i class="far fa-eye"></i></button>
                             </td>
                         </tr>
@@ -432,7 +432,7 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
 
 <fieldset *ngIf="!fromGeneral" class="border py-1 px-3 my-3">
     <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Depósito de caja
-        <!-- <button [disabled]="formReadOnly" class="btn btn-sm btn-success-outline" ngbTooltip="Recargar depósitos" (click)="calcValoresDeposito()">
+        <!-- <button disabled="formReadOnly" class="btn btn-sm btn-success-outline" ngbTooltip="Recargar depósitos" (click)="calcValoresDeposito()">
             <i class="fas fa-redo"></i>
         </button> -->
     </legend>
@@ -449,17 +449,17 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
             <div class="input-group input-group-sm">
 
                 <!-- <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Cuentas bancarias</span></div>
-                <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
+                <ng-select disabled="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
                     <ng-option [value]="0" disabled>Seleccione una cuenta de banco</ng-option>
                     <ng-option *ngFor="let op of cuentasBancarias" [value]="op.cuenta_banco">{{ op.cuenta_banco }}</ng-option>
                 </ng-select> -->
                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Cuentas bancarias</span></div>
-                <ng-select [disabled]="formReadOnly || titulosDisabled || depositoDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
+                <ng-select disabled="formReadOnly || titulosDisabled || depositoDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
                     <ng-option [value]="0" disabled>Seleccione una cuenta de banco</ng-option>
                     <ng-option *ngFor="let item of listaCuentas" [value]="item">{{ item.name_banks + ' ' + item.num_cuenta}}</ng-option>
                 </ng-select>
                 <div class="col-1"></div>
-                <button [disabled]="formReadOnly || titulosDisabled || depositoDisabled" class="btn btn-sm btn-success" ngbTooltip="Agregar depósitos" (click)="agregaDepositos()"><i class="fas fa-plus"></i></button>
+                <button disabled="formReadOnly || titulosDisabled || depositoDisabled" class="btn btn-sm btn-success" ngbTooltip="Agregar depósitos" (click)="agregaDepositos()"><i class="fas fa-plus"></i></button>
             </div>
         </div>
 
@@ -493,17 +493,17 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                                 <td class="text-left">
                                     <div class="input-group input-group-sm">
 
-                                        <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                        <input type="text" maxlength="100" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                     </div>
                                 </td>
                                 <td class="text-right">
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                        <input currencyMask type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.total"  (keyup)="calcDepositoFinal()">
+                                        <input currencyMask type="text" maxlength="8" class="form-control form-control-sm text-right"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.total"  (keyup)="calcDepositoFinal()">
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="titulosDisabled || formReadOnly" (click)="removeDeposito(d)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" disabled="titulosDisabled || formReadOnly" (click)="removeDeposito(d)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </ng-container>
@@ -666,7 +666,7 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                                             $ {{ d.totalOtro | number: '1.2-2' }}
                                         </td>
                                         <td class="text-center">
-                                            <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                            <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" disabled="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
                                         </td>
                                     </tr>
                                     <tr style="font-size: 16px;" class="font-weight-bold">

@@ -10,7 +10,7 @@
                 <div class="col-sm-12">
                     <!-- <div class="input-group input-group-sm">
                         <div class="input-group-prepend "><span class="size-span-campo input-group-text font-weight-bold">Periodo</span></div>
-                        <input type="text" minlength="4" maxlength="4" class="form-control" (change)="ObtenerPeriodo($event)" placeholder="Periodo" [(ngModel)]="selected_anio" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
+                        <input type="text" minlength="4" maxlength="4" class="form-control" (change)="ObtenerPeriodo($event)" placeholder="Periodo" [(ngModel)]="selected_anio" disabled="yearDisabled" (keypress)="onlyNumber($event)">
                     </div> -->
 
 
@@ -18,7 +18,7 @@
                         <div class="input-group-prepend">
                             <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Período</span>
                         </div>
-                        <!-- <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="selected_anio" [disabled]="yearDisabled" (keypress)="onlyNumber($event)"> -->
+                        <!-- <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="selected_anio" disabled="yearDisabled" (keypress)="onlyNumber($event)"> -->
                         <ng-select class="form-control" [(ngModel)]="selected_anio" [clearable]="false"
                             [items]="cmb_periodos" bindValue="periodo" bindLabel="periodo"></ng-select>
                         <div class="input-group-append">
@@ -49,7 +49,7 @@
                             disabled
                             [(ngModel)]="mes_actual">
 
-                            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                            <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                 {{item.name}}
                             </ng-option>
                         </ng-select>

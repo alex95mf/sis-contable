@@ -21,7 +21,7 @@
             <div class="col-12 col-md-6 pt-0 pb-0">
                 <app-cc-input-group-prepend label="Nombre Trámite" styleSpan="size-span-campo font-weight-bold">
 
-                    <ng-select id="tareas" class="form-control form-control-sm" [(ngModel)]="ticketNew.fk_tipo_flujo" [disabled]="deshabilitar" (change)="getCatalogoSubCategoria($event)" maxlength="5">
+                    <ng-select id="tareas" class="form-control form-control-sm" [(ngModel)]="ticketNew.fk_tipo_flujo" disabled="deshabilitar" (change)="getCatalogoSubCategoria($event)" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione un trámite</ng-option>
                         <ng-option *ngFor="let op of tareas" [value]="op.id_flujo">{{ op.nombre }}</ng-option>
                     </ng-select>
@@ -30,7 +30,7 @@
             </div>
             <div class="col-12 col-md-3 pt-0 pb-0">
                 <app-cc-input-group-prepend label="Tipo de Tramite" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select id="subcategoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.tipo" [disabled]="deshabilitar" maxlength="5">
+                    <ng-select id="subcategoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.tipo" disabled="deshabilitar" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione una Sub Categoria</ng-option>
                         <ng-option [value]="'I'">Interno</ng-option>
                         <ng-option [value]="'E'">Externo</ng-option>
@@ -42,7 +42,7 @@
             <div class="col-12 col-md-3 pt-0 pb-0">
 
                 <app-cc-input-group-prepend label="Prioridad" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.prioridad" [disabled]="deshabilitar" maxlength="5">
+                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.prioridad" disabled="deshabilitar" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
                         <ng-option *ngFor="let op of prioridadList" [value]="op.value">{{ op.label }}</ng-option>
                     </ng-select>
@@ -56,7 +56,7 @@
                     <div class="input-group-prepend">
                         <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Contribuyente</span>
                     </div>
-                    <input class="form-control" [disabled]="deshabilitar" [(ngModel)]="ticketNew.contribuyente[0].length == 0 ? 'No hay contribuyente' : ticketNew.contribuyente[0]['razon_social']"/>
+                    <input class="form-control" disabled="deshabilitar" [(ngModel)]="ticketNew.contribuyente[0].length == 0 ? 'No hay contribuyente' : ticketNew.contribuyente[0]['razon_social']"/>
                 </div>
             </div> -->
 
@@ -64,7 +64,7 @@
         <div class="row m-0">
             <div class="col-12 col-md-12 pt-0 pb-0">
                 <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
-                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketNew.observacion" [disabled]="deshabilitar" maxlength="300"></textarea>
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketNew.observacion" disabled="deshabilitar" maxlength="300"></textarea>
                 </app-cc-input-group-prepend>
 
             </div>

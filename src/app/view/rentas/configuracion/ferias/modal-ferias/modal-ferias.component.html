@@ -3,9 +3,9 @@
     <div class="row">
         <div class="col-8">
             <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
-                <input type="text" name="" id="" class="form-control" readonly [value]="contribuyente.razon_social" [disabled]="feria.id">
+                <input type="text" name="" id="" class="form-control" readonly [value]="contribuyente.razon_social" disabled="feria.id">
                 <div class="input-group-append">
-                    <button class="btn btn-sm btn-secondary" (click)="buscarContribuyente()" [disabled]="feria.id">
+                    <button class="btn btn-sm btn-secondary" (click)="buscarContribuyente()" disabled="feria.id">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -13,7 +13,7 @@
         </div>
         <div class="col-4">
             <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
-                <input type="text" class="form-control" [(ngModel)]="feria.nombre" [disabled]="feria.id">
+                <input type="text" class="form-control" [(ngModel)]="feria.nombre" disabled="feria.id">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-4">

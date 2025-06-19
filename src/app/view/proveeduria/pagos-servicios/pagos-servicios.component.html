@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-sm-6">
                         <app-cc-input-group-prepend label="Número doc." styleSpan="size-span-campo">
-                            <input id="inpNumDoc" type="text" class="form-control form-control-sm" placeholder="Número documento" [(ngModel)]="values.num" [disabled]="values.doc === 0 || values.doc === 'No Deducible'">
+                            <input id="inpNumDoc" type="text" class="form-control form-control-sm" placeholder="Número documento" [(ngModel)]="values.num" disabled="values.doc === 0 || values.doc === 'No Deducible'">
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
@@ -40,13 +40,13 @@
                             </div>
                             <div class="input-group-prepend">
                                 <span class="input-group-text btn" id="inputLabel-prepend">
-                                    <input type="radio" id="customRadioPedido" name="customRadio"  [disabled]="!values.imp" [checked]="values.pedido" (change)="setTypeImp($event)">
+                                    <input type="radio" id="customRadioPedido" name="customRadio"  disabled="!values.imp" [checked]="values.pedido" (change)="setTypeImp($event)">
                                     &nbsp;&nbsp;Pedido
                                 </span>
                             </div>
                             <div class="input-group-prepend">
                                 <span class="input-group-text btn" id="inputLabel-prepend">
-                                    <input type="radio" id="customRadioLiq" name="customRadio" [disabled]="!values.imp" [checked]="values.liq" (change)="setTypeImp($event)">
+                                    <input type="radio" id="customRadioLiq" name="customRadio" disabled="!values.imp" [checked]="values.liq" (change)="setTypeImp($event)">
                                     &nbsp;&nbsp;Liquidación
                                 </span>                        
                             </div>
@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <app-cc-input-group-prepend label="Número Imp." styleSpan="size-span-campo">
-                            <input id="inpNumImp" type="text" class="form-control form-control-sm" placeholder="Número documento" [disabled]="values.pedido === false && values.liq === false" [(ngModel)]="values.num_imp">
+                            <input id="inpNumImp" type="text" class="form-control form-control-sm" placeholder="Número documento" disabled="values.pedido === false && values.liq === false" [(ngModel)]="values.num_imp">
                         </app-cc-input-group-prepend>
                     </div>
                     <div class="col-sm-6">
@@ -167,7 +167,7 @@
                                 (keypress)="commonServices.FormatDecimalVal($event)">
                         </td>
                         <td>
-                            <input type="text" [(ngModel)]="dt.totalParse" [disabled]="true">
+                            <input type="text" [(ngModel)]="dt.totalParse" disabled="true">
                         </td>
                     </tr>
                     <tr>

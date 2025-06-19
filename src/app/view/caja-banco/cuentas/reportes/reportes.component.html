@@ -16,7 +16,7 @@
                 <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo">
                     <ng-select id="IdVendedor" class="form-control custom" appendTo="body" [searchable]="true"
                         [clearable]="false" [(ngModel)]="beneficiario" (ngModelChange)="searchBeneficiario($event)"
-                        [disabled]="cuenta == 0">
+                        disabled="cuenta == 0">
                         <ng-option [value]="0">Seleccione beneficiario</ng-option>
                         <ng-option *ngFor="let d of arrayCheque" [value]="d.beneficiario">{{ d.beneficiario }}
                         </ng-option>
@@ -195,7 +195,7 @@
                             <app-cc-input-group-prepend label="Fecha Vencimiento" styleSpan="size-span-campo">
                                 <ejs-datepicker [(ngModel)]="fechaVencimiento" class="form-control" name="dateFrom"
                                     format='yyyy-MM-dd' (ngModelChange)="dateVencimineto()"
-                                    [disabled]="estadoCheque != 'Girado'">
+                                    disabled="estadoCheque != 'Girado'">
                                 </ejs-datepicker>
                             </app-cc-input-group-prepend>
                         </div>

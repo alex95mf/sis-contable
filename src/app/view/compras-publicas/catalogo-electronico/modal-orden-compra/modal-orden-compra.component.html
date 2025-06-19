@@ -8,7 +8,7 @@
                 <div class="input-group input-group-sm mt-2">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Proveedores</span></div>
                     <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [(ngModel)]="proveedorActive.razon_social">
-                    <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                    <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -47,7 +47,7 @@
                 <!-- <div class="input-group input-group-sm mt-2">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Admin de Compra</span></div>
                     <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Admin Compra" (click)="expandListAdminCompra()" [value]="adminActive" [(ngModel)]="adminActive.nombre">
-                    <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListAdminCompra()" placement="bottom" ngbTooltip="Buscar Admin de Compra">
+                    <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListAdminCompra()" placement="bottom" ngbTooltip="Buscar Admin de Compra">
                         <i class="fas fa-search"></i>
                     </button>
                 </div> -->

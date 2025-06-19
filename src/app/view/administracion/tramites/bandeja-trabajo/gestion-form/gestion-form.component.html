@@ -39,7 +39,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Prioridad</span>
                                 </div>
-                                <ng-select id="categoria" class="form-control form-control-sm" readonly [(ngModel)]="tramite.prioridad" [disabled]="deshabilitar" maxlength="5">
+                                <ng-select id="categoria" class="form-control form-control-sm" readonly [(ngModel)]="tramite.prioridad" disabled="deshabilitar" maxlength="5">
                                     <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
                                     <ng-option *ngFor="let op of prioridadList" [value]="op.value">
                                         <i

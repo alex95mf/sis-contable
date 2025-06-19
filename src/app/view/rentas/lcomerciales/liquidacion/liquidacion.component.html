@@ -6,7 +6,7 @@
                 <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" readonly class="form-control" [placeholder]="contribuyente?.razon_social">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" matTooltip="Buscar Contribuyente" (click)="expandContribuyentes()" [disabled]="formReadonly">
+                        <button class="btn btn-primary" matTooltip="Buscar Contribuyente" (click)="expandContribuyentes()" disabled="formReadonly">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -16,7 +16,7 @@
                 <app-cc-input-group-prepend label="Orden de Inspecci&oacute;n" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" readonly class="form-control" [placeholder]="orden_inspeccion?.numero_orden">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" matTooltip="Buscar Orden de Inspeccion" (click)="expandOrdenInspeccion()" [disabled]="!contribuyenteSelected">
+                        <button class="btn btn-primary" matTooltip="Buscar Orden de Inspeccion" (click)="expandOrdenInspeccion()" disabled="!contribuyenteSelected">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -116,7 +116,7 @@
         <div class="row mb-2">
             <div class="col">
                 <span class="h3">Conceptos</span>
-                <button class="float-right btn btn-sm btn-success" matTooltip="Seleccionar Impuestos" (click)="expandImpuestos()" [disabled]="!ordenInspeccionSelected">
+                <button class="float-right btn btn-sm btn-success" matTooltip="Seleccionar Impuestos" (click)="expandImpuestos()" disabled="!ordenInspeccionSelected">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -146,7 +146,7 @@
                             <td class="text-right">
                                 <!-- Comentario -->
                                 <div class="input-group input-group-sm">
-                                    <input type="text" maxlength="50" class="form-control form-control-sm" [disabled]="formReadonly || conceptosDisabled" [(ngModel)]="d.comentario" [readonly]="formReadonly" > 
+                                    <input type="text" maxlength="50" class="form-control form-control-sm" disabled="formReadonly || conceptosDisabled" [(ngModel)]="d.comentario" [readonly]="formReadonly" > 
                                 </div>
                             </td>
                             <td>$ {{ d.total | number:'1.2-2' }}</td>
@@ -163,10 +163,10 @@
                                     <!-- <button *ngIf="d.exoneraciones.length > 0" class="btn btn-sm btn-warning align-self-center" matTooltip="Revisar Exoneraciones" (click)="expandDetalles(d)">
                                         <i class="fas fa-eye"></i>
                                     </button> -->
-                                    <button class="btn btn-sm btn-secondary align-self-center" matTooltip="Agregar Exoneracion" (click)="expandExoneraciones(d, i)" [disabled]="formReadonly">
+                                    <button class="btn btn-sm btn-secondary align-self-center" matTooltip="Agregar Exoneracion" (click)="expandExoneraciones(d, i)" disabled="formReadonly">
                                         <i class="fas fa-plus"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-outline-danger align-self-center ml-1" matTooltip="Remover Concepto" [disabled]="formReadonly || conceptosDisabled" (click)="removeConcepto(i)">
+                                    <button class="btn btn-sm btn-outline-danger align-self-center ml-1" matTooltip="Remover Concepto" disabled="formReadonly || conceptosDisabled" (click)="removeConcepto(i)">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </div>

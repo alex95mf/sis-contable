@@ -35,7 +35,7 @@
         <div class="row my-2">
             <div class="col-4">
                 <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select class="form-control" [(ngModel)]="at_tipo" [disabled]="formReadOnly">
+                    <ng-select class="form-control" [(ngModel)]="at_tipo" disabled="formReadOnly">
                         <ng-option [value]="0" disabled>Seleccione un Tipo de Contrato</ng-option>
                         <ng-option value="P">PRIMERA VEZ</ng-option>
                         <ng-option value="R">RENOVACION</ng-option>
@@ -43,7 +43,7 @@
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Tipo</span></div>
-                    <ng-select class="form-control" [(ngModel)]="at_tipo" [disabled]="formReadOnly">
+                    <ng-select class="form-control" [(ngModel)]="at_tipo" disabled="formReadOnly">
                         <ng-option [value]="0" disabled>Seleccione un Tipo de Contrato</ng-option>
                         <ng-option value="P">PRIMERA VEZ</ng-option>
                         <ng-option value="R">RENOVACION</ng-option>
@@ -52,22 +52,22 @@
             </div>
             <div class="col-4">
                 <app-cc-input-group-prepend label="Num. Contrato" styleSpan="size-span-campo font-weight-bold">
-                    <input type="text" class="form-control" [(ngModel)]="at_contrato" [disabled]="formReadOnly">
+                    <input type="text" class="form-control" [(ngModel)]="at_contrato" disabled="formReadOnly">
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Num.
                             Contrato</span></div>
-                    <input type="text" class="form-control" [(ngModel)]="at_contrato" [disabled]="formReadOnly">
+                    <input type="text" class="form-control" [(ngModel)]="at_contrato" disabled="formReadOnly">
 
                 </div> -->
             </div>
             <div class="col-4">
                 <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
-                    <input type="text" class="form-control" minlength="4" maxlength="4" [(ngModel)]="periodo" [disabled]="formReadOnly">
+                    <input type="text" class="form-control" minlength="4" maxlength="4" [(ngModel)]="periodo" disabled="formReadOnly">
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Período</span></div>
-                    <input type="text" class="form-control" minlength="4" maxlength="4" [(ngModel)]="periodo" [disabled]="formReadOnly">
+                    <input type="text" class="form-control" minlength="4" maxlength="4" [(ngModel)]="periodo" disabled="formReadOnly">
                 </div> -->
             </div>
         </div>  
@@ -76,7 +76,7 @@
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text size-span-campo ">Contribuyente</span></div>
                     <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
-                    <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                    <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -84,11 +84,11 @@
             <div class="col-6">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text size-span-campo">Propiedad</span></div>
-                    <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                    <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                         <ng-option disabled [value]="0">Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                     </ng-select>
-                    <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                    <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                         <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                     </ng-select>
                 </div>
@@ -226,7 +226,7 @@
                 <h5 class="mb-0 text-dark">Exoneraciones</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" [disabled]="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" disabled="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -262,7 +262,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -299,11 +299,11 @@
             <div class="col-5">
                 <!-- <div class="input-group input-group-lg input-group-total">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">STA</span></div>
-                    <input currencyMask class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="liquidacion.sta" (ngModelChange)="calcSubtotal_2()" [disabled]="formReadOnly || staArri">
+                    <input currencyMask class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="liquidacion.sta" (ngModelChange)="calcSubtotal_2()" disabled="formReadOnly || staArri">
                 </div> -->
                 <div class="input-group input-group-lg input-group-total my-2">
                     <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >STA</span></div>
-                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.sta" (ngModelChange)="calcSubtotal_2()" [disabled]="formReadOnly || staArri">
+                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.sta" (ngModelChange)="calcSubtotal_2()" disabled="formReadOnly || staArri">
                 </div>
             </div>
         </div>

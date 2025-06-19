@@ -20,7 +20,7 @@ filtroBoton="btnsRecCierraCaja" [groupButton]="vmButtons" (onMetodoGlobal)="meto
     <div class="col-3">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Efectivo final</span></div>
-            <input readonly [disabled]="formReadOnly" type="text" class="form-control form-control-sm" (keypress)="commonService.FormatDecimalVal($event)" [(ngModel)]="caja_dia.total_efectivo_cierre_final" maxlength="7">
+            <input readonly disabled="formReadOnly" type="text" class="form-control form-control-sm" (keypress)="commonService.FormatDecimalVal($event)" [(ngModel)]="caja_dia.total_efectivo_cierre_final" maxlength="7">
         </div>
     </div>
 
@@ -153,7 +153,7 @@ filtroBoton="btnsRecCierraCaja" [groupButton]="vmButtons" (onMetodoGlobal)="meto
 
 <fieldset class="border py-1 px-3 my-3">
     <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Reporte diario
-        <button [disabled]="formReadOnly" class="btn btn-sm btn-success-outline" ngbTooltip="Recargar reporte diario" (click)="getRecibosDia()">
+        <button disabled="formReadOnly" class="btn btn-sm btn-success-outline" ngbTooltip="Recargar reporte diario" (click)="getRecibosDia()">
             <i class="fas fa-redo"></i>
         </button>  
     </legend>
@@ -350,12 +350,12 @@ filtroBoton="btnsRecCierraCaja" [groupButton]="vmButtons" (onMetodoGlobal)="meto
             <div class="input-group input-group-sm">
                 
                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Cuentas bancarias</span></div>
-                <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
+                <ng-select disabled="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
                     <ng-option [value]="0" disabled>Seleccione una cuenta de banco</ng-option>
                     <ng-option *ngFor="let op of cuentasBancarias" [value]="op.cuenta_banco">{{ op.cuenta_banco }}</ng-option>
                 </ng-select>
                 <div class="col-1"></div>
-                <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-success" ngbTooltip="Agregar depósitos" (click)="agregaDepositos()"><i class="fas fa-plus"></i></button>
+                <button disabled="formReadOnly || titulosDisabled" class="btn btn-sm btn-success" ngbTooltip="Agregar depósitos" (click)="agregaDepositos()"><i class="fas fa-plus"></i></button>
             </div>
         </div>
     
@@ -385,17 +385,17 @@ filtroBoton="btnsRecCierraCaja" [groupButton]="vmButtons" (onMetodoGlobal)="meto
                                 <td class="text-left">
                                     <div class="input-group input-group-sm">
                                         
-                                        <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                        <input type="text" maxlength="100" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                     </div>
                                 </td>
                                 <td class="text-right">                                
                                     <div class="input-group input-group-sm">             
                                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
-                                        <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.total" (keypress)="commonService.FormatDecimalVal($event)" (keyup)="calcDepositoFinal()">
+                                        <input type="text" maxlength="8" class="form-control form-control-sm text-right"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.total" (keypress)="commonService.FormatDecimalVal($event)" (keyup)="calcDepositoFinal()">
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="titulosDisabled || formReadOnly" (click)="removeDeposito(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" disabled="titulosDisabled || formReadOnly" (click)="removeDeposito(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </ng-container>

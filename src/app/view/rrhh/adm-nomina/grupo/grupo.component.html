@@ -6,14 +6,14 @@
         <div class="col-sm-6">
             <app-cc-input-group-prepend label="Nombre Grupo" styleSpan="size-span-campo">
                 <input placeholder="Ingrese Nombre" type="text" #nom="ngModel" name="nom" [(ngModel)]="noms" class="form-control form-control-sm" 
-                [disabled]="permisions[0].editar == '0' || dusuario" id="Idnombre">
+                disabled="permisions[0].editar == '0' || dusuario" id="Idnombre">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-6">
             <app-cc-input-group-prepend label="Comisiona" styleSpan="size-span-campo">                  
                 <div class=" switch-container">
                     <div class="onoffswitch">
-                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" [disabled]="permisions[0].editar == '0' || dusuario  " id="myonoffswitch" checked [(ngModel)]="checkAuth" (click)="setCheck(checkAuth)">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" disabled="permisions[0].editar == '0' || dusuario  " id="myonoffswitch" checked [(ngModel)]="checkAuth" (click)="setCheck(checkAuth)">
                         <label class="onoffswitch-label" for="myonoffswitch">
                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>

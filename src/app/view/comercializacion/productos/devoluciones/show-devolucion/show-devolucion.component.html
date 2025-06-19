@@ -49,12 +49,12 @@
                                             <div class="text-center">
                                                 <button class="btn btn-danger btn-sm" (click)="deleteDevolucion(dt)"
                                                     placement="top" ngbTooltip="Eliminar devolución"
-                                                    [disabled]="dt.estado_dev == 'Anulado' || dt.estado_dev == 'Aprobado'">
+                                                    disabled="dt.estado_dev == 'Anulado' || dt.estado_dev == 'Aprobado'">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                                 <button class="btn btn-primary btn-sm" (click)="editarDevolucion(dt)"
                                                     placement="left" ngbTooltip="Editar devolución"
-                                                    [disabled]="dt.estado_dev == 'Anulado'">
+                                                    disabled="dt.estado_dev == 'Anulado'">
                                                     <i class="far fa-edit"></i>
                                                 </button>
                                             </div>

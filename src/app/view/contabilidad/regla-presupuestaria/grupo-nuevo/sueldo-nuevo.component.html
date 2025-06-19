@@ -62,7 +62,7 @@
           <input type="text" class="form-control" readonly [(ngModel)]="cuenta_contable_cobro"
             placeholder="Cuenta Contable" maxlength="15">
           <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('4')" [ngReadonly]="isdebe && tipo == 'GENERAL'"
-            [disabled]="isdebe && tipo == 'GENERAL'">
+            disabled="isdebe && tipo == 'GENERAL'">
             Consultar</button>
             <button class="btn btn-warning  btn-sm" (click)="cuenta_contable_cobro = ''">
               <i class="fas fa-trash-alt"></i> 
@@ -75,7 +75,7 @@
           <input type="text" class="form-control" readonly [(ngModel)]="cuenta_contable_pago"
             placeholder="Cuenta Contable" maxlength="15">
           <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('5')" [readonly]="ishaber && tipo == 'GENERAL'"
-            [disabled]="ishaber && tipo == 'GENERAL'">
+            disabled="ishaber && tipo == 'GENERAL'">
             Consultar</button>
             <button class="btn btn-warning  btn-sm" (click)="cuenta_contable_pago = ''">
               <i class="fas fa-trash-alt"></i> 

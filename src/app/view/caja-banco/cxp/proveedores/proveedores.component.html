@@ -66,14 +66,14 @@
                                 </button>
                                 <button class="btn btn-sm"  
                                     (click)="showRetencion(idx)" type="button"
-                                    [disabled]="el.purchase['retencion'] === 1 || 
+                                    disabled="el.purchase['retencion'] === 1 || 
                                     el.valor_saldo === 0 || el.cxp_cab.type == 'ImPedido' || el.cxp_cab.type == 'ImGastos' "
                                     style="background-color: #f0601d; color: rgb(241, 239, 239);" placement="left"
                                     matTooltip="Retención">
                                     <i class="fas fa-file-invoice"></i>
                                 </button>
                                 <button class="btn btn-sm" (click)="showLetter(idx)" type="button"
-                                    [disabled]="el.valor_abono === el.valor && el.valor_saldo === 0"
+                                    disabled="el.valor_abono === el.valor && el.valor_saldo === 0"
                                     style="background-color: #16c210; color: white;" placement="left"
                                     matTooltip="Pagar letra">
                                     <i class="fa fa-usd"></i>
@@ -344,7 +344,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <app-cc-input-group-prepend label="Razón Social/Nombres y Apellidos">
-                                <input id="inpRazonSocial" type="text" class="form-control" [disabled]="true"
+                                <input id="inpRazonSocial" type="text" class="form-control" disabled="true"
                                     [(ngModel)]="contacts['purchase']['proveedor']['razon_social']">
                             </app-cc-input-group-prepend>
                         </div>
@@ -361,13 +361,13 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <app-cc-input-group-prepend label="Identificación" styleSpan="size-span-campo">
-                                <input id="inpDNI" type="text" class="form-control" [disabled]="true"
+                                <input id="inpDNI" type="text" class="form-control" disabled="true"
                                     [(ngModel)]="contacts['purchase']['proveedor']['document']">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-6">
                             <app-cc-input-group-prepend label="Fecha Emisión" styleSpan="size-span-campo">
-                                <input id="inpEmision" type="text" class="form-control" [disabled]="true"
+                                <input id="inpEmision" type="text" class="form-control" disabled="true"
                                     [(ngModel)]="contacts['purchase']['fecha']">
                             </app-cc-input-group-prepend>
                         </div>
@@ -375,23 +375,23 @@
                     <div class="row">
                         <div class="col-sm-2">
                             <app-cc-input-group-prepend label="Monto">
-                                <input id="inpMonto" type="text" class="form-control text-right" [disabled]="true"
+                                <input id="inpMonto" type="text" class="form-control text-right" disabled="true"
                                     [(ngModel)]="calculate.monto">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-2">
                             <app-cc-input-group-prepend label="Base">
-                                <input id="inptIva" type="text" class="form-control text-right" [disabled]="true"
+                                <input id="inptIva" type="text" class="form-control text-right" disabled="true"
                                     [(ngModel)]="calculate.iva">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-2">
                             <app-cc-input-group-prepend label="Valor">
-                                <input id="inpValue" type="text" class="form-control text-right" [disabled]="true"
+                                <input id="inpValue" type="text" class="form-control text-right" disabled="true"
                                     [(ngModel)]="calculate.parseValue">
 
                                 <div class="input-group-prepend">
-                                    <button class="btn btn-sm btn-success" [disabled]="values.method === 0"
+                                    <button class="btn btn-sm btn-success" disabled="values.method === 0"
                                         (click)="addRetencion()">
                                         <i class="fas fa-plus"></i>
                                     </button>

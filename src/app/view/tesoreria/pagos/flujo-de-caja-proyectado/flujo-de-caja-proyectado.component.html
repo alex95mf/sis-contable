@@ -6,12 +6,12 @@
         <div class="row  text-right justify-content-end mt-2">
             <div class="col-sm-2 text-right">
                 <div class="input-group input-group-sm">
-                    <button [disabled]="btnDisabled" class="btn btn-sm btn-primary" (click)="cargarPlantilla()"><i class="fas fa-upload"></i> Cargar Flujo Caja</button>
+                    <button disabled="btnDisabled" class="btn btn-sm btn-primary" (click)="cargarPlantilla()"><i class="fas fa-upload"></i> Cargar Flujo Caja</button>
                 </div>
             </div>
             <div class="col-sm-2 text-right ">
                 <div class="input-group input-group-sm">
-                    <button class="btn btn-sm btn-success" (click)="descargarFlujoCaja()" [disabled]="reporte.length==0"><i class="fas fa-download"></i> Descargar Flujo Caja</button>
+                    <button class="btn btn-sm btn-success" (click)="descargarFlujoCaja()" disabled="reporte.length==0"><i class="fas fa-download"></i> Descargar Flujo Caja</button>
                 </div>
             </div>
 
@@ -21,7 +21,7 @@
             <!-- <div class="col-3">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Periodo</span></div>
-                    <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Ingresa un Período" [(ngModel)]="periodo" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
+                    <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Ingresa un Período" [(ngModel)]="periodo" disabled="yearDisabled" (keypress)="onlyNumber($event)">
                 </div>
             </div> -->
 
@@ -65,7 +65,7 @@
                         disabled
                         [(ngModel)]="mes_actual">
 
-                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                        <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                             {{item.name}}
                         </ng-option>
                     </ng-select>
@@ -77,7 +77,7 @@
                         <span class="input-group-text size-span-campo">Archivos</span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xlsx" (change)="onFileChange($event)" [disabled]="fileValid || reporte.length==0">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xlsx" (change)="onFileChange($event)" disabled="fileValid || reporte.length==0">
                         <label class="custom-file-label" for="inputGroupFile01">{{ file ? file.name : "Seleccione un archivo" }}</label>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                                 <!-- <td class="text-right "  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.total | number:'1.2-2' }}</b></td>          -->
 
                                 <!-- <td class="text-center">
-                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" disabled="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
                                 </td> -->
                             </tr>
                         </tbody>

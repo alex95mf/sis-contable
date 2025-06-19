@@ -33,7 +33,7 @@
                                     </div>
                                     <input type="text" #nameAccountM="ngModel" name="nameAccountM"
                                         [(ngModel)]="nameAccountMayor" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="Nombre cuenta mayor">
+                                        disabled="true" placeholder="Nombre cuenta mayor">
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                                             id="inputGroup-sizing-sm">Saldo</span>
                                     </div>
                                     <input type="text" [(ngModel)]="saldoAccountMayor"
-                                        class="form-control form-control-sm text-right" [disabled]="true"
+                                        class="form-control form-control-sm text-right" disabled="true"
                                         [ngClass]="{'saldoOne':validaSaldo, 'saldoTwo':!validaSaldo}">
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                     </div>
                                     <input type="text" #saldolAccountM="ngModel" placeholder="Denominación moneda"
                                         name="saldolAccountM" [(ngModel)]="valueDivisa"
-                                        class="form-control form-control-sm" [disabled]="true"
+                                        class="form-control form-control-sm" disabled="true"
                                         [ngClass]="{'saldoOne':validaSaldo, 'saldoTwo':!validaSaldo}">
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                     </div>
                                     <input type="text" #nivelAccountM="ngModel" name="nivelAccountM"
                                         [(ngModel)]="nivelAccountMayor" class="form-control form-control-sm inp"
-                                        [disabled]="true" placeholder="Nivel de la cuenta">
+                                        disabled="true" placeholder="Nivel de la cuenta">
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                     </div>
                                     <input type="text" #tipeAccountM="ngModel" name="tipeAccountM"
                                         [(ngModel)]="tipeAccountMayor" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="Tipo de cuenta">
+                                        disabled="true" placeholder="Tipo de cuenta">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -93,7 +93,7 @@
                                     </div>
                                     <input type="text" #tipeAccountM="ngModel" name="tipeAccountM"
                                         [(ngModel)]="claseAccountMayor" placeholder="Clase de la cuenta"
-                                        class="form-control form-control-sm" [disabled]="true">
+                                        class="form-control form-control-sm" disabled="true">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -104,7 +104,7 @@
                                     </div>
                                     <input type="text" #estlAccountM="ngModel" name="estlAccountM"
                                         [(ngModel)]="estadoAccountMayor" class="form-control form-control-sm inp"
-                                        [disabled]="true" placeholder="Estado de la cuenta">
+                                        disabled="true" placeholder="Estado de la cuenta">
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                                     </div>
                                     <input type="text" 
                                         [(ngModel)]="numCatalogoPresupuestoCon" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="codigo presupuesto">
+                                        disabled="true" placeholder="codigo presupuesto">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -128,7 +128,7 @@
                                     </div>
                                     <input type="text" 
                                         [(ngModel)]="nameCatalogoPresupuestoCon" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="nombre codigo presupuesto">
+                                        disabled="true" placeholder="nombre codigo presupuesto">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -139,7 +139,7 @@
                                     </div>
                                     <input type="text" 
                                         [(ngModel)]="iSgubenamentalCon" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="cuenta gubernamental">
+                                        disabled="true" placeholder="cuenta gubernamental">
                                 </div>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                                     </div>
                                     <input type="text"
                                         [(ngModel)]="numaccountCierreCon" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="codigo cuenta de cierre">
+                                        disabled="true" placeholder="codigo cuenta de cierre">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -164,7 +164,7 @@
                                     </div>
                                     <input type="text"  
                                         [(ngModel)]="nameAccountCierreCon" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="Nombre cuenta de cierre">
+                                        disabled="true" placeholder="Nombre cuenta de cierre">
                                 </div>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                                     </div>
                                     <input type="text" #cueAccount="ngModel" name="cueAccount"
                                         [(ngModel)]="cuentaAccount" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="Nuevo código de cuenta">
+                                        disabled="true" placeholder="Nuevo código de cuenta">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -197,7 +197,7 @@
                                             id="inputGroup-sizing-sm">Nombre:</span>
                                     </div>
                                     <input type="text" #namAccount="ngModel" name="namAccount" [(ngModel)]="nameAccount"
-                                        class="form-control form-control-sm" [disabled]="!newAcc" id="IdnameAccount"
+                                        class="form-control form-control-sm" disabled="!newAcc" id="IdnameAccount"
                                         placeholder="Nuevo nombre de cuenta">
                                 </div>
                             </div>
@@ -227,7 +227,7 @@
                                     </div>
                                     <input type="text" 
                                         [(ngModel)]="nameCatalogoPresupuesto" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="Nombre codigo presupuestario">
+                                        disabled="true" placeholder="Nombre codigo presupuestario">
                                 </div>
                             </div>
                         </div>
@@ -256,7 +256,7 @@
                                     </div>
                                     <input type="text" 
                                         [(ngModel)]="nameCatalogoPresupuestoHaber" class="form-control form-control-sm"
-                                        [disabled]="true" placeholder="Nombre codigo presupuestario haber">
+                                        disabled="true" placeholder="Nombre codigo presupuestario haber">
                                 </div>
                             </div>
                         </div>
@@ -288,7 +288,7 @@
                                     </div>
                                     <input type="text" #levelAccount="ngModel" name="levelAccount"
                                         placeholder="Nuevo nivel de cuenta" [(ngModel)]="nivelAccount"
-                                        class="form-control form-control-sm" [disabled]="true">
+                                        class="form-control form-control-sm" disabled="true">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -372,7 +372,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="mt-1">
-                                    <button class="btn btn-action btn-sm" (click)="nuevaReglaPresupuestaria()" [disabled]="numAccountMayor == undefined">
+                                    <button class="btn btn-action btn-sm" (click)="nuevaReglaPresupuestaria()" disabled="numAccountMayor == undefined">
                                         Cuentas Complementarias
                                     </button>
                                 </div>

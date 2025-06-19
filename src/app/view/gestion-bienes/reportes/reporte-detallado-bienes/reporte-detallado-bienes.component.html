@@ -34,7 +34,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Año de Ingreso" styleSpan="size-span-campo font-weight-bold">
                                 <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="anio_ingreso" id="idNominaDatef"
-                                (change)="ChangeFechaCompras($event)" [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" [disabled]="busqueda">
+                                (change)="ChangeFechaCompras($event)" [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" disabled="busqueda">
                                 </ng-select>
                             </app-cc-input-group-prepend>
                             <!-- <app-cc-input-group-prepend label="Año de Ingreso" styleSpan="size-span-campo font-weight-bold">
@@ -46,7 +46,7 @@
                                     id="idNominaDatef" 
                                     class="ui-calendar ui-calendar-button"
                                     [showIcon]="true" inputId="icon" 
-                                    [disabled]="busqueda" 
+                                    disabled="busqueda" 
                                     [style]="{'height':'30px','display': 'inline-flex'}" 
                                     [inputStyle]="{'height':'30px','width':'12rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}"
                                 >
@@ -75,10 +75,10 @@
                                 <input placeholder="Ubicación" type="text" #departamento="ngModel"
                                 name="departamento" readonly [(ngModel)]="departamentoSelect.dep_nombre" 
                                 class="form-control form-control-sm" 
-                                id="departamento" [disabled]="false">
+                                id="departamento" disabled="false">
                             
                                 <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" 
-                                    style="box-shadow: unset;outline: unset;" [disabled]="false">
+                                    style="box-shadow: unset;outline: unset;" disabled="false">
                                     Buscar
                                 </button>
                             </app-cc-input-group-prepend>
@@ -88,7 +88,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Custodio" styleSpan="size-span-campo font-weight-bold">
                                 <input class="form-control form-control-sm" [(ngModel)]="UserSelect" readonly placeholder="Custodio "/>
-                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(2)" [disabled]="false">Buscar</button>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(2)" disabled="false">Buscar</button>
             
                             </app-cc-input-group-prepend>
                         </div>
@@ -100,10 +100,10 @@
                                 <input placeholder="Ubicación" type="text" #departamento="ngModel"
                                 name="departamento" readonly [(ngModel)]="departamentoSelectRes.dep_nombre" 
                                 class="form-control form-control-sm" 
-                                id="departamento" [disabled]="false">
+                                id="departamento" disabled="false">
                             
                                 <button class="btn btn-primary btn-sm" (click)="modalDepartamentosResponsable()" 
-                                    style="box-shadow: unset;outline: unset;" [disabled]="false">
+                                    style="box-shadow: unset;outline: unset;" disabled="false">
                                     Buscar
                                 </button>
                             </app-cc-input-group-prepend>
@@ -112,7 +112,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Responsable" styleSpan="size-span-campo font-weight-bold">
                                 <input class="form-control form-control-sm" [(ngModel)]="UserSelectResponsable" readonly placeholder="Responsable "/>
-                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(4)" [disabled]="false">Buscar</button>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(4)" disabled="false">Buscar</button>
             
                             </app-cc-input-group-prepend>
                         </div>

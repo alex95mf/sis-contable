@@ -6,10 +6,10 @@
                     <app-cc-input-group-prepend label="N&uacute;mero" styleSpan="size-span-print">
                         <input type="text" class="form-control" readonly [value]="liquidacion.id">
                         <div class="input-group-append">
-                           <button class="btn btn-action" (click)="getAnterior()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                           <button class="btn btn-action" (click)="getAnterior()" matTooltip="Registro Anterior" disabled="lastRecord == null">
                                <i class="far fa-chevron-left"></i>
                            </button>
-                           <button class="btn btn-action" (click)="getSiguiente()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                           <button class="btn btn-action" (click)="getSiguiente()" matTooltip="Registro Siguiente" disabled="lastRecord == null">
                                <i class="far fa-chevron-right"></i>
                            </button>
                            <button class="btn btn-action" (click)="getUltimoRegistro()" matTooltip="Ultimo Registro">
@@ -31,7 +31,7 @@
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="font-size: 11px;">Contribuyente</span></div>
                     <input type="text" class="form-control" disabled placeholder="Seleccione un Contribuyente" [(ngModel)]="liquidacion.contribuyente.razonSocial">
                     <div class="input-group-append">
-                        <button [disabled]="$any(this).formDisabled" class="btn btn-info btn-sm" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                        <button disabled="$any(this).formDisabled" class="btn btn-info btn-sm" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -44,14 +44,14 @@
                     <input disabled type="date" class="form-control form-control-sm" [(ngModel)]="liquidacion.fecha">
                 </div> -->
                 <app-cc-input-group-prepend label="Fecha" styleSpan="font-weight-bold size-span-campo">
-                    <input type="date" [disabled]="selectConcepto" class="form-control" [(ngModel)]="liquidacion.fecha">
+                    <input type="date" disabled="selectConcepto" class="form-control" [(ngModel)]="liquidacion.fecha">
                 </app-cc-input-group-prepend>
             </div>
         </div>
         <div class="row my-2">
             <div class="col-3">
                 <app-cc-input-group-prepend label="Concepto" styleSpan="font-weight-bold size-span-print">
-                    <ng-select [disabled]="selectConcepto" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="liquidacion.concepto" (change)="validarBoton($event)">
+                    <ng-select disabled="selectConcepto" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="liquidacion.concepto" (change)="validarBoton($event)">
                         <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
                         <ng-option *ngFor="let c of conceptos" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
                     </ng-select>
@@ -81,7 +81,7 @@
         <div class="row my-2">
             <div class="col-6">
                 <app-cc-input-group-prepend label="Observaciones" styleSpan="font-weight-bold bg-dark size-span-campo">
-                    <textarea [disabled]="$any(this).formDisabled" cols="30" rows="3" class="form-control" [(ngModel)]="liquidacion.observaciones"></textarea>
+                    <textarea disabled="$any(this).formDisabled" cols="30" rows="3" class="form-control" [(ngModel)]="liquidacion.observaciones"></textarea>
                 </app-cc-input-group-prepend>
             </div>
         </div>
@@ -90,7 +90,7 @@
                 <h5 class="mb-0 text-dark">Detalle</h5>
             </div>
             <div class="col text-right">
-                <button id="button-add-detalle" [disabled]="concDisabled || formDisabled" class="btn btn-success btn-sm" ngbTooltip="Agregar detalles para liquidación" (click)="seleccionarDetalles(liquidacion.concepto)">
+                <button id="button-add-detalle" disabled="concDisabled || formDisabled" class="btn btn-success btn-sm" ngbTooltip="Agregar detalles para liquidación" (click)="seleccionarDetalles(liquidacion.concepto)">
                     <i class="far fa-plus"></i>
                 </button>
             </div>
@@ -117,7 +117,7 @@
                                 <td>{{ d.descripcion }}</td>
                                 <td>$ {{ d.valor | number:'1.2-2' }}</td>
                                 <td>$ {{ d.total | number:'1.2-2' }}</td>
-                                <td *ngIf="d.id != undefined"><button class="btn btn-sm btn-danger" [disabled]="!queryMode"><i class="far fa-trash-alt"></i></button></td>
+                                <td *ngIf="d.id != undefined"><button class="btn btn-sm btn-danger" disabled="!queryMode"><i class="far fa-trash-alt"></i></button></td>
                                 <td *ngIf="d.id == undefined"><button class="btn btn-sm btn-danger" (click)="eliminarDetalle(d, i)"><i class="far fa-trash-alt"></i></button></td>
                             </tr>
                         </tbody>
@@ -142,7 +142,7 @@
             </div>
             <div class="col text-right">
 
-                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"  (click)="expandExoneracion()" [disabled]="concDisabled || formDisabled">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"  (click)="expandExoneracion()" disabled="concDisabled || formDisabled">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -178,7 +178,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <td class="text-right text-danger">$ -{{ (d.valor | number: '1.2-2') ?? 0 }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración"  [disabled]="concDisabled || formDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración"  disabled="concDisabled || formDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -192,7 +192,7 @@
             </div>
             <div class="col text-right">
 
-                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"  (click)="expandExoneracion()"  [disabled]="concDisabled || formDisabled">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"  (click)="expandExoneracion()"  disabled="concDisabled || formDisabled">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -228,7 +228,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <td class="text-right text-danger">$ -{{ (d.valor ?? 0 | number: '1.2-2') }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración"  [disabled]="concDisabled || formDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración"  disabled="concDisabled || formDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -269,7 +269,7 @@
             <div class="col-4">
                 <div class="input-group input-group-lg input-group-total">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">STA</span></div>
-                    <input type="number" class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="liquidacion.sta" (keyup)="calcular()" [disabled]="$any(this).formDisabled">
+                    <input type="number" class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="liquidacion.sta" (keyup)="calcular()" disabled="$any(this).formDisabled">
                 </div>
             </div>
         </div> -->
@@ -277,7 +277,7 @@
             <div class="col-5">
                 <div class="input-group input-group-sm input-group-total">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">STA</span></div>
-                    <input currencyMask class="form-control form-control-lg font-weight-bold" [readonly]="conceptoSta" [(ngModel)]="liquidacion.sta" (keyup)="calcular()" [disabled]="$any(this).formDisabled">
+                    <input currencyMask class="form-control form-control-lg font-weight-bold" [readonly]="conceptoSta" [(ngModel)]="liquidacion.sta" (keyup)="calcular()" disabled="$any(this).formDisabled">
                 </div>
             </div>
         </div>

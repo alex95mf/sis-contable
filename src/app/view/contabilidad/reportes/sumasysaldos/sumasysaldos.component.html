@@ -54,7 +54,7 @@
                             disabled
                             [(ngModel)]="mes_actual">
 
-                            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                            <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                 {{item.name}}
                             </ng-option>
                         </ng-select>
@@ -81,7 +81,7 @@
                         appendTo="body" [searchable]="true"
                         [(ngModel)]="nivelSeleccionado"
                         [clearable]="true"
-                        [disabled]="permisions[0].editar == '0'">
+                        disabled="permisions[0].editar == '0'">
                         <!-- (ngModelChange)="rerender($event)"  -->
                             <!--<ng-option value="">Seleccione Nivel</ng-option>-->
                             <ng-option *ngFor="let d of lstNiveles" [value]="d">{{d}}</ng-option>
@@ -105,7 +105,7 @@
 
                 <div class="col-sm-3">
                     <app-cc-input-group-prepend label="Clase" styleSpan="size-span-otro">
-                        <ng-select  class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="claseSeleccionado" (ngModelChange)="rerender($event)" [clearable]="false" [disabled]="permisions[0].editar == '0'">
+                        <ng-select  class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="claseSeleccionado" (ngModelChange)="rerender($event)" [clearable]="false" disabled="permisions[0].editar == '0'">
                             <ng-option value="">SELECCIONAR CLASE</ng-option>
                             <ng-option value="DEUDORA">DEUDORA</ng-option>
                             <ng-option value="ACREEDORA">ACREEDORA</ng-option>
@@ -114,7 +114,7 @@
                 </div>
                 <div class="col-sm-3">
                     <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-otro">
-                        <ng-select  class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="grupoSeleccionado" (ngModelChange)="rerender($event)" [clearable]="false" [disabled]="permisions[0].editar == '0'">
+                        <ng-select  class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="grupoSeleccionado" (ngModelChange)="rerender($event)" [clearable]="false" disabled="permisions[0].editar == '0'">
                             <ng-option value="">SELECCIONAR GRUPO</ng-option>
                             <ng-option *ngFor="let d of groupAccount" [value]="d.grupo">{{d.grupo}}</ng-option>
                         </ng-select>

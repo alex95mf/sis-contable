@@ -7,7 +7,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Caja Registradora</span></div>
             <input type="text" class="form-control form-control-sm" disabled [value]="cajaActiva?cajaActiva.nombre:'Ninguna'">
-            <button [disabled]="formReadOnly" class="btn btn-sm btn-info" ngbTooltip="Recargar caja" (click)="validacionCaja()">
+            <button disabled="formReadOnly" class="btn btn-sm btn-info" ngbTooltip="Recargar caja" (click)="validacionCaja()">
                 <i class="fas fa-redo"></i>
             </button>
         </div>
@@ -16,7 +16,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Contribuyente</span></div>
             <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [(ngModel)]="filter.contribuyente">
-            <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+            <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -66,7 +66,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Juicios</span>
             </div>
             <ng-select class="form-control" [(ngModel)]="documento.juicio" (change)="selectJuicioHandler($event)"
-                [disabled]="disabledJuicio"  [readonly]="titulosDisabled || formReadOnly" [clearable]="false">
+                disabled="disabledJuicio"  [readonly]="titulosDisabled || formReadOnly" [clearable]="false">
                 <ng-option [value]="0" disabled>Seleccione un Juicio</ng-option>
                 <ng-option *ngFor="let j of juicios" [value]="j.id_cob_juicio">{{ j.num_proceso }}</ng-option>
             </ng-select>
@@ -99,7 +99,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <h5 class="mb-0 text-dark">Detalles de liquidaciones</h5>
     </div>
     <div class="col text-right">
-        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
+        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" disabled="titulosDisabled || formReadOnly">
             <i class="fas fa-plus"></i> Agregar título
         </button>
 
@@ -109,7 +109,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
     <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
         <button class="btn btn-success btn-sm" placement="top"
             ngbTooltip="Agregar costas" (click)="addCosta()"
-            [disabled]="agregaCostas">
+            disabled="agregaCostas">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
     </div>
@@ -140,17 +140,17 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
                                     <input maxlength="100" class="form-control form-control-sm"
-                                    [disabled]="true"  [(ngModel)]="d.cobro" >
+                                    disabled="true"  [(ngModel)]="d.cobro" >
                                 </div>
                                 <!-- $ {{ d.cobro }} -->
                             </td>
 
                             <td class="text-center">
-                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover costa" [disabled]="titulosDisabled || formReadOnly" (click)="removeCosta(i)"><i class="far fa-trash-alt"></i></button>
+                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover costa" disabled="titulosDisabled || formReadOnly" (click)="removeCosta(i)"><i class="far fa-trash-alt"></i></button>
                                 <!-- <button class="btn btn-warning btn-sm mr-1" (click)="expandDetalleMulta(d)" placement="left" ngbTooltip="Ver detalle">
                                     <i class="far fa-eye"></i>
                                 </button>
-                                <button *ngIf="!formReadOnly" class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
+                                <button *ngIf="!formReadOnly" class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" disabled="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
                                 <button *ngIf="formReadOnly" class="btn btn-sm btn-info" placement="left" ngbTooltip="Imprimir" (click)="printTitulo(d)"><i class="far fa-print"></i></button> -->
                             </td>
                         </tr>
@@ -183,7 +183,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo" >Formas de pago</span></div>
-            <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="formaPago" [clearable]="false" (change)="handlePago($event)">
+            <ng-select disabled="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="formaPago" [clearable]="false" (change)="handlePago($event)">
                 <ng-option [value]="0" disabled>Seleccione forma de pago</ng-option>
                 <ng-option *ngFor="let op of formasDePago" [value]="op">{{ op.nombre }}</ng-option>
             </ng-select>
@@ -191,7 +191,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
     </div>
     <div *ngIf="expandPago" class="col">
-        <button [disabled]="titulosDisabled || formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Seleccionar documento" (click)="selectDocPago()">
+        <button disabled="titulosDisabled || formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Seleccionar documento" (click)="selectDocPago()">
             <i class="fas fa-expand-alt"></i>
         </button>
     </div>
@@ -199,7 +199,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
         <div *ngIf="hayEntidad" class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Entidad</span></div>
-            <ng-select [disabled]="formReadOnly || entidadDisabled" class="form-control" [(ngModel)]="entidad" [clearable]="false" (change)="handleEntidad($event)">
+            <ng-select disabled="formReadOnly || entidadDisabled" class="form-control" [(ngModel)]="entidad" [clearable]="false" (change)="handleEntidad($event)">
                 <ng-option [value]="0" disabled>Seleccione entidad financiera</ng-option>
                 <ng-option *ngFor="let op of entidadesFiltrada" [value]="op">{{ op.nombre }}</ng-option>
             </ng-select>
@@ -210,7 +210,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
         <div *ngIf="hayEmisor" class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Emisor</span></div>
-            <ng-select [disabled]="formReadOnly || emisorDisabled" class="form-control" [(ngModel)]="emisor" [clearable]="false" >
+            <ng-select disabled="formReadOnly || emisorDisabled" class="form-control" [(ngModel)]="emisor" [clearable]="false" >
                 <ng-option [value]="0" disabled>Seleccione banco emisor</ng-option>
                 <ng-option *ngFor="let op of emisoresFiltrada" [value]="op">{{ op.nombre }}</ng-option>
             </ng-select>
@@ -218,7 +218,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
     </div>
     <div class="col-2 text-right">
-        <button [disabled]="titulosDisabled || formReadOnly || deshabilitarFormaPag" class="btn btn-sm btn-success" ngbTooltip="Agregar método de pago" (click)="agregaPagos()">
+        <button disabled="titulosDisabled || formReadOnly || deshabilitarFormaPag" class="btn btn-sm btn-success" ngbTooltip="Agregar método de pago" (click)="agregaPagos()">
             <i class="fas fa-plus"></i> Agregar forma de pago
         </button>
     </div>
@@ -252,14 +252,14 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td class="text-center">{{ d.banco==''?'-':d.banco  }}</td>
                             <!-- <td class="text-center">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" maxlength="50" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
+                                    <input type="text" maxlength="50" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
                                 </div>
                             </td> -->
 
                             <!-- el documento 1 cambia para cheque, tarjetas o transferencia, los demas NA -->
                             <td *ngIf="d.tipo_pago=='CHEQUE' || d.tipo_pago=='TARJETA' || d.tipo_pago=='DEBITO' || d.tipo_pago=='TRANSFERENCIA'" class="text-center">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" maxlength="50" class="form-control form-control-sm" [placeholder]="doc1PlaceHolder(d)" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
+                                    <input type="text" maxlength="50" class="form-control form-control-sm" [placeholder]="doc1PlaceHolder(d)" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
                                 </div>
                             </td>
                             <td *ngIf="d.tipo_pago=='GARANTIA' || d.tipo_pago=='FAVOR' || d.tipo_pago== 'CRUCE CONVENIO' || d.tipo_pago== 'NOTA CREDITO' || d.tipo_pago== 'ANTICIPO PRECOBRADO'" class="text-center">
@@ -270,12 +270,12 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <!-- solo tipo de pago cheque cuenta con segundo documento, los demas NA                         -->
                             <td *ngIf="d.tipo_pago=='CHEQUE'">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" maxlength="50" class="form-control form-control-sm" placeholder="No. de serie" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento2">
+                                    <input type="text" maxlength="50" class="form-control form-control-sm" placeholder="No. de serie" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento2">
                                 </div>
                             </td>
                             <td *ngIf="d.tipo_pago=='TARJETA' || d.tipo_pago=='DEBITO'">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" maxlength="50" class="form-control form-control-sm" placeholder="No. de voucher" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento2">
+                                    <input type="text" maxlength="50" class="form-control form-control-sm" placeholder="No. de voucher" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento2">
                                 </div>
                             </td>
 
@@ -288,7 +288,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td class="text-right">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                    <input currencyMask maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
+                                    <input currencyMask maxlength="8" class="form-control form-control-sm text-right"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
                                 </div>
                             </td>
 
@@ -296,25 +296,25 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                    <input currencyMask maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor_recibido" (keypress)="onlyNumberDot($event)" (keyup)="getCambio(d)">
+                                    <input currencyMask maxlength="8" class="form-control form-control-sm text-right"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.valor_recibido" (keypress)="onlyNumberDot($event)" (keyup)="getCambio(d)">
                                 </div>
                             </td>
                             <td *ngIf="d.tipo_pago!='EFECTIVO'" class="text-center">-</td>
                             <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                    <input currencyMask maxlength="8" class="form-control form-control-sm text-right" readonly [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cambio" (keypress)="onlyNumberDot($event)" >
+                                    <input currencyMask maxlength="8" class="form-control form-control-sm text-right" readonly disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.cambio" (keypress)="onlyNumberDot($event)" >
                                 </div>
                             </td>
                             <td *ngIf="d.tipo_pago!='EFECTIVO'" class="text-center">-</td>
                             <td class="text-center">
                                 <div class="input-group input-group-sm">
 
-                                    <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                    <input type="text" maxlength="100" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                 </div>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="titulosDisabled || formReadOnly" (click)="removeFormaPago(i)"><i class="far fa-trash-alt"></i></button>
+                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" disabled="titulosDisabled || formReadOnly" (click)="removeFormaPago(i)"><i class="far fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     </ng-container>
@@ -434,7 +434,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
                                                 <input maxlength="100" class="form-control form-control-sm"
-                                                [disabled]="titulosDisabled || formReadOnly"  [(ngModel)]="d.cobro" (ngModelChange)="calcCobroTotal($event)" (keyup)="restar(d)">
+                                                disabled="titulosDisabled || formReadOnly"  [(ngModel)]="d.cobro" (ngModelChange)="calcCobroTotal($event)" (keyup)="restar(d)">
                                             </div>
                                             <!-- $ {{ d.cobro }} -->
                                         </td>
@@ -493,7 +493,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                         <td class="text-center">{{ d.banco==''?'-':d.banco  }}</td>
                                         <!-- <td class="text-center">
                                             <div class="input-group input-group-sm">
-                                                <input type="text" maxlength="50" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
+                                                <input type="text" maxlength="50" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
                                             </div>
                                         </td> -->
 

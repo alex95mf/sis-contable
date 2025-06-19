@@ -21,7 +21,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
-                <select id="inp-year" class="form-control form-control-sm" [(ngModel)]="depreciation.status" [disabled]="depreciation.year === 0 || depreciation.acquisition === 0" (ngModelChange)="rerender($event)">
+                <select id="inp-year" class="form-control form-control-sm" [(ngModel)]="depreciation.status" disabled="depreciation.year === 0 || depreciation.acquisition === 0" (ngModelChange)="rerender($event)">
                     <option hidden disabled selected [value]="0">Elegir Estado</option>
                     <option *ngFor="let el of status" [value]="el.name">{{ el.name }}</option>
                 </select>
@@ -58,7 +58,7 @@
                                     <td>{{ el.vida_util + el.depreciacion }}</td>
                                     <td>{{ el.vida_util }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm" [disabled]="el.status == 0"
+                                        <button type="button" class="btn btn-sm" disabled="el.status == 0"
                                             style="background-color: #2B81E4; color: white; border-radius: 10px"
                                             (click)="depreciateFixedAsset(el)" placement="top" ngbTooltip="Depreciar">
                                             <i class="fa fa-line-chart" aria-hidden="true"></i>

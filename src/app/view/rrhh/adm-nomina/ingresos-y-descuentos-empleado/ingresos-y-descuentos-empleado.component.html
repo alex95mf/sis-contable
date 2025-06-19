@@ -30,10 +30,10 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                     <app-cc-input-group-prepend label="ID" styleSpan="font-weight-bold">
                         <input currencyMask [options]="{prefix: '', precision: 0, nullable: true}" class="form-control" [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="getPrevRecord()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                            <button class="btn btn-primary" (click)="getPrevRecord()" matTooltip="Registro Anterior" disabled="lastRecord == null">
                                 <i class="far fa-chevron-left"></i>
                             </button>
-                            <button class="btn btn-primary" (click)="getNextRecord()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                            <button class="btn btn-primary" (click)="getNextRecord()" matTooltip="Registro Siguiente" disabled="lastRecord == null">
                                 <i class="far fa-chevron-right"></i>
                             </button>
                             <button class="btn btn-primary" (click)="getLatest()" matTooltip="Ultimo Registro">
@@ -60,7 +60,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                             (ccItemSelecionado)="viewSelectionMesCC($event)"
                             [optionDefault]="'Selecionar opcion'" #nameMes 
                             [labelDescription]="'Mes'" 
-                            [disabled]="consulta"
+                            disabled="consulta"
                             formControlName="fcn_mes" 
                             codigocatalogo="MES">
                         </app-cc-select-nom-catalogo>
@@ -78,7 +78,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                             [optionDefault]="'Selecionar opcion'"
                             #nameTipoRubro [labelDescription]="'Tipo rubro'" 
                             formControlName="fcn_tipo_ribro" 
-                            [disabled]="consulta"
+                            disabled="consulta"
                             codigocatalogo="TDR"
                             >
                         </app-cc-select-nom-catalogo>
@@ -103,11 +103,11 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                             [readonly]="readonlyInpuRubro"
                            
                             formControlName="fcn_input_searh_rubro" 
-                            [disabled]="consulta"
+                            disabled="consulta"
                             placeholder="Ingrese rubro">
                             <div class="input-group-append">
                                 <button (click)="onClicConsultaRubros(content)"
-                                [disabled]="btnSearchRubro"
+                                disabled="btnSearchRubro"
                                 class="btn btn-primary"
                                     type="button">
                                     <i class="fa fa-search"></i>
@@ -123,7 +123,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm mt-1">
                             <input type="text" class="form-control form-control-sm" [readonly]="true"
-                            formControlName="fcn_descripcion_rubro_input" [disabled]="consulta"
+                            formControlName="fcn_descripcion_rubro_input" disabled="consulta"
                            
                                 #nameRubroDescripcion placeholder="Rubro">
                         </div>
@@ -174,7 +174,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Tipo de Contratos" styleSpan="size-span-campo">
                         <ng-select id="tipo_contratos" class="form-control form-control-sm" [(ngModel)]="tipoContrato" (change)="contratoSelected($event)" 
-                        [clearable]="true" #nameTipoContrato formControlName="fcn_tipo_contrato_input" [disabled]="consulta" [ngModelOptions]="{standalone: true}">
+                        [clearable]="true" #nameTipoContrato formControlName="fcn_tipo_contrato_input" disabled="consulta" [ngModelOptions]="{standalone: true}">
                             <ng-option disabled [value]="0" disabled>Seleccione un tipo</ng-option>
                             <ng-option *ngFor="let tc of tipoContratos" [value]="tc.id_catalogo">{{tc.cat_nombre }}</ng-option>
                         </ng-select>
@@ -192,7 +192,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                                         #nameNombreArchivo
                                         formControlName="fcn_nombre_archivo_input"
                                         [readonly]="true"
-                                        [disabled]="consulta"
+                                        disabled="consulta"
                                          placeholder="Nombre del archivo">
                                 </div>
                             </div>
@@ -212,7 +212,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                                         formGroupIngresoDescuento.value.fcn_indc_anio == '' ||
                                         formGroupIngresoDescuento.value.fcn_indc_anio == null -->
                             <button style="display:block;width:100%; height:30px;"
-                            [disabled]="btnSubirArchivo || objGetIngresosDescuento.length > 0 "
+                            disabled="btnSubirArchivo || objGetIngresosDescuento.length > 0 "
                             onclick="document.getElementById('getFile').click()">Cargar Archivo</button>
                             <input #Image (change)="handleFileInputPlantilla($event.target.files)"
                                 type='file'
@@ -241,12 +241,12 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                                             formControlName="fcn_nombre_archivo_input"
                                             [ngClass]="{ 'is-invalid': submitted && f.fcn_nombre_archivo_input.errors }"
                                             [readonly]="true"
-                                            [disabled]="consulta"
+                                            disabled="consulta"
                                             placeholder="Nombre del archivo">
                             <div class="input-group-append">
                             
                                 <button class="btn btn-primary" style="display:block;"
-                                    [disabled]="btnSubirArchivo || objGetIngresosDescuento.length > 0 "
+                                    disabled="btnSubirArchivo || objGetIngresosDescuento.length > 0 "
                                     onclick="document.getElementById('getFile').click()">
                                     <i class="fas fa-file-upload"></i>Cargar Archivo
                                 </button>
@@ -292,7 +292,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                                     <!-- <button pButton pRipple icon="pi pi-plus-circle" title="Agregar"
                                     class="p-button-rounded p-button-success mr-2"
                                     (click)=onAddNewIngresoDescuento()
-                                    [disabled]="btnNewIngresoDescuento"
+                                    disabled="btnNewIngresoDescuento"
                                     ></button> -->
                                 </div>
                             </ng-template>
@@ -313,7 +313,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                             <ng-template pTemplate="body" let-det_ingreso_descuento let-editing="editing">
                                 <tr style="font-size: 11px; " [ngClass]="{'table-danger': det_ingreso_descuento.indc_valor_solicitado <= 0 }">
                                     <td *ngIf="consulta" class="text-center" style="min-width:100px; font-size: 11px;">
-                                        <input  [(ngModel)]="det_ingreso_descuento.aprobar" [ngModelOptions]="{standalone: true}" type="checkbox" (change)="handleRowCheck($event, det_ingreso_descuento)" [disabled]="det_ingreso_descuento.tiene_control">
+                                        <input  [(ngModel)]="det_ingreso_descuento.aprobar" [ngModelOptions]="{standalone: true}" type="checkbox" (change)="handleRowCheck($event, det_ingreso_descuento)" disabled="det_ingreso_descuento.tiene_control">
                                     </td>
                                     <td>{{det_ingreso_descuento.linea}}</td>
                                     <td>{{det_ingreso_descuento.emp_identificacion}}</td>
@@ -336,7 +336,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                                                  [(ngModel)]="det_ingreso_descuento.indc_valor_solicitado"
                                                  [min]="0"
                                                  required
-                                                 [disabled]="det_ingreso_descuento.tiene_control">
+                                                 disabled="det_ingreso_descuento.tiene_control">
                                             </ng-template>
                                             <ng-template pTemplate="output" >
                                                 $ {{det_ingreso_descuento.indc_valor_solicitado }}
@@ -347,7 +347,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                                         <!-- <button pButton pRipple icon="pi pi-trash" title="Borrar datos"
                                         (click)="deleteDataIngDesc(det_ingreso_descuento)"
                                         class="p-button-rounded p-button-danger mr-2"></button> -->
-                                        <button [disabled]="det_ingreso_descuento.tiene_control" class="btn btn-danger btn-sm" (click)="deleteDataIngDesc(det_ingreso_descuento)"><i class="fas fa-trash-alt"></i></button>
+                                        <button disabled="det_ingreso_descuento.tiene_control" class="btn btn-danger btn-sm" (click)="deleteDataIngDesc(det_ingreso_descuento)"><i class="fas fa-trash-alt"></i></button>
         
         
                                         <!-- <button pButton pRipple icon="pi pi-user-edit"
@@ -388,7 +388,7 @@ cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGloba
                                     <!-- <button pButton pRipple icon="pi pi-plus-circle" title="Agregar"
                                     class="p-button-rounded p-button-success mr-2"
                                     (click)=onAddNewIngresoDescuento()
-                                    [disabled]="btnNewIngresoDescuento"
+                                    disabled="btnNewIngresoDescuento"
                                     ></button> -->
                                 </div>
                             </ng-template>

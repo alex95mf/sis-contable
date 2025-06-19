@@ -31,7 +31,7 @@
         </div>
         <div class="col">
             <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo font-weight-bold">
-                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.fk_grupo.id_catalogo" [disabled]="local.tipo_local == 1">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.fk_grupo.id_catalogo" disabled="local.tipo_local == 1">
                     <ng-option [value]="0" disabled>Grupo</ng-option>
                     <ng-option *ngFor="let grupo of cmb_grupo" [value]="grupo.id">{{ grupo.codigo }}</ng-option>
                 </ng-select>
@@ -68,7 +68,7 @@
     <div class="row">
         <div class="col-4">
             <app-cc-input-group-prepend label="Establecimiento" styleSpan="size-span-campo font-weight-bold">
-                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.tipo_establecimiento" [disabled]="false">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.tipo_establecimiento" disabled="false">
                     <ng-option [value]="0" disabled>Establecimiento</ng-option>
                     <ng-option *ngFor="let establecimiento of cmb_tipo_estable" [value]="establecimiento.value"> {{ establecimiento.label }}</ng-option>
                 </ng-select>
@@ -76,7 +76,7 @@
         </div>
         <div class="col-4">
             <app-cc-input-group-prepend label="Tiene F&aacute;brica" styleSpan="size-span-campo font-weight-bold">
-                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.tiene_fabrica" [disabled]="false">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.tiene_fabrica" disabled="false">
                     <ng-option [value]="0" disabled>Tiene Fábrica</ng-option>
                     <ng-option *ngFor="let fabrica of cmb_tiene_fabrica" [value]="fabrica"> {{ fabrica == "S" ? 'SI': 'NO' }}</ng-option>
                 </ng-select>

@@ -21,7 +21,7 @@
                     <div *ngIf="selectedReporte=='ING'" class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Tipo de ingreso" styleSpan="size-span-campo">
                             <ng-select id="IdProvidersDoc" class="form-control custom" appendTo="body" [searchable]="true"
-                                [clearable]="false" [(ngModel)]="tipoIngreso" [disabled]="false" >
+                                [clearable]="false" [(ngModel)]="tipoIngreso" disabled="false" >
                                 <ng-option [value]="0" disabled>Seleccione tipo de ingreso</ng-option>
                                 <ng-option *ngFor="let d of catalog" [value]="d" >
                                     {{d.descripcion}}  {{d.valor}}</ng-option>
@@ -41,7 +41,7 @@
                     </div>
                     <div *ngIf="selectedReporte=='EGR'" class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="motivo" [disabled]="motivoBol">
+                            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="motivo" disabled="motivoBol">
                                 <ng-option  [value]= "0" disabled>Seleccione el motivo</ng-option>
                                 <ng-option *ngFor="let item of motivosCR"  [value]="item.valor">{{item.descripcion}}</ng-option>
                                 </ng-select>

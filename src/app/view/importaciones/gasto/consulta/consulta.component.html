@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo">
-                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" style="padding-left: 7px;font-size: 13px;" [disabled]="disNumero" [(ngModel)]="numero" (ngModelChange)="filterNumero($event)" [clearable]="false">
+                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" style="padding-left: 7px;font-size: 13px;" disabled="disNumero" [(ngModel)]="numero" (ngModelChange)="filterNumero($event)" [clearable]="false">
                                         <ng-option [value]="0">Seleccione Número Documento</ng-option>
                                         <ng-option *ngFor="let d of arraynumDoc" [value]="d.num_doc_gasto">
                                             {{d.num_doc_gasto}}</ng-option>
@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <app-cc-input-group-prepend>
-                                    <input type="text" placeholder="Ruc Proveedor" [(ngModel)]="ruc" id="idruc" [disabled]="true" class="form-control form-control-sm">
+                                    <input type="text" placeholder="Ruc Proveedor" [(ngModel)]="ruc" id="idruc" disabled="true" class="form-control form-control-sm">
                                 </app-cc-input-group-prepend>
                             </div>
                         </div>

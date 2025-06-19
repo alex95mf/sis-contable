@@ -35,7 +35,7 @@
                             <!-- <input type="text" class="form-control" [(ngModel)]="gastosPersonalesForm.num_documento"
                                 #nameNumDocumento placeholder="Busqueda Empleado" formControlName="lgNumDocumento"  [readonly]="isDisabled"> -->
                             <div class="input-group-append">
-                                <button (click)="onClicConsultaPersonas()"  class="btn btn-sm btn-primary" type="button" [disabled]="isDisabled">
+                                <button (click)="onClicConsultaPersonas()"  class="btn btn-sm btn-primary" type="button" disabled="isDisabled">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
@@ -64,7 +64,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <app-cc-input-group-prepend label="Otro Empleador" styleSpan="size-span-campo font-weight-bold">
-                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.otro_empleador" (blur)="valoresCalculables()" [disabled]="formReadonly">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.otro_empleador" (blur)="valoresCalculables()" disabled="formReadonly">
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12">
@@ -75,24 +75,24 @@
                             </div>
                             <div class="col-12">
                                 <app-cc-input-group-prepend label="Horas Extra" styleSpan="size-span-campo font-weight-bold">
-                                    <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.horas_extra_mensual" (blur)="calcularHorasExtra()" placeholder="Mensual" [disabled]="formReadonly">
+                                    <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.horas_extra_mensual" (blur)="calcularHorasExtra()" placeholder="Mensual" disabled="formReadonly">
                                     <input class="form-control" currencyMask [options]="{nullable: false}" readonly [(ngModel)]="impuestoRenta.horas_extra" placeholder="Anual">
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12">
                                 <app-cc-input-group-prepend label="Bonificaciones" styleSpan="size-span-campo font-weight-bold">
-                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.bonificaciones" (blur)="valoresCalculables()" [disabled]="formReadonly">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.bonificaciones" (blur)="valoresCalculables()" disabled="formReadonly">
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12">
                                 <app-cc-input-group-prepend label="Comisiones" styleSpan="size-span-campo font-weight-bold">
-                                    <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.comisiones_mensual" (blur)="calcularComisiones()" placeholder="Mensual" [disabled]="formReadonly">
+                                    <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.comisiones_mensual" (blur)="calcularComisiones()" placeholder="Mensual" disabled="formReadonly">
                                     <input class="form-control" currencyMask [options]="{nullable: false}" readonly [(ngModel)]="impuestoRenta.comisiones" placeholder="Anual">
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12">
                                 <app-cc-input-group-prepend label="Utilidades" styleSpan="size-span-campo font-weight-bold">
-                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.utilidades" [disabled]="formReadonly" (blur)="valoresCalculables()">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.utilidades" disabled="formReadonly" (blur)="valoresCalculables()">
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12">
@@ -124,7 +124,7 @@
                         </div>
                         <div class="col-12">
                             <app-cc-input-group-prepend label="Otros Gastos" styleSpan="size-span-campo font-weight-bold">
-                                <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.otros_gastos" (blur)="valoresCalculables()" [disabled]="formReadonly">
+                                <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.otros_gastos" (blur)="valoresCalculables()" disabled="formReadonly">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-12">
@@ -142,7 +142,7 @@
                         <legend class="w-auto bg-dark mb-1">Rebajas</legend>
                         <div class="col-6">
                             <app-cc-input-group-prepend label="Cargas Familiares" styleSpan="size-span-campo font-weight-bold">
-                                <input class="form-control" [(ngModel)]="impuestoRenta.num_cargas_familiares" (blur)="handleInputCargas()" [disabled]="formReadonly">
+                                <input class="form-control" [(ngModel)]="impuestoRenta.num_cargas_familiares" (blur)="handleInputCargas()" disabled="formReadonly">
                                 
                             </app-cc-input-group-prepend>
                         </div>
@@ -159,9 +159,9 @@
                         <div class="col-12">
                             <app-cc-input-group-prepend label="Discapacidad" styleSpan="size-span-campo font-weight-bold">
                                 <ng-select class="form-control" [(ngModel)]="empleado.discapacitado" (change)="handleSelectDiscapacidad($event)"
-                                    [items]="cmb_discapacitado" bindValue="value" bindLabel="label" [clearable]="false" [disabled]="formReadonly">
+                                    [items]="cmb_discapacitado" bindValue="value" bindLabel="label" [clearable]="false" disabled="formReadonly">
                                 </ng-select>
-                                <input currencyMask [options]="{prefix: '', suffix: '%', precision: 0, nullable: false}" [disabled]="roDiscapacidad" 
+                                <input currencyMask [options]="{prefix: '', suffix: '%', precision: 0, nullable: false}" disabled="roDiscapacidad" 
                                     [(ngModel)]="empleado.porcentaje_discapacidad" class="form-control" (blur)="consultarTablaDiscapacidad()" placeholder="Porcentaje">
                                 <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.rebaja_discapacidad" readonly placeholder="Valor">
                             </app-cc-input-group-prepend>
@@ -169,7 +169,7 @@
                         <div class="col-12">
                             <app-cc-input-group-prepend label="Tercera Edad" styleSpan="size-span-campo font-weight-bold">
                                 <ng-select class="form-control" [(ngModel)]="empleado.tercera_edad" (change)="handleSelectTerceraEdad($event)"
-                                    [items]="cmb_tercera_edad" bindValue="value" bindLabel="label" [clearable]="false" [disabled]="formReadonly">
+                                    [items]="cmb_tercera_edad" bindValue="value" bindLabel="label" [clearable]="false" disabled="formReadonly">
                                 </ng-select>
                                 <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.rebaja_tercera_edad" [readonly]="roTerceraEdad" placeholder="Valor">
                             </app-cc-input-group-prepend>
@@ -193,7 +193,7 @@
                         </div>
                         <div class="col-12">
                             <app-cc-input-group-prepend label="Retenciones" styleSpan="size-span-campo font-weight-bold">
-                                <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.retenciones" [disabled]="formReadonly"  (blur)="calcularBase()">
+                                <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.retenciones" disabled="formReadonly"  (blur)="calcularBase()">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-12">
@@ -280,15 +280,15 @@
                                     <!-- <td class="text-right">$ {{ nomCat.valor_tope }}</td> -->
                                     <td>
                                         <div>
-                                            <input class="border-0" [(ngModel)]="nomCat.valor_proyectado" #vChValorProyectado  [readonly]="isDisabled" [disabled]="isDisabled" currencyMask (blur)="validarValorProyectado(nomCat)" >
-                                            <!-- <input class="border-0" [ngModel]="nomCat.valor_proyectado" #vChValorProyectado  [readonly]="isDisabled" [disabled]="isDisabled" currencyMask (blur)="onBlurValorProyectado($event.target.value , nomCat)" > -->
+                                            <input class="border-0" [(ngModel)]="nomCat.valor_proyectado" #vChValorProyectado  [readonly]="isDisabled" disabled="isDisabled" currencyMask (blur)="validarValorProyectado(nomCat)" >
+                                            <!-- <input class="border-0" [ngModel]="nomCat.valor_proyectado" #vChValorProyectado  [readonly]="isDisabled" disabled="isDisabled" currencyMask (blur)="onBlurValorProyectado($event.target.value , nomCat)" > -->
                                             <!-- <input [(ngModel)]="nomCat.valor_proyectado"   (blur) = 'onBlurValorProyectado(nomCat)' type="number"> -->
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <input class="border-0" [(ngModel)]="nomCat.valor_real" #vChValorReal  [readonly]="isDisabled" [disabled]="isDisabled" currencyMask (blur)='validarValorReal(nomCat)'>
-                                            <!-- <input class="border-0" [ngModel]="nomCat.valor_real" #vChValorReal  [readonly]="isDisabled" [disabled]="isDisabled" currencyMask (blur) = 'onBlurValorReal($event.target.value, nomCat)'> -->
+                                            <input class="border-0" [(ngModel)]="nomCat.valor_real" #vChValorReal  [readonly]="isDisabled" disabled="isDisabled" currencyMask (blur)='validarValorReal(nomCat)'>
+                                            <!-- <input class="border-0" [ngModel]="nomCat.valor_real" #vChValorReal  [readonly]="isDisabled" disabled="isDisabled" currencyMask (blur) = 'onBlurValorReal($event.target.value, nomCat)'> -->
                                             <!-- <input [(ngModel)]="nomCat.valor_real"  type="number"> -->
                                         </div>
                                     </td>

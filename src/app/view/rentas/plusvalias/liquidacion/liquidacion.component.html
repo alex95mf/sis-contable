@@ -15,7 +15,7 @@
                 <div class="col-6">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text size-span-campo">Fecha</span></div>
-                        <input type="date" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="liquidacion.fecha">
+                        <input type="date" class="form-control form-control-sm" disabled="formReadOnly" [(ngModel)]="liquidacion.fecha">
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         <div class="input-group-prepend"><span class="input-group-text size-span-campo">Contribuyente</span></div>
                         <input type="text" class="form-control form-control-sm" readonly
                             placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
-                        <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()"
+                        <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()"
                             placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
@@ -36,11 +36,11 @@
                         <div class="input-group-prepend"><span class="input-group-text size-span-campo">Propiedad</span></div>
                         <input style="width: 200px;" *ngIf="mostrarPro" type="text" class="form-control form-control-sm" readonly
                         placeholder="Propiedades " [(ngModel)]="propiedadActive2">
-                        <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                        <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                             <ng-option disabled [value]="0">Seleccione una Propiedad</ng-option>
                             <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                         </ng-select>
-                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                             <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                         </ng-select>
                     </div>
@@ -53,7 +53,7 @@
                         <!-- <ng-select *ngIf="!formReadOnly" id="codigo_catastral"
                             [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''"
                             class="form-control form-control-sm" [(ngModel)]="propiedadActive" (change)="selectPropiedad($event)"
-                            [disabled]="codCastDisabled || formReadOnly" >
+                            disabled="codCastDisabled || formReadOnly" >
                             <ng-option disabled>Seleccione una Propiedad</ng-option>
                             <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod.
                                     Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span>
@@ -63,7 +63,7 @@
                         <!-- <ng-select *ngIf="formReadOnly" id="codigo_catastral"
                             [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''"
                             class="form-control form-control-sm" [(ngModel)]="propiedadActive.id"
-                            [disabled]="codCastDisabled || formReadOnly" (change)="selectPropiedad($event)">
+                            disabled="codCastDisabled || formReadOnly" (change)="selectPropiedad($event)">
                             <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod.
                                     Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span>
                                 {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span
@@ -76,7 +76,7 @@
                 <div class="col-6">
                     <app-cc-input-group-prepend label="Certificado Liberatorio" styleSpan="size-span-campo ">
                     <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                    [(ngModel)]="liquidacion.certificado_pv" (change)="valorCertificado($event)" [disabled]="formReadOnly">
+                    [(ngModel)]="liquidacion.certificado_pv" (change)="valorCertificado($event)" disabled="formReadOnly">
                     <ng-option *ngFor="let c of certList" [value]="c.value">{{c.label}}</ng-option>
                     <!-- <ng-option  [value]= "0" disabled>Tiene certificado Liberatorio</ng-option>
                     <ng-option  [value]="'S'">SI</ng-option>
@@ -90,7 +90,7 @@
                 <div class="col-6">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text size-span-campo">Valor certificado</span></div>
-                        <input class="form-control form-control-sm"  [(ngModel)]="liquidacion.certif_pv_valor"  [disabled]=" liquidacion.certificado_pv == 'N' ? true : false"
+                        <input class="form-control form-control-sm"  [(ngModel)]="liquidacion.certif_pv_valor"  disabled=" liquidacion.certificado_pv == 'N' ? true : false"
                         (keyup)="valorCertificado()">
                         
                     </div>
@@ -154,7 +154,7 @@
                         <div class="input-group-prepend"><span class="input-group-text size-span-campo">Contribuyente</span></div>
                         <input type="text" class="form-control form-control-sm" readonly
                             placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteCActive.razon_social">
-                        <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentesC()"
+                        <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentesC()"
                             placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
@@ -177,7 +177,7 @@
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text">Valor certificado</span></div>
                         <input class="form-control form-control-sm" 
-                            [(ngModel)]="liquidacion.certif_al_valor" [disabled]=" liquidacion.certificado_al == 'N' ? true : false" >
+                            [(ngModel)]="liquidacion.certif_al_valor" disabled=" liquidacion.certificado_al == 'N' ? true : false" >
                     </div>
                 </div>
 
@@ -231,7 +231,7 @@
                                 <td class="text-right">
                                     <div class="input-group input-group-sm">
                                         <input type="text" class="form-control form-control-sm"  maxlength="255" [(ngModel)]="d.comentario" [readonly]="formReadOnly || conceptosDisabled" 
-                                        [disabled]=" liquidacion.certificado_pv == 'S'"> 
+                                        disabled=" liquidacion.certificado_pv == 'S'"> 
                                     </div>
                                 </td>
                                 <!-- Calculos -->
@@ -258,19 +258,19 @@
                                         <!-- <div class="input-group-prepend"><span class="input-group-text">$</span></div> -->
                                         <!-- <p-inputNumber 
                                             [(ngModel)]="d.valor" (keyup)="calcSubtotal()"
-                                            [disabled]="liquidacion.certificado_pv == 'S' || i == 0 || i == 2 || i == 5 || i==8 || i==9 || conceptosDisabled || formReadOnly"
+                                            disabled="liquidacion.certificado_pv == 'S' || i == 0 || i == 2 || i == 5 || i==8 || i==9 || conceptosDisabled || formReadOnly"
                                             mode="currency" currency="USD" locale="en-US"
                                             [inputStyle]="{'height':'30px', 'font-size':'11px'}">
                                         </p-inputNumber> -->
                                         <input class="form-control form-control-sm text-right" currencyMask [options]="options"
                                             [(ngModel)]="d.valor"  [readonly]="i == 0 || i == 2 || i == 5 || i==8 || i==9 || conceptosDisabled || formReadOnly? true: false" 
-                                            [disabled]=" liquidacion.certificado_pv == 'S'"  (keyup)="calcSubtotal()">
+                                            disabled=" liquidacion.certificado_pv == 'S'"  (keyup)="calcSubtotal()">
                                     </div>
                                     <div class="input-group input-group-sm" *ngIf="i ==12 || i==14? true : false" >
                                         
                                         <input currencyMask [options]="{ min: 0, max: 100, prefix:'' }" class="form-control form-control-sm text-right"
                                             [(ngModel)]="d.porcentaje" [readonly]="i == 0 || i == 2 || i == 5 || i==8 || i==9 || conceptosDisabled || formReadOnly? true: false" 
-                                            [disabled]=" liquidacion.certificado_pv == 'S'"  (keyup)="calcSubtotal()">
+                                            disabled=" liquidacion.certificado_pv == 'S'"  (keyup)="calcSubtotal()">
                                         <div class="input-group-append"><span class="input-group-text">%</span></div>
                                     </div>
                                 </td>
@@ -282,13 +282,13 @@
                                         <div class="input-group-prepend"><span class="input-group-text size-span-campo">TOTAL $</span></div>
                                         <input type="text" class="form-control form-control-sm text-right"
                                              [readonly]="i == 0 || i == 2 || i == 5 || i==8 || i==9 || i ==10 || i==11 || i==12 || i==13 || i==14 || conceptosDisabled ? true: false" 
-                                           [disabled]=" liquidacion.certificado_pv == 'S'" value=" {{ d.valor | number: '1.2-2' }}"  (keyup)="calcSubtotal()">
+                                           disabled=" liquidacion.certificado_pv == 'S'" value=" {{ d.valor | number: '1.2-2' }}"  (keyup)="calcSubtotal()">
                                     </div>
                                     <div class="input-group input-group-sm" *ngIf="i ==10 ? true : false" >
                                         <div class="input-group-prepend"><span class="input-group-text size-span-campo">$</span></div>
                                         <input  type="text" class="form-control form-control-sm text-right"
                                         value="{{ d.valor | number:'1.2-2'}}" [readonly]="i == 0 || i == 2 || i == 5  || i==8 || i==9 || i==10 || i==11 || conceptosDisabled || formReadOnly ? true: false" 
-                                            (keyup)="calcSubtotal()"   [disabled]=" liquidacion.certificado_pv == 'S'">
+                                            (keyup)="calcSubtotal()"   disabled=" liquidacion.certificado_pv == 'S'">
                                     </div>
                                 </td>
                             </tr>
@@ -359,7 +359,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <!-- <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td> -->
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -393,7 +393,7 @@
             <div class="col-4">
                 <div class="input-group input-group-lg input-group-total">
                     <div class="input-group-prepend"><span class="label-saldo label-saldo_item">STA</span></div>
-                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.pl_sta" (keyup)="calculateExoneraciones()" [disabled]="formReadOnly || conceptoStaPlus">
+                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.pl_sta" (keyup)="calculateExoneraciones()" disabled="formReadOnly || conceptoStaPlus">
                 </div>
             </div>
         </div>
@@ -518,7 +518,7 @@
                                         <!-- <div class="input-group-prepend"><span class="input-group-text">$</span></div> -->
                                         <!-- <p-inputNumber 
                                             [(ngModel)]="d.valor" (keyup)="calcSubtotal_2()"
-                                            [disabled]="alcabalaDisabled || liquidacion.certificado_pv == 'S'"
+                                            disabled="alcabalaDisabled || liquidacion.certificado_pv == 'S'"
                                             mode="currency" currency="USD" locale="en-US" [max]="max_inputnumber"
                                             [inputStyle]="{'height':'30px', 'font-size':'11px'}">
                                         </p-inputNumber> -->
@@ -609,7 +609,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <!-- <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td> -->
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracionAL(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracionAL(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -643,7 +643,7 @@
             <div class="col-4">
                 <div class="input-group input-group-lg input-group-total">
                     <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >IMPS</span></div>
-                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.al_imps"  [disabled]="formReadOnly">
+                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.al_imps"  disabled="formReadOnly">
                 </div>
             </div>
         </div>
@@ -651,7 +651,7 @@
             <div class="col-4">
                 <div class="input-group input-group-lg input-group-total">
                     <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >STA</span></div>
-                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.al_sta" (keyup)="calcSubtotal_2_2()" [disabled]="formReadOnly || conceptoStaAlca">
+                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.al_sta" (keyup)="calcSubtotal_2_2()" disabled="formReadOnly || conceptoStaAlca">
                 </div>
             </div>
         </div>

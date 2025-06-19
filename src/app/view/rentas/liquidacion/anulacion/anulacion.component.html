@@ -5,8 +5,8 @@ filtroBoton="btnsRenLiqAnu" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
     <div class="col-4">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Contribuyente</span></div>
-            <input type="text" class="form-control form-control-sm" [disabled]="formReadOnly" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
-            <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+            <input type="text" class="form-control form-control-sm" disabled="formReadOnly" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
+            <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -14,19 +14,19 @@ filtroBoton="btnsRenLiqAnu" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
     <div class="col-4">
         <!-- <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Tipo de Anulación</span></div>
-            <ng-select id="concepto" class="form-control" [clearable]="false" [disabled]="formReadOnly" [searchable]="false" [(ngModel)]="anulacion" (change)="mostrar()">
+            <ng-select id="concepto" class="form-control" [clearable]="false" disabled="formReadOnly" [searchable]="false" [(ngModel)]="anulacion" (change)="mostrar()">
                 <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
                 <ng-option *ngFor="let c of anulacionList" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
             </ng-select>
         </div> -->
         <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo size-span-campo">
-            <ng-select [items]="motivos" bindValue="descripcion" bindLabel="descripcion" [(ngModel)]="liquidacion.motivo" [clearable]="false" [disabled]=" formReadOnly || conDisabled" class="form-control"></ng-select>
+            <ng-select [items]="motivos" bindValue="descripcion" bindLabel="descripcion" [(ngModel)]="liquidacion.motivo" [clearable]="false" disabled=" formReadOnly || conDisabled" class="form-control"></ng-select>
         </app-cc-input-group-prepend>
     </div>
     <div class="col-4">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo" style="width: 120px;">Concepto</span></div>
-            <ng-select [disabled]=" formReadOnly || conDisabled" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="handleConcepto()">
+            <ng-select disabled=" formReadOnly || conDisabled" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="handleConcepto()">
                 <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
                 <ng-option *ngFor="let c of conceptosList" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
             </ng-select>
@@ -41,8 +41,8 @@ filtroBoton="btnsRenLiqAnu" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
         <div class="col-4">
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text size-span-campo">T&iacute;tulo de Cr&eacute;dito</span></div>
-                <input type="text" class="form-control form-control-sm" [disabled]="formReadOnly || liqDisabled" placeholder="Seleccione una Liquidación" (click)="expandModalLiquidaciones()" [value]="liqAnular.documento">
-                <button [disabled]="formReadOnly || liqDisabled" class="btn btn-primary btn-sm" (click)="expandModalLiquidaciones()" placement="bottom" ngbTooltip="Buscar Liquidaciones del Contribuyente">
+                <input type="text" class="form-control form-control-sm" disabled="formReadOnly || liqDisabled" placeholder="Seleccione una Liquidación" (click)="expandModalLiquidaciones()" [value]="liqAnular.documento">
+                <button disabled="formReadOnly || liqDisabled" class="btn btn-primary btn-sm" (click)="expandModalLiquidaciones()" placement="bottom" ngbTooltip="Buscar Liquidaciones del Contribuyente">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -248,7 +248,7 @@ filtroBoton="btnsRenLiqAnu" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                         <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                         <td class="text-right text-danger">$ -{{ (d.valor | number: '1.2-2') ?? 0 }}</td>
                         <td class="text-center">
-                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>

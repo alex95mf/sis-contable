@@ -71,10 +71,10 @@
                     <input class="form-control" currencyMask [ngModel]="item.precio_cotizado" readonly/>
                 </td>
                 <td class="text-center" >
-                    <input class="form-control" type="text" [(ngModel)]="item.cantidad_mod" (ngModelChange)="calcularValorTotal()" [disabled]="search"/>
+                    <input class="form-control" type="text" [(ngModel)]="item.cantidad_mod" (ngModelChange)="calcularValorTotal()" disabled="search"/>
                 </td>
                 <td class="text-center" >
-                    <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario" (blur)="calcularValorTotal()" [disabled]="search"/>
+                    <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario" (blur)="calcularValorTotal()" disabled="search"/>
                 </td>
                 <td class="text-center" style="width: 10%;">
                     <input class="form-control" currencyMask [ngModel]="item.costo_total_mod" readonly/>

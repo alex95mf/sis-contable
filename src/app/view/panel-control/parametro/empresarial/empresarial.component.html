@@ -31,7 +31,7 @@
                                         <div class="col-12 ">
                                             <div class="input-group input-group-sm mt-1">
                                                 <input id="fichero" type="file" lang="es" accept="image/*"
-                                                    (change)="onselect($event)" [disabled]="dusuario">
+                                                    (change)="onselect($event)" disabled="dusuario">
                                                 <label for="fichero" class="btn sub1 "
                                                     style="font-size:11px;line-height:0.5"><i class="fa fa-upload"
                                                         aria-hidden="true" style="font-size:13px;"></i>SELECCIONE
@@ -60,7 +60,7 @@
                                                         <input placeholder="Ingrese Nombre comercial" type="text"
                                                             #nombre="ngModel" name="nombre" id="nombre"
                                                             [(ngModel)]="nombreComercial" maxlength="200"
-                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            class="form-control form-control-sm" disabled="dusuario"
                                                             id="IdnombreComercial">
                                                     </div>
                                                 </div>
@@ -72,7 +72,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese dirección" type="text" #address="ngModel"
                                                             name="address" [(ngModel)]="direccion"
-                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            class="form-control form-control-sm" disabled="dusuario"
                                                             id="Iddireccion">
                                                     </div>
                                                 </div>
@@ -85,7 +85,7 @@
                                                         <input placeholder="Ingrese razón Social" type="text" #rsocial="ngModel"
                                                             name="rsocial" id="Idrsocial" [(ngModel)]="razonsocial"
                                                             minlength="20" maxlength="200" class="form-control form-control-sm"
-                                                            [disabled]="dusuario">
+                                                            disabled="dusuario">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -96,7 +96,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese un correo, ejemplo@ejemplo.com" type="email"
                                                             #email="ngModel" name="email" [(ngModel)]="emails"
-                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            class="form-control form-control-sm" disabled="dusuario"
                                                             id="Idemail">
                                                     </div>
                                                 </div>
@@ -109,7 +109,7 @@
                                                         <input placeholder="Ingrese ruc de la empresa" type="text"
                                                             #rucngM="ngModel" name="rucngM" [(ngModel)]="ruc"
                                                             class="form-control form-control-sm" maxlength="13"
-                                                            [disabled]="dusuario" id="Idruc" min="0"
+                                                            disabled="dusuario" id="Idruc" min="0"
                                                             (keypress)="commonServices.FormatDecimalVal($event)">
                                                     </div>
                                                 </div>
@@ -121,7 +121,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese Teléfono 1" type="text" #t1="ngModel"
                                                             maxlength="10" name="t1" [(ngModel)]="telefono1"
-                                                            class="form-control form-control-sm" [disabled]="dusuario" id="Idt1"
+                                                            class="form-control form-control-sm" disabled="dusuario" id="Idt1"
                                                             min="0" (keypress)="commonServices.FormatDecimalVal($event)">
                                                     </div>
                                                 </div>
@@ -133,7 +133,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese representante legal" type="text"
                                                             #rlegal="ngModel" name="rlegal" [(ngModel)]="rucLegal"
-                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            class="form-control form-control-sm" disabled="dusuario"
                                                             id="Idrlegal">
                                                     </div>
                                                 </div>
@@ -145,7 +145,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese Teléfono 2" type="text" #t2="ngModel"
                                                             maxlength="10" name="t2" [(ngModel)]="telefono2"
-                                                            class="form-control form-control-sm" [disabled]="dusuario" id="Idt2"
+                                                            class="form-control form-control-sm" disabled="dusuario" id="Idt2"
                                                             min="0" (keypress)="commonServices.FormatDecimalVal($event)">
                                                     </div>
                                                 </div>
@@ -157,7 +157,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese cantidad de usuarios" type="number"
                                                             #users="ngModel" name="users" [(ngModel)]="usersEmpresa"
-                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            class="form-control form-control-sm" disabled="dusuario"
                                                             id="IdUserEmpresa">
                                                     </div>
                                                 </div>
@@ -169,7 +169,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese celular" type="text" #cel="ngModel"
                                                             maxlength="10" name="cel" [(ngModel)]="celular"
-                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            class="form-control form-control-sm" disabled="dusuario"
                                                             id="Idcel" min="0"
                                                             (keypress)="commonServices.FormatDecimalVal($event)">
                                                     </div>
@@ -183,14 +183,14 @@
                                                         </div>
                                                         <input placeholder="Ingrese cantidad de sucursales" type="number"
                                                             #sucur="ngModel" name="sucur" [(ngModel)]="sucursal"
-                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            class="form-control form-control-sm" disabled="dusuario"
                                                             id="Idsucursal">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <app-cc-input-group-prepend label="Fecha alta" styleSpan="size-span-campo">
                                                         <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" name="dateFrom"
-                                                            format='yyyy-MM-dd' [disabled]="dusuario" class="form-control">
+                                                            format='yyyy-MM-dd' disabled="dusuario" class="form-control">
                                                         </ejs-datepicker><!-- (ngModelChange)="rerender()" -->
                                                     </app-cc-input-group-prepend>
                                                 </div>
@@ -202,7 +202,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese contacto" type="text" #contact="ngModel"
                                                             name="contact" [(ngModel)]="contacto"
-                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            class="form-control form-control-sm" disabled="dusuario"
                                                             id="Idcontacto">
                                                     </div>
                                                 </div>
@@ -210,7 +210,7 @@
                                                 <div class="col-sm-6">
                                                     <app-cc-input-group-prepend label="Fecha baja" styleSpan="size-span-campo">
                                                         <ejs-datepicker [(ngModel)]="toDatePicker" name="dateFrom"
-                                                            format='yyyy-MM-dd' [disabled]="dusuario" class="form-control">
+                                                            format='yyyy-MM-dd' disabled="dusuario" class="form-control">
                                                         </ejs-datepicker><!-- (ngModelChange)="rerender()" -->
                                                     </app-cc-input-group-prepend>
                                                 </div>
@@ -234,7 +234,7 @@
                                                         <select class="form-control form-control-sm custom-select"
                                                             #estadoe="ngModel" name="estadoe" [(ngModel)]="estadoEmpresa"
                                                             style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;"
-                                                            [disabled]="dusuario" id="IdestadoEmpresa">
+                                                            disabled="dusuario" id="IdestadoEmpresa">
                                                             <option value="A">Activo</option>
                                                             <option value="I">Inactivo</option>
                                                         </select>
@@ -335,7 +335,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese nombre sucursal" type="text"
                                                             #nombreSucu="ngModel" name="nombreSucu" [(ngModel)]="nombreSucursal"
-                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            class="form-control form-control-sm" disabled="!newSucursal"
                                                             id="IdNombreSucu">
                                                     </div>
                                                 </div>
@@ -347,7 +347,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese dirección" type="text" #addressuc="ngModel"
                                                             name="addressuc" [(ngModel)]="direccionSucu"
-                                                            class="form-control form-control-sm" [disabled]="!newSucursal "
+                                                            class="form-control form-control-sm" disabled="!newSucursal "
                                                             id="IddireccionSucu">
                                                     </div>
                                                 </div>
@@ -360,7 +360,7 @@
                                                         <select class="form-control form-control-sm custom-select"
                                                             #estadosu="ngModel" name="estadosu" [(ngModel)]="estadoSucursal"
                                                             style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
-                                                            [disabled]="!newSucursal" id="IdestadoSucursal">
+                                                            disabled="!newSucursal" id="IdestadoSucursal">
                                                             <option value="A">Activo</option>
                                                             <option value="I">Inactivo</option>
                                                         </select>
@@ -374,7 +374,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese Teléfono 1" type="text" #t1Sucu="ngModel"
                                                             maxlength="10" name="t1Sucu" [(ngModel)]="telefono1Sucu"
-                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            class="form-control form-control-sm" disabled="!newSucursal"
                                                             id="Idt1Sucu" min="0"
                                                             (keypress)="commonServices.FormatDecimalVal($event)">
                                                     </div>
@@ -387,7 +387,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese celular" type="text" #celSucu="ngModel"
                                                             maxlength="10" name="celSucu" [(ngModel)]="celularSucu"
-                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            class="form-control form-control-sm" disabled="!newSucursal"
                                                             id="IdCelSucu" min="0"
                                                             (keypress)="commonServices.FormatDecimalVal($event)">
                                                     </div>
@@ -400,7 +400,7 @@
                                                         </div>
                                                         <select [(ngModel)]="empresaSeleccionado"
                                                             class="form-control form-control-sm custom-select"
-                                                            [disabled]="!newSucursal" (ngModelChange)="obtenerEmpresa($event)"
+                                                            disabled="!newSucursal" (ngModelChange)="obtenerEmpresa($event)"
                                                             style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
                                                             id="IdEmpresaSucursal">
                                                             <option [value]="0">Seleccione empresa</option>
@@ -418,7 +418,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese Teléfono 2" type="text" #t2Sucu="ngModel"
                                                             maxlength="10" name="t2Sucu" [(ngModel)]="telefono2Sucu"
-                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            class="form-control form-control-sm" disabled="!newSucursal"
                                                             id="Idt2Sucu" min="0"
                                                             (keypress)="commonServices.FormatDecimalVal($event)">
                                                     </div>
@@ -431,7 +431,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese Teléfono 2" type="text" #t2Sucu="ngModel"
                                                             maxlength="10" name="t2Sucu" [(ngModel)]="telefono2Sucu"
-                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            class="form-control form-control-sm" disabled="!newSucursal"
                                                             id="Idt2Sucu" min="0"
                                                             (keypress)="commonServices.FormatDecimalVal($event)">
                                                     </div>
@@ -444,7 +444,7 @@
                                                         </div>
                                                         <input placeholder="Ingrese email" type="text" #emailSucu="ngModel"
                                                             name="emailSucu" [(ngModel)]="emailSucursal"
-                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            class="form-control form-control-sm" disabled="!newSucursal"
                                                             id="idEmailSucu">
                                                     </div>
                                                 </div>
@@ -456,7 +456,7 @@
                                                         </div>
                                                         <select [(ngModel)]="usuarioSeleccionado" #usuario="ngModel"
                                                             name="usuario" class="form-control form-control-sm custom-select"
-                                                            [disabled]="!newSucursal" (ngModelChange)="obtenerUsuario($event)"
+                                                            disabled="!newSucursal" (ngModelChange)="obtenerUsuario($event)"
                                                             style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
                                                             id="Idusuario">
                                                             <!--  || usersEmpty -->
@@ -538,7 +538,7 @@
                                                 <input placeholder="Ingrese Nombre comercial" type="text"
                                                     #nombre="ngModel" name="nombre" id="nombre"
                                                     [(ngModel)]="nombreComercial" maxlength="200"
-                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    class="form-control form-control-sm" disabled="dusuario"
                                                     id="IdnombreComercial">
                                             </div>
                                         </div>
@@ -550,7 +550,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese dirección" type="text" #address="ngModel"
                                                     name="address" [(ngModel)]="direccion"
-                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    class="form-control form-control-sm" disabled="dusuario"
                                                     id="Iddireccion">
                                             </div>
                                         </div>
@@ -563,7 +563,7 @@
                                                 <input placeholder="Ingrese razón Social" type="text" #rsocial="ngModel"
                                                     name="rsocial" id="Idrsocial" [(ngModel)]="razonsocial"
                                                     minlength="20" maxlength="200" class="form-control form-control-sm"
-                                                    [disabled]="dusuario">
+                                                    disabled="dusuario">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -574,7 +574,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese un correo, ejemplo@ejemplo.com" type="email"
                                                     #email="ngModel" name="email" [(ngModel)]="emails"
-                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    class="form-control form-control-sm" disabled="dusuario"
                                                     id="Idemail">
                                             </div>
                                         </div>
@@ -587,7 +587,7 @@
                                                 <input placeholder="Ingrese ruc de la empresa" type="text"
                                                     #rucngM="ngModel" name="rucngM" [(ngModel)]="ruc"
                                                     class="form-control form-control-sm" maxlength="13"
-                                                    [disabled]="dusuario" id="Idruc" min="0"
+                                                    disabled="dusuario" id="Idruc" min="0"
                                                     (keypress)="commonServices.FormatDecimalVal($event)">
                                             </div>
                                         </div>
@@ -599,7 +599,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese Teléfono 1" type="text" #t1="ngModel"
                                                     maxlength="10" name="t1" [(ngModel)]="telefono1"
-                                                    class="form-control form-control-sm" [disabled]="dusuario" id="Idt1"
+                                                    class="form-control form-control-sm" disabled="dusuario" id="Idt1"
                                                     min="0" (keypress)="commonServices.FormatDecimalVal($event)">
                                             </div>
                                         </div>
@@ -611,7 +611,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese representante legal" type="text"
                                                     #rlegal="ngModel" name="rlegal" [(ngModel)]="rucLegal"
-                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    class="form-control form-control-sm" disabled="dusuario"
                                                     id="Idrlegal">
                                             </div>
                                         </div>
@@ -623,7 +623,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese Teléfono 2" type="text" #t2="ngModel"
                                                     maxlength="10" name="t2" [(ngModel)]="telefono2"
-                                                    class="form-control form-control-sm" [disabled]="dusuario" id="Idt2"
+                                                    class="form-control form-control-sm" disabled="dusuario" id="Idt2"
                                                     min="0" (keypress)="commonServices.FormatDecimalVal($event)">
                                             </div>
                                         </div>
@@ -635,7 +635,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese cantidad de usuarios" type="number"
                                                     #users="ngModel" name="users" [(ngModel)]="usersEmpresa"
-                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    class="form-control form-control-sm" disabled="dusuario"
                                                     id="IdUserEmpresa">
                                             </div>
                                         </div>
@@ -647,7 +647,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese celular" type="text" #cel="ngModel"
                                                     maxlength="10" name="cel" [(ngModel)]="celular"
-                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    class="form-control form-control-sm" disabled="dusuario"
                                                     id="Idcel" min="0"
                                                     (keypress)="commonServices.FormatDecimalVal($event)">
                                             </div>
@@ -661,14 +661,14 @@
                                                 </div>
                                                 <input placeholder="Ingrese cantidad de sucursales" type="number"
                                                     #sucur="ngModel" name="sucur" [(ngModel)]="sucursal"
-                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    class="form-control form-control-sm" disabled="dusuario"
                                                     id="Idsucursal">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <app-cc-input-group-prepend label="Fecha alta" styleSpan="size-span-campo">
                                                 <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" name="dateFrom"
-                                                    format='yyyy-MM-dd' [disabled]="dusuario" class="form-control">
+                                                    format='yyyy-MM-dd' disabled="dusuario" class="form-control">
                                                 </ejs-datepicker>
                                             </app-cc-input-group-prepend>
                                         </div>
@@ -680,7 +680,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese contacto" type="text" #contact="ngModel"
                                                     name="contact" [(ngModel)]="contacto"
-                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    class="form-control form-control-sm" disabled="dusuario"
                                                     id="Idcontacto">
                                             </div>
                                         </div>
@@ -688,7 +688,7 @@
                                         <div class="col-sm-6">
                                             <app-cc-input-group-prepend label="Fecha baja" styleSpan="size-span-campo">
                                                 <ejs-datepicker [(ngModel)]="toDatePicker" name="dateFrom"
-                                                    format='yyyy-MM-dd' [disabled]="dusuario" class="form-control">
+                                                    format='yyyy-MM-dd' disabled="dusuario" class="form-control">
                                                 </ejs-datepicker>
                                             </app-cc-input-group-prepend>
                                         </div>
@@ -712,7 +712,7 @@
                                                 <select class="form-control form-control-sm custom-select"
                                                     #estadoe="ngModel" name="estadoe" [(ngModel)]="estadoEmpresa"
                                                     style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;"
-                                                    [disabled]="dusuario" id="IdestadoEmpresa">
+                                                    disabled="dusuario" id="IdestadoEmpresa">
                                                     <option value="A">Activo</option>
                                                     <option value="I">Inactivo</option>
                                                 </select>
@@ -730,7 +730,7 @@
                                         <div class="col-12 ">
                                             <div class="input-group input-group-sm mt-1">
                                                 <input id="fichero" type="file" lang="es" accept="image/*"
-                                                    (change)="onselect($event)" [disabled]="dusuario">
+                                                    (change)="onselect($event)" disabled="dusuario">
                                                 <label for="fichero" class="btn sub1 "
                                                     style="font-size:11px;line-height:0.5"><i class="fa fa-upload"
                                                         aria-hidden="true" style="font-size:13px;"></i>SELECCIONE
@@ -790,7 +790,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese nombre sucursal" type="text"
                                                     #nombreSucu="ngModel" name="nombreSucu" [(ngModel)]="nombreSucursal"
-                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    class="form-control form-control-sm" disabled="!newSucursal"
                                                     id="IdNombreSucu">
                                             </div>
                                         </div>
@@ -802,7 +802,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese dirección" type="text" #addressuc="ngModel"
                                                     name="addressuc" [(ngModel)]="direccionSucu"
-                                                    class="form-control form-control-sm" [disabled]="!newSucursal "
+                                                    class="form-control form-control-sm" disabled="!newSucursal "
                                                     id="IddireccionSucu">
                                             </div>
                                         </div>
@@ -815,7 +815,7 @@
                                                 <select class="form-control form-control-sm custom-select"
                                                     #estadosu="ngModel" name="estadosu" [(ngModel)]="estadoSucursal"
                                                     style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
-                                                    [disabled]="!newSucursal" id="IdestadoSucursal">
+                                                    disabled="!newSucursal" id="IdestadoSucursal">
                                                     <option value="A">Activo</option>
                                                     <option value="I">Inactivo</option>
                                                 </select>
@@ -831,7 +831,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese Teléfono 1" type="text" #t1Sucu="ngModel"
                                                     maxlength="10" name="t1Sucu" [(ngModel)]="telefono1Sucu"
-                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    class="form-control form-control-sm" disabled="!newSucursal"
                                                     id="Idt1Sucu" min="0"
                                                     (keypress)="commonServices.FormatDecimalVal($event)">
                                             </div>
@@ -844,7 +844,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese celular" type="text" #celSucu="ngModel"
                                                     maxlength="10" name="celSucu" [(ngModel)]="celularSucu"
-                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    class="form-control form-control-sm" disabled="!newSucursal"
                                                     id="IdCelSucu" min="0"
                                                     (keypress)="commonServices.FormatDecimalVal($event)">
                                             </div>
@@ -857,7 +857,7 @@
                                                 </div>
                                                 <select [(ngModel)]="empresaSeleccionado"
                                                     class="form-control form-control-sm custom-select"
-                                                    [disabled]="!newSucursal" (ngModelChange)="obtenerEmpresa($event)"
+                                                    disabled="!newSucursal" (ngModelChange)="obtenerEmpresa($event)"
                                                     style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
                                                     id="IdEmpresaSucursal">
                                                     <option [value]="0">Seleccione empresa</option>
@@ -877,7 +877,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese Teléfono 2" type="text" #t2Sucu="ngModel"
                                                     maxlength="10" name="t2Sucu" [(ngModel)]="telefono2Sucu"
-                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    class="form-control form-control-sm" disabled="!newSucursal"
                                                     id="Idt2Sucu" min="0"
                                                     (keypress)="commonServices.FormatDecimalVal($event)">
                                             </div>
@@ -890,7 +890,7 @@
                                                 </div>
                                                 <input placeholder="Ingrese email" type="text" #emailSucu="ngModel"
                                                     name="emailSucu" [(ngModel)]="emailSucursal"
-                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    class="form-control form-control-sm" disabled="!newSucursal"
                                                     id="idEmailSucu">
                                             </div>
                                         </div>
@@ -902,7 +902,7 @@
                                                 </div>
                                                 <select [(ngModel)]="usuarioSeleccionado" #usuario="ngModel"
                                                     name="usuario" class="form-control form-control-sm custom-select"
-                                                    [disabled]="!newSucursal" (ngModelChange)="obtenerUsuario($event)"
+                                                    disabled="!newSucursal" (ngModelChange)="obtenerUsuario($event)"
                                                     style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
                                                     id="Idusuario">
                                                

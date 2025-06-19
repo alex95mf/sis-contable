@@ -119,7 +119,7 @@
                                         #nameInputSearchEmpleado>
                                     <div class="input-group-append">
                                         <button (click)="onClicConsultaEmpleados(content)"
-                                        [disabled]="disableBtnConsultaEmpleados"
+                                        disabled="disableBtnConsultaEmpleados"
                                             class="btn btn-primary" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
@@ -212,7 +212,7 @@
                                                 #vChTipoJornada [id_jornada]="0" -->
                                         <div class="input-group-append">
                                             <button (click)="onClicConsultaEmpleados2(content)"
-                                            [disabled]="disableBtnConsultaEmpleados"
+                                            disabled="disableBtnConsultaEmpleados"
                                                 class="btn btn-primary" type="button">
                                                 <i class="fa fa-search"></i>
                                             </button>
@@ -375,7 +375,7 @@
                                 <td  style="min-width:80px;">{{ his.estado === 'A' ? 'ACTIVO' : 'INACTIVO'}}</td>
                                 <td style="min-width: 100px;">
                                     <button 
-                                    [disabled]="his.estado == 'I'"
+                                    disabled="his.estado == 'I'"
                                     type="button" (click)="regDelete(his.id_accion_personal)"
                                     class="btn btn-sm tooltip-test my-1"
                                     style="background-color: #F86C6B; color: white; border-radius: 10px"

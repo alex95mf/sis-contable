@@ -12,10 +12,10 @@
                              <app-cc-input-group-prepend label="ID" styleSpan="size-span-print">
                                 <input currencyMask [options]="{prefix: '', precision: 0, nullable: true}" class="form-control" [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
                                 <div class="input-group-append">
-                                    <button class="btn btn-action" (click)="getPrevRecord()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                                    <button class="btn btn-action" (click)="getPrevRecord()" matTooltip="Registro Anterior" disabled="lastRecord == null">
                                         <i class="far fa-chevron-left"></i>
                                     </button>
-                                    <button class="btn btn-action" (click)="getNextRecord()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                                    <button class="btn btn-action" (click)="getNextRecord()" matTooltip="Registro Siguiente" disabled="lastRecord == null">
                                         <i class="far fa-chevron-right"></i>
                                     </button>
                                     <button class="btn btn-action" (click)="getLatest()" matTooltip="Ultimo Registro">
@@ -87,7 +87,7 @@
                         <div class="col-12 col-md-6 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
                                 <input class="form-control" [(ngModel)]="codigo_cuenta_contable" type="text" readonly/>
-                                <button class="btn btn-action btn-sm" (click)="modalCuentaContable()" [disabled]="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
+                                <button class="btn btn-action btn-sm" (click)="modalCuentaContable()" disabled="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-12 col-md-6 pt-0 pb-0">
@@ -178,7 +178,7 @@
                             <ng-template pTemplate="body" let-rowData  let-columns="columns">
                                 <tr style="font-size: 12px;height: 45px;"  [ngClass]="{'table-danger': rowData.total_diferencia <= 0 }">
                                     <td class="text-center">
-                                        <input *ngIf="rowData.linea!= 'TOTAL'" [(ngModel)]="rowData.aprobar" type="checkbox" (change)="handleRowCheck($event, rowData)" [disabled]="rowData.tiene_control">
+                                        <input *ngIf="rowData.linea!= 'TOTAL'" [(ngModel)]="rowData.aprobar" type="checkbox" (change)="handleRowCheck($event, rowData)" disabled="rowData.tiene_control">
                                     </td>
                                   
                                     <td [ngStyle]="{'font-size':'11px',

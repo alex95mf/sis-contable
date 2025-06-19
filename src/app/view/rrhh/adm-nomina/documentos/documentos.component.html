@@ -72,20 +72,20 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
-                                                <select [(ngModel)]="empleSeleccionadodoc" name="emple" id="emplecarga" class="form-control form-control-sm custom-select estilo-combos"  [disabled]="permisions[0].editar == '0'">
+                                                <select [(ngModel)]="empleSeleccionadodoc" name="emple" id="emplecarga" class="form-control form-control-sm custom-select estilo-combos"  disabled="permisions[0].editar == '0'">
                                                     <option *ngFor="let d of dataEmpleado" [value]="d.id_personal">{{d.nombres}}</option>
                                                 </select>
                                             </app-cc-input-group-prepend>
                                         </div>
                                         <div class="col-sm-12">
                                             <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo">
-                                                <textarea placeholder="Ingrese descripción" type="text" maxlength="200" name="des"  [(ngModel)]="desCatalogo" rows="2" class="form-control form-control-sm text" [disabled]="permisions[0].editar == '0'" id="Iddescripcion">
+                                                <textarea placeholder="Ingrese descripción" type="text" maxlength="200" name="des"  [(ngModel)]="desCatalogo" rows="2" class="form-control form-control-sm text" disabled="permisions[0].editar == '0'" id="Iddescripcion">
                                                 </textarea>
                                             </app-cc-input-group-prepend>
                                         </div>
                                         <div class="col-sm-12">
                                             <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
-                                                <select class="form-control form-control-sm custom-select estilo-combos" name="estado" [(ngModel)]="estadoSeleccionado" [disabled]="permisions[0].editar == '0'" id="Idestado">
+                                                <select class="form-control form-control-sm custom-select estilo-combos" name="estado" [(ngModel)]="estadoSeleccionado" disabled="permisions[0].editar == '0'" id="Idestado">
                                                     <option value="A">Activo</option>
                                                 </select>
                                             </app-cc-input-group-prepend>
@@ -95,12 +95,12 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" style="height: 48px;"><img src="assets/img/file.png" width="35"></span>
                                                     <label class="btn sub" for="ficher"><i class="fa fa-upload" aria-hidden="true" style="font-size:14px;"></i>SELECCIONE ARCHIVO</label>
-                                                    <input type="file" id="ficher" lang="es" accept=".pdf,.doc,.docx,.xlsx,.xls,.pptx" name="file" (change)="subiendoando($event.target.files)" [disabled]="permisions[0].editar == '0'">
+                                                    <input type="file" id="ficher" lang="es" accept=".pdf,.doc,.docx,.xlsx,.xls,.pptx" name="file" (change)="subiendoando($event.target.files)" disabled="permisions[0].editar == '0'">
                                                 </div>
                                             </app-cc-input-group-prepend>
                                         </div>
                                         <!-- <div class="col-sm-12 justify-content-end" *ngIf="id_archivo!=undefined">
-                                            <button class="btn btn-sm tooltip-test my-1 boton-descargar" (click)="downloadAnexo()" title="Descargar documento" [disabled]="permisions[0].editar == '0'">
+                                            <button class="btn btn-sm tooltip-test my-1 boton-descargar" (click)="downloadAnexo()" title="Descargar documento" disabled="permisions[0].editar == '0'">
                                                 <i class="fa fa-download"></i>Descargar</button>
                                         </div> -->
                                         <div class="col-sm-12">

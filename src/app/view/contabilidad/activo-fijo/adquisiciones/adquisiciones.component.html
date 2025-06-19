@@ -7,7 +7,7 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Tipo documento" styleSpan="size-span-campo">
                 <select class="form-control form-control-sm custom-select" [(ngModel)]="activof.fk_doc"
-                    [disabled]="true" id="idTipDocSelect">
+                    disabled="true" id="idTipDocSelect">
                     <option *ngFor="let d of tip_doc" [value]="d.id"> {{d.nombre}} </option>
                 </select>
             </app-cc-input-group-prepend>
@@ -38,14 +38,14 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Tipo pago" styleSpan="size-span-campo">
                 <select class="form-control form-control-sm custom-select" [(ngModel)]="activof.tipo_pago"
-                    (ngModelChange)="changeDisabledBtn()" [disabled]="permissions.editar == '0'" id="idTipoPagoSelect">
+                    (ngModelChange)="changeDisabledBtn()" disabled="permissions.editar == '0'" id="idTipoPagoSelect">
                     <option [value]="0">Seleccione tipo pago</option>
                     <option *ngFor="let d of tipo_pago" [value]="d.valor"> {{d.valor}} </option>
                 </select>
 
                 <button class="btn btn-primary btn-sm" (click)="setNumCuotas()"
                     style="box-shadow: unset;outline: unset;" id="idbtndifered"
-                    [disabled]="permissions.editar == '0'  || !flagBtnDired " placement="top"
+                    disabled="permissions.editar == '0'  || !flagBtnDired " placement="top"
                     matTooltip="Diferir cuotas">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </button>
@@ -70,7 +70,7 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Forma pago" styleSpan="size-span-campo">
                 <select class="form-control form-control-sm custom-select" [(ngModel)]="activof.forma_pago"
-                    [disabled]="permissions.editar == '0'" id="idFormaPago">
+                    disabled="permissions.editar == '0'" id="idFormaPago">
                     <option [value]="0">Seleccione forma pago</option>
                     <option *ngFor="let d of forma_pago" [value]="d.valor"> {{d.valor}} </option>
                 </select>
@@ -167,7 +167,7 @@
                                 </td>
                                 <td>
                                     <select class="form-control form-control-sm custom-select" [(ngModel)]="d.fk_grupo"
-                                        [disabled]="permissions.editar == '0' || 
+                                        disabled="permissions.editar == '0' || 
                                             d.precio <= 0.00 || d.precio == '' " id="idtipogroup"
                                         (ngModelChange)="selectGroupDepreciacion(i,$event)">
                                         <option [value]="0">Seleccione un grupo</option>
@@ -178,11 +178,11 @@
                                 </td>
                                 <td>
                                     <input type="text" class="form-control form-control-sm" [(ngModel)]="d.codigo"
-                                        [disabled]="true" placeholder="Código">
+                                        disabled="true" placeholder="Código">
                                 </td>
                                 <td>
                                     <select class="form-control form-control-sm custom-select" [(ngModel)]="d.estado"
-                                        [disabled]="permissions.editar == '0'" id="idestadoselec">
+                                        disabled="permissions.editar == '0'" id="idestadoselec">
                                         <!-- <option [value]="0">Estado</option> -->
                                         <option *ngFor="let d of arrayAux" [value]="d.id">
                                             {{d.nombre}}
@@ -203,7 +203,7 @@
                                 <td>
                                     <ng-select [(ngModel)]="d.modelo" [searchable]="true"
                                         class="form-control form-control-sm custom-select custom" appendTo="body"
-                                        [clearable]="false" [disabled]="d.marca == '0' ">
+                                        [clearable]="false" disabled="d.marca == '0' ">
                                         <ng-option [value]="0">Modelo</ng-option>
                                         <ng-option *ngFor="let dtmo of dataModelos" [value]="dtmo.valor">
                                             {{dtmo.valor}}
@@ -216,12 +216,12 @@
                                             matTooltip="Eliminar Items" (click)="deleteItems(i)"><i
                                                 class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
-                                        <button class="btn btn-info btn-sm" [disabled]="permissions.agregar == '0' "
+                                        <button class="btn btn-info btn-sm" disabled="permissions.agregar == '0' "
                                             data-toggle="tooltip" data-placement="top" matTooltip="Crear marca"
                                             (click)="setCatalogoTitle('Ingreso de nueva marca','MARCAS','Marca')">
                                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                         </button>
-                                        <button class="btn btn-primary btn-sm" [disabled]="permissions.agregar == '0' "
+                                        <button class="btn btn-primary btn-sm" disabled="permissions.agregar == '0' "
                                             data-toggle="tooltip" data-placement="top" matTooltip="Crear modelo"
                                             (click)="setCatalogoTitle('Ingreso de nuevo modelo','MODELOS','Modelo')">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -299,7 +299,7 @@
                                 <input type="text" #valueCata="ngModel" name="valueCata"
                                     style="box-shadow: unset;outline: unset;" class="form-control form-control-sm"
                                     [(ngModel)]="valorCatalogo" placeholder="Ingrese valor"
-                                    [disabled]="permissions.editar == '0' " id="IdValorCatalogo">
+                                    disabled="permissions.editar == '0' " id="IdValorCatalogo">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-12">
@@ -307,7 +307,7 @@
                                 <textarea name="descripcion" cols="40" rows="1" #causa="ngModel" name="causa"
                                     class="form-control form-control-sm" [(ngModel)]="description"
                                     placeholder="Ingrese Descripción" style="box-shadow: unset;outline: unset;"
-                                    [disabled]="permissions.editar == '0' " id="Idcausa">
+                                    disabled="permissions.editar == '0' " id="Idcausa">
                                 </textarea>
                             </app-cc-input-group-prepend>
                         </div>

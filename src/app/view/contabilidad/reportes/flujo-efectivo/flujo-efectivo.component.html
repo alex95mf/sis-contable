@@ -48,7 +48,7 @@
                                         [searchable]="true"
                                         disabled
                                         [(ngModel)]="mes_actual">
-                                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                        <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                             {{item.name}}
                                         </ng-option>
                                     </ng-select>
@@ -195,7 +195,7 @@
                                  <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.total | number:'1.2-2'}}</em></b></td>
 
                                  <!-- <td class="text-center">
-                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" disabled="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
                                 </td> -->
                             </tr>
                         </tbody>

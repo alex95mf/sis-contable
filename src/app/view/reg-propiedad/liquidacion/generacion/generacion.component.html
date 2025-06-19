@@ -38,7 +38,7 @@
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text">Contribuyente</span></div>
                     <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
-                    <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                    <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text">Arancel</span></div>
                     <input type="text" class="form-control" [placeholder]="!arancelDisabled ? 'Seleccione un Arancel' : ''" readonly [(ngModel)]="arancelActive.descripcion">
-                    <button class="btn btn-info btn-sm" [disabled]="arancelDisabled || formReadOnly" (click)="expandArancel()" placement="bottom" ngbTooltip="Buscar Arancel">
+                    <button class="btn btn-info btn-sm" disabled="arancelDisabled || formReadOnly" (click)="expandArancel()" placement="bottom" ngbTooltip="Buscar Arancel">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -58,7 +58,7 @@
             <div class="col-3">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text">Cod. Catastral</span></div>
-                    <ng-select id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="liquidacion.fk_lote" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                    <ng-select id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="liquidacion.fk_lote" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                         <ng-option disabled>Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of propiedades" [value]="c.pivot.lote_id">{{ c.cod_catastral }}</ng-option>
                     </ng-select>
@@ -74,13 +74,13 @@
             <div class="col-4">
                 <div class="p-inputgroup form-control-sm">
                     <span class="p-inputgroup-addon">Cuant&iacute;a</span>
-                    <p-inputNumber [(ngModel)]="liquidacion.cuantia" mode="currency" currency="USD" locale="en-US" [disabled]="cuantiaDisabled || formReadOnly" (keyup)="changeAvalCuantia()"></p-inputNumber>
+                    <p-inputNumber [(ngModel)]="liquidacion.cuantia" mode="currency" currency="USD" locale="en-US" disabled="cuantiaDisabled || formReadOnly" (keyup)="changeAvalCuantia()"></p-inputNumber>
                 </div>
             </div>
             <div class="col-2">
                 <div class="input-group input-group-sm">
                     <!--<div class="input-group-prepend"><span class="input-group-text">Calcular</span></div>-->
-                    <button class="btn btn-info btn-sm ml-1 w-100" placement="bottom" ngbTooltip="Calcular Subtotal" [disabled]="calcularDisabled || formReadOnly" (click)="calcSubtotal()">
+                    <button class="btn btn-info btn-sm ml-1 w-100" placement="bottom" ngbTooltip="Calcular Subtotal" disabled="calcularDisabled || formReadOnly" (click)="calcSubtotal()">
                         Calcular
                         <i class="fas fa-calculator"></i>
                     </button>
@@ -102,7 +102,7 @@
                 <h5 class="mb-0 text-dark">Exoneraciones</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" [disabled]="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" disabled="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -131,7 +131,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -264,7 +264,7 @@
                 <div class="col-4">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text">Cuantía</span></div>
-                        <input type="text" class="form-control form-control-sm" [disabled]="cuantiaDisabled || formReadOnly" [(ngModel)]="liquidacion.cuantia" (keypress)="onlyNumber($event)" (keyup)="changeAvalCuantia()">
+                        <input type="text" class="form-control form-control-sm" disabled="cuantiaDisabled || formReadOnly" [(ngModel)]="liquidacion.cuantia" (keypress)="onlyNumber($event)" (keyup)="changeAvalCuantia()">
                     </div>
                 </div>
             </div>

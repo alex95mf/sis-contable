@@ -7,7 +7,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo documento</span>
                     </div>
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.idTipDocSelect" [disabled]="!actions.dComponet " id="idTipDocSelect" (ngModelChange)="cancelBuy($event)">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.idTipDocSelect" disabled="!actions.dComponet " id="idTipDocSelect" (ngModelChange)="cancelBuy($event)">
                         <option *ngFor="let d of dataBuy.tip_doc" [value]="d.id">
                             {{d.nombre}}
                         </option>
@@ -20,14 +20,14 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
                             pago</span>
                     </div>
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.tipoPagoSelect" (ngModelChange)="changeDisabledBtn()" [disabled]="!actions.dComponet " id="idTipoPagoSelect">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.tipoPagoSelect" (ngModelChange)="changeDisabledBtn()" disabled="!actions.dComponet " id="idTipoPagoSelect">
                         <option [value]="0">Seleccione tipo pago</option>
                         <option *ngFor="let d of dataBuy.tipo_pago" [value]="d.valor">
                             {{d.valor}}
                         </option>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-primary" (click)="setNumCuotas()" style="box-shadow: unset;outline: unset;" id="idbtndifered" [disabled]="!flagBtnDired " placement="top" ngbTooltip="Diferir cuotas">
+                        <button class="btn btn-primary" (click)="setNumCuotas()" style="box-shadow: unset;outline: unset;" id="idbtndifered" disabled="!flagBtnDired " placement="top" ngbTooltip="Diferir cuotas">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Autorización</span>
                     </div>
-                    <input placeholder="Número autorización" type="text" class="form-control form-control-sm" id="idNumFac" [(ngModel)]="dataBuy.numAut" [disabled]="!actions.dComponet">
+                    <input placeholder="Número autorización" type="text" class="form-control form-control-sm" id="idNumFac" [(ngModel)]="dataBuy.numAut" disabled="!actions.dComponet">
 
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Forma
                             pago</span>
                     </div>
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.formaPagoSelect" [disabled]="!actions.dComponet" id="idFormaPago">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.formaPagoSelect" disabled="!actions.dComponet" id="idFormaPago">
                         <option [value]="0">Seleccione forma pago</option>
                         <option *ngFor="let d of dataBuy.forma_pago" [value]="d.valor">
                             {{d.valor}}
@@ -80,7 +80,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
                     </div>
-                    <input placeholder="Número documento" type="text" class="form-control form-control-sm" id="idNumDoc" [(ngModel)]="dataBuy.numDoc" [disabled]="!actions.dComponet">
+                    <input placeholder="Número documento" type="text" class="form-control form-control-sm" id="idNumDoc" [(ngModel)]="dataBuy.numDoc" disabled="!actions.dComponet">
 
                 </div>
             </div>
@@ -89,7 +89,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
                     </div>
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.estado" [disabled]="!disestado">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.estado" disabled="!disestado">
                         <option value="A">Activo</option>
                         <option value="I">Inactivo</option>
                     </select>
@@ -101,7 +101,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
                     </div>
                     <ng-select class="form-control" [searchable]="true" [(ngModel)]="dataBuy.rucProvider"
-                        [clearable]="false" [disabled]="!actions.dComponet" id="idRucProv">
+                        [clearable]="false" disabled="!actions.dComponet" id="idRucProv">
                         <ng-option [value]="0">Seleccione proveedor</ng-option>
                         <ng-option *ngFor="let d of arrayProveedor" [value]="d.num_documento">
                             {{d.razon_social}}</ng-option>
@@ -124,7 +124,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
                     </div>
-                    <ng-select class="form-control" [searchable]="true" [(ngModel)]="dataBuy.rucProvider" [clearable]="false" [disabled]="!actions.dComponet" id="idRucProv">
+                    <ng-select class="form-control" [searchable]="true" [(ngModel)]="dataBuy.rucProvider" [clearable]="false" disabled="!actions.dComponet" id="idRucProv">
                         <ng-option [value]="0">Seleccione proveedor</ng-option>
                         <ng-option *ngFor="let d of arrayProveedor" [value]="d.num_documento">
                             {{d.razon_social}}</ng-option>
@@ -137,7 +137,7 @@
                         <span class="input-group-text" style="background-color: #404a63; color: white;"
                             placeholder="Ingrese observación">Observación</span>
                     </div>
-                    <textarea name="" id="idTexObserv" [(ngModel)]="dataBuy.observation" [disabled]="!actions.dComponet"
+                    <textarea name="" id="idTexObserv" [(ngModel)]="dataBuy.observation" disabled="!actions.dComponet"
                         class="form-control form-control-sm" placeholder="Ingrese una observación"></textarea>
                 </div>
             </div> -->
@@ -146,7 +146,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Usuario recibe</span>
                     </div>
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.userSelect" [disabled]="!actions.dComponet" id="idUserReceibed">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="dataBuy.userSelect" disabled="!actions.dComponet" id="idUserReceibed">
                         <option [value]="0">Seleccione usuario</option>
                         <option *ngFor="let d of dataBuy.dataUsuario" [value]="d.id_usuario">{{d.nombre}}
                         </option>
@@ -168,7 +168,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese observación">Observación</span>
                     </div>
-                    <textarea name="" id="idTexObserv" [(ngModel)]="dataBuy.observation" [disabled]="!actions.dComponet" class="form-control form-control-sm" placeholder="Ingrese una observación"></textarea>
+                    <textarea name="" id="idTexObserv" [(ngModel)]="dataBuy.observation" disabled="!actions.dComponet" class="form-control form-control-sm" placeholder="Ingrese una observación"></textarea>
                 </div>
             </div>
         </div>
@@ -176,7 +176,7 @@
             <div class="col-12 filters pl-2 pr-2 ">
                 <div class="row justify-content-end pt-2">
                     <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
-                        <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Añadir Items" (click)="addItems()" [disabled]="!actions.dComponet">
+                        <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Añadir Items" (click)="addItems()" disabled="!actions.dComponet">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -201,7 +201,7 @@
                                     <td style="width: 7%;text-align: center;" class="pt-3">{{i+1}}</td>
                                     <td style="width: 20%;">
                                         <div>
-                                            <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true" [disabled]="!actions.dComponet " [clearable]="false" [(ngModel)]="d.productSelect" (ngModelChange)="getDataProduct($event,i)">
+                                            <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true" disabled="!actions.dComponet " [clearable]="false" [(ngModel)]="d.productSelect" (ngModelChange)="getDataProduct($event,i)">
                                                 <ng-option [value]="0">Seleccione Producto</ng-option>
                                                 <ng-option *ngFor="let d of arrayProductos" [value]="d.id_producto">
                                                     {{d.nombre}}</ng-option>
@@ -210,23 +210,23 @@
                                     </td>
                                     <td style="width: 15%;text-align: center;padding-top: 14px;">{{d.codigo}}</td>
                                     <td style="width: 21%;">
-                                        <textarea class="form-control form-control-sm" [(ngModel)]="d.description" placeholder="Ingrese descripción" [disabled]="!actions.dComponet  " rows="1">
+                                        <textarea class="form-control form-control-sm" [(ngModel)]="d.description" placeholder="Ingrese descripción" disabled="!actions.dComponet  " rows="1">
                                        </textarea>
                                     </td>
                                     <td style="width: 9%;">
                                         <div>
-                                            <input type="text" class="form-control form-control-sm" placeholder="0.0000" style="text-align: right;padding-right: 5px;" [(ngModel)]="d.quantity" (keyup)="sumTotal(i)" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="!actions.dComponet  || d.productSelect == undefined  ">
+                                            <input type="text" class="form-control form-control-sm" placeholder="0.0000" style="text-align: right;padding-right: 5px;" [(ngModel)]="d.quantity" (keyup)="sumTotal(i)" min="0" (keypress)="commonServices.FormatDecimalVal($event)" disabled="!actions.dComponet  || d.productSelect == undefined  ">
                                         </div>
                                     </td>
                                     <td style="width: 9%;">
                                         <div>
-                                            <input type="text" class="form-control form-control-sm" placeholder="$ 0.0000" style="text-align: right;padding-right: 5px;" [(ngModel)]="d.price" (keyup)="sumTotal(i)" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="!actions.dComponet || d.productSelect == undefined ">
+                                            <input type="text" class="form-control form-control-sm" placeholder="$ 0.0000" style="text-align: right;padding-right: 5px;" [(ngModel)]="d.price" (keyup)="sumTotal(i)" min="0" (keypress)="commonServices.FormatDecimalVal($event)" disabled="!actions.dComponet || d.productSelect == undefined ">
                                         </div>
                                     </td>
                                     <td style="width: 9%;text-align: right;" class="pt-3">$ {{d.totalItems.toFixed(4)}}
                                     </td>
                                     <td style="width: 10%;text-align: center;">
-                                        <button class="btn btn-danger" placement="left" ngbTooltip="Eliminar Items" [disabled]="!actions.dComponet" (click)="deleteItems(i)"><i
+                                        <button class="btn btn-danger" placement="left" ngbTooltip="Eliminar Items" disabled="!actions.dComponet" (click)="deleteItems(i)"><i
                                                 class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </td>

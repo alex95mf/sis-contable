@@ -16,7 +16,7 @@
             <span>Total Denominaciones</span>
         </div>
         <div class="col-2 text-break">
-            <input type="number" style="text-align: right;" [(ngModel)]="total" [disabled] = "true">
+            <input type="number" style="text-align: right;" [(ngModel)]="total" disabled = "true">
         </div>
     </div>
     <div class="row">
@@ -43,7 +43,7 @@
                             </td>
                             <td style="width: 15%;" *ngIf="dt.isDenom == 1">
                                 <input type="number" style="width: 100%;" 
-                                    [(ngModel)]="dt.total_denom" class="text-right" min="0" [disabled]="true">
+                                    [(ngModel)]="dt.total_denom" class="text-right" min="0" disabled="true">
                             </td>
                             <td style="width: 15%;" *ngIf="dt.isDenom == 0">
                                 <input type="number" style="width: 100%;" [(ngModel)]="dt.cantidad" class="text-right"
@@ -51,7 +51,7 @@
                             </td>
                             <td style="width: 15%;" *ngIf="dt.isDenom == 0">
                                 <input type="number" style="width: 100%;" 
-                                    [(ngModel)]="dt.total_denom" class="text-right" min="0" [disabled]="true">
+                                    [(ngModel)]="dt.total_denom" class="text-right" min="0" disabled="true">
                             </td>
                         </tr>
                     </tbody>
@@ -61,7 +61,7 @@
     </div>
     <div class="row justify-content-center mt-3">
         <div class="col-3">
-            <button class="btn btn-info btn-block btn-sm" (click)="registerTotal()" [disabled]="total == 0">REGISTRAR</button>
+            <button class="btn btn-info btn-block btn-sm" (click)="registerTotal()" disabled="total == 0">REGISTRAR</button>
         </div>
         <div class="col-3">
             <button class="btn btn-danger btn-block btn-sm" (click)="cancel()">CANCELAR</button>

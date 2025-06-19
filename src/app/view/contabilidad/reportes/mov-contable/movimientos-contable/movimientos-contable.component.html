@@ -50,7 +50,7 @@
 							<label class="l">Codigo</label>
 						 </div>
 						 <div class="col-md-12 mt-0">
-							<ng-select class="form-control beautifulNgSel" [searchable]="true" [disabled]="permisions.consultar == '0'"  style="padding-left: 7px;font-size: 13px;" [(ngModel)]="codigo" (ngModelChange)="filterCodigo($event)" [clearable]="false">
+							<ng-select class="form-control beautifulNgSel" [searchable]="true" disabled="permisions.consultar == '0'"  style="padding-left: 7px;font-size: 13px;" [(ngModel)]="codigo" (ngModelChange)="filterCodigo($event)" [clearable]="false">
 							<ng-option [value]="0">Seleccione Codigo</ng-option>
 							<ng-option *ngFor="let d of arrayCodigo" [value]="d.codigo"> {{d.codigo}}</ng-option>
 							</ng-select>
@@ -65,7 +65,7 @@
 							<label class="l">Desde</label>
 						 </div>
 						 <div class="col-md-12 mt-0">
-							<ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd" [disabled]="permisions.consultar == '0'" (ngModelChange)="FromOrToChange()"  >
+							<ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd" disabled="permisions.consultar == '0'" (ngModelChange)="FromOrToChange()"  >
 							</ejs-datepicker>
 						 </div>
 					  </div>
@@ -76,7 +76,7 @@
 							<label class="l">Tipo</label>
 						 </div>
 						 <div class="col-md-12 ">
-							<select class="form-control form-control-sm custom-select" (ngModelChange)="filterTipo($event)" [disabled]="permisions.consultar == '0'" [(ngModel)]="tipo">
+							<select class="form-control form-control-sm custom-select" (ngModelChange)="filterTipo($event)" disabled="permisions.consultar == '0'" [(ngModel)]="tipo">
 							<option [value]="0">Seleccione Tipo</option>
 							<option *ngFor="let d of arrayTipo" [value]="d.codigo">{{ d.codigo }} </option>
 							</select>
@@ -89,7 +89,7 @@
 							<label class="l">Anterior</label>
 						 </div>
 						 <div class="col-md-12 fechas">
-							<input type="text"  [(ngModel)]="anterior" disabled class="form-control form-control-sm text-right" [disabled]="permisions.consultar == '0'" id="IdAnterior">
+							<input type="text"  [(ngModel)]="anterior" disabled class="form-control form-control-sm text-right" disabled="permisions.consultar == '0'" id="IdAnterior">
 						 </div>
 					  </div>
 				   </div>
@@ -103,7 +103,7 @@
 							<label class="l">Nombre</label>
 						 </div>
 						 <div class="col-md-12 mt-0">
-							<ng-select class="form-control beautifulNgSel" [searchable]="true" style="padding-left: 7px;font-size: 13px;" [disabled]="permisions.consultar == '0'" [(ngModel)]="nombre" (ngModelChange)="filterNombre($event)" [clearable]="false">
+							<ng-select class="form-control beautifulNgSel" [searchable]="true" style="padding-left: 7px;font-size: 13px;" disabled="permisions.consultar == '0'" [(ngModel)]="nombre" (ngModelChange)="filterNombre($event)" [clearable]="false">
 							<ng-option [value]="0">Seleccione Nombre</ng-option>
 							<ng-option *ngFor="let d of arrayNombre" [value]="d.nombre"> {{d.nombre}}</ng-option>
 							</ng-select>
@@ -116,7 +116,7 @@
 							<label class="l">Hasta</label>
 						 </div>
 						 <div class="col-md-12 mt-0">
-							<ejs-datepicker [(ngModel)]="toDatePicker" type="text" format="yyyy-MM-dd" (ngModelChange)="FromOrToChange($event)" [disabled]="permisions.consultar == '0'">
+							<ejs-datepicker [(ngModel)]="toDatePicker" type="text" format="yyyy-MM-dd" (ngModelChange)="FromOrToChange($event)" disabled="permisions.consultar == '0'">
 							</ejs-datepicker>
 						 </div>
 					  </div>
@@ -127,7 +127,7 @@
 							<label class="l">Número</label>
 						 </div>
 						 <div class="col-md-12 ">
-							<select class="form-control form-control-sm custom-select" (ngModelChange)="filterNumero($event)" [disabled]="permisions.consultar == '0' || tipo == 0" [(ngModel)]="numero">
+							<select class="form-control form-control-sm custom-select" (ngModelChange)="filterNumero($event)" disabled="permisions.consultar == '0' || tipo == 0" [(ngModel)]="numero">
 							<option [value]="0">Seleccione Numero</option>
 							<option *ngFor="let d of arrayCab" [value]="d.num_doc">{{ d.num_doc.padStart(10, 0)}} </option>
 							</select>
@@ -145,7 +145,7 @@
 					  </div>
 				   </div>
 				   <div class="col-md-1">
-					  <br><button class="btn btn-sm tooltip-test my-1" style="background-color: #404A63; color: white; border-radius: 10px;margin-left:10px;"  [disabled]="permisions.consultar == '0'" (click)="limpiarMov() " placement="top" ngbTooltip="Limpiar Datos"> <i style="color:white; " class="fa fa-repeat"></i></button> 
+					  <br><button class="btn btn-sm tooltip-test my-1" style="background-color: #404A63; color: white; border-radius: 10px;margin-left:10px;"  disabled="permisions.consultar == '0'" (click)="limpiarMov() " placement="top" ngbTooltip="Limpiar Datos"> <i style="color:white; " class="fa fa-repeat"></i></button> 
 				   </div>
 				</div>
 			 </div>

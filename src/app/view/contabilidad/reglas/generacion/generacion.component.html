@@ -8,7 +8,7 @@
                 <div class="row m-0">
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Tipo de Regla" styleSpan="font-weight-bold size-span-campo">
-                            <ng-select id="tipo_regla" class="form-control form-control-sm" [(ngModel)]="documento.tipo_regla" maxlength="5" [disabled]="formReadOnly">
+                            <ng-select id="tipo_regla" class="form-control form-control-sm" [(ngModel)]="documento.tipo_regla" maxlength="5" disabled="formReadOnly">
                                 <ng-option disabled [value]="0">Seleccione un tipo regla</ng-option>
                                 <ng-option *ngFor="let op of tipoRegla" [value]="op.valor">
                                     {{ op.descripcion }}</ng-option>
@@ -33,7 +33,7 @@
                 <div class="row m-0">
                     <div class="col-12 col-md-12 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Descripción" styleSpan="font-weight-bold size-span-campo">
-                            <textarea id="descripcion" type="text" class="form-control form-control-sm" cols="40" rows="4"  placeholder="Descripción" [(ngModel)]="documento.descripcion" [disabled]="formReadOnly" maxlength="900"></textarea>
+                            <textarea id="descripcion" type="text" class="form-control form-control-sm" cols="40" rows="4"  placeholder="Descripción" [(ngModel)]="documento.descripcion" disabled="formReadOnly" maxlength="900"></textarea>
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                                 <div class="col-4">
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend ml-2"><span class="input-group-text size-span-campo font-weight-bold" >Tipo Código</span></div>
-                                        <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="tipoCodigo" [clearable]="false" (click)="selectTipoCodigo($event)">
+                                        <ng-select disabled="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="tipoCodigo" [clearable]="false" (click)="selectTipoCodigo($event)">
                                             <ng-option [value]="0" disabled>Seleccione un tipo código</ng-option>
                                             <ng-option *ngFor="let op of tipoCodigoList" [value]="op.value">{{ op.label }}</ng-option>
                                         </ng-select>
@@ -88,21 +88,21 @@
                                 <div class="col-4">
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend ml-2"><span class="input-group-text size-span-campo font-weight-bold">Tipo Movimiento</span></div>
-                                        <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="tipoMovimiento" [clearable]="false" (click)="selectTipoMovimiento($event)">
+                                        <ng-select disabled="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="tipoMovimiento" [clearable]="false" (click)="selectTipoMovimiento($event)">
                                             <ng-option [value]="0" disabled>Seleccione un tipo movimiento</ng-option>
                                             <ng-option *ngFor="let op of tipoMovimientoList" [value]="op.value">{{ op.label }}</ng-option>
                                         </ng-select>
                                     </div>
                                 </div>
                                 <div class="col-4 text-right">
-                                    <button [disabled]="formReadOnly || addDetalle" class="btn btn-sm btn-success" ngbTooltip="Agregar Detalles" (click)="agregarItems()"><i class="far fa-plus"></i></button>
+                                    <button disabled="formReadOnly || addDetalle" class="btn btn-sm btn-success" ngbTooltip="Agregar Detalles" (click)="agregarItems()"><i class="far fa-plus"></i></button>
                                 </div>
                             </div>
                             <div class="row  m-0 mt-2 mb-3" *ngIf="tipoCodigo=='CON'">
                                 <div  class="col-6">
                                     <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
                                         <input class="form-control" [(ngModel)]="grupo.codigo_cuenta_contable" type="text" readonly/>
-                                        <button class="btn btn-action btn-sm" (click)="modalCuentaContable(true)" [disabled]="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
+                                        <button class="btn btn-action btn-sm" (click)="modalCuentaContable(true)" disabled="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
                                     </app-cc-input-group-prepend>
                                 </div>
                     
@@ -117,7 +117,7 @@
                                 <div  class="col-6">
                                     <app-cc-input-group-prepend label="Codigo Presupuesto" styleSpan="size-span-campo font-weight-bold">
                                         <input class="form-control" [(ngModel)]="grupo.codigo_presupuesto" type="text" readonly/>
-                                        <button class="btn btn-action btn-sm" (click)="modalCuentaContable(false)" [disabled]="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
+                                        <button class="btn btn-action btn-sm" (click)="modalCuentaContable(false)" disabled="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
                                     </app-cc-input-group-prepend>
                                 </div>
                     
@@ -155,7 +155,7 @@
                                                         <td class="text-center">{{ d.codigo}}</td>
                                                         <td class="text-center">{{ d.descripcion}}</td>
                                                         <td class="text-center">
-                                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Detalle de Regla" [disabled]="titulosDisabled || formReadOnly" (click)="removeDetalleReglas(d)"><i class="far fa-trash-alt"></i></button>
+                                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Detalle de Regla" disabled="titulosDisabled || formReadOnly" (click)="removeDetalleReglas(d)"><i class="far fa-trash-alt"></i></button>
                                                         </td>
                                                     </tr>
                                                 </ng-container>
@@ -267,7 +267,7 @@
                     <div class="col-4">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend ml-2"><span class="input-group-text size-span-campo font-weight-bold" >Tipo Código</span></div>
-                            <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="tipoCodigo" [clearable]="false" (click)="selectTipoCodigo($event)">
+                            <ng-select disabled="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="tipoCodigo" [clearable]="false" (click)="selectTipoCodigo($event)">
                                 <ng-option [value]="0" disabled>Seleccione un tipo código</ng-option>
                                 <ng-option *ngFor="let op of tipoCodigoList" [value]="op.value">{{ op.label }}</ng-option>
                             </ng-select>
@@ -276,21 +276,21 @@
                     <div class="col-4">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend ml-2"><span class="input-group-text size-span-campo font-weight-bold">Tipo Movimiento</span></div>
-                            <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="tipoMovimiento" [clearable]="false" (click)="selectTipoMovimiento($event)">
+                            <ng-select disabled="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="tipoMovimiento" [clearable]="false" (click)="selectTipoMovimiento($event)">
                                 <ng-option [value]="0" disabled>Seleccione un tipo movimiento</ng-option>
                                 <ng-option *ngFor="let op of tipoMovimientoList" [value]="op.value">{{ op.label }}</ng-option>
                             </ng-select>
                         </div>
                     </div>
                     <div class="col-4 text-right">
-                        <button [disabled]="formReadOnly || addDetalle" class="btn btn-sm btn-success" ngbTooltip="Agregar Detalles" (click)="agregarItems()"><i class="fas fa-plus"></i></button>
+                        <button disabled="formReadOnly || addDetalle" class="btn btn-sm btn-success" ngbTooltip="Agregar Detalles" (click)="agregarItems()"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
                 <div class="row mt-2 mb-3" *ngIf="tipoCodigo=='CON'">
                     <div  class="col-6">
                         <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
                             <input class="form-control" [(ngModel)]="grupo.codigo_cuenta_contable" type="text" readonly/>
-                            <button class="btn btn-action btn-sm" (click)="modalCuentaContable(true)" [disabled]="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
+                            <button class="btn btn-action btn-sm" (click)="modalCuentaContable(true)" disabled="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
                         </app-cc-input-group-prepend>
                     </div>
         
@@ -305,7 +305,7 @@
                     <div  class="col-6">
                         <app-cc-input-group-prepend label="Codigo Presupuesto" styleSpan="size-span-campo font-weight-bold">
                             <input class="form-control" [(ngModel)]="grupo.codigo_presupuesto" type="text" readonly/>
-                            <button class="btn btn-action btn-sm" (click)="modalCuentaContable(false)" [disabled]="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
+                            <button class="btn btn-action btn-sm" (click)="modalCuentaContable(false)" disabled="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
                         </app-cc-input-group-prepend>
                     </div>
         
@@ -343,7 +343,7 @@
                                             <td class="text-center">{{ d.codigo}}</td>
                                             <td class="text-center">{{ d.descripcion}}</td>
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Detalle de Regla" [disabled]="titulosDisabled || formReadOnly" (click)="removeDetalleReglas(d)"><i class="far fa-trash-alt"></i></button>
+                                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Detalle de Regla" disabled="titulosDisabled || formReadOnly" (click)="removeDetalleReglas(d)"><i class="far fa-trash-alt"></i></button>
                                             </td>
                                         </tr>
                                     </ng-container>

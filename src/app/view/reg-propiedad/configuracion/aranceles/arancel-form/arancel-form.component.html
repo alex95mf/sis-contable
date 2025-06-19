@@ -126,7 +126,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Tarifa base</span>
                     </div>
-                    <input [disabled]="arancel.desc_calculo != 'FI' && arancel.desc_calculo != 'FO'" id="valor" type="text" class="form-control form-control-sm" placeholder="Tarifa base" [(ngModel)]="arancel.valor" (keypress)="onlyNumberDot($event)">
+                    <input disabled="arancel.desc_calculo != 'FI' && arancel.desc_calculo != 'FO'" id="valor" type="text" class="form-control form-control-sm" placeholder="Tarifa base" [(ngModel)]="arancel.valor" (keypress)="onlyNumberDot($event)">
                 </div>
             </div>
             <div class="col-4">
@@ -134,7 +134,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Porcentaje</span>
                     </div>
-                    <input [disabled]="arancel.desc_calculo != 'FO'" id="porcentaje" type="text" class="form-control form-control-sm" placeholder="Porcentaje" [(ngModel)]="arancel.porcentaje" (keypress)="onlyNumberDot($event)">
+                    <input disabled="arancel.desc_calculo != 'FO'" id="porcentaje" type="text" class="form-control form-control-sm" placeholder="Porcentaje" [(ngModel)]="arancel.porcentaje" (keypress)="onlyNumberDot($event)">
                 </div>
             </div>
         </div>

@@ -134,7 +134,7 @@
                       <i class="fas fa-eye"></i>
                     </button>
                     <button class="btn btn-warning btn-sm" (click)="modalEditDetalles(dt)" matTooltip="Editar Detalles"
-                      [disabled]="dt.notificador != null">
+                      disabled="dt.notificador != null">
                       <i class="fas fa-edit"></i>
                     </button>
                     <button class="btn btn-outline-danger btn-sm" (click)="imprimirNotificacion(dt)"

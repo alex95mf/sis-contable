@@ -24,7 +24,7 @@
                                         <td *ngIf="dt.valor != null" style="width: 35%;text-align: right;">{{ dt.valor }}</td>
                                         <td style="text-align: center;width: 15%;">
                                             <input *ngIf="dt.valor == null" disabled type="checkbox" style="cursor: pointer;">
-                                            <input *ngIf="dt.valor != null" [disabled]="dt.estado_tarifa == 'I' || dt.estado == 'I'" type="checkbox" style="cursor: pointer;" [(ngModel)]="dt.action">
+                                            <input *ngIf="dt.valor != null" disabled="dt.estado_tarifa == 'I' || dt.estado == 'I'" type="checkbox" style="cursor: pointer;" [(ngModel)]="dt.action">
                                         </td>
                                     </tr>
                                 </tbody>

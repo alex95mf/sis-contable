@@ -15,7 +15,7 @@
             <i class="fa fa-clone" aria-hidden="true"></i> DUPLICAR
         </button>
 
-        <button class="btn btn-danger btn-style" [disabled]="actions.btnCancel" (click)="CancelForm()">
+        <button class="btn btn-danger btn-style" disabled="actions.btnCancel" (click)="CancelForm()">
             <i class="fa fa-undo" aria-hidden="true"></i> CANCELAR
         </button>
     </div>
@@ -29,7 +29,7 @@
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
                             <label for="">Ruc/Razón social</label>
                             <ng-select id="duplicateQuotes" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false"
-                                [disabled]="!actions.btnDuplicate" style="padding-left: 7px;font-size: 13px;"
+                                disabled="!actions.btnDuplicate" style="padding-left: 7px;font-size: 13px;"
                                 [(ngModel)]="customerSelect" (keyup)="getCustomerFilter($event.target.value)"
                                 (ngModelChange)="getCustomer($event)">
                                 <ng-option *ngFor="let d of arrayCustomerAux" [value]="d.id_cliente">
@@ -47,7 +47,7 @@
                             <label for="">Estado Doc.</label>
                             <select class="form-control" [(ngModel)]="docStatus"
                                 style="padding-left: 7px; font-size: 13px;"
-                                [disabled]="permissions.editar == '0' || actions.btnDuplicate">
+                                disabled="permissions.editar == '0' || actions.btnDuplicate">
                                 <option *ngFor="let d of statusDocuments" [value]="d.name">
                                     {{ d.name }}
                                 </option>
@@ -72,7 +72,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="razón social" type="text"
                                                         class="form-control form-control-sm" id="idRazSocial"
-                                                        [disabled]="true" [(ngModel)]="customer.razon_social">
+                                                        disabled="true" [(ngModel)]="customer.razon_social">
                                                 </div>
                                             </div>
                                             <div class="row cont pt-2">
@@ -82,7 +82,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="tipo documento" type="text"
                                                         class="form-control form-control-sm" id="idTipDoc"
-                                                        [disabled]="true" [(ngModel)]="customer.tipo_documento">
+                                                        disabled="true" [(ngModel)]="customer.tipo_documento">
                                                 </div>
                                             </div>
                                             <div class="row cont pt-2">
@@ -93,7 +93,7 @@
                                                     <input placeholder="numero documento" type="text"
                                                         [(ngModel)]="customer.num_documento"
                                                         class="form-control form-control-sm" id="idNumDoc"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                 </div>
                                             </div>
                                         </div>
@@ -105,7 +105,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="tipo contribuyente" type="text"
                                                         class="form-control form-control-sm" id="idTipCont"
-                                                        [disabled]="true" [(ngModel)]="customer.tipo_contribuyente">
+                                                        disabled="true" [(ngModel)]="customer.tipo_contribuyente">
                                                 </div>
                                             </div>
                                             <div class="row cont pt-2">
@@ -115,7 +115,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="cupo crédito" type="text"
                                                         class="form-control form-control-sm" id="idCupoCre"
-                                                        [disabled]="true" [(ngModel)]="customer.cupo_credito">
+                                                        disabled="true" [(ngModel)]="customer.cupo_credito">
                                                 </div>
                                             </div>
                                             <div class="row cont pt-2">
@@ -125,7 +125,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="saldo crédito" type="text"
                                                         class="form-control form-control-sm" id="idSalCre"
-                                                        [disabled]="true" [(ngModel)]="customer.saldo_credito">
+                                                        disabled="true" [(ngModel)]="customer.saldo_credito">
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="Grupo" type="text"
                                                         class="form-control form-control-sm" id="idGrupo"
-                                                        [disabled]="true" [(ngModel)]="customer.grupo">
+                                                        disabled="true" [(ngModel)]="customer.grupo">
                                                 </div>
                                             </div>
                                             <div class="row cont pt-2">
@@ -147,7 +147,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="asesor financiero" type="text"
                                                         class="form-control form-control-sm" id="idAsesor"
-                                                        [disabled]="true" [(ngModel)]="customer['asesor']['nombre']">
+                                                        disabled="true" [(ngModel)]="customer['asesor']['nombre']">
                                                 </div>
                                             </div>
                                             <div class="row cont pt-2">
@@ -157,7 +157,7 @@
                                                 <div class="col-md-12 ">
                                                     <select id="idFormPago" class="form-control form-control-sm"
                                                         [(ngModel)]="customer.formaPagoSelect"
-                                                        [disabled]="permissions.editar == '0'">
+                                                        disabled="permissions.editar == '0'">
                                                         <option *ngFor="let d of arrayFormaPago" [value]="d.valor">
                                                             {{ d.valor }}
                                                         </option>
@@ -196,7 +196,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="provincia" type="text"
                                                         class="form-control form-control-sm" id="idProvincia"
-                                                        [disabled]="true" [(ngModel)]="customer.provincia">
+                                                        disabled="true" [(ngModel)]="customer.provincia">
                                                 </div>
                                             </div>
                                             <div class="row cont ">
@@ -206,7 +206,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="ciudad" type="text"
                                                         class="form-control form-control-sm" id="idCiudad"
-                                                        [disabled]="true" [(ngModel)]="customer.ciudad">
+                                                        disabled="true" [(ngModel)]="customer.ciudad">
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +218,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="dirección" type="text"
                                                         class="form-control form-control-sm" id="idAddress"
-                                                        [disabled]="true" [(ngModel)]="customer.direccion">
+                                                        disabled="true" [(ngModel)]="customer.direccion">
                                                 </div>
                                             </div>
                                             <div class="row cont">
@@ -228,7 +228,7 @@
                                                 <div class="col-md-12 ">
                                                     <input placeholder="teléfono" type="text"
                                                         class="form-control form-control-sm" id="idTelefono"
-                                                        [disabled]="true" [(ngModel)]="customer.telefono">
+                                                        disabled="true" [(ngModel)]="customer.telefono">
                                                 </div>
                                             </div>
                                         </div>
@@ -275,7 +275,7 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right btn-add">
                             <button class="btn btn-success" placement="top"
                                 ngbTooltip="Agregar productos a la cotización" (click)="addProduct()"
-                                [disabled]="permissions.editar == '0'">
+                                disabled="permissions.editar == '0'">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Agregar producto
                             </button>
                         </div>
@@ -308,13 +308,13 @@
                                                 style="text-align: right;" [(ngModel)]="d.quantity"
                                                 (keyup)="sumTotal(i)" min="0"
                                                 (keypress)="commonServices.FormatDecimalVal($event)"
-                                                [disabled]="permissions.editar == '0'">
+                                                disabled="permissions.editar == '0'">
                                         </td>
                                         <td style="width: 10%;" *ngIf="d.action">
                                             <input type="number" class="form-control form-control-sm"
                                                 style="text-align: right;" [(ngModel)]="d.price" (keyup)="sumTotal(i)"
                                                 min="0" (keypress)="commonServices.FormatDecimalVal($event)"
-                                                [disabled]="permissions.editar == '0'">
+                                                disabled="permissions.editar == '0'">
                                         </td>
                                         <td style="width: 9%;text-align: right;" *ngIf="d.action">
                                             {{d.totalItems.toFixed(4)}}

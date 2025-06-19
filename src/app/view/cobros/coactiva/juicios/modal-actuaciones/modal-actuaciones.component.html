@@ -32,7 +32,7 @@
             <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control" [clearable]="false" [(ngModel)]="estadoSelected">
                     <ng-option [value]="0" disabled>Seleccione un Estado</ng-option>
-                    <ng-option *ngFor="let estado of estados" [value]="estado" [disabled]="estado.isconstant < estadoSelected.isconstant">{{ estado.descripcion }}</ng-option>
+                    <ng-option *ngFor="let estado of estados" [value]="estado" disabled="estado.isconstant < estadoSelected.isconstant">{{ estado.descripcion }}</ng-option>
                 </ng-select>
             </app-cc-input-group-prepend>
         </div>

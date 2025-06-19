@@ -25,7 +25,7 @@
             </div>
             <div class="col-sm-3">
                 <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select id="estado" class="form-control" [(ngModel)]="estado" maxlength="1" ><!-- [disabled]="true" -->
+                    <ng-select id="estado" class="form-control" [(ngModel)]="estado" maxlength="1" ><!-- disabled="true" -->
                         <ng-option disabled [value]="0">Seleccione un estado</ng-option>
                         <ng-option *ngFor="let op of estadoNotificacionList" [value]="op.value">{{ op.label }}</ng-option>
                     </ng-select>

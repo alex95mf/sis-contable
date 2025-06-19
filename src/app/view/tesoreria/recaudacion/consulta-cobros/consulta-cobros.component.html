@@ -83,7 +83,7 @@
                                 </div>
                                 <input placeholder="Usuario" type="text" #usuario="ngModel"
                                     name="usuario" [(ngModel)]="filter.usuario" 
-                                    class="form-control form-control-sm" [disabled]="dusuario" 
+                                    class="form-control form-control-sm" disabled="dusuario" 
                                     id="usuario">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary btn-sm" (click)="modalUsuarios('recaudador')" 
@@ -108,7 +108,7 @@
                                 </div>
                                 <input placeholder="Usuario Anulación" type="text" #usuario="ngModel"
                                     name="usuario" [(ngModel)]="filter.usuario_anulacion" 
-                                    class="form-control form-control-sm" [disabled]="dusuarioanulacion" 
+                                    class="form-control form-control-sm" disabled="dusuarioanulacion" 
                                     id="usuario">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary btn-sm" (click)="modalUsuarios('anulacion')" 

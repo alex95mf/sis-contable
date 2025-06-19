@@ -14,7 +14,7 @@
             <div class="col-sm-6">
                 <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control"  placeholder="Seleccione un Contribuyente" [value]="juicio.fk_contribuyente?.razon_social">
-                    <button class="btn btn-sm btn-primary mr-1" matTooltip="Contribuyente" [disabled]="readOnlyMode" (click)="expandContribuyentes()" ><i class="fas fa-search"></i> </button>
+                    <button class="btn btn-sm btn-primary mr-1" matTooltip="Contribuyente" disabled="readOnlyMode" (click)="expandContribuyentes()" ><i class="fas fa-search"></i> </button>
                 </app-cc-input-group-prepend>
             </div>
             

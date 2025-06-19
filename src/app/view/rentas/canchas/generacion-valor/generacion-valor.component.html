@@ -18,15 +18,15 @@ filtroBoton="btnsRenLiqGenValor" [groupButton]="vmButtons" (onMetodoGlobal)="met
         <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
             <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
             <div class="input-group-append">
-                <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" matTooltip="Buscar Contribuyente">
+                <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" matTooltip="Buscar Contribuyente">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
         </app-cc-input-group-prepend>
         <!-- <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Contribuyente</span></div>
-            <input type="text" class="form-control form-control-sm" [disabled]="formReadOnly" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
-            <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+            <input type="text" class="form-control form-control-sm" disabled="formReadOnly" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
+            <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                 <i class="fas fa-search"></i>
             </button>
         </div> -->
@@ -48,14 +48,14 @@ filtroBoton="btnsRenLiqGenValor" [groupButton]="vmButtons" (onMetodoGlobal)="met
 <div class="row my-2 mb-3">
     <div class="col-4">
         <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo font-weight-bold">
-            <ng-select [disabled]=" formReadOnly" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="mostrar()">
+            <ng-select disabled=" formReadOnly" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="mostrar()">
                 <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
                 <ng-option *ngFor="let c of conceptosList" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
             </ng-select>
         </app-cc-input-group-prepend>
         <!-- <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Concepto</span></div>
-            <ng-select [disabled]=" formReadOnly" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="mostrar()">
+            <ng-select disabled=" formReadOnly" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="mostrar()">
                 <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
                 <ng-option *ngFor="let c of conceptosList" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
             </ng-select>
@@ -95,10 +95,10 @@ filtroBoton="btnsRenLiqGenValor" [groupButton]="vmButtons" (onMetodoGlobal)="met
         <h5 class="mb-0 text-dark">Conceptos</h5>
     </div>
     <div class="col text-right">
-        <!-- <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema"  (click)="reestablecerConceptos()" [disabled]="conceptosDisabled || formReadOnly">
+        <!-- <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema"  (click)="reestablecerConceptos()" disabled="conceptosDisabled || formReadOnly">
             <i class="fas fa-undo"></i>
         </button> -->
-        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto" [disabled]="conceptosDisabled || formReadOnly" (click)="expandConceptos()">
+        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto" disabled="conceptosDisabled || formReadOnly" (click)="expandConceptos()">
             <i class="fas fa-plus"></i>
         </button>
     </div>
@@ -129,7 +129,7 @@ filtroBoton="btnsRenLiqGenValor" [groupButton]="vmButtons" (onMetodoGlobal)="met
                             <td>{{ d.nombre_detalle }}</td>
                             <td class="text-right">
                                 <div class="input-group input-group-sm">
-                                    <input currencyMask [options]="{prefix: '', precision: 0}" class="form-control form-control-sm" [disabled]="conceptosDisabled || formReadOnly" [(ngModel)]="d.cantidad" (keyup)="multiplicar(d)">
+                                    <input currencyMask [options]="{prefix: '', precision: 0}" class="form-control form-control-sm" disabled="conceptosDisabled || formReadOnly" [(ngModel)]="d.cantidad" (keyup)="multiplicar(d)">
                                 </div>
                             </td>
                             <td class="text-right">
@@ -150,7 +150,7 @@ filtroBoton="btnsRenLiqGenValor" [groupButton]="vmButtons" (onMetodoGlobal)="met
                                 </div>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-danger" matTooltip="Remover Concepto" [disabled]="formReadOnly || conceptosDisabled" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
+                                <button class="btn btn-sm btn-danger" matTooltip="Remover Concepto" disabled="formReadOnly || conceptosDisabled" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     </ng-container>
@@ -174,10 +174,10 @@ filtroBoton="btnsRenLiqGenValor" [groupButton]="vmButtons" (onMetodoGlobal)="met
         <h5 class="mb-0 text-dark">Exoneraciones</h5>
     </div>
     <div class="col text-right">
-        <!-- <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema" [disabled]="exoneracionDisabled || formReadOnly" (click)="reestablecerExoneracion()">
+        <!-- <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema" disabled="exoneracionDisabled || formReadOnly" (click)="reestablecerExoneracion()">
             <i class="fas fa-undo"></i>
         </button> -->
-        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" [disabled]="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
+        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" disabled="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
             <i class="fas fa-plus"></i>
         </button>
     </div>
@@ -214,7 +214,7 @@ filtroBoton="btnsRenLiqGenValor" [groupButton]="vmButtons" (onMetodoGlobal)="met
                         <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                         <td class="text-right text-danger">$ -{{ (d.valor | number: '1.2-2') ?? 0 }}</td>
                         <td class="text-center">
-                            <button class="btn btn-sm btn-danger" matTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                            <button class="btn btn-sm btn-danger" matTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>

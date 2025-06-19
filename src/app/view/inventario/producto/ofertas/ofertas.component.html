@@ -5,19 +5,19 @@
         <div class="row mt-2">
             <div class="col-sm-6">
                 <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
-                    <input type="text" placeholder="{{proNombre}}" [disabled]="true"
+                    <input type="text" placeholder="{{proNombre}}" disabled="true"
                         class="form-control form-control-sm">
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-3">
                 <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo">
-                    <input type="text" placeholder="{{proCodigo}}" [disabled]="true"
+                    <input type="text" placeholder="{{proCodigo}}" disabled="true"
                         class="form-control form-control-sm">
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-3">
                 <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo">
-                    <input type="text" placeholder="{{proTipo}}" [disabled]="true" class="form-control form-control-sm">
+                    <input type="text" placeholder="{{proTipo}}" disabled="true" class="form-control form-control-sm">
                 </app-cc-input-group-prepend>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <app-cc-input-group-prepend label="Grupo Precio" styleSpan="size-span-campo">
                     <select class="form-control form-control-sm custom-select" id="idGrupoPrecio"
                         [(ngModel)]="promo.precio" (ngModelChange)="searchPrecio($event)"
-                        [disabled]="!actions.dComponet">
+                        disabled="!actions.dComponet">
                         <option [value]="0">Seleccione grupo precio</option>
                         <option *ngFor="let d of dataPrecio" [value]="d.reference">
                             {{d.name}}
@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-3">
                 <app-cc-input-group-prepend label="Grupo Producto" styleSpan="size-span-campo">
-                    <input type="text" placeholder="{{proGrupo}}" [disabled]="true"
+                    <input type="text" placeholder="{{proGrupo}}" disabled="true"
                         class="form-control form-control-sm">
                 </app-cc-input-group-prepend>
             </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="input-group-text form-control form-control-sm">
                         <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="promo.promocion"
-                            id="idpromocion" [disabled]="!actions.dComponet">
+                            id="idpromocion" disabled="!actions.dComponet">
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 <app-cc-input-group-prepend label="Porcentaje" styleSpan="size-span-campo">
                     <input type="text" class="form-control form-control-sm" (keypress)="FormatDecimalVal($event);"
                         id="idPorcentaje" (ngModelChange)="valCupo($event)" [(ngModel)]="promo.porcentaje"
-                        [disabled]="promo.precio == undefined || !actions.dComponet">
+                        disabled="promo.precio == undefined || !actions.dComponet">
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-3">

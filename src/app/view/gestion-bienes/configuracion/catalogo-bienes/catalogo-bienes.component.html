@@ -79,7 +79,7 @@ icono="fas fa-tasks" >
                                 <button class="btn btn-primary mr-1 btn-sm" (click)="modalEdition(item)">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn btn-danger btn-sm" (click)="eliminarCata(item)" [disabled]="item.estado == 'I'">
+                                <button class="btn btn-danger btn-sm" (click)="eliminarCata(item)" disabled="item.estado == 'I'">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>

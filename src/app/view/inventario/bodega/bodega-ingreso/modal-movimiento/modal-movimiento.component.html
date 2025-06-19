@@ -22,7 +22,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Producto</span>
                             </div>
-                            <ng-select id="IdproductSendNg" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="productSend" [disabled]="!dPsend" (ngModelChange)="getQuantyProduct($event)">
+                            <ng-select id="IdproductSendNg" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="productSend" disabled="!dPsend" (ngModelChange)="getQuantyProduct($event)">
                                 <ng-option *ngFor="let d of listProduct" [value]="d.id_producto">
                                     {{d.nombre_producto}}</ng-option>
                             </ng-select>
@@ -35,7 +35,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad disponible</span>
                             </div>
-                            <input type="text" [(ngModel)]="quantityAvailableSend" class="form-control form-control-sm" [disabled]="true">
+                            <input type="text" [(ngModel)]="quantityAvailableSend" class="form-control form-control-sm" disabled="true">
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad a Enviar</span>
                             </div>
-                            <input placeholder="Ingrese cantidad a enviar" type="number" [(ngModel)]="quantitySend" [disabled]="!dQsend" class="form-control form-control-sm" id="idquSend">
+                            <input placeholder="Ingrese cantidad a enviar" type="number" [(ngModel)]="quantitySend" disabled="!dQsend" class="form-control form-control-sm" id="idquSend">
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bodega a recibir</span>
                             </div>
-                            <select [(ngModel)]="bodegaReceived" class="form-control form-control-sm custom-select" [disabled]="!dBReceived" (ngModelChange)="getProductReceibed($event)">
+                            <select [(ngModel)]="bodegaReceived" class="form-control form-control-sm custom-select" disabled="!dBReceived" (ngModelChange)="getProductReceibed($event)">
                                 <option *ngFor="let d of dataBodega" [value]="d.id_bodega_cab">{{d.nombre}}
                                 </option>
                             </select>
@@ -73,7 +73,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Producto</span>
                             </div>
-                            <input type="text" [(ngModel)]="productReceived" class="form-control form-control-sm" [disabled]="true">
+                            <input type="text" [(ngModel)]="productReceived" class="form-control form-control-sm" disabled="true">
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad disponible</span>
                             </div>
-                            <input type="text" [(ngModel)]="quantyAvaReceived" class="form-control form-control-sm" [disabled]="true">
+                            <input type="text" [(ngModel)]="quantyAvaReceived" class="form-control form-control-sm" disabled="true">
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad a recibir</span>
                             </div>
-                            <input type="text" [(ngModel)]="quantitySend" [disabled]="true" class="form-control form-control-sm">
+                            <input type="text" [(ngModel)]="quantitySend" disabled="true" class="form-control form-control-sm">
                         </div>
                     </div>
                 </div>

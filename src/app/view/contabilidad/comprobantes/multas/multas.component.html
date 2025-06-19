@@ -5,10 +5,10 @@
             <app-cc-input-group-prepend label="ID" styleSpan="size-span-print">
                 <input currencyMask [options]="{prefix: '', precision: 0, nullable: true}" class="form-control" [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
                 <div class="input-group-append">
-                    <button class="btn btn-action" (click)="getPrevRecord()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                    <button class="btn btn-action" (click)="getPrevRecord()" matTooltip="Registro Anterior" disabled="lastRecord == null">
                         <i class="far fa-chevron-left"></i>
                     </button>
-                    <button class="btn btn-action" (click)="getNextRecord()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                    <button class="btn btn-action" (click)="getNextRecord()" matTooltip="Registro Siguiente" disabled="lastRecord == null">
                         <i class="far fa-chevron-right"></i>
                     </button>
                     <button class="btn btn-action" (click)="getLatest()" matTooltip="Ultimo Registro">
@@ -19,10 +19,10 @@
             <!-- <app-cc-input-group-prepend label="ID" styleSpan="font-weight-bold">
                 <input currencyMask [options]="{prefix: '', precision: 0, nullable: true}" class="form-control" [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
                 <div class="input-group-append">
-                    <button class="btn btn-sm btn-primary" (click)="getPrevRecord()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                    <button class="btn btn-sm btn-primary" (click)="getPrevRecord()" matTooltip="Registro Anterior" disabled="lastRecord == null">
                         <i class="far fa-chevron-left"></i>
                     </button>
-                    <button class="btn btn-sm btn-primary" (click)="getNextRecord()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                    <button class="btn btn-sm btn-primary" (click)="getNextRecord()" matTooltip="Registro Siguiente" disabled="lastRecord == null">
                         <i class="far fa-chevron-right"></i>
                     </button>
                     <button class="btn btn-sm btn-primary" (click)="getLatest()" matTooltip="Ultimo Registro">
@@ -43,7 +43,7 @@
         <div class="col-sm-4">
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text size-span-campo">Fecha</span></div>
-                <input  type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha" [disabled]="multasDisabled" max="2050-01-01" >
+                <input  type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha" disabled="multasDisabled" max="2050-01-01" >
             </div>
         </div>
             
@@ -67,7 +67,7 @@
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Proveedores</span></div>
                 <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [value]="proveedorActive.razon_social">
-                <button [disabled]="multasDisabled" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                <button disabled="multasDisabled" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -78,7 +78,7 @@
                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Tipo
                         de Proceso</span>
                 </div>
-                <ng-select id="tipo_proceso" class="form-control form-control-sm"  (change)="tipoSelected($event)" [(ngModel)]="documento.tipo_proceso" maxlength="5" [disabled]="multasDisabled || habilitarTipoProceso">
+                <ng-select id="tipo_proceso" class="form-control form-control-sm"  (change)="tipoSelected($event)" [(ngModel)]="documento.tipo_proceso" maxlength="5" disabled="multasDisabled || habilitarTipoProceso">
                     <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
                     <ng-option *ngFor="let op of tipoProceso" [value]="op.label" >
                         {{ op.label }}</ng-option>
@@ -93,7 +93,7 @@
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">No.
                         Proceso</span></div>
                 <input type="text" class="form-control form-control-sm"  readonly  maxlength="20" placeholder="No. Proceso"  [(ngModel)]="documento.nro_proceso" >
-                <button [disabled]="multasDisabled || habilitarProceso"  class="btn btn-primary btn-sm" ngbTooltip="Buscar solicitudes" (click)="modalSolicitud()"><i class="fas fa-search"></i> Buscar</button>
+                <button disabled="multasDisabled || habilitarProceso"  class="btn btn-primary btn-sm" ngbTooltip="Buscar solicitudes" (click)="modalSolicitud()"><i class="fas fa-search"></i> Buscar</button>
             </div>
         </div>
 
@@ -109,7 +109,7 @@
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Monto
                         Proceso</span></div>
-                <input type="text" class="form-control form-control-sm" readonly  maxlength="17" placeholder="Monto Proceso" (keypress)="validaciones.numberOnlyDot($event)" [(ngModel)]="documento.monto_proceso" [disabled]="multasDisabled">
+                <input type="text" class="form-control form-control-sm" readonly  maxlength="17" placeholder="Monto Proceso" (keypress)="validaciones.numberOnlyDot($event)" [(ngModel)]="documento.monto_proceso" disabled="multasDisabled">
             </div>
         </div>
     </div>
@@ -153,7 +153,7 @@
         <div class="col-sm-6">
             <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
                 <input class="form-control"  type="text" readonly [(ngModel)]="codigo_cuenta"/>
-                <button class="btn btn-primary btn-sm" (click)="modalCuentaContable()" [disabled]="multasDisabled" > Consultar</button>
+                <button class="btn btn-primary btn-sm" (click)="modalCuentaContable()" disabled="multasDisabled" > Consultar</button>
             </app-cc-input-group-prepend>
         </div>
 
@@ -169,7 +169,7 @@
         <div class="col-sm-6">
             <div class="input-group input-group-lg input-group-total">
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Valor a pagar</span></div>
-                <input currencyMask id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="documento.total"  [disabled]="multasDisabled">
+                <input currencyMask id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="documento.total"  disabled="multasDisabled">
             </div>
         </div>
     </div> -->
@@ -181,7 +181,7 @@
                     <span class="label-saldo">Valor a pagar</span>
                 </div>
                 <input currencyMask id="pagoTotal" class="form-control form-control-lg font-weight-bold"
-                [(ngModel)]="documento.total"  [disabled]="multasDisabled">
+                [(ngModel)]="documento.total"  disabled="multasDisabled">
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Empresa</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="ptoemision.empresa"
-                        [disabled]="!actions.dComponet || disabledUpdated" id="ptoemisionEmpresa"
+                        disabled="!actions.dComponet || disabledUpdated" id="ptoemisionEmpresa"
                         (ngModelChange)="getFilterEmpresa($event)">
                         <option [value]="0">Seleccione empresa</option>
                         <option *ngFor="let d of arrayEmpresa" [value]="d.id_empresa">{{d.nombre_comercial}}</option>
@@ -20,7 +20,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="ptoemision.sucursal"
-                        id="ptoemisionSucursal" [disabled]="ptoemision.empresa == 0 || disabledUpdated "
+                        id="ptoemisionSucursal" disabled="ptoemision.empresa == 0 || disabledUpdated "
                         (ngModelChange)="getFilterptoEmision($event)">
                         <option [value]="0">Seleccione sucursal</option>
                         <option *ngFor="let d of arraySucursal" [value]="d.id_sucursal">{{d.nombre}}</option>
@@ -34,7 +34,7 @@
                             Documento</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="ptoemision.tipoDoc"
-                        id="ptoemisionDocumento" [disabled]="!actions.dComponet || disabledUpdated "
+                        id="ptoemisionDocumento" disabled="!actions.dComponet || disabledUpdated "
                         (ngModelChange)="getFilterDocumento($event)">
                         <option [value]="0">Seleccione tipo documento</option>
                         <option *ngFor="let d of arrayDocumento" [value]="d.id">{{d.nombre}}</option>
@@ -50,7 +50,7 @@
                     </div>
                     <input placeholder="Número autorización" type="text" minlength="10" maxlength="11"
                         class="form-control form-control-sm" id="ptoemisionNumFac" [(ngModel)]="ptoemision.numAut"
-                        [disabled]="!actions.dComponet">
+                        disabled="!actions.dComponet">
 
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     </div>
                     <input placeholder="Ingrese Nombre de Punto de Emisión" type="text"
                         class="form-control form-control-sm" id="idptoemisionNombre" [(ngModel)]="ptoemision.nombre"
-                        [disabled]="!actions.dComponet">
+                        disabled="!actions.dComponet">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -72,12 +72,12 @@
                     </div>
                     <input type="text" (keypress)="commonServices.FormatDecimalVal($event)" minlength="10"
                         maxlength="10" class="form-control form-control-sm" [(ngModel)]="parameters.numeroAviso"
-                        id="idnumeroAviso" [disabled]="!sueldData">
+                        id="idnumeroAviso" disabled="!sueldData">
                     <div class="input-group-append" style="width: 30px;padding-left: 9px!important;padding-top: 6px;
                         background-color: #009688;text-align: center !important;border-radius: 0px 5px 5px 0px;">
                         <input type="checkbox" style="text-align: center;" title="" [(ngModel)]="parameters.checkaviso"
                             (ngModelChange)="setsueldoUni()" id="checksueldouni"
-                            [disabled]="permisions[0].editar == '0'|| !actions.dComponet">
+                            disabled="permisions[0].editar == '0'|| !actions.dComponet">
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                     <input placeholder="Ingrese Número de Facura" type="text"
                         (keypress)="commonServices.FormatDecimalVal($event)" minlength="9" maxlength="9"
                         class="form-control form-control-sm" id="idptoemisionnumFacInicio"
-                        [(ngModel)]="ptoemision.numFacInicio" [disabled]="!actions.dComponet">
+                        [(ngModel)]="ptoemision.numFacInicio" disabled="!actions.dComponet">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -104,7 +104,7 @@
                     <input placeholder="Ingrese número factura de caducidad" type="text"
                         (keypress)="commonServices.FormatDecimalVal($event)" minlength="9" maxlength="9"
                         class="form-control form-control-sm" id="idptonumFacCaducidad"
-                        [(ngModel)]="ptoemision.numFacCaducidad" [disabled]="!actions.dComponet">
+                        [(ngModel)]="ptoemision.numFacCaducidad" disabled="!actions.dComponet">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -113,7 +113,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Caja por Defecto</span>
                     </div>
                     <input type="checkbox" title="" [(ngModel)]="parameters.checkCajaDefault"
-                        class="form-control form-control-sm" id="idCajaDefault" [disabled]="!actions.dComponet"
+                        class="form-control form-control-sm" id="idCajaDefault" disabled="!actions.dComponet"
                         (ngModelChange)="existCajaDefecto()" style="height: 17px;margin-top: 5px;">
                 </div>
             </div>
@@ -128,7 +128,7 @@
                     <input placeholder="Ingreso número de establecimiento" type="text" minlength="3" maxlength="3"
                         (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm"
                         id="idptonumFacEstablecimiento" [(ngModel)]="ptoemision.numFacEstablecimiento"
-                        [disabled]="!actions.dComponet || disabledUpdated">
+                        disabled="!actions.dComponet || disabledUpdated">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -140,7 +140,7 @@
                     <input placeholder="Ingreso número de punto de emisión" type="text" minlength="3" maxlength="3"
                         (keyup)="ValidacionPto($event)" (keypress)="commonServices.FormatDecimalVal($event)"
                         class="form-control form-control-sm" id="idptonumPuntoEmision"
-                        [(ngModel)]="ptoemision.numPuntoEmision" [disabled]="!actions.dComponet   || disabledUpdated">
+                        [(ngModel)]="ptoemision.numPuntoEmision" disabled="!actions.dComponet   || disabledUpdated">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -151,7 +151,7 @@
                     </div>
                     <input placeholder="Ingrese número serial de la factura" type="text" minlength="10" maxlength="10"
                         (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm"
-                        id="idptonumFacSerial" [(ngModel)]="ptoemision.numFacSerial" [disabled]="!actions.dComponet">
+                        id="idptonumFacSerial" [(ngModel)]="ptoemision.numFacSerial" disabled="!actions.dComponet">
                 </div>
             </div>
         </div>
@@ -159,14 +159,14 @@
             <div class="col-sm-6">
                 <app-cc-input-group-prepend label="Fecha Autorización" styleSpan="size-span-campo">
                     <ejs-datepicker [(ngModel)]="fechaAutorizacion" class="form-control" name="dateFrom"
-                        format='yyyy-MM-dd' [disabled]="!actions.dComponet">
+                        format='yyyy-MM-dd' disabled="!actions.dComponet">
                     </ejs-datepicker>
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-6">
                 <app-cc-input-group-prepend label="Fecha Caducidad" styleSpan="size-span-campo">
                     <ejs-datepicker [(ngModel)]="fechaCaducidad" class="form-control" name="dateFrom"
-                        format='yyyy-MM-dd' [disabled]="!actions.dComponet">
+                        format='yyyy-MM-dd' disabled="!actions.dComponet">
                     </ejs-datepicker>
                 </app-cc-input-group-prepend>
             </div>
@@ -180,7 +180,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Empresa</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="ptoemision.empresa"
-                        [disabled]="!actions.dComponet" id="ptoemisionEmpresa"
+                        disabled="!actions.dComponet" id="ptoemisionEmpresa"
                         (ngModelChange)="getFilterEmpresa($event)">
                         <option *ngFor="let d of arrayEmpresa" [value]="d.id_empresa">
                             {{d.nombre_comercial}}</option>
@@ -193,7 +193,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="ptoemision.sucursal"
-                        id="ptoemisionSucursal" [disabled]="ptoemision.empresa == 0 "
+                        id="ptoemisionSucursal" disabled="ptoemision.empresa == 0 "
                         (ngModelChange)="getFiltersucursalExistente($event)">
                         <option></option>
                         <option *ngFor="let d of arraySucursal" [value]="d.id_sucursal">{{d.nombre}}
@@ -208,7 +208,7 @@
                             Documento</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="ptoemision.tipoDoc"
-                        id="ptoemisionDocumento" [disabled]=" ptoemision.ptoExistente == undefined"
+                        id="ptoemisionDocumento" disabled=" ptoemision.ptoExistente == undefined"
                         (ngModelChange)="getFilterDocumento($event)">
                         <option *ngFor="let d of arrayDocumento" [value]="d.id">{{d.nombre}}
                         </option>
@@ -224,7 +224,7 @@
                     </div>
                     <input placeholder="numero autorización" type="text" minlength="10" maxlength="11"
                         class="form-control form-control-sm" id="ptoemisionNumFac" [(ngModel)]="ptoemision.numAut"
-                        [disabled]=" ptoemision.ptoExistente == undefined">
+                        disabled=" ptoemision.ptoExistente == undefined">
                 </div>
             </div>
             <div class="col-sm-4" *ngIf="guardarDocumento">
@@ -234,7 +234,7 @@
                     </div>
                     <input placeholder="Ingrese Nombre de Punto de Emisión" type="text"
                         class="form-control form-control-sm" id="idptoemisionNombre" [(ngModel)]="ptoemision.nombre"
-                        [disabled]="  actions.ptoEmisionFl">
+                        disabled="  actions.ptoEmisionFl">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -245,12 +245,12 @@
                     </div>
                     <input type="text" (keypress)="commonServices.FormatDecimalVal($event)" minlength="10"
                         maxlength="10" class="form-control form-control-sm" [(ngModel)]="parameters.numeroAviso"
-                        id="idnumeroAviso" [disabled]="!sueldData">
+                        id="idnumeroAviso" disabled="!sueldData">
                     <div class="input-group-append" style="width: 30px;padding-left: 9px!important;padding-top: 6px;
                         background-color: #009688;text-align: center !important;border-radius: 0px 5px 5px 0px;">
                         <input type="checkbox" title="" [(ngModel)]="parameters.checkaviso"
                             (ngModelChange)="setsueldoUni()" id="checksueldouni"
-                            [disabled]=" ptoemision.ptoExistente == undefined">
+                            disabled=" ptoemision.ptoExistente == undefined">
                     </div>
                 </div>
             </div>
@@ -265,7 +265,7 @@
                     <input placeholder="Ingrese Número de Facura" type="text"
                         (keypress)="commonServices.FormatDecimalVal($event)" minlength="9" maxlength="9"
                         class="form-control form-control-sm" id="idptoemisionnumFacInicio"
-                        [(ngModel)]="ptoemision.numFacInicio" [disabled]=" ptoemision.ptoExistente == undefined">
+                        [(ngModel)]="ptoemision.numFacInicio" disabled=" ptoemision.ptoExistente == undefined">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -277,7 +277,7 @@
                     <input placeholder="Ingrese número factura de caducidad" type="text"
                         (keypress)="commonServices.FormatDecimalVal($event)" minlength="9" maxlength="9"
                         class="form-control form-control-sm" id="idptonumFacCaducidad"
-                        [(ngModel)]="ptoemision.numFacCaducidad" [disabled]=" ptoemision.ptoExistente == undefined">
+                        [(ngModel)]="ptoemision.numFacCaducidad" disabled=" ptoemision.ptoExistente == undefined">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -287,7 +287,7 @@
                     </div>
                     <input type="checkbox" class="form-control form-control-sm"
                         [(ngModel)]="parameters.checkCajaDefault" id="idCajaDefault"
-                        [disabled]="permisions[0].editar == '0'  ||  actions.ptoEmisionFl"
+                        disabled="permisions[0].editar == '0'  ||  actions.ptoEmisionFl"
                         (ngModelChange)="existCajaDefecto()">
                 </div>
             </div>
@@ -302,7 +302,7 @@
                     <input placeholder="Ingreso número de establecimiento" type="text" minlength="3" maxlength="3"
                         (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm"
                         id="idptonumFacEstablecimiento" [(ngModel)]="ptoemision.numFacEstablecimiento"
-                        [disabled]="permisions[0].editar == '0'  ||   actions.ptoEmisionFl">
+                        disabled="permisions[0].editar == '0'  ||   actions.ptoEmisionFl">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -315,7 +315,7 @@
                         (keyup)="ValidacionPto($event)" (keypress)="commonServices.FormatDecimalVal($event)"
                         class="form-control form-control-sm" id="idptonumPuntoEmision"
                         [(ngModel)]="ptoemision.numPuntoEmision"
-                        [disabled]="permisions[0].editar == '0'  ||   actions.ptoEmisionFl ">
+                        disabled="permisions[0].editar == '0'  ||   actions.ptoEmisionFl ">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -327,7 +327,7 @@
                     <input placeholder="Ingrese número serial de la factura" type="text" minlength="10" maxlength="10"
                         (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm"
                         id="idptonumFacSerial" [(ngModel)]="ptoemision.numFacSerial"
-                        [disabled]=" ptoemision.ptoExistente == undefined">
+                        disabled=" ptoemision.ptoExistente == undefined">
                 </div>
             </div>
         </div>
@@ -338,7 +338,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Punto Existente</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="ptoemision.ptoExistente"
-                        id="ptoemisionExistente" [disabled]=" ptoemision.sucursal == undefined"
+                        id="ptoemisionExistente" disabled=" ptoemision.sucursal == undefined"
                         (ngModelChange)="filterExistente($event)">
                         <option></option>
                         <option *ngFor="let d of puntoExistente" [value]="d.pto_nombre">
@@ -349,16 +349,16 @@
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Fecha Autorización" styleSpan="size-span-campo">
                     <ejs-datepicker [(ngModel)]="fechaAutorizacion" class="form-control" name="dateFrom"
-                        format='yyyy-MM-dd' [disabled]="!actions.dComponet"
-                        [disabled]=" ptoemision.ptoExistente == undefined">
+                        format='yyyy-MM-dd' disabled="!actions.dComponet"
+                        disabled=" ptoemision.ptoExistente == undefined">
                     </ejs-datepicker>
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-">
                 <app-cc-input-group-prepend label="Fecha Caducidad" styleSpan="size-span-campo">
                     <ejs-datepicker [(ngModel)]="fechaCaducidad" class="form-control" name="dateFrom"
-                        format='yyyy-MM-dd' [disabled]="!actions.dComponet"
-                        [disabled]=" ptoemision.ptoExistente == undefined">
+                        format='yyyy-MM-dd' disabled="!actions.dComponet"
+                        disabled=" ptoemision.ptoExistente == undefined">
                     </ejs-datepicker>
                 </app-cc-input-group-prepend>
             </div>
@@ -410,33 +410,33 @@
 
 <!-- <section style="background-color:transparent;border: none; border-color: transparent;">
     <div class="row justify-content-center" *ngIf="permisions?.length > 0 ">
-            <button class="btn btn-warning boton" *ngIf="!nuevoPtoEmsion" [disabled]="actions.btnNuevo"
+            <button class="btn btn-warning boton" *ngIf="!nuevoPtoEmsion" disabled="actions.btnNuevo"
                 (click)="newPtoEmision()" ngbTooltip="Realizar nuevo Pto Emisión" style="width:212px;width-size:8px;">
                 <i class="fa fa-plus-square-o" aria-hidden="true"></i> NUEVO PUNTO EMISION
             </button>
-            <button class="btn btn-primary boton" *ngIf="guardaPtoEmsion " [disabled]="!actions.btnGuardar"
+            <button class="btn btn-primary boton" *ngIf="guardaPtoEmsion " disabled="!actions.btnGuardar"
                 placement="top" ngbTooltip="Guardar Punto Emisión" (click)="validaSaveparameter()">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i> GUARDAR
             </button>
-            <button class="btn btn-success boton" *ngIf="!nuevoPtoDocumento " [disabled]="actions.btnNuevo"
+            <button class="btn btn-success boton" *ngIf="!nuevoPtoDocumento " disabled="actions.btnNuevo"
                 (click)="newPtoDocumento()" style="width:212px;width-size:8px;" ngbTooltip="Realizar nuevo Documento">
                 <i class="fa fa-plus-square-o" aria-hidden="true"></i> NUEVO DOCUMENTO
             </button>
 
-            <button class="btn btn-primary boton" *ngIf="guardarDocumento" [disabled]="!actions.btnGuardar"
+            <button class="btn btn-primary boton" *ngIf="guardarDocumento" disabled="!actions.btnGuardar"
                 placement="top" style="width:212px;width-size:8px;" (click)="validaSaveDocumento()"
                 ngbTooltip="Guardar Punto Emisión">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i> GUARDAR DOCUMENTO
             </button>
-            <button class="btn boton" [disabled]="!actions.btnmodificar" style="background-color:#821DD5;color:white;"
+            <button class="btn boton" disabled="!actions.btnmodificar" style="background-color:#821DD5;color:white;"
                 ngbTooltip="Modificar Rol Pago" (click)="validaeditModificarPto()"><i class="fa fa-pencil-square-o"
                     aria-hidden="true"></i>MODIFICAR</button>
 
-            <button class="btn boton" style="color:white; background:#8b3838;" [disabled]="!actions.btneliminar"
+            <button class="btn boton" style="color:white; background:#8b3838;" disabled="!actions.btneliminar"
                 placement="top" ngbTooltip="Eliminar Rol de Paso" (click)="validateDelete()">
                 <i class="fa fa-trash-o " style="color:white;font-size: 19px;" aria-hidden="true"></i> ELIMINAR
             </button>
-            <button class="btn btn-danger boton" [disabled]="!actions.btncancelar" (click)="cleanptoemision()"
+            <button class="btn btn-danger boton" disabled="!actions.btncancelar" (click)="cleanptoemision()"
                 ngbTooltip="Cancelar Proceso">
                 <i class="fa fa-times" aria-hidden="true"></i> CANCELAR
             </button>

@@ -89,7 +89,7 @@
                                 <div class="col-sm-12">
                                     <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
                                         <select [(ngModel)]="empleSeleccionado" name="emple" id="emplecarga" class="form-control form-control-sm custom-select estilo-combos"
-                                            [disabled]="permisions[0].editar == '0'">
+                                            disabled="permisions[0].editar == '0'">
                                             <option *ngFor="let d of dataEmpleado" [value]="d.id_personal"> {{d.nombres}} </option>
                                         </select>
                                     </app-cc-input-group-prepend>
@@ -97,25 +97,25 @@
                                 <div class="col-sm-12">
                                     <app-cc-input-group-prepend label="Cedula" styleSpan="size-span-campo">
                                         <input placeholder="Ingrese Cedula" type="text" name="cedcarga" maxlength="10" (keypress)="validaciones.numberOnly($event)" [(ngModel)]="cedulacarga"
-                                            class="form-control form-control-sm" [disabled]="permisions[0].editar == '0'" id="cedulacarga">
+                                            class="form-control form-control-sm" disabled="permisions[0].editar == '0'" id="cedulacarga">
                                     </app-cc-input-group-prepend>
                                 </div>
                                 <div class="col-sm-12">
                                     <app-cc-input-group-prepend label="Nombres" styleSpan="size-span-campo">
                                         <input placeholder="Ingrese Nombres" type="text" name="nomcarga" maxlength="200" [(ngModel)]="nombrecarga" class="form-control form-control-sm"
-                                            [disabled]="permisions[0].editar == '0'" id="carga">
+                                            disabled="permisions[0].editar == '0'" id="carga">
                                     </app-cc-input-group-prepend>
                                 </div>
                                 <div class="col-sm-12">
                                     <app-cc-input-group-prepend label="Apellidos" styleSpan="size-span-campo">
                                         <input placeholder="Ingrese Apellidos" type="text" name="apellcarga" maxlength="200" [(ngModel)]="apellidocarga" class="form-control form-control-sm"
-                                            [disabled]="permisions[0].editar == '0'" id="cargas">
+                                            disabled="permisions[0].editar == '0'" id="cargas">
                                     </app-cc-input-group-prepend>
                                 </div>
                                 <div class="col-sm-12">
                                     <app-cc-input-group-prepend label="Relación" styleSpan="size-span-campo">
                                         <select [(ngModel)]="relacioncarga" id="relacion" name="relacion"
-                                            class="form-control form-control-sm custom-select estilo-combos" [disabled]="permisions[0].editar == '0'">
+                                            class="form-control form-control-sm custom-select estilo-combos" disabled="permisions[0].editar == '0'">
                                             <option *ngFor="let d of datarelacion"
                                                 [value]="d.valor">{{d.valor}}
                                             </option>
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <app-cc-input-group-prepend label="Nacimiento" styleSpan="size-span-campo">
-                                        <ejs-datepicker [(ngModel)]="fechaCarga" name="dateFrom" format='yyyy-MM-dd' class="form-control" id="idNominaDate1" [disabled]="permisions[0].editar == '0'" name="dateFrom">
+                                        <ejs-datepicker [(ngModel)]="fechaCarga" name="dateFrom" format='yyyy-MM-dd' class="form-control" id="idNominaDate1" disabled="permisions[0].editar == '0'" name="dateFrom">
                                         </ejs-datepicker>
                                     </app-cc-input-group-prepend>
                                 </div>
@@ -134,7 +134,7 @@
                                     <app-cc-input-group-prepend label="Discapacidad" styleSpan="size-span-campo">
                                         <div class="switch-container">
                                             <div class="onoffswitch">
-                                                <input type="checkbox" name="discarga" class="onoffswitch-checkbox" [disabled]="permisions[0].editar == '0'" id="discarga" checked [(ngModel)]="discapacidadcarga">
+                                                <input type="checkbox" name="discarga" class="onoffswitch-checkbox" disabled="permisions[0].editar == '0'" id="discarga" checked [(ngModel)]="discapacidadcarga">
                                                 <label class="onoffswitch-label" for="discarga">
                                                     <span class="onoffswitch-inner"></span>
                                                     <span class="onoffswitch-switch"></span>
@@ -147,7 +147,7 @@
                                     <app-cc-input-group-prepend label="Afiliado" styleSpan="size-span-campo">
                                         <div class="switch-container">
                                             <div class="onoffswitch">
-                                                <input type="checkbox" name="afiliado" class="onoffswitch-checkbox" [disabled]="permisions[0].editar == '0'" id="afi" checked [(ngModel)]="afiliado">
+                                                <input type="checkbox" name="afiliado" class="onoffswitch-checkbox" disabled="permisions[0].editar == '0'" id="afi" checked [(ngModel)]="afiliado">
                                                 <label class="onoffswitch-label" for="afi">
                                                     <span class="onoffswitch-inner"></span>
                                                     <span class="onoffswitch-switch"></span>

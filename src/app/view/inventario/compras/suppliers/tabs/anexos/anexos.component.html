@@ -14,7 +14,7 @@
                             </label>
                             <input type="file" id="ficher" lang="es" accept=".pdf,.doc,.docx,.xlsx,.xls,.pptx"
                                 name="file" placement="top" ngbTooltip="Subir archivos" multiple
-                                (change)="subiendoando($event.target.files)" [disabled]="!dAction">
+                                (change)="subiendoando($event.target.files)" disabled="!dAction">
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                             </div>
                             <textarea id="idDescripcion" #descrip="ngModel" name="descrip" [(ngModel)]="desDocument "
                                 style="height: 40px;" class="form-control form-control-sm" rows="3"
-                                [disabled]="!dAction"></textarea>
+                                disabled="!dAction"></textarea>
                         </div>
                     </div>
                 </div>
@@ -65,17 +65,17 @@
                                             <button type="button" class="btn btn-sm tooltip-test my-1"
                                                 (click)="AnexoView(dt)"
                                                 style="background-color: #FFC107; color: black; border-radius: 10px"
-                                                title="Mostrar anexo" [disabled]="!dAction"><i class="fa fa-eye"></i>
+                                                title="Mostrar anexo" disabled="!dAction"><i class="fa fa-eye"></i>
                                             </button>
                                             <button class="btn btn-sm tooltip-test my-1" (click)="AnexoDownload(dt)"
                                                 style="background-color: #404A63; color: white; border-radius: 10px"
-                                                title="Descargar anexo" [disabled]="!dAction">
+                                                title="Descargar anexo" disabled="!dAction">
                                                 <i class="fa fa-download"></i>
                                             </button>
                                             <button type="button" (click)="AnexoDelete(dt,i)"
                                                 class="btn btn-sm tooltip-test my-1"
                                                 style="background-color: #F86C6B; color: white; border-radius: 10px"
-                                                title="Remover Anexo" [disabled]="!dAction">
+                                                title="Remover Anexo" disabled="!dAction">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </td>

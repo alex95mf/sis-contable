@@ -10,21 +10,21 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo font-weight-bold">
                                 <!--<input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.fecha_desde">-->
-                                <input id="filter_razon_social" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_desde" [disabled]="constDisabled">
+                                <input id="filter_razon_social" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_desde" disabled="constDisabled">
                             </app-cc-input-group-prepend>
                         </div>
 
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo font-weight-bold">
                                 <!--<input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.fecha_hasta" >-->
-                                <input id="filter_num_documento" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_hasta" [disabled]="constDisabled">
+                                <input id="filter_num_documento" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_hasta" disabled="constDisabled">
                             </app-cc-input-group-prepend>
                         </div>
 
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Tipo de Bien" styleSpan="size-span-campo font-weight-bold">
                                 <!--<input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.periodo" (keypress)="validaciones.numberOnly($event)">-->
-                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.periodo" [disabled]="constDisabled">
+                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.periodo" disabled="constDisabled">
                                     <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
                                     <ng-option *ngFor="let item of listaCatalogo"  [value]="item">{{item}}</ng-option>
                                   </ng-select>

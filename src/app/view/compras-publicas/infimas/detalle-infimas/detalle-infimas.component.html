@@ -115,12 +115,12 @@
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xlsx, .xls"
                                                         (change)="cargaArchivo($event.target.files)"
-                                                        [disabled]="disabledCampo">
+                                                        disabled="disabledCampo">
                                                     <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ?
                                                         fileList[0].name : "Seleccione un archivo" }}</label>
 
                                                 </div> 
-                                                <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="guardarArchivo()" placement="bottom" ngbTooltip="Guardar Archivo">
+                                                <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="guardarArchivo()" placement="bottom" ngbTooltip="Guardar Archivo">
                                                     Guardar
                                                  </button>
                                             </app-cc-input-group-prepend>
@@ -141,9 +141,9 @@
                                 <fieldset class="border card-fieldset">
                                     <div class="row m-0">
                                         <div class="text-right col-12">
-                                            <button *ngIf="datosInfimas.inf_adjudicado=='S' || adjudList.value=='S'" [disabled]="deshabilitar" class="btn btn-warning btn-md mt-2 mb-3 pb-2"  placement="bottom" ngbTooltip="Generar orden" (click)="generarOrden()">Generar Orden</button>
+                                            <button *ngIf="datosInfimas.inf_adjudicado=='S' || adjudList.value=='S'" disabled="deshabilitar" class="btn btn-warning btn-md mt-2 mb-3 pb-2"  placement="bottom" ngbTooltip="Generar orden" (click)="generarOrden()">Generar Orden</button>
                                             <button *ngIf="datosInfimas.inf_adjudicado=='N' || adjudList.value=='N' || datosInfimas.inf_adjudicado=='P' || adjudList.value=='P'"class="btn btn-success btn-md mt-2 mb-3 pb-2 ml-1" (click)="generarOrden()">Guardar</button>
-                                            <button *ngIf="datosInfimas.inf_adjudicado=='S' || adjudList.value=='S'" [disabled]="deshabilitarReporte" class="btn btn-primary btn-md mt-2 mb-3 pb-2 ml-1"  placement="bottom" ngbTooltip="Imprimir orden" (click)="imprimirOrden()">Imprimir</button>
+                                            <button *ngIf="datosInfimas.inf_adjudicado=='S' || adjudList.value=='S'" disabled="deshabilitarReporte" class="btn btn-primary btn-md mt-2 mb-3 pb-2 ml-1"  placement="bottom" ngbTooltip="Imprimir orden" (click)="imprimirOrden()">Imprimir</button>
                                         </div>
                                         
                                     </div>
@@ -166,7 +166,7 @@
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" id="inputGroupFile03" accept=".pdf"
                                                             (change)="cargaArchivo4($event.target.files)"
-                                                            [disabled]="disabledCampoOC">
+                                                            disabled="disabledCampoOC">
                                                         <label class="custom-file-label" for="inputGroupFile03">{{ fileList4 !== undefined ?
                                                             fileList4[0].name : "Seleccione un archivo" }}</label>
      
@@ -174,7 +174,7 @@
                                                     </div>
                                                    
                                                         <button class="btn btn-sm btn-secondary" (click)="uploadFile4()" 
-                                                        [disabled]='disabledCampoOC'>Cargar</button>
+                                                        disabled='disabledCampoOC'>Cargar</button>
                                                  
          
                                                 
@@ -217,7 +217,7 @@
 
                                             <app-cc-input-group-prepend label="Proveedores" styleSpan="size-span-campo font-weight-bold">
                                                 <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [(ngModel)]="proveedorActive.razon_social">
-                                                <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                                                <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                                                     <i class="fas fa-search"></i>
                                                 </button>
 
@@ -229,7 +229,7 @@
 
                                             <app-cc-input-group-prepend label="Admin de Compra" styleSpan="size-span-campo font-weight-bold">
                                                 <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Admin Compra" (click)="expandListAdminCompra()" [value]="adminActive" [(ngModel)]="adminActive.nombre">
-                                                <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListAdminCompra()" placement="bottom" ngbTooltip="Buscar Admin de Compra">
+                                                <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListAdminCompra()" placement="bottom" ngbTooltip="Buscar Admin de Compra">
                                                     <i class="fas fa-search"></i>
                                                 </button>
 
@@ -297,7 +297,7 @@
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
                                                     (change)="cargaArchivo2($event.target.files)"
-                                                    [disabled]="disabledCampoCM">
+                                                    disabled="disabledCampoCM">
                                                 <label class="custom-file-label" for="inputGroupFile01">{{ fileList2 !== undefined ?
                                                     fileList2[0].name : "Seleccione un archivo" }}</label>
                                             </div>
@@ -319,7 +319,7 @@
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf"
                                                     (change)="cargaArchivo3($event.target.files)"
-                                                    [disabled]="disabledCampoCP">
+                                                    disabled="disabledCampoCP">
                                                 <label class="custom-file-label" for="inputGroupFile02">{{ fileList3 !== undefined ?
                                                     fileList3[0].name : "Seleccione un archivo" }}</label>
                                             </div>
@@ -386,7 +386,7 @@
                     <div class="row m-0">
 
                         <div class="col-12 text-right">
-                            <button class="btn btn-primary" (click)="validaDetallesInfimas()" [disabled]="disabledDetalle">
+                            <button class="btn btn-primary" (click)="validaDetallesInfimas()" disabled="disabledDetalle">
                                 Guardar Detalle
                             </button>
                         </div>

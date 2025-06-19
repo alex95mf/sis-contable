@@ -33,10 +33,10 @@
                         <app-cc-input-group-prepend label="Departamento" styleSpan="font-weight-bold size-span-campo">
                             <input placeholder="Departamento..." type="text" #departamento="ngModel"
                             name="departamento" [(ngModel)]="filter.dep_nombre" 
-                            class="form-control form-control-sm" [disabled]="true" 
+                            class="form-control form-control-sm" disabled="true" 
                             id="departamento">
                         <div class="input-group-append">
-                            <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" [disabled]="dusuario"
+                            <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" disabled="dusuario"
                                 style="box-shadow: unset;outline: unset;">
                                 Buscar
                             </button>
@@ -47,10 +47,10 @@
                         <app-cc-input-group-prepend label="Usuario Responsable" styleSpan="font-weight-bold size-span-campo">
                             <input placeholder="Usuario Responsable..." type="text" #departamento="ngModel"
                             name="departamento" [(ngModel)]="filter.nombre_usuario" 
-                            class="form-control form-control-sm" [disabled]="true" 
+                            class="form-control form-control-sm" disabled="true" 
                             id="usuario">
                         <div class="input-group-append">
-                            <button class="btn btn-primary btn-sm" (click)="modalUsuarios()" [disabled]="dusuario">
+                            <button class="btn btn-primary btn-sm" (click)="modalUsuarios()" disabled="dusuario">
                                 Buscar
                             </button>
                         </div>

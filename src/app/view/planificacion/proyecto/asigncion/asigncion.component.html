@@ -27,7 +27,7 @@
                 </div>
                 <!-- <div class="col-1">
                     <button class="btn btn-sm btn-primary" (click)="handleClickBuscar()"
-                        [disabled]="periodoSelected == undefined || programaSelected == undefined || departamentoSelected == undefined">
+                        disabled="periodoSelected == undefined || programaSelected == undefined || departamentoSelected == undefined">
                         <i class="fas fa-search"></i> BUSCAR
                     </button>
                 </div> -->
@@ -148,7 +148,7 @@
                         <p>{{(i+1) + '.- '}}{{ atribucion.valor }}</p>
                         <div *ngIf="!atribucion.atribucion_bienes_count; then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock>
-                            <button [disabled]="atribucion.atribucion_data.id == null"
+                            <button disabled="atribucion.atribucion_data.id == null"
                                 class="btn btn-sm btn-link" (click)="expandBienes(atribucion)">
                                 <i class="fas fa-box-open text-danger"></i>
                                 Bienes y Servicios pendientes

@@ -5,7 +5,7 @@
             <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control" [(ngModel)]="atribucionParamsNew.periodo"
                     (ngModelChange)="periodoSelected($event,periodo)" [items]="cmb_periodo" bindValue="periodo"
-                    bindLabel="periodo" [disabled]="search"></ng-select>
+                    bindLabel="periodo" disabled="search"></ng-select>
             </app-cc-input-group-prepend>
         </div>
         <div class="col-4">
@@ -36,11 +36,11 @@
         <div class="col-12">
             <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                    [(ngModel)]="atribucionParamsNew.programa" [disabled]="search">
+                    [(ngModel)]="atribucionParamsNew.programa" disabled="search">
                     <ng-option [value]="0" disabled>Chosee.. </ng-option>
                     <ng-option *ngFor="let item of programa" [value]="item">{{item.label}}</ng-option>
                 </ng-select>
-                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect()" disabled="search">
                     <i class="fas fa-search"></i>Buscar
                 </button>
             </app-cc-input-group-prepend>
@@ -48,11 +48,11 @@
         <div class="col-12">
             <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                    [(ngModel)]="atribucionParamsNew.departamento" [disabled]="search">
+                    [(ngModel)]="atribucionParamsNew.departamento" disabled="search">
                     <ng-option [value]="0" disabled>Chosee.. </ng-option>
                     <ng-option *ngFor="let item of departamento" [value]="item">{{item.value}}</ng-option>
                 </ng-select>
-                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienesSelect()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienesSelect()" disabled="search">
                     <i class="fas fa-search"></i>Buscar
                 </button>
             </app-cc-input-group-prepend>
@@ -64,7 +64,7 @@
                 <input type="number" class="form-control" placeholder="Ingrese el numero... "
                     [(ngModel)]="atribucionParamsNew.reforma_presupuesto" readonly />
                 <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('Presupuestario','partida1')"
-                    [disabled]="search"><i class="fas fa-search"></i>Buscar</button>
+                    disabled="search"><i class="fas fa-search"></i>Buscar</button>
             </app-cc-input-group-prepend>
         </div>
         <div class="col-6">
@@ -79,14 +79,14 @@
         <div class="col-6">
             <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
                 <input type="date" class="form-control" placeholder="Ingrese el numero... "
-                    [(ngModel)]="atribucionParamsNew.fecha" [disabled]="search" />
+                    [(ngModel)]="atribucionParamsNew.fecha" disabled="search" />
             </app-cc-input-group-prepend>
         </div>
         <div class="col-3">
             <app-cc-input-group-prepend label="Valor a disminuir" styleSpan="size-span-campo font-weight-bold">
                 <input currencyMask [options]="{max: totalPartida}" class="form-control"
                     placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.ajuste_1"
-                    (keypress)="calcularValorTotal()" [disabled]="search" />
+                    (keypress)="calcularValorTotal()" disabled="search" />
             </app-cc-input-group-prepend>
         </div>
         <div class="col-3">
@@ -98,7 +98,7 @@
         <div class="col-6">
             <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
                 <textarea class="form-control" placeholder="Ingrese una observacion... "
-                    [(ngModel)]="atribucionParamsNew.observacion" [disabled]="search"></textarea>
+                    [(ngModel)]="atribucionParamsNew.observacion" disabled="search"></textarea>
             </app-cc-input-group-prepend>
         </div>
     </div>
@@ -148,7 +148,7 @@
                 </tr>
                 <tr *ngFor="let item of listaSolicitudesAtribucion" [ngClass]="{'table-warning': item.check}">
                     <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check"
-                            (ngModelChange)="calcularValorTotal()"     [disabled]="item.saldo_por_comprometer == 0 || item.icpactivo == 'activo'" /></td>
+                            (ngModelChange)="calcularValorTotal()"     disabled="item.saldo_por_comprometer == 0 || item.icpactivo == 'activo'" /></td>
                     <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
                     <td class="text-center">{{item.programa}}</td>
                     <td class="text-center">{{item.departamento}}</td>
@@ -166,14 +166,14 @@
                     </td>
                   <!--   <td class="text-center">
                         <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario_por_mod"
-                            [disabled]="!item.check" />
+                            disabled="!item.check" />
                     </td> -->
                     <!--  (ngModelChange)="actualizaTotalCotizado(item)" -->
                  <!--    <td class="text-center" style="width: 10%;">
-                        <input class="form-control" (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  /> readonly 
+                        <input class="form-control" (ngModelChange)="actualizaTotalCotizado(item)" disabled="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  /> readonly 
                     </td>-->
                     <td class="text-center" style="width: 10%;">
-                        <input class="form-control" (ngModelChange)="actualizaTotalCotizado($event, item)" [disabled]="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
+                        <input class="form-control" (ngModelChange)="actualizaTotalCotizado($event, item)" disabled="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
                     </td>
                      <td class="text-center">1<!-- {{item.cantidad_ajustada}} --></td>
                     <!-- <td class="text-center">$ {{item.costo_unitario_ajustado | number:'1.2-2'}}</td> -->
@@ -192,7 +192,7 @@
                     <td class="text-center">$ {{item.precio_cotizado_mod | number:'1.2-2'}}</td> -->
                    
                     <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)"
-                            [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                            disabled="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
                 </tr>
             </tbody>
         </table>
@@ -247,11 +247,11 @@
             <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
                     [(ngModel)]="atribucionParamsNew.programa_dos"
-                    [disabled]="search">
+                    disabled="search">
                     <ng-option [value]="0" disabled>Chosee.. </ng-option>
                     <ng-option *ngFor="let item of programa" [value]="item">{{item.label}}</ng-option>
                 </ng-select>
-                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect2()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect2()" disabled="search">
                     <i class="fas fa-search"></i>Buscar
                 </button>
             </app-cc-input-group-prepend>
@@ -259,11 +259,11 @@
         <div class="col-12">
             <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                    [(ngModel)]="atribucionParamsNew.departamento_dos" [disabled]="search">
+                    [(ngModel)]="atribucionParamsNew.departamento_dos" disabled="search">
                     <ng-option [value]="0" disabled>Chosee.. </ng-option>
                     <ng-option *ngFor="let item of departamento2" [value]="item">{{item.value}}</ng-option>
                 </ng-select>
-                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" disabled="search">
                     <i class="fas fa-search"></i>Buscar
                 </button>
             </app-cc-input-group-prepend>
@@ -275,7 +275,7 @@
                 <input type="number" class="form-control" placeholder="Ingrese el numero... "
                     [(ngModel)]="atribucionParamsNew.reforma_presupuesto2" readonly />
                 <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('valor','partida2')"
-                    [disabled]="search"><i class="fas fa-search"></i>Buscar</button>
+                    disabled="search"><i class="fas fa-search"></i>Buscar</button>
             </app-cc-input-group-prepend>
             <app-cc-input-group-prepend label="Partida Presupuestaria" styleSpan="size-span-campo font-weight-bold">
                 <textarea id="descripcion_presupuesto2" type="text" class="form-control form-control-sm"
@@ -289,7 +289,7 @@
                 <app-cc-input-group-prepend label="Valor a aumentar" styleSpan="size-span-campo font-weight-bold">
                     <input currencyMask class="form-control" currencyMask placeholder="Ingrese el numero... "
                         [(ngModel)]="atribucionParamsNew.ajuste_2" (keypress)="calcularValorTotal2()"
-                        [disabled]="search" />
+                        disabled="search" />
 
                 </app-cc-input-group-prepend>
             </div>
@@ -301,7 +301,7 @@
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-3 mt-1">
-                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" disabled="search">
                     <i class="fas fa-search"></i> Buscar
                 </button>
             </div>
@@ -355,7 +355,7 @@
                 </tr>
                 <tr *ngFor="let item of listaSolicitudesAtribucion2" [ngClass]="{'table-warning': item.check}">
                     <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check"
-                            (ngModelChange)="calcularValorTotal2()"  [disabled]="item.icpactivo == 'activo'" /></td>
+                            (ngModelChange)="calcularValorTotal2()"  disabled="item.icpactivo == 'activo'" /></td>
                     <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
                     <td class="text-center">{{item.programa}}</td>
                     <td class="text-center">{{item.departamento}}</td>
@@ -371,10 +371,10 @@
                                     disabled/><!-- []="!item.check" [(ngModel)]="item.cantidad_solicitada_por_mod" (ngModelChange)="actualizaTotalCotizado(item)" -->
                             </td>
                             <td class="text-center" style="width: 10%;">
-                                <input class="form-control" (ngModelChange)="actualizaTotalCotizado2($event, item)" [disabled]="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
+                                <input class="form-control" (ngModelChange)="actualizaTotalCotizado2($event, item)" disabled="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
                             </td>
                            <!--  <td class="text-center" style="width: 10%;">
-                                <input class="form-control" (ngModelChange)="actualizaTotalCotizado($event, item)" [disabled]="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
+                                <input class="form-control" (ngModelChange)="actualizaTotalCotizado($event, item)" disabled="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
                             </td> -->
 
                             <td class="text-center">1<!-- {{item.cantidad_ajustada}} --></td>
@@ -395,10 +395,10 @@
                     <td class="text-center">$ {{item.precio_cotizado_mod | number:'1.2-2'}}</td> -->
                    <!--  <td class="text-center"><input class="form-control" type="text"
                             [(ngModel)]="item.cantidad_solicitada_por_mod"
-                            [disabled]="!item.check" /></td> --> <!--  (ngModelChange)="actualizaTotalCotizado2(item)" -->
+                            disabled="!item.check" /></td> --> <!--  (ngModelChange)="actualizaTotalCotizado2(item)" -->
                   <!--   <td class="text-center">
                         <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario_por_mod"
-                            [disabled]="!item.check" />
+                            disabled="!item.check" />
                     </td> --><!-- (ngModelChange)="actualizaTotalCotizado2(item)"  -->
                    <!--  <td class="text-center" style="width: 10%;">
                         <input class="form-control" currencyMask [ngModel]="item.costo_total_por_mod" readonly />
@@ -407,7 +407,7 @@
                    
                   
                     <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)"
-                            [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                            disabled="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
                 </tr>
             </tbody>
         </table>
@@ -460,7 +460,7 @@
             <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control" [(ngModel)]="atribucionParamsNew.periodo"
                     (ngModelChange)="periodoSelected($event,periodo)" [items]="cmb_periodo" bindValue="periodo"
-                    bindLabel="periodo" [disabled]="search"></ng-select>
+                    bindLabel="periodo" disabled="search"></ng-select>
             </app-cc-input-group-prepend>
         </div>
         <div class="col-4">
@@ -474,11 +474,11 @@
         <div class="col-12">
             <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                    [(ngModel)]="atribucionParamsNew.programa" [disabled]="search">
+                    [(ngModel)]="atribucionParamsNew.programa" disabled="search">
                     <ng-option [value]="0" disabled>Chosee.. </ng-option>
                     <ng-option *ngFor="let item of programa" [value]="item">{{item.label}}</ng-option>
                 </ng-select>
-                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect()" disabled="search">
                     <i class="fas fa-search"></i>Buscar
                 </button>
             </app-cc-input-group-prepend>
@@ -486,11 +486,11 @@
         <div class="col-12">
             <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                    [(ngModel)]="atribucionParamsNew.departamento" [disabled]="search">
+                    [(ngModel)]="atribucionParamsNew.departamento" disabled="search">
                     <ng-option [value]="0" disabled>Chosee.. </ng-option>
                     <ng-option *ngFor="let item of departamento" [value]="item">{{item.value}}</ng-option>
                 </ng-select>
-                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienesSelect()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienesSelect()" disabled="search">
                     <i class="fas fa-search"></i>Buscar
                 </button>
             </app-cc-input-group-prepend>
@@ -502,7 +502,7 @@
                 <input type="number" class="form-control" placeholder="Ingrese el numero... "
                     [(ngModel)]="atribucionParamsNew.reforma_presupuesto" readonly />
                 <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('Presupuestario','partida1')"
-                    [disabled]="search"><i class="fas fa-search"></i>Buscar</button>
+                    disabled="search"><i class="fas fa-search"></i>Buscar</button>
             </app-cc-input-group-prepend>
         </div>
         <div class="col-6">
@@ -517,14 +517,14 @@
         <div class="col-6">
             <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
                 <input type="date" class="form-control" placeholder="Ingrese el numero... "
-                    [(ngModel)]="atribucionParamsNew.fecha" [disabled]="search" />
+                    [(ngModel)]="atribucionParamsNew.fecha" disabled="search" />
             </app-cc-input-group-prepend>
         </div>
         <div class="col-3">
             <app-cc-input-group-prepend label="Valor a disminuir" styleSpan="size-span-campo font-weight-bold">
                 <input currencyMask [options]="{max: totalPartida}" class="form-control"
                     placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.ajuste_1"
-                    (keypress)="calcularValorTotal()" [disabled]="search" />
+                    (keypress)="calcularValorTotal()" disabled="search" />
             </app-cc-input-group-prepend>
         </div>
         <div class="col-3">
@@ -536,7 +536,7 @@
         <div class="col-6">
             <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
                 <textarea class="form-control" placeholder="Ingrese una observacion... "
-                    [(ngModel)]="atribucionParamsNew.observacion" [disabled]="search"></textarea>
+                    [(ngModel)]="atribucionParamsNew.observacion" disabled="search"></textarea>
             </app-cc-input-group-prepend>
         </div>
     </div>
@@ -592,11 +592,11 @@
 
                     <td class="text-center">
                         <input class="form-control" type="text" [(ngModel)]="item.cantidad_solicitada_por_mod"
-                            (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check" />
+                            (ngModelChange)="actualizaTotalCotizado(item)" disabled="!item.check" />
                     </td>
                     <td class="text-center">
                         <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario_por_mod"
-                            (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check" />
+                            (ngModelChange)="actualizaTotalCotizado(item)" disabled="!item.check" />
                     </td>
                     <td class="text-center" style="width: 10%;">
                         <input class="form-control" currencyMask [ngModel]="item.costo_total_por_mod" readonly />
@@ -605,7 +605,7 @@
                     <td class="text-center">$ {{item.costo_unitario_ajustado | number:'1.2-2'}}</td>
                     <td class="text-center">$ {{item.costo_total_ajustado | number:'1.2-2'}}</td>
                     <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)"
-                            [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                            disabled="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
                 </tr>
             </tbody>
         </table>
@@ -660,11 +660,11 @@
             <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
                     [(ngModel)]="atribucionParamsNew.programa_dos"
-                    [disabled]="search">
+                    disabled="search">
                     <ng-option [value]="0" disabled>Chosee.. </ng-option>
                     <ng-option *ngFor="let item of programa" [value]="item">{{item.label}}</ng-option>
                 </ng-select>
-                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect2()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect2()" disabled="search">
                     <i class="fas fa-search"></i>Buscar
                 </button>
             </app-cc-input-group-prepend>
@@ -672,11 +672,11 @@
         <div class="col-12">
             <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                    [(ngModel)]="atribucionParamsNew.departamento_dos" [disabled]="search">
+                    [(ngModel)]="atribucionParamsNew.departamento_dos" disabled="search">
                     <ng-option [value]="0" disabled>Chosee.. </ng-option>
                     <ng-option *ngFor="let item of departamento2" [value]="item">{{item.value}}</ng-option>
                 </ng-select>
-                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" disabled="search">
                     <i class="fas fa-search"></i>Buscar
                 </button>
             </app-cc-input-group-prepend>
@@ -688,7 +688,7 @@
                 <input type="number" class="form-control" placeholder="Ingrese el numero... "
                     [(ngModel)]="atribucionParamsNew.reforma_presupuesto2" readonly />
                 <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('valor','partida2')"
-                    [disabled]="search"><i class="fas fa-search"></i>Buscar</button>
+                    disabled="search"><i class="fas fa-search"></i>Buscar</button>
             </app-cc-input-group-prepend>
             <app-cc-input-group-prepend label="Partida Presupuestaria" styleSpan="size-span-campo font-weight-bold">
                 <textarea id="descripcion_presupuesto2" type="text" class="form-control form-control-sm"
@@ -702,7 +702,7 @@
                 <app-cc-input-group-prepend label="Valor a aumentar" styleSpan="size-span-campo font-weight-bold">
                     <input currencyMask class="form-control" currencyMask placeholder="Ingrese el numero... "
                         [(ngModel)]="atribucionParamsNew.ajuste_2" (keypress)="calcularValorTotal2()"
-                        [disabled]="search" />
+                        disabled="search" />
 
                 </app-cc-input-group-prepend>
             </div>
@@ -714,7 +714,7 @@
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-3 mt-1">
-                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" [disabled]="search">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" disabled="search">
                     <i class="fas fa-search"></i> Buscar
                 </button>
             </div>
@@ -771,10 +771,10 @@
                     <td class="text-center">$ {{item.precio_cotizado_mod | number:'1.2-2'}}</td>
                     <td class="text-center"><input class="form-control" type="text"
                             [(ngModel)]="item.cantidad_solicitada_por_mod"
-                            (ngModelChange)="actualizaTotalCotizado2(item)" [disabled]="!item.check" /></td>
+                            (ngModelChange)="actualizaTotalCotizado2(item)" disabled="!item.check" /></td>
                     <td class="text-center">
                         <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario_por_mod"
-                            (ngModelChange)="actualizaTotalCotizado2(item)" [disabled]="!item.check" />
+                            (ngModelChange)="actualizaTotalCotizado2(item)" disabled="!item.check" />
                     </td>
                     <td class="text-center" style="width: 10%;">
                         <input class="form-control" currencyMask [ngModel]="item.costo_total_por_mod" readonly />
@@ -783,7 +783,7 @@
                     <td class="text-center">$ {{item.costo_unitario_ajustado | number:'1.2-2'}}</td>
                     <td class="text-center">$ {{item.costo_total_ajustado | number:'1.2-2'}}</td>
                     <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)"
-                            [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                            disabled="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
                 </tr>
             </tbody>
         </table>

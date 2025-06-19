@@ -136,12 +136,12 @@
                         </td>
                         <td style="min-width:200px">
                             <label for="chk_he_aprobado{{ rowIndex }}">
-                                <input type="checkbox" [(ngModel)]="empleado.he_aprobado" id="chk_he_aprobado{{ rowIndex }}" (change)="actualizarRegistro(empleado)" [disabled]="empleado.minutos_extra_25 == 0 && empleado.minutos_extra_50 == 0 && empleado.minutos_extra_100 == 0 || empleado.estado == 'A'">
+                                <input type="checkbox" [(ngModel)]="empleado.he_aprobado" id="chk_he_aprobado{{ rowIndex }}" (change)="actualizarRegistro(empleado)" disabled="empleado.minutos_extra_25 == 0 && empleado.minutos_extra_50 == 0 && empleado.minutos_extra_100 == 0 || empleado.estado == 'A'">
                                 Aprobar Horas Extras
                             </label>
                         </td>
                         <td style="min-width:400px">
-                            <input type="text" class="form-control form-control-sm" [(ngModel)]="empleado.observaciones" (blur)="actualizarRegistro(empleado)" [disabled]="empleado.estado == 'A'">
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="empleado.observaciones" (blur)="actualizarRegistro(empleado)" disabled="empleado.estado == 'A'">
                         </td>
                     </tr>
                 </ng-template>

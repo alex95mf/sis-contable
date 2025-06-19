@@ -38,12 +38,12 @@
             <app-cc-input-group-prepend label="Retención" styleSpan="size-span-campo">
                 <div class="input-group-prepend"> 
                     <span class="input-group-text btn"  id="inputLabel-prepend">  
-                        SI&nbsp;&nbsp; <input type="checkbox" [(ngModel)]="retencionSi" id="checkretencionSi" [disabled]="disabledDataSi"  (ngModelChange)="filterRetencionSi($event)">
+                        SI&nbsp;&nbsp; <input type="checkbox" [(ngModel)]="retencionSi" id="checkretencionSi" disabled="disabledDataSi"  (ngModelChange)="filterRetencionSi($event)">
                     </span>
                 </div>
                 <div class="input-group-prepend"> 
                     <span class="input-group-text btn"  id="inputLabel-prepend">  
-                        NO&nbsp;&nbsp; <input type="checkbox" [(ngModel)]="retencionNo" id="checkretencionNo" [disabled]="disabledDataNo" (ngModelChange)="filterRetencionNo($event)">
+                        NO&nbsp;&nbsp; <input type="checkbox" [(ngModel)]="retencionNo" id="checkretencionNo" disabled="disabledDataNo" (ngModelChange)="filterRetencionNo($event)">
                     </span>
                 </div>
             </app-cc-input-group-prepend>

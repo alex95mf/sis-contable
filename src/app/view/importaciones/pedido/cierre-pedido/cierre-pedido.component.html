@@ -22,7 +22,7 @@
                                     </div>
                                     <select class="form-control form-control-sm custom-select" [(ngModel)]="id_select"
                                         id="idPedido" (ngModelChange)="getPedidoFilter($event)"
-                                        [disabled]="disabGlobal">
+                                        disabled="disabGlobal">
                                         <option [value]="0">Seleccione pedido</option>
                                         <option *ngFor="let d of arrayPedidos" [value]="d.id">
                                             {{d.num_doc.toString().padStart(10,
@@ -36,7 +36,7 @@
                                         <span class="input-group-text size-span-campo"
                                             id="inputGroup-sizing-sm">Origen</span>
                                     </div>
-                                    <input type="text" placeholder="{{importPed.country.nom_pais}}" [disabled]="true"
+                                    <input type="text" placeholder="{{importPed.country.nom_pais}}" disabled="true"
                                         class="form-control form-control-sm">
                                     <div class="input-group-append w-auto">
                                         <img src="{{importPed.country.flag}}" alt="" style="border-radius: 0px 5px 5px 0px;">
@@ -59,7 +59,7 @@
                                             Por:</span>
                                     </div>
                                     <select class="form-control form-control-sm custom-select" [(ngModel)]="nombre_base"
-                                        [disabled]="id_select == 0 || disabGlobal" (ngModelChange)="calculated($event)">
+                                        disabled="id_select == 0 || disabGlobal" (ngModelChange)="calculated($event)">
                                         <option value="0">Seleccione costear por:</option>
                                         <option value="Valor">Valor</option>
                                         <option value="Volumen">Volumen</option>
@@ -74,7 +74,7 @@
                                             id="inputGroup-sizing-sm">Proveedor</span>
                                     </div>
                                     <input type="text" placeholder="{{importPed.providers.razon_social}}"
-                                        [disabled]="true" class="form-control form-control-sm">
+                                        disabled="true" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -83,7 +83,7 @@
                                         <span class="input-group-text size-span-campo"
                                             id="inputGroup-sizing-sm">Ruc</span>
                                     </div>
-                                    <input type="text" placeholder="ruc proveedor" [disabled]="true"
+                                    <input type="text" placeholder="ruc proveedor" disabled="true"
                                         [(ngModel)]="importPed.ruc" class="form-control form-control-sm">
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                     </div>
                                     <input type="text"
                                         placeholder="{{commonServices.formatNumber(totales_views.total_base)}} {{(prefijo)}}"
-                                        [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                                        disabled="true" class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -106,7 +106,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
                                             peso</span>
                                     </div>
-                                    <input type="text" [disabled]="true" [(ngModel)]="totales_views.total_peso"
+                                    <input type="text" disabled="true" [(ngModel)]="totales_views.total_peso"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
                                             volumen</span>
                                     </div>
-                                    <input type="text" [disabled]="true" [(ngModel)]="totales_views.total_volumen"
+                                    <input type="text" disabled="true" [(ngModel)]="totales_views.total_volumen"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
                                             pedido</span>
                                     </div>
-                                    <input type="text" [disabled]="true" placeholder="$ {{totales_views.total_pedido}}"
+                                    <input type="text" disabled="true" placeholder="$ {{totales_views.total_pedido}}"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
                                             gasto</span>
                                     </div>
-                                    <input type="text" [disabled]="true" placeholder="$ {{totales_views.total_gasto}}"
+                                    <input type="text" disabled="true" placeholder="$ {{totales_views.total_gasto}}"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
                                             General</span>
                                     </div>
-                                    <input type="text" [disabled]="true" placeholder="$ {{totales_views.total_general}}"
+                                    <input type="text" disabled="true" placeholder="$ {{totales_views.total_general}}"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -188,17 +188,17 @@
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm p-0"
-                                            [(ngModel)]="d.nombre" [disabled]="true" style="width: 100%;">
+                                            [(ngModel)]="d.nombre" disabled="true" style="width: 100%;">
                                     </td>
                                     <td>
                                         <div placement="top" ngbTooltip="{{d.codigo_pro}}">
                                             <input type="text" class="form-control form-control-sm pr-1"
-                                                [(ngModel)]="d.codigo_pro" [disabled]="true" style="width: 100%;">
+                                                [(ngModel)]="d.codigo_pro" disabled="true" style="width: 100%;">
                                         </div>
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.peso)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.peso)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
                                     <td>
@@ -206,46 +206,46 @@
                                             <input type="number" class="form-control form-control-sm pr-1"
                                                 style="text-align: right;" (keyup)="sumTotal(i)"
                                                 placeholder="{{commonServices.formatNumber(d.volumen)}}"
-                                                [disabled]="true">
+                                                disabled="true">
                                         </div>
                                     </td>
                                     <td>
                                         <div>
                                             <input type="number" class="form-control form-control-sm pr-1"
-                                                style="text-align: right;" [(ngModel)]="d.cantidad" [disabled]="true">
+                                                style="text-align: right;" [(ngModel)]="d.cantidad" disabled="true">
                                         </div>
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.precio)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.precio)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
                                     <td>
                                         <div placement="top" ngbTooltip="{{d.total_aux}}">
                                             <input type="text" class="form-control form-control-sm pr-1"
-                                                placeholder="{{d.total_aux}}" [disabled]="true"
+                                                placeholder="{{d.total_aux}}" disabled="true"
                                                 style="width: 100%;text-align: right;">
                                         </div>
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm pr-1"
                                             placeholder="{{commonServices.formatNumber(d.poctj_base)}}"
-                                            [disabled]="true" style="width: 100%;text-align: right;">
+                                            disabled="true" style="width: 100%;text-align: right;">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.fob)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.fob)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.total_fob)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.total_fob)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
                                     <td>
                                         <div class="mt-2">
                                             <input type="checkbox" [(ngModel)]="d.aplica_base"
-                                                [disabled]="nombre_base == '0' || disabGlobal || importPed.gastos.length == 0"
+                                                disabled="nombre_base == '0' || disabGlobal || importPed.gastos.length == 0"
                                                 (click)="claculateNewPtjIndividual(i)">
                                         </div>
                                     </td>

@@ -15,8 +15,8 @@
             <div class="col-6">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Orden de Inspección</span></div>
-                    <input type="text" class="form-control form-control-sm" [class]="!ordenDisabled ? 'bg-white' : ''" readonly [disabled]="ordenDisabled" placeholder="Seleccione una Orden de Inspección" (click)="expandInspecciones()" [value]="ordenActive.numero_orden">
-                    <button class="btn btn-primary btn-sm" [disabled]="ordenDisabled" (click)="expandInspecciones()" placement="bottom" ngbTooltip="Buscar Ordenes de Inspección">
+                    <input type="text" class="form-control form-control-sm" [class]="!ordenDisabled ? 'bg-white' : ''" readonly disabled="ordenDisabled" placeholder="Seleccione una Orden de Inspección" (click)="expandInspecciones()" [value]="ordenActive.numero_orden">
+                    <button class="btn btn-primary btn-sm" disabled="ordenDisabled" (click)="expandInspecciones()" placement="bottom" ngbTooltip="Buscar Ordenes de Inspección">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -129,7 +129,7 @@
                 <h5 class="mb-0 text-dark">Conceptos</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema"  (click)="reestablecerConceptos()" [disabled]="conceptosDisabled || formReadOnly">
+                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema"  (click)="reestablecerConceptos()" disabled="conceptosDisabled || formReadOnly">
                     <i class="fas fa-undo"></i>
                 </button>
                 <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()">
@@ -171,7 +171,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Concepto" [disabled]="formReadOnly || conceptosDisabled" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
+                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Concepto" disabled="formReadOnly || conceptosDisabled" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                             </ng-container>
@@ -195,10 +195,10 @@
                 <h5 class="mb-0 text-dark">Exoneraciones</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema" [disabled]="exoneracionDisabled || formReadOnly" (click)="reestablecerExoneracion()">
+                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema" disabled="exoneracionDisabled || formReadOnly" (click)="reestablecerExoneracion()">
                     <i class="fas fa-undo"></i>
                 </button>
-                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" [disabled]="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" disabled="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -235,7 +235,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -325,7 +325,7 @@
                 <div class="col-12">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Propiedad</span></div>
-                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                             <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                         </ng-select>
                     </div>

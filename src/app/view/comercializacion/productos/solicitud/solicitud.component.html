@@ -51,10 +51,10 @@
             <div class="col-sm-6">
                 <app-cc-input-group-prepend label="Siguiente Estado" styleSpan="size-span-campo">
                     <div class="btn-group btn-group-xs form-control form-control">
-                        <button type="button" class="btn btn-warning" (click)="SetnexStatus(solicitud)" [disabled]="!discreado">Creado</button>
-                        <button type="button" class="btn btn-success" (click)="SetnexStatus(solicitud)" [disabled]="!disrevisado" ngbTooltip="Cambiar Estado">Revisar</button>
-                        <button type="button" class="btn btn-info" (click)="SetnexStatus(solicitud)" [disabled]="!disprocesado" ngbTooltip="Cambiar Estado">Procesar</button>
-                        <button type="button" class="btn btn-danger" (click)="SetnexStatus(solicitud)" [disabled]="!disaprobado" ngbTooltip="Cambiar Estado">Aprobar</button>
+                        <button type="button" class="btn btn-warning" (click)="SetnexStatus(solicitud)" disabled="!discreado">Creado</button>
+                        <button type="button" class="btn btn-success" (click)="SetnexStatus(solicitud)" disabled="!disrevisado" ngbTooltip="Cambiar Estado">Revisar</button>
+                        <button type="button" class="btn btn-info" (click)="SetnexStatus(solicitud)" disabled="!disprocesado" ngbTooltip="Cambiar Estado">Procesar</button>
+                        <button type="button" class="btn btn-danger" (click)="SetnexStatus(solicitud)" disabled="!disaprobado" ngbTooltip="Cambiar Estado">Aprobar</button>
                     </div>
                 </app-cc-input-group-prepend>
             </div>

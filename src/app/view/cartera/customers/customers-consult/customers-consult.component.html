@@ -54,7 +54,7 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Provincia" styleSpan="size-span-campo">
-                    <ng-select id="IdProvincia" class="form-control custom" appendTo="body" [searchable]="true" [disabled]="!provinceTurn" [clearable]="false" [(ngModel)]="provincia" (ngModelChange)="searchCities($event)">
+                    <ng-select id="IdProvincia" class="form-control custom" appendTo="body" [searchable]="true" disabled="!provinceTurn" [clearable]="false" [(ngModel)]="provincia" (ngModelChange)="searchCities($event)">
                         <ng-option [value]="0">
                             Seleccione Provincia
                         </ng-option>
@@ -65,7 +65,7 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Ciudad" styleSpan="size-span-campo">
-                    <ng-select id="IdCiudad" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [disabled]="!cityTurn" (ngModelChange)="searchCiudad($event)" [(ngModel)]="ciudad">
+                    <ng-select id="IdCiudad" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" disabled="!cityTurn" (ngModelChange)="searchCiudad($event)" [(ngModel)]="ciudad">
                         <ng-option [value]="0">
                             Seleccione Ciudad
                         </ng-option>

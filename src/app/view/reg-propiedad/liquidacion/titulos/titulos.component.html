@@ -86,7 +86,7 @@
                             </td>
                             <td>
                                 <div class="text-center mx-auto">
-                                    <button class="btn btn-danger btn-xl mr-1" (click)="anular(dt.id_liquidacion)" placement="left" ngbTooltip="Anular liquidacion" [disabled]="dt.estado != 'E'">
+                                    <button class="btn btn-danger btn-xl mr-1" (click)="anular(dt.id_liquidacion)" placement="left" ngbTooltip="Anular liquidacion" disabled="dt.estado != 'E'">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </div>

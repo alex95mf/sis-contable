@@ -106,7 +106,7 @@
                       </div>
                       <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
                         style="padding-left: 7px;font-size: 13px;" [(ngModel)]="importPed.fk_pais" [clearable]="false"
-                        [disabled]="true" (ngModelChange)="changeFlag()">
+                        disabled="true" (ngModelChange)="changeFlag()">
                         <ng-option [value]="0">Seleccione país</ng-option>
                         <ng-option *ngFor="let d of arrayCountrys" [value]="d.id">
                           {{d.nom_pais}}</ng-option>
@@ -122,7 +122,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Puerto
                           salida</span>
                       </div>
-                      <input type="text" placeholder="Ingrese puerto de salida" [disabled]="true"
+                      <input type="text" placeholder="Ingrese puerto de salida" disabled="true"
                         [(ngModel)]="importPed.puerto_salida" id="idprtSalida" class="form-control form-control-sm">
                     </div>
                   </div>
@@ -133,7 +133,7 @@
                           llegada</span>
                       </div>
                       <input type="text" placeholder="Ingrese puerto de llegada" class="form-control form-control-sm"
-                        [(ngModel)]="importPed.prt_llegada" id="idPrtll" [disabled]="true">
+                        [(ngModel)]="importPed.prt_llegada" id="idPrtll" disabled="true">
                     </div>
                   </div>
                 </div>
@@ -145,7 +145,7 @@
                           transporte</span>
                       </div>
                       <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.tip_transp"
-                        [disabled]="true">
+                        disabled="true">
                         <option value="0">Seleccione transporte</option>
                         <option value="Aereo">Aéreo</option>
                         <option value="Terrestre">Terrestre</option>
@@ -160,7 +160,7 @@
                           transporte</span>
                       </div>
                       <input type="text" placeholder="Ingrese nombre transporte" class="form-control form-control-sm"
-                        [(ngModel)]="importPed.name_transp" id="idNametrp" [disabled]="true">
+                        [(ngModel)]="importPed.name_transp" id="idNametrp" disabled="true">
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -169,7 +169,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo carga</span>
                       </div>
                       <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.tipo_carga"
-                        [disabled]="true" (ngModelChange)="changeContainer($event)">
+                        disabled="true" (ngModelChange)="changeContainer($event)">
                         <option value="0">Seleccione tipo carga</option>
                         <option value="FCL">Full Load Container</option>
                         <option value="LCL">Low Container Load</option>
@@ -185,7 +185,7 @@
                       </div>
                       <input type="number" placeholder="Ingrese cantidad de contenedores"
                         class="form-control form-control-sm" [(ngModel)]="importPed.contenedor_cat" id="idCtdCtn"
-                        [disabled]="true">
+                        disabled="true">
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -195,7 +195,7 @@
                       </div>
                       <input type="text" [(ngModel)]="importPed.cap_peso" min="0" class="form-control form-control-sm"
                         placeholder="Ingrese capacidad del peso en kilogramos" id="idCpcPeso"
-                        (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                        (keypress)="commonServices.FormatDecimalVal($event)" disabled="true">
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -207,7 +207,7 @@
                       <input type="text" [(ngModel)]="importPed.cap_vol" min="0" id="idCpcVol"
                         class="form-control form-control-sm"
                         placeholder="Ingrese capacidad del volumen en metros cúbicos"
-                        (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                        (keypress)="commonServices.FormatDecimalVal($event)" disabled="true">
                     </div>
                   </div>
                 </div>
@@ -218,7 +218,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No.
                           inspección</span>
                       </div>
-                      <input type="text" placeholder="Inspección" [disabled]="true" class="form-control form-control-sm"
+                      <input type="text" placeholder="Inspección" disabled="true" class="form-control form-control-sm"
                         [(ngModel)]="importPed.inspeccion" id="idImpec" min="0"
                         (keypress)="commonServices.FormatDecimalVal($event)">
                     </div>
@@ -230,7 +230,7 @@
                       </div>
                       <input type="text" placeholder="Número Dai" min="0" class="form-control form-control-sm"
                         (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="importPed.num_dai"
-                        id="idnumDai" [disabled]="true">
+                        id="idnumDai" disabled="true">
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -238,7 +238,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. B/L</span>
                       </div>
-                      <input type="text" placeholder="Número B/L" [(ngModel)]="importPed.bl" [disabled]="true" id="idbl"
+                      <input type="text" placeholder="Número B/L" [(ngModel)]="importPed.bl" disabled="true" id="idbl"
                         min="0" class="form-control form-control-sm"
                         (keypress)="commonServices.FormatDecimalVal($event)">
                     </div>
@@ -251,7 +251,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Items</span>
                       </div>
                       <input type="text" [(ngModel)]="importPed.total_items" class="form-control form-control-sm"
-                        [disabled]="true">
+                        disabled="true">
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -262,7 +262,7 @@
                       </div>
                       <input type="number" class="form-control form-control-sm"
                         placeholder="$ {{commonServices.formatNumber(totalesXProductosCierre.total_arancel)}}"
-                        id="idArancel" [disabled]="true">
+                        id="idArancel" disabled="true">
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -279,7 +279,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Gasto</span>
                       </div>
-                      <input type="text" placeholder="Gastos del pedido" [disabled]="true"
+                      <input type="text" placeholder="Gastos del pedido" disabled="true"
                         class="form-control form-control-sm"
                         placeholder="$ {{commonServices.formatNumber(totalesViews.tgt)}}">
                     </div>
@@ -291,7 +291,7 @@
                           Transporte</span>
                       </div>
                       <input type="text" class="form-control form-control-sm"
-                        placeholder="$ {{commonServices.formatNumber(totalesViews.total_transp)}}" [disabled]="true">
+                        placeholder="$ {{commonServices.formatNumber(totalesViews.total_transp)}}" disabled="true">
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -308,7 +308,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Seguro</span>
                       </div>
-                      <input type="text" [disabled]="true" class="form-control form-control-sm"
+                      <input type="text" disabled="true" class="form-control form-control-sm"
                         placeholder="$ {{commonServices.formatNumber(totalesViews.ts)}}">
                     </div>
                   </div>
@@ -318,7 +318,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Fob</span>
                       </div>
                       <input type="text" class="form-control form-control-sm"
-                        placeholder="$ {{commonServices.formatNumber(totalesViews.tf)}}" [disabled]="true">
+                        placeholder="$ {{commonServices.formatNumber(totalesViews.tf)}}" disabled="true">
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -326,7 +326,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Observación</span>
                       </div>
-                      <textarea class="form-control" aria-label="With textarea" [disabled]="dsbGlb"
+                      <textarea class="form-control" aria-label="With textarea" disabled="dsbGlb"
                         placeholder="Ingrese una observación" [(ngModel)]="importPed.observacion"></textarea>
                     </div>
                   </div>
@@ -336,7 +336,7 @@
                 <div class="row justify-content-center mt-3">
                   <div class="col-12 p-0">
                     <button class="btn  btn-block" type="button" data-toggle="collapse" data-target="#collapseExample"
-                      [disabled]="true" (click)="changeStatus()" aria-expanded="false" aria-controls="collapseExample"
+                      disabled="true" (click)="changeStatus()" aria-expanded="false" aria-controls="collapseExample"
                       style="height: 25px;
                                                                                    color: white;
                                                                                    padding: 0px;
@@ -356,7 +356,7 @@
                         <div class="row justify-content-end">
                           <div class="col-9 pr-0">
                             <select class="form-control form-control-sm custom-select " [(ngModel)]="pedido"
-                              [disabled]="true">
+                              disabled="true">
                               <option [value]="0">Seleccione pedido</option>
                               <option [value]="d.id" *ngFor="let d of arrayPedidos">
                                 {{d.num_doc.toString().padStart(10,
@@ -365,10 +365,10 @@
                             </select>
                           </div>
                           <div class="col-3 ">
-                            <button class="btn btn-success btn-sm" [disabled]="true" (click)="addPedido()">
+                            <button class="btn btn-success btn-sm" disabled="true" (click)="addPedido()">
                               <i class="fas fa-plus"></i>
                             </button>
-                            <button class="btn btn-danger btn-sm" [disabled]="true" (click)="deletePedido()">
+                            <button class="btn btn-danger btn-sm" disabled="true" (click)="deletePedido()">
                               <i class="far fa-trash-alt"></i>
                             </button>
                           </div>
@@ -468,7 +468,7 @@
 
                 <div class="row justify-content-center mt-4">
                   <div class="col-12 p-0">
-                    <button class="btn  btn-block" type="button" data-toggle="collapse" [disabled]="true"
+                    <button class="btn  btn-block" type="button" data-toggle="collapse" disabled="true"
                       data-target="#collapseTransporte" (click)="changeStatusTr()" aria-expanded="false"
                       aria-controls="collapseExample" style="height: 25px;
                                                                                    color: white;
@@ -492,7 +492,7 @@
                           </div>
                           <div class="col-md-12 mt-0">
                             <select class="form-control form-control-sm custom-select" [(ngModel)]="factor_transp"
-                              [disabled]="true" (ngModelChange)="calculated($event)">
+                              disabled="true" (ngModelChange)="calculated($event)">
                               <option value="0">Seleccione costear por:</option>
                               <option value="Valor">Valor</option>
                               <option value="Volumen">Volumen</option>
@@ -509,7 +509,7 @@
                           <div class="col-md-12 mt-0">
                             <input type="text"
                               placeholder="$ {{commonServices.formatNumber(totalesViews.total_transp)}}"
-                              [disabled]="true" style="border: none;">
+                              disabled="true" style="border: none;">
                           </div>
                         </div>
                       </div>
@@ -520,7 +520,7 @@
                           </div>
                           <div class="col-md-12 mt-0">
                             <input type="text" placeholder="{{commonServices.formatNumber(base_transp)}} {{(prefijo)}}"
-                              [disabled]="true" style="border: none;">
+                              disabled="true" style="border: none;">
                           </div>
                         </div>
                       </div>
@@ -643,7 +643,7 @@
                 <div class="row justify-content-center mt-4">
                   <div class="col-12 p-0">
                     <button class="btn  btn-block" type="button" data-toggle="collapse"
-                      data-target="#collapseDetalleGasto" [disabled]="true" (click)="changeStatusDet()"
+                      data-target="#collapseDetalleGasto" disabled="true" (click)="changeStatusDet()"
                       aria-expanded="false" aria-controls="collapseExample" style="height: 25px;
                                                                                    color: white;
                                                                                    padding: 0px;
@@ -752,7 +752,7 @@
                 <div class="row justify-content-center mt-4 mb-2">
                   <div class="col-12 p-0">
                     <button class="btn  btn-block" type="button" data-toggle="collapse" data-target="#collapseCierre"
-                      [disabled]="true" (click)="changeStatusCiere()" aria-expanded="false"
+                      disabled="true" (click)="changeStatusCiere()" aria-expanded="false"
                       aria-controls="collapseExample" style="height: 25px;
                                                                                    color: white;
                                                                                    padding: 0px;
@@ -819,7 +819,7 @@
                                     (ngModelChange)="changePartida(i,$event)"
                                     style="text-align: left;padding-left: 10px;"
                                     (keypress)="commonServices.FormatDecimalVal($event)" id="{{'id_partida' + i}}"
-                                    [disabled]="true">
+                                    disabled="true">
                                 </div>
                               </td>
                               <td>

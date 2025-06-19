@@ -8,11 +8,11 @@
                 <div class="col-sm-4">
                         <!-- <div class="input-group input-group-sm">
                             <div class="input-group-prepend"><span class="input-group-text">Periodo</span></div>
-                            <input type="text" data-date-format="YYYY" class="form-control form-control-sm" [(ngModel)]="selected_anio" [disabled]="constDisabled">
+                            <input type="text" data-date-format="YYYY" class="form-control form-control-sm" [(ngModel)]="selected_anio" disabled="constDisabled">
                         </div> -->
                         <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
                             <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="selected_anio"
-                                [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" [disabled]="constDisabled">
+                                [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" disabled="constDisabled">
                             </ng-select>
                         </app-cc-input-group-prepend>
                    
@@ -20,7 +20,7 @@
                     <!--<div class="col-3">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend"><span class="input-group-text">Periodo</span></div>
-                            <input type="date" data-date-format="YYYY" class="form-control form-control-sm" [(ngModel)]="selected_anio" [disabled]="constDisabled">
+                            <input type="date" data-date-format="YYYY" class="form-control form-control-sm" [(ngModel)]="selected_anio" disabled="constDisabled">
                         </div>
                     </div>-->
                     <!--<app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo">

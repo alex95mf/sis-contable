@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Bodega" styleSpan="size-span-campo">
-                    <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [disabled]="toma.sucursal == 0" [(ngModel)]="toma.bodega" (ngModelChange)="filterBodega($event)">
+                    <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" disabled="toma.sucursal == 0" [(ngModel)]="toma.bodega" (ngModelChange)="filterBodega($event)">
                         <ng-option [value]="0">Seleccione Bodega</ng-option>
                         <ng-option *ngFor="let d of arrayBodega" [value]="d.id_bodega_cab">{{d.nombre}}</ng-option>
                     </ng-select>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo">
-                    <ng-select id="IdGrupo" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="toma.grupo" (ngModelChange)="filterGrupo($event)" [disabled]="toma.sucursal == 0">
+                    <ng-select id="IdGrupo" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="toma.grupo" (ngModelChange)="filterGrupo($event)" disabled="toma.sucursal == 0">
                         <ng-option [value]="0">Seleccione grupo</ng-option>
                         <ng-option *ngFor="let d of arrayGrupo" [value]="d.id_grupo">{{d.nombre}}</ng-option>
                     </ng-select>
@@ -95,7 +95,7 @@
                     <legend class="w-auto h6">Ingresos de Items Productos</legend>
                     <div class="row justify-content-end" style="margin-top:-20px;">
                         <div class="col-md-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
-                            <button class="btn btn-success" placement="top" ngbTooltip="Añadir Items" [disabled]="sucursal == 0" (click)="addItems()">
+                            <button class="btn btn-success" placement="top" ngbTooltip="Añadir Items" disabled="sucursal == 0" (click)="addItems()">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -120,7 +120,7 @@
                                         <tbody style="width: 100%;">
                                             <tr *ngFor="let d of dataProducto; let i = index">
                                                 <td style="width: 22%;">
-                                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="d.productSelect" [disabled]="toma.bodega == 0  " (ngModelChange)="getDataProduct($event,i)">
+                                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="d.productSelect" disabled="toma.bodega == 0  " (ngModelChange)="getDataProduct($event,i)">
                                                         <ng-option [value]="0">Seleccione Producto</ng-option>
                                                         <ng-option *ngFor="let d of arrayFiltProducto" [value]="d.id_producto">{{d.nombreProducto}}</ng-option>
                                                     </ng-select>
@@ -128,12 +128,12 @@
                                                 <td style="width: 15%;padding-top: 8px;text-align:right">{{d.codigo}}</td>
                                                 <td style="width: 8%;padding-top: 8px;"><input type="number" class="form-control form-control-sm" id="idCosto" [(ngModel)]="d.costo" disabled min="0" style="text-align:right"></td>
                                                 <td style="width: 8%;padding-top: 8px;"><input type="number" class="form-control form-control-sm" id="idStock" [(ngModel)]="d.stock" disabled min="0" style="text-align:right"></td>
-                                                <td style="width: 8%;padding-top: 8px;"><input type="number" class="form-control form-control-sm" id="idConteo" [(ngModel)]="d.conteo" [disabled]="d.productSelect == 0 " (keyup)="sumTotal(d,i)" min="0" (keypress)="commonServices.FormatDecimalVal($event)"
+                                                <td style="width: 8%;padding-top: 8px;"><input type="number" class="form-control form-control-sm" id="idConteo" [(ngModel)]="d.conteo" disabled="d.productSelect == 0 " (keyup)="sumTotal(d,i)" min="0" (keypress)="commonServices.FormatDecimalVal($event)"
                                                         style="text-align:right"></td>
                                                 <td style="width: 8%;padding-top: 8px;"><input type="number" class="form-control form-control-sm" id="idDiferencia" [(ngModel)]="d.diferencia" disabled min="0" (keypress)="commonServices.FormatDecimalVal($event)" style="text-align:right"></td>
                                                 <td style="width: 10%;padding-top: 8px;">{{d.movimiento}}</td>
                                                 <td style="width: 5%;text-align: center;">
-                                                    <button class="btn btn-danger" placement="top" ngbTooltip="Eliminar Items" (click)="deleteItems(i)" [disabled]="sucursal == 0"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    <button class="btn btn-danger" placement="top" ngbTooltip="Eliminar Items" (click)="deleteItems(i)" disabled="sucursal == 0"><i class="fa fa-trash-o" aria-hidden="true"></i>
                                                     </button>
                                                 </td>
                                             </tr>

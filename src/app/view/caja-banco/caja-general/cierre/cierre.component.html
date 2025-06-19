@@ -15,7 +15,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Caja</span>
                     </div>
-                    <input type="text" [(ngModel)]="caja.nombre_caja" [disabled]="true"
+                    <input type="text" [(ngModel)]="caja.nombre_caja" disabled="true"
                         class="form-control form-control-sm">
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Registro</span>
                     </div>
-                    <input type="text" placeholder="RDC-{{numCajaRegister}}" [disabled]="true"
+                    <input type="text" placeholder="RDC-{{numCajaRegister}}" disabled="true"
                         class="form-control form-control-sm">
                 </div>
             </div>
@@ -35,7 +35,7 @@
                             corte</span>
                     </div>
                     <input type="text" [(ngModel)]="arrayView.ing" style="background-color:#007BFF;color:white;"
-                        [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                        disabled="true" class="form-control form-control-sm text-right pr-1">
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Usuario
                             Caja</span>
                     </div>
-                    <input type="text" [(ngModel)]="caja.name_user_caja" [disabled]="true"
+                    <input type="text" [(ngModel)]="caja.name_user_caja" disabled="true"
                         class="form-control form-control-sm">
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
                     </div>
-                    <input type="text" placeholder="{{numSucursal}} - {{caja.name_sucursal}}" [disabled]="true"
+                    <input type="text" placeholder="{{numSucursal}} - {{caja.name_sucursal}}" disabled="true"
                         class="form-control form-control-sm">
                 </div>
             </div>
@@ -79,7 +79,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha
                             Apertura</span>
                     </div>
-                    <input type="text" [(ngModel)]="caja.fecha_apertura" format='yyyy-MM-dd HH:mm:ss' [disabled]="true"
+                    <input type="text" [(ngModel)]="caja.fecha_apertura" format='yyyy-MM-dd HH:mm:ss' disabled="true"
                         class="form-control form-control-sm">
                 </div>
             </div>
@@ -90,7 +90,7 @@
                             Apertura</span>
                     </div>
                     <input type="text" [(ngModel)]="arrayView.apertura" style="background-color: #17A2B8;color: white;"
-                        [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                        disabled="true" class="form-control form-control-sm text-right pr-1">
                 </div>
             </div>
             <div class="col-4">
@@ -100,7 +100,7 @@
                     </div>
                     <input type="text" class="form-control form-control-sm text-right pr-1"
                         [ngClass]="{ 'diferentOne' : arrayView.diferencia < 0,'diferentTwo' : arrayView.diferencia >= 0 }"
-                        [(ngModel)]="arrayView.diferencia" [disabled]="true">
+                        [(ngModel)]="arrayView.diferencia" disabled="true">
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@
                                     <td class="text-center p-0"
                                         style="width: 5%;padding-left: 0px !important;cursor: pointer;">
                                         <input type="checkbox" style="cursor: pointer;" [(ngModel)]="dt.validate_sum"
-                                            (click)="changeVal(i)" [disabled]="changeAll">
+                                            (click)="changeVal(i)" disabled="changeAll">
                                     </td>
                                     <td>{{ dt.fecha }}</td>
                                     <td *ngIf="dt.isModuleCpbt == 0">{{ getTipeDocTable(dt.tip_doc) }}-{{
@@ -218,7 +218,7 @@
                                     style="background-color: #FFC107;color: rgba(0, 0, 0, 0.527);font-size: 18px !important;">TOTAL</span>
                             </div>
                             <input type="text" class="form-control form-control-sm text-right pr-3"
-                                [(ngModel)]="arrayView.cierre" [disabled]="true"
+                                [(ngModel)]="arrayView.cierre" disabled="true"
                                 style="background-color: #007BFF;color: white;font-size: 18px !important;">
                         </div>
                     </div>
@@ -340,7 +340,7 @@
                                 corte</span>
                         </div>
                         <input type="text" [(ngModel)]="arrayView.ing" style="background-color:#007BFF;color:white;"
-                            [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                            disabled="true" class="form-control form-control-sm text-right pr-1">
                     </div>
                 </div>
                 <div class="col-4">
@@ -362,7 +362,7 @@
                         </div>
                         <input type="text" class="form-control form-control-sm text-right pr-1"
                             style="background-color: #DD6975;color: white;" [(ngModel)]="arrayView.diferencia"
-                            [disabled]="true">
+                            disabled="true">
                     </div>
                 </div>
             </div>
@@ -412,7 +412,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Caja</span>
                             </div>
-                            <input type="text" [(ngModel)]="caja.nombre_caja" [disabled]="true"
+                            <input type="text" [(ngModel)]="caja.nombre_caja" disabled="true"
                                 class="form-control form-control-sm">
                         </div>
                     </div>
@@ -423,7 +423,7 @@
                                     Apertura</span>
                             </div>
                             <input type="text" [(ngModel)]="caja.fecha_apertura" format='yyyy-MM-dd HH:mm:ss'
-                                [disabled]="true" class="form-control form-control-sm">
+                                disabled="true" class="form-control form-control-sm">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -433,7 +433,7 @@
                                     cierre</span>
                             </div>
                             <input type="text" [(ngModel)]="caja.fecha_cierre" format='yyyy-MM-dd HH:mm:ss'
-                                [disabled]="true" class="form-control form-control-sm">
+                                disabled="true" class="form-control form-control-sm">
                         </div>
                     </div>
                 </div>
@@ -444,7 +444,7 @@
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Usuario
                                     Caja</span>
                             </div>
-                            <input type="text" [(ngModel)]="caja.name_user_caja" [disabled]="true"
+                            <input type="text" [(ngModel)]="caja.name_user_caja" disabled="true"
                                 class="form-control form-control-sm">
                         </div>
                     </div>
@@ -455,7 +455,7 @@
                                     Apertura</span>
                             </div>
                             <input type="text" placeholder="$ {{commonServices.formatNumber(arrayView.apertura)}}"
-                                [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                                disabled="true" class="form-control form-control-sm text-right pr-1">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -465,7 +465,7 @@
                                     diferencia</span>
                             </div>
                             <input type="text" class="form-control form-control-sm text-right pr-1"
-                                placeholder="$ {{commonServices.formatNumber(arrayView.diferencia)}}" [disabled]="true">
+                                placeholder="$ {{commonServices.formatNumber(arrayView.diferencia)}}" disabled="true">
                         </div>
                     </div>
                 </div>
@@ -489,7 +489,7 @@
                                     cuadre</span>
                             </div>
                             <input type="text" placeholder="$ {{commonServices.formatNumber(arrayView.cuadre)}}"
-                                [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                                disabled="true" class="form-control form-control-sm text-right pr-1">
                         </div>
                     </div>
 
@@ -500,7 +500,7 @@
                                     ingresos</span>
                             </div>
                             <input type="text" placeholder="$ {{commonServices.formatNumber(arrayView.ing)}}"
-                                [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                                disabled="true" class="form-control form-control-sm text-right pr-1">
                         </div>
                     </div>
                 </div>
@@ -522,7 +522,7 @@
                                     id="inputGroup-sizing-sm">Supervisor</span>
                             </div>
                             <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body"
-                                [searchable]="true" [disabled]="!forceClose " [clearable]="false"
+                                [searchable]="true" disabled="!forceClose " [clearable]="false"
                                 [(ngModel)]="caja.supervisor">
                                 <ng-option [value]="0">Seleccione supervisor</ng-option>
                                 <ng-option *ngFor="let d of arrayUsers" [value]="d.id_usuario">
@@ -536,7 +536,7 @@
                                 <span class="input-group-text size-span-campo"
                                     id="inputGroup-sizing-sm">Contraseña</span>
                             </div>
-                            <input type="password" [(ngModel)]="caja.pass" [disabled]="!forceClose"
+                            <input type="password" [(ngModel)]="caja.pass" disabled="!forceClose"
                                 placeholder="Contraseña" id="Idpass" class="form-control form-control-sm">
                         </div>
                     </div>
@@ -557,7 +557,7 @@
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Egresos</span>
                             </div>
                             <input type="number" placeholder="{{commonServices.formatNumber(arrayView.egr)}}"
-                                (keyup)="sumEgresos()" [disabled]="true" min="0" class="form-control form-control-sm"
+                                (keyup)="sumEgresos()" disabled="true" min="0" class="form-control form-control-sm"
                                 (keypress)="commonServices.FormatDecimalVal($event)">
                         </div>
                     </div>

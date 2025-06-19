@@ -16,7 +16,7 @@ filtroBoton="btnsRecAbreCaja" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
     <div class="col-3">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Efectivo inicial</span></div>
-            <input [disabled]="formReadOnly" currencyMask class="form-control form-control-sm" [(ngModel)]="caja_dia.total_efectivo_inicio" onclick="this.select()">
+            <input disabled="formReadOnly" currencyMask class="form-control form-control-sm" [(ngModel)]="caja_dia.total_efectivo_inicio" onclick="this.select()">
         </div>
     </div>
 

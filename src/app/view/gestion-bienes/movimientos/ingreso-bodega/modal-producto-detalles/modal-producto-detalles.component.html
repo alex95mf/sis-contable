@@ -12,7 +12,7 @@
             </app-cc-input-group-prepend>
         </div>
         <div class="col">
-            <button class="btn btn-sm btn-primary" matTooltip="Agregar Detalle" (click)="agregarDetalle()" [disabled]="formReadonly">
+            <button class="btn btn-sm btn-primary" matTooltip="Agregar Detalle" (click)="agregarDetalle()" disabled="formReadonly">
                 <i class="fas fa-plus"></i> Agregar
             </button>
         </div>
@@ -32,15 +32,15 @@
             </tr>
             <tr *ngFor="let detalle of detalles">
                 <td>
-                    <input currencyMask [options]="currencyOptions" class="form-control" [(ngModel)]="detalle.cantidad" (blur)="validarCantidad()" [disabled]="formReadonly">
+                    <input currencyMask [options]="currencyOptions" class="form-control" [(ngModel)]="detalle.cantidad" (blur)="validarCantidad()" disabled="formReadonly">
                 </td>
                 <td>
-                    <input type="text" class="form-control" [(ngModel)]="detalle.lote" [disabled]="formReadonly">
+                    <input type="text" class="form-control" [(ngModel)]="detalle.lote" disabled="formReadonly">
                 </td>
                 <td>
-                    <input type="date" class="form-control" [(ngModel)]="detalle.fecha_caducidad" [disabled]="formReadonly">
+                    <input type="date" class="form-control" [(ngModel)]="detalle.fecha_caducidad" disabled="formReadonly">
                 </td>
-                <td><button class="btn btn-sm btn-danger" (click)="eliminarDetalle(detalle)" [disabled]="detalle.id != null"><i class="fas fa-trash-alt"></i></button></td>
+                <td><button class="btn btn-sm btn-danger" (click)="eliminarDetalle(detalle)" disabled="detalle.id != null"><i class="fas fa-trash-alt"></i></button></td>
             </tr>
         </tbody>
     </table>

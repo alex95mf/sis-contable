@@ -22,7 +22,7 @@
                         [searchable]="true"
                         disabled
                         [(ngModel)]="movimiento.mes">
-                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                        <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                             {{item.name}}
                         </ng-option>
                     </ng-select>
@@ -40,7 +40,7 @@
                 <app-cc-input-group-prepend label="Tipo Movimiento" styleSpan="size-span-campo">
                     <ng-select [clearable]=true [(ngModel)]="movimiento.tipo_movimiento"
                         class="form-control form-control-sm custom-select"
-                        [disabled]="false">
+                        disabled="false">
                         <ng-option [value]="0">Seleccione un tipo movimiento</ng-option>
                         <ng-option *ngFor="let d of tipo_movimientos"
                             [value]="d.id">{{d.name}}</ng-option>
@@ -51,7 +51,7 @@
                 <app-cc-input-group-prepend label="Bancos" styleSpan="size-span-campo">
                     <ng-select [clearable]=true [(ngModel)]="bankSelect" (change)="bankSelected($event)"
                         class="form-control form-control-sm custom-select"
-                         [disabled]="false">
+                         disabled="false">
                         <ng-option *ngFor="let d of arrayBanks"
                             [value]="d.id_banks">{{d.name_banks + ' ' +d.num_cuenta}}</ng-option>
                     </ng-select>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Numero Transacción" styleSpan="size-span-campo">
-                    <input type="text" [disabled]="false" [(ngModel)]="movimiento.numero"
+                    <input type="text" disabled="false" [(ngModel)]="movimiento.numero"
                         class="form-control text-right" placeholder="Número Transacción">
                 </app-cc-input-group-prepend>
             </div>
@@ -67,7 +67,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo">
-                    <input currencyMask [disabled]="false" [(ngModel)]="movimiento.valor"
+                    <input currencyMask disabled="false" [(ngModel)]="movimiento.valor"
                         class="form-control text-right" placeholder="$ 0.00">
                 </app-cc-input-group-prepend>
             </div>

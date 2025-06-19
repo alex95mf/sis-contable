@@ -24,7 +24,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo">Tipo</span>
                             </div>
-                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="dt.type">
+                            <input type="text" class="form-control form-control-sm" disabled="true" [value]="dt.type">
                         </div>
                     </div>
                     <!--  -->
@@ -43,8 +43,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo">Estado</span>
                             </div>
-                            <input type="text" class="form-control form-control-sm" [disabled]="true" *ngIf="dt.estado == 1" value="Activo">
-                            <input type="text" class="form-control form-control-sm" [disabled]="true" *ngIf="dt.estado != 1" value="Anulado">
+                            <input type="text" class="form-control form-control-sm" disabled="true" *ngIf="dt.estado == 1" value="Activo">
+                            <input type="text" class="form-control form-control-sm" disabled="true" *ngIf="dt.estado != 1" value="Anulado">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -52,7 +52,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo">Total Asiento</span>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-right" [disabled]="true" [value]="'$' + formatNumber(dt.valor)">
+                            <input type="text" class="form-control form-control-sm text-right" disabled="true" [value]="'$' + formatNumber(dt.valor)">
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo">Concepto</span>
                             </div>
-                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="dt.concepto">
+                            <input type="text" class="form-control form-control-sm" disabled="true" [value]="dt.concepto">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -70,7 +70,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo">Nota</span>
                             </div>
-                            <textarea class="form-control form-control-sm" [disabled]="true">{{dt.nota}}</textarea>
+                            <textarea class="form-control form-control-sm" disabled="true">{{dt.nota}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo</span>
                         </div>
-                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="dt.type">
+                        <input type="text" class="form-control form-control-sm" disabled="true" [value]="dt.type">
                     </div>
                 </div>
                 <div class="col-6">
@@ -190,8 +190,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
                         </div>
-                        <input type="text" class="form-control form-control-sm" [disabled]="true" *ngIf="dt.estado == 1" value="Activo">
-                        <input type="text" class="form-control form-control-sm" [disabled]="true" *ngIf="dt.estado != 1" value="Anulado">
+                        <input type="text" class="form-control form-control-sm" disabled="true" *ngIf="dt.estado == 1" value="Activo">
+                        <input type="text" class="form-control form-control-sm" disabled="true" *ngIf="dt.estado != 1" value="Anulado">
                     </div>
                 </div>
                 <div class="col-6">
@@ -199,7 +199,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor</span>
                         </div>
-                        <input type="text" class="form-control form-control-sm text-right" [disabled]="true" [value]="'$' + formatNumber(dt.valor)">
+                        <input type="text" class="form-control form-control-sm text-right" disabled="true" [value]="'$' + formatNumber(dt.valor)">
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Concepto </span>
                         </div>
-                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="dt.concepto">
+                        <input type="text" class="form-control form-control-sm" disabled="true" [value]="dt.concepto">
                     </div>
                 </div>
                 <div class="col-6" *ngIf="dt.nota != null">
@@ -217,7 +217,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nota</span>
                         </div>
-                        <textarea class="form-control form-control-sm" [disabled]="true">{{dt.nota}}</textarea>
+                        <textarea class="form-control form-control-sm" disabled="true">{{dt.nota}}</textarea>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-md-12 mt-0">
                             <input type="text" placeholder="{{arrayAcc[0].accounting_document.nombre}}"
-                                [disabled]="true">
+                                disabled="true">
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-md-12 mt-0">
                             <input type="text" placeholder="{{arrayAcc[0].num_doc.toString().padStart(10, '0')}}"
-                                [disabled]="true">
+                                disabled="true">
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                             <label class="mb-0">Fecha Movimiento</label>
                         </div>
                         <div class="col-md-12 mt-0">
-                            <input type="text" placeholder="{{arrayAcc[0].fecha}}" [disabled]="true">
+                            <input type="text" placeholder="{{arrayAcc[0].fecha}}" disabled="true">
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -48,7 +48,7 @@
                             <label class="mb-0">Valor</label>
                         </div>
                         <div class="col-md-12 mt-0">
-                            <input type="text" [(ngModel)]="arrayAcc[0].valor" [disabled]="true">
+                            <input type="text" [(ngModel)]="arrayAcc[0].valor" disabled="true">
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-md-12 mt-0">
                             <input type="text" placeholder="{{arrayAcc[0].accounting_document.nombre}}"
-                                [disabled]="true">
+                                disabled="true">
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-md-12 mt-0">
                             <input type="text" placeholder="{{arrayAcc[0].secuencial.toString().padStart(10, '0')}}"
-                                [disabled]="true">
+                                disabled="true">
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                             <label class="mb-0">Fecha Movimiento</label>
                         </div>
                         <div class="col-md-12 mt-0">
-                            <input type="text" placeholder="{{arrayAcc[0].fecha_emision}}" [disabled]="true">
+                            <input type="text" placeholder="{{arrayAcc[0].fecha_emision}}" disabled="true">
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -90,7 +90,7 @@
                             <label class="mb-0">Valor</label>
                         </div>
                         <div class="col-md-12 mt-0">
-                            <input type="text" placeholder="{{arrayAcc[0].valor}}" [disabled]="true">
+                            <input type="text" placeholder="{{arrayAcc[0].valor}}" disabled="true">
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                             <label class="mb-0">Beneficiario</label>
                         </div>
                         <div class="col-md-12 mt-0">
-                            <input type="text" placeholder="{{arrayAcc[0].beneficiario}}" [disabled]="true">
+                            <input type="text" placeholder="{{arrayAcc[0].beneficiario}}" disabled="true">
                         </div>
                     </div>
                     <div class="row mt-1" *ngIf="arrayAcc[0].IDENTIFICADOR == 'I' ">
@@ -108,7 +108,7 @@
                             <label class="mb-0">Beneficiario</label>
                         </div>
                         <div class="col-md-12 mt-0">
-                            <input type="text" placeholder="{{arrayAcc[0].nombre_cliente}}" [disabled]="true">
+                            <input type="text" placeholder="{{arrayAcc[0].nombre_cliente}}" disabled="true">
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -116,7 +116,7 @@
                             <label class="mb-0">No. Doc Adquisición</label>
                         </div>
                         <div class="col-md-12 mt-0">
-                            <input type="text" placeholder="{{arrayAcc[0].num_doc_adq}}" [disabled]="true">
+                            <input type="text" placeholder="{{arrayAcc[0].num_doc_adq}}" disabled="true">
                         </div>
                     </div>
                 </div>

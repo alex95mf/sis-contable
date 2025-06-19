@@ -6,7 +6,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo">Bodega</span>
                     </div>
-                    <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [disabled]="!actions.dComponet" [clearable]="true" [(ngModel)]="bodegaSearch" (ngModelChange)="getFilterBodega($event)">
+                    <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" disabled="!actions.dComponet" [clearable]="true" [(ngModel)]="bodegaSearch" (ngModelChange)="getFilterBodega($event)">
                         <ng-option *ngFor="let d of arrayBodega" [value]="d.id_bodega_cab">{{d.nombre}}</ng-option>
                     </ng-select>
                 </div>
@@ -16,8 +16,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo">Almacenamiento</span>
                     </div>
-                    <ng-select id="IdAlmacenamiento" class="form-control custom" appendTo="body" [searchable]="true" [disabled]="!actions.dComponet || bodegaSearch == undefined " [clearable]="true" [(ngModel)]="almacenamientoSearch" (ngModelChange)="getFilterAlmacenamiento($event)"
-                        [disabled]="!disbledTipo">
+                    <ng-select id="IdAlmacenamiento" class="form-control custom" appendTo="body" [searchable]="true" disabled="!actions.dComponet || bodegaSearch == undefined " [clearable]="true" [(ngModel)]="almacenamientoSearch" (ngModelChange)="getFilterAlmacenamiento($event)"
+                        disabled="!disbledTipo">
                         <ng-option *ngFor="let d of arrayAlmacenamiento" [value]="d.id_bodega_det">{{d.tipo_almacenamiento}}</ng-option>
                     </ng-select>
                 </div>
@@ -30,7 +30,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo">Producto</span>
                     </div>
-                    <ng-select id="IdProducts" class="form-control custom" appendTo="body" [searchable]="true" [disabled]="!actions.dComponet" [clearable]="true" [(ngModel)]="productosSearch" (ngModelChange)="getFilterProduct($event)">
+                    <ng-select id="IdProducts" class="form-control custom" appendTo="body" [searchable]="true" disabled="!actions.dComponet" [clearable]="true" [(ngModel)]="productosSearch" (ngModelChange)="getFilterProduct($event)">
                         <ng-option *ngFor="let d of arrayProducts | filter:[{field:'clase', value: 'Productos'}]" [value]="d.id_producto">
                             {{d.nombre}}</ng-option>
                     </ng-select>
@@ -59,7 +59,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Producto</span>
                     </div>
-                    <ng-select id="IdProducts" class="form-control custom" appendTo="body" [searchable]="true" [disabled]="!actions.dComponet" [clearable]="true" [(ngModel)]="productosSearch" (ngModelChange)="getFilterProduct($event)">
+                    <ng-select id="IdProducts" class="form-control custom" appendTo="body" [searchable]="true" disabled="!actions.dComponet" [clearable]="true" [(ngModel)]="productosSearch" (ngModelChange)="getFilterProduct($event)">
                         <ng-option *ngFor="let d of arrayProducts" [value]="d.id_producto">
                             {{d.nombre}}</ng-option>
                     </ng-select>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-sm-2">
                 <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo">
-                    <input type="number" min="0" [(ngModel)]="valorcantidad" #cupo="ngModel" name="cupo" id="idCantDist" (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm text-right" [disabled]=" !actions.dComponet || productosSearch == undefined ">
+                    <input type="number" min="0" [(ngModel)]="valorcantidad" #cupo="ngModel" name="cupo" id="idCantDist" (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm text-right" disabled=" !actions.dComponet || productosSearch == undefined ">
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-2">

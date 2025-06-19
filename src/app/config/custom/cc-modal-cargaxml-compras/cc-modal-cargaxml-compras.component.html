@@ -16,7 +16,7 @@
             <div class="col-sm-6">
                 <button [ngClass]="{'d-none': exist_client }" class="p-button-sm p-button-info"
                     (click)="RegistrarProveedor($event)" pButton type="button">Crear Proveedor</button>
-                <button [disabled]="botonConfirmar" class="ml-2 p-button-sm p-button-secondary"
+                <button disabled="botonConfirmar" class="ml-2 p-button-sm p-button-secondary"
                     (click)="CargarFacturaProveedor($event)" pButton type="button">Confirmar</button>
             </div>
         </div>
@@ -120,7 +120,7 @@
                     <ng-select style="width: 150px;" loadingText="Cargando.."
                         [clearable]=false [loading]="d.LoadOpcionImpuesto"
                         placeholder="-seleccionar impuesto-" [(ngModel)]="product.impuesto"
-                        [disabled]="true" (ngModelChange)="CambioImpuesto(i)"
+                        disabled="true" (ngModelChange)="CambioImpuesto(i)"
                         class="form-control form-control-sm custom-select"
                         (open)="getImpuestosDetalle(i,dataProducto)" [items]="impuestos"
                         bindLabel="descripcion" bindValue="valor" appendTo="#tabla_xml"
@@ -150,7 +150,7 @@
                             class="form-control form-control-sm custom-select"
                             (open)="getRetencionIva(i,dataProducto)" [items]="rte_iva"
                             (change)="ChangeImpuestoIva($event,dataProducto,i)"
-                            [disabled]="d.isRetencionIva" bindLabel="descripcion_tipo_servicio"
+                            disabled="d.isRetencionIva" bindLabel="descripcion_tipo_servicio"
                             bindValue="codigo_sri_iva" id="idRteIva"
                             appendTo="#tabla_xml">
                         </ng-select>
@@ -213,23 +213,23 @@
                                         </td>
                                         <td>
                                             <input type="text" class="form-control form-control-sm pr-1"
-                                                style="width: 250px;" [(ngModel)]="d.nombre" [disabled]="true"
+                                                style="width: 250px;" [(ngModel)]="d.nombre" disabled="true"
                                                 id="product_{{i}}">
                                         </td>
                                         <td style="display: none; text-align: center;">
-                                            <input type="text" [(ngModel)]="d.codigo" [disabled]="true"
+                                            <input type="text" [(ngModel)]="d.codigo" disabled="true"
                                                 placeholder="Código">
                                         </td>
                                         <td style="display: none; text-align: center;">
                                             <textarea class="form-control form-control-sm" [(ngModel)]="d.observacion"
-                                                [disabled]="true" placeholder="Ingrese descripción" rows="1">
+                                                disabled="true" placeholder="Ingrese descripción" rows="1">
                           </textarea>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control form-control-sm pr-1"
                                                 placeholder="0.00" style="width: 100px; text-align: right;"
                                                 [(ngModel)]="d.cantidad" (keyup)="sumRegistroDetalle(i)" min="0"
-                                                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true"
+                                                (keypress)="commonServices.FormatDecimalVal($event)" disabled="true"
                                                 id="cantidad_{{i}}">
                                         </td>
                                         <td>
@@ -237,7 +237,7 @@
                                                 class="form-control form-control-sm pr-1" placeholder="$ 0.00"
                                                 style="width: 100px; text-align: right;" [(ngModel)]="d.precio"
                                                 (keyup)="sumRegistroDetalle(i)" min="0"
-                                                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                                                (keypress)="commonServices.FormatDecimalVal($event)" disabled="true">
                                         </td>
                                         <td style="text-align: right; width: 100px; vertical-align: middle;">
                                             <div style="width: 100px;">
@@ -248,14 +248,14 @@
                                             <input type="text" class="form-control form-control-sm pr-1"
                                                 placeholder="$ 0.00" style="width: 100px; text-align: right;"
                                                 [(ngModel)]="d.desc" (keyup)="sumRegistroDetalle(i)" min="0"
-                                                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                                                (keypress)="commonServices.FormatDecimalVal($event)" disabled="true">
                                         </td>
                                         <td>
                                             <div>
                                                 <ng-select style="width: 150px;" loadingText="Cargando.."
                                                     [clearable]=false [loading]="d.LoadOpcionImpuesto"
                                                     placeholder="-seleccionar impuesto-" [(ngModel)]="d.impuesto"
-                                                    [disabled]="true" (ngModelChange)="CambioImpuesto(i)"
+                                                    disabled="true" (ngModelChange)="CambioImpuesto(i)"
                                                     class="form-control form-control-sm custom-select"
                                                     (open)="getImpuestosDetalle(i,dataProducto)" [items]="impuestos"
                                                     bindLabel="descripcion" bindValue="valor" appendTo="#tabla_xml"
@@ -293,7 +293,7 @@
                                                     class="form-control form-control-sm custom-select"
                                                     (open)="getRetencionIva(i,dataProducto)" [items]="rte_iva"
                                                     (change)="ChangeImpuestoIva($event,dataProducto,i)"
-                                                    [disabled]="d.isRetencionIva" bindLabel="descripcion_tipo_servicio"
+                                                    disabled="d.isRetencionIva" bindLabel="descripcion_tipo_servicio"
                                                     bindValue="codigo_sri_iva" id="idRteIva"
                                                     appendTo="#tabla_xml"></ng-select>
                                             </div>
@@ -312,7 +312,7 @@
                                         <td>
                                             <input type="text" class="form-control form-control-sm pr-1"
                                                 placeholder="$ 0.00" style="width: 60px; text-align: right;"
-                                                [(ngModel)]="d.iva_detalle" min="0" [disabled]="true">
+                                                [(ngModel)]="d.iva_detalle" min="0" disabled="true">
                                         </td>
 
                                     </tr>

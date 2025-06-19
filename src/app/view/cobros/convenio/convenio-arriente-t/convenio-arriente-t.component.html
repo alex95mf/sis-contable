@@ -12,7 +12,7 @@
             <div class="col-4">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Fecha</span></div>
-                    <input type="date" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="arriendoTerreno.fecha">
+                    <input type="date" class="form-control form-control-sm" disabled="formReadOnly" [(ngModel)]="arriendoTerreno.fecha">
                 </div>
             </div>
             <div class="col-4">
@@ -31,7 +31,7 @@
             <div class="col-3">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Tipo</span></div>
-                    <ng-select class="form-control" [(ngModel)]="arriendoTerreno.at_tipo" [disabled]="formReadOnly">
+                    <ng-select class="form-control" [(ngModel)]="arriendoTerreno.at_tipo" disabled="formReadOnly">
                         <ng-option [value]="0" disabled>Seleccione un Tipo de Contrato</ng-option>
                         <ng-option value="P">PRIMERA VEZ</ng-option>
                         <ng-option value="R">RENOVACION</ng-option>
@@ -43,7 +43,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold">Num. Contrato</span>
                     </div>
-                    <input type="number" class="form-control" [(ngModel)]="arriendoTerreno.at_contrato" [disabled]="formReadOnly">
+                    <input type="number" class="form-control" [(ngModel)]="arriendoTerreno.at_contrato" disabled="formReadOnly">
                 </div>
             </div>
         </div>   -->
@@ -52,7 +52,7 @@
                 <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
                     <div class="input-group-append">
-                        <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                        <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -60,7 +60,7 @@
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Contribuyente</span></div>
                     <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
-                    <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                    <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                         <i class="fas fa-search"></i>
                     </button>
                 </div> -->
@@ -69,7 +69,7 @@
                 <app-cc-input-group-prepend label="Compra Terreno" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control" readonly placeholder="Documento de Compra" (click)="expandCompraTerreno()" [ngModel]="compraTerrenoActive?.documento">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-info" (click)="expandCompraTerreno()" [disabled]="contribuyenteActive.id_cliente == undefined || contribuyenteActive.id_cliente == null">
+                        <button class="btn btn-sm btn-info" (click)="expandCompraTerreno()" disabled="contribuyenteActive.id_cliente == undefined || contribuyenteActive.id_cliente == null">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -81,11 +81,11 @@
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Propiedad</span></div>
-                    <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                    <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                         <ng-option disabled [value]="0">Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                     </ng-select>
-                    <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                    <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                         <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                     </ng-select>
                 </div> -->
@@ -234,14 +234,14 @@
                                     <td class="text-center">
                                         <div class="input-group input-group-sm">
                                             
-                                            <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="detallLiquidacion.comentario" >
+                                            <input type="text" maxlength="100" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="detallLiquidacion.comentario" >
                                         </div>
                                     </td>
 
                                     <td class="text-right">
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                            <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="detallLiquidacion.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
+                                            <input type="text" maxlength="8" class="form-control form-control-sm text-right"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="detallLiquidacion.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
                                         </div>
                                     </td>
                                 </tr>
@@ -284,7 +284,7 @@
                             <div class="input-group-prepend ml-2">
                                 <span class="input-group-text font-weight-bold" style="width:155px;">{{'Cuota inicial'+(amortizacion.cuota_inicial>0?' ('+((amortizacion.cuota_inicial/totalCobro*100) | number: '1.2-2')+'%)':'')}}</span>
                             </div>
-                            <input id="cuota_inicial" [disabled]="formReadOnly || titulosDisabled" currencyMask class="form-control" [(ngModel)]="amortizacion.cuota_inicial">          
+                            <input id="cuota_inicial" disabled="formReadOnly || titulosDisabled" currencyMask class="form-control" [(ngModel)]="amortizacion.cuota_inicial">          
                         </div>
                     </div>
                     <div class="col-4 ">       
@@ -299,13 +299,13 @@
                     <div class="col-4 ">        
                         <div class="input-group input-group-sm">         
                             <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">No. cuotas</span></div>
-                            <input id="num_cuotas" [disabled]=" titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">     
+                            <input id="num_cuotas" disabled=" titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">     
                         </div>
                     </div>
                     <div class="col-4 ">        
                         <div class="input-group input-group-sm">            
                             <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Interés</span></div>
-                            <input id="interes" readonly [disabled]=" titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">         
+                            <input id="interes" readonly disabled=" titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">         
                         </div>
                     </div>      
                 </div>
@@ -316,7 +316,7 @@
                 </div>
                 <div class="row my-2">
                     <div class="col text-right">
-                        <button [disabled]=" titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
+                        <button disabled=" titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
                     </div>
                 </div>
             </div>
@@ -442,7 +442,7 @@
                 <div class="col-3">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Tipo</span></div>
-                        <ng-select class="form-control" [(ngModel)]="arriendoTerreno.at_tipo" [disabled]="formReadOnly">
+                        <ng-select class="form-control" [(ngModel)]="arriendoTerreno.at_tipo" disabled="formReadOnly">
                             <ng-option [value]="0">Seleccione un Tipo de Contrato</ng-option>
                             <ng-option value="P">PRIMERA VEZ</ng-option>
                             <ng-option value="R">RENOVACION</ng-option>
@@ -453,7 +453,7 @@
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Num.
                                 Contrato</span></div>
-                        <input type="text" class="form-control" [(ngModel)]="arriendoTerreno.at_contrato" [disabled]="formReadOnly">
+                        <input type="text" class="form-control" [(ngModel)]="arriendoTerreno.at_contrato" disabled="formReadOnly">
                     </div>
                 </div>
             </div>  
@@ -462,7 +462,7 @@
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Contribuyente</span></div>
                         <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
-                        <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                        <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -470,11 +470,11 @@
                 <div class="col-6">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Propiedad</span></div>
-                        <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                        <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                             <ng-option disabled [value]="0">Seleccione una Propiedad</ng-option>
                             <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                         </ng-select>
-                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                             <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                         </ng-select>
                     </div>
@@ -580,7 +580,7 @@
                         <div class="col-4 ">       
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">{{'Cuota inicial'+(amortizacion.cuota_inicial>0?' ('+((amortizacion.cuota_inicial/totalCobro*100) | number: '1.2-2')+'%)':'')}}</span></div>
-                                <input id="cuota_inicial" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">          
+                                <input id="cuota_inicial" disabled="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">          
                             </div>
                         </div>
                         <div class="col-4 ">       
@@ -595,13 +595,13 @@
                         <div class="col-4 ">        
                             <div class="input-group input-group-sm">         
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">No. cuotas</span></div>
-                                <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">     
+                                <input id="num_cuotas" disabled="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">     
                             </div>
                         </div>
                         <div class="col-4 ">        
                             <div class="input-group input-group-sm">            
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Interés</span></div>
-                                <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">         
+                                <input id="interes" readonly disabled="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">         
                             </div>
                         </div>      
                     </div>
@@ -612,7 +612,7 @@
                     </div>
                     <div class="row my-2">
                         <div class="col text-right">
-                            <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
+                            <button disabled="formReadOnly || titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
                         </div>
                     </div>
                 </div> -->

@@ -21,7 +21,7 @@
         <div class="row my-2">
             <div class="col">
                 <app-cc-input-group-prepend label="Actividad Comercial" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select class="form-control" [(ngModel)]="local.fk_actividad_comercial" [clearable]="false" [disabled] = 'true'>
+                    <ng-select class="form-control" [(ngModel)]="local.fk_actividad_comercial" [clearable]="false" disabled = 'true'>
                         <ng-option [value]="0" disabled>Escoja una Actividad Comercial</ng-option>
                         <ng-option *ngFor="let actividad of actividades_comerciales" [value]="actividad.id">{{ actividad.nombre }}</ng-option>
                     </ng-select>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-4">
                 <app-cc-input-group-prepend label="Tipo de Negocio" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select class="form-control" [(ngModel)]="local.tipo_negocio" [clearable]="false" [disabled] = 'true'>
+                    <ng-select class="form-control" [(ngModel)]="local.tipo_negocio" [clearable]="false" disabled = 'true'>
                         <ng-option [value]="0" disabled>Escoja un Tipo de Negocio</ng-option>
                         <ng-option *ngFor="let tipo of tipos_negocio" [value]="tipo.codigo">{{ tipo.nombre }}</ng-option>
                     </ng-select>
@@ -42,7 +42,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold" style="width: 120px;">Grupo</span>
                     </div>
-                    <ng-select class="form-control" [(ngModel)]="local.fk_grupo" [clearable]="false" readonly [disabled] = 'true'>
+                    <ng-select class="form-control" [(ngModel)]="local.fk_grupo" [clearable]="false" readonly disabled = 'true'>
                         <ng-option disabled [value]="0">Escoja un Grupo</ng-option>
                         <ng-option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.nombre }}</ng-option>
                     </ng-select>
@@ -53,7 +53,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold" style="width: 120px;">Sector</span>
                     </div>
-                    <ng-select class="form-control" [(ngModel)]="local.fk_sector" [clearable]="false"  [disabled] = 'true'>
+                    <ng-select class="form-control" [(ngModel)]="local.fk_sector" [clearable]="false"  disabled = 'true'>
                         <ng-option disabled [value]="0">Escoja un Sector</ng-option>
                         <ng-option *ngFor="let sector of sectores" [value]="sector.id">{{ sector.codigo }}. {{ sector.nombre }}</ng-option>
                     </ng-select>
@@ -72,7 +72,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold" style="width: 120px;">Estado</span>
                     </div>
-                    <ng-select class="form-control" [(ngModel)]="local.estado" [clearable]="false" [disabled] = 'true'>
+                    <ng-select class="form-control" [(ngModel)]="local.estado" [clearable]="false" disabled = 'true'>
                         <ng-option [value]="0" disabled>Escoja un Estado</ng-option>
                         <ng-option *ngFor="let estado of estados" [value]="estado.codigo">{{ estado.codigo }} - {{ estado.nombre }}</ng-option>
                     </ng-select>

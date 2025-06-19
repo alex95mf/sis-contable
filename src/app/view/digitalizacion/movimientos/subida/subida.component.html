@@ -6,7 +6,7 @@
       <div class="col-sm-4">
         <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo font-weight-bold">
           <ng-select class="form-control" [clearable]="true" (change)="selectTipoDocumento($event)"
-            [disabled]="bloquear">
+            disabled="bloquear">
             <ng-option *ngFor="let c of lst_tipoDoC" [value]="c.id_tipo_documento">{{c.nombre}}</ng-option>
           </ng-select>
         </app-cc-input-group-prepend>
@@ -15,7 +15,7 @@
         <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
           <input type="text" readonly class="form-control" [ngModel]="fileName">
           <div class="input-group-append">
-            <button class="btn btn-primary" (click)="resetInput()" [disabled]="tipoDoC == undefined || bloquear">
+            <button class="btn btn-primary" (click)="resetInput()" disabled="tipoDoC == undefined || bloquear">
               <i class="far fa-file-alt"></i> SELECCIONAR
             </button>
             <input type="file" class="d-none" (change)="handleInputFile($event)" #inputFile multiple

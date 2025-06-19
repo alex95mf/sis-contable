@@ -8,7 +8,7 @@
             <!-- <div class="col-3">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Periodo</span></div>
-                    <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Ingresa un Período" [(ngModel)]="periodo" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
+                    <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Ingresa un Período" [(ngModel)]="periodo" disabled="yearDisabled" (keypress)="onlyNumber($event)">
                 </div>
             </div> -->
             <div class="col-4">
@@ -50,7 +50,7 @@
                         disabled
                         [(ngModel)]="mes_actual">
 
-                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                        <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                             {{item.name}}
                         </ng-option>
                     </ng-select>
@@ -169,7 +169,7 @@
                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.total | number:'1.2-2' }}</b></td>
 
                                 <!-- <td class="text-center">
-                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" disabled="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
                                 </td> -->
                             </tr>
                         </tbody>

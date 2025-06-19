@@ -33,7 +33,7 @@
                             <span *ngIf="d.estado == 'D'"><i class="fas fa-circle text-danger"></i> Denegado</span>
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="d.id_documento_detalle !=0"  (click)="removeIdpIngresos(i)"><i class="far fa-trash-alt"></i></button>
+                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" disabled="d.id_documento_detalle !=0"  (click)="removeIdpIngresos(i)"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </ng-container>
@@ -71,7 +71,7 @@
                         <td class="text-center">$ {{d.precio_cotizado}}</td>                      
            
                         <td class="text-center">
-                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="d.id_documento_detalle !=0"  (click)="removeIdpIngresos(i)"><i class="far fa-trash-alt"></i></button>
+                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" disabled="d.id_documento_detalle !=0"  (click)="removeIdpIngresos(i)"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </ng-container>

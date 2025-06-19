@@ -21,7 +21,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text font-weight-bold" style="width: 120px;">Fecha Inicio Act.</span>
                 </div>
-                <input type="date" class="form-control" [(ngModel)]="local.fecha" [disabled]="local.tipo_local == 1">
+                <input type="date" class="form-control" [(ngModel)]="local.fecha" disabled="local.tipo_local == 1">
             </div>
         </div>
 
@@ -84,7 +84,7 @@
         <div class="col-4">
             <app-cc-input-group-prepend label="Establecimiento" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control" [selectOnTab]="true" [clearable]="false" [(ngModel)]="local.tipo_establecimiento"
-                    [disabled]="false">
+                    disabled="false">
                     <ng-option [value]="0" disabled>Establecimiento</ng-option>
                     <ng-option *ngFor="let establecimiento of tipo_estable" [value]="establecimiento.value"> {{
                         establecimiento.label }}</ng-option>
@@ -94,7 +94,7 @@
         <div class="col-4">
             <app-cc-input-group-prepend label="Tiene F&aacute;brica" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control" [selectOnTab]="true" [clearable]="false" [(ngModel)]="local.tiene_fabrica"
-                    [disabled]="false">
+                    disabled="false">
                     <ng-option [value]="0" disabled>Tiene Fábrica</ng-option>
                     <ng-option *ngFor="let fabrica of tiene_fabrica" [value]="fabrica"> {{ fabrica == "S" ? 'SI': 'NO'
                         }}</ng-option>
@@ -252,7 +252,7 @@
                         <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
                             <input type="text" class="form-control" readonly [value]="local.feria?.nombre">
                             <div class="input-group-append">
-                                <button class="btn btn-secondary" (click)="expandFerias()" [disabled]="local.fk_contribuyente.razon_social == ''">
+                                <button class="btn btn-secondary" (click)="expandFerias()" disabled="local.fk_contribuyente.razon_social == ''">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>

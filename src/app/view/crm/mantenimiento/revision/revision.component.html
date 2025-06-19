@@ -49,7 +49,7 @@
                         <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-" appendTo="body"
                             [clearable]="true" [searchable]="true" disabled [(ngModel)]="producto.estado">
 
-                            <ng-option [value]="item.estado" [disabled]="item.disabled"
+                            <ng-option [value]="item.estado" disabled="item.disabled"
                                 *ngFor="let item of lista_estados">
                                 {{item.descripcion}}
                             </ng-option>

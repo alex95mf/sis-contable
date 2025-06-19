@@ -10,7 +10,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
                     </div>
                     <ng-select id="duplicateQuotes" class="form-control" [searchable]="true" [clearable]="false"
-                        [disabled]="!actions.btnDuplicate" style="padding-left: 7px;font-size: 13px;"
+                        disabled="!actions.btnDuplicate" style="padding-left: 7px;font-size: 13px;"
                         [(ngModel)]="customerSelect" (keyup)="getCustomerFilter($event.target.value)"
                         (ngModelChange)="getCustomer($event)">
                         <ng-option *ngFor="let d of arrayCustomerAux" [value]="d.id_cliente">
@@ -26,7 +26,7 @@
                             contribuyente</span>
                     </div>
                     <input placeholder="tipo contribuyente" type="text" class="form-control form-control-sm"
-                        id="idTipCont" [disabled]="true" [(ngModel)]="tipo_con">
+                        id="idTipCont" disabled="true" [(ngModel)]="tipo_con">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -44,7 +44,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Documento</span>
                     </div>
                     <input placeholder="tipo documento" type="text" class="form-control form-control-sm" id="idTipDoc"
-                        [disabled]="true" [(ngModel)]="customer.tipo_documento">
+                        disabled="true" [(ngModel)]="customer.tipo_documento">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -53,7 +53,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo crédito</span>
                     </div>
                     <input placeholder="cupo crédito" type="text" class="form-control form-control-sm" id="idCupoCre"
-                        [disabled]="true" [(ngModel)]="customer.cupo_credito">
+                        disabled="true" [(ngModel)]="customer.cupo_credito">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -62,7 +62,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Asesor</span>
                     </div>
                     <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
-                        id="idAsesor" [disabled]="true" [(ngModel)]="customer['asesor']['nombre']">
+                        id="idAsesor" disabled="true" [(ngModel)]="customer['asesor']['nombre']">
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
                     </div>
                     <input placeholder="numero documento" type="text" [(ngModel)]="customer.num_documento"
-                        class="form-control form-control-sm" id="idNumDoc" [disabled]="true">
+                        class="form-control form-control-sm" id="idNumDoc" disabled="true">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -82,7 +82,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo crédito</span>
                     </div>
                     <input placeholder="saldo crédito" type="text" class="form-control form-control-sm" id="idSalCre"
-                        [disabled]="true" [(ngModel)]="customer.saldo_credito">
+                        disabled="true" [(ngModel)]="customer.saldo_credito">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -91,7 +91,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
                     </div>
                     <input placeholder="teléfono" type="text" class="form-control form-control-sm" id="idTelefono"
-                        [disabled]="true" [(ngModel)]="customer.telefono">
+                        disabled="true" [(ngModel)]="customer.telefono">
                 </div>
 
             </div>
@@ -103,7 +103,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupo</span>
                     </div>
                     <input placeholder="Grupo" type="text" class="form-control form-control-sm" id="idGrupo"
-                        [disabled]="true" [(ngModel)]="grupo">
+                        disabled="true" [(ngModel)]="grupo">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -112,7 +112,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
                     </div>
                     <input placeholder="dirección" type="text" class="form-control form-control-sm" id="idAddress"
-                        [disabled]="true" [(ngModel)]="customer.direccion">
+                        disabled="true" [(ngModel)]="customer.direccion">
                 </div>
             </div>
             <div class="col-sm-4">

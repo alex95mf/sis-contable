@@ -140,7 +140,7 @@
                                     <button class="btn btn-primary btn-sm mx-1" (click)="showSeguiTicketForm(false, dt)" placement="left" ngbTooltip="Abrir Seguimiento">
                                         <i class="far fa-eye "></i>
                                     </button>
-                                    <button *ngIf="dt.estado === 'PA'" class="btn btn-success btn-sm mx-1" (click)="openAprobarModal(dt)" placement="left" ngbTooltip="Aprobar Ticket" [disabled] = "deshabilitarBotonAprobacion(dt)">
+                                    <button *ngIf="dt.estado === 'PA'" class="btn btn-success btn-sm mx-1" (click)="openAprobarModal(dt)" placement="left" ngbTooltip="Aprobar Ticket" disabled = "deshabilitarBotonAprobacion(dt)">
                                         <i class="far fa-check"></i>
                                     </button>
                                 </div>

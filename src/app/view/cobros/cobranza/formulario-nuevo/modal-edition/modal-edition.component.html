@@ -5,14 +5,14 @@
     <div class="col">
       <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
         <ng-select class="form-control" [clearable]="false" [(ngModel)]="notificacion.estado" [readonly]="validacionDetalles">
-          <ng-option *ngFor="let estado of estados" [value]="estado.value" [disabled]="estado.value == 0">{{ estado.label }}</ng-option>
+          <ng-option *ngFor="let estado of estados" [value]="estado.value" disabled="estado.value == 0">{{ estado.label }}</ng-option>
         </ng-select>
       </app-cc-input-group-prepend>
     </div>
     <div class="col">
       <app-cc-input-group-prepend label="Notificador" styleSpan="size-span-campo font-weight-bold">
         <ng-select class="form-control" [clearable]="false" [(ngModel)]="notificacion.notificador" [readonly]="validacionDetalles">
-          <ng-option *ngFor="let notificador of notificadores" [value]="notificador.descripcion" [disabled]="notificador.valor == 0">{{notificador.descripcion}}</ng-option>
+          <ng-option *ngFor="let notificador of notificadores" [value]="notificador.descripcion" disabled="notificador.valor == 0">{{notificador.descripcion}}</ng-option>
         </ng-select>
       </app-cc-input-group-prepend>
     </div>

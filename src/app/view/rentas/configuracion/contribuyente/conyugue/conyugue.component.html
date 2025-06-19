@@ -1,6 +1,6 @@
 <!-- Currently I am {{contribuyenteCon.co_tiene_conyuge ? 'open' : 'closed'}} -->
 <!-- (opened)="contribuyenteCon.co_tiene_conyuge = true" (closed)="contribuyenteCon.co_tiene_conyuge = false" -->
-<mat-expansion-panel class="mt-2"  [disabled]="!validadorNt" >
+<mat-expansion-panel class="mt-2"  disabled="!validadorNt" >
     <mat-expansion-panel-header>
       <input type="checkbox" [(ngModel)]="contribuyenteCon.co_tiene_conyuge" (change)="selectedCheck()">
       <mat-panel-title>Cónyuge</mat-panel-title>

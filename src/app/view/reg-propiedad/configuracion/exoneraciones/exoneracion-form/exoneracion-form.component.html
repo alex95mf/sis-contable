@@ -7,7 +7,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Concepto</span>
                     </div>
-                    <ng-select id="concepto" class="form-control form-control-sm" [(ngModel)]="exoneracion.fk_concepto" [disabled]="disabled" (change)="buscarConDet()">
+                    <ng-select id="concepto" class="form-control form-control-sm" [(ngModel)]="exoneracion.fk_concepto" disabled="disabled" (change)="buscarConDet()">
                         <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
                         <ng-option *ngFor="let co of conceptos" [value]="co.id_concepto">{{ co.codigo +'-'+ co.nombre }}</ng-option>
                     </ng-select>

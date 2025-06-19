@@ -105,10 +105,10 @@
                                     </td>
                                     <td>
                                         <div class="text-center mx-auto">
-                                            <button class="btn btn-success btn-sm mr-1" (click)="aprobar(dt.id_liquidacion)" placement="left" ngbTooltip="Aprobar liquidación" [disabled]="dt.estado != 'E'">
+                                            <button class="btn btn-success btn-sm mr-1" (click)="aprobar(dt.id_liquidacion)" placement="left" ngbTooltip="Aprobar liquidación" disabled="dt.estado != 'E'">
                                                 <i class="far fa-check"></i>
                                             </button>
-                                            <button class="btn btn-danger btn-sm mr-1" (click)="anular(dt.id_liquidacion)" placement="left" ngbTooltip="Anular liquidación" [disabled]="dt.estado != 'E'">
+                                            <button class="btn btn-danger btn-sm mr-1" (click)="anular(dt.id_liquidacion)" placement="left" ngbTooltip="Anular liquidación" disabled="dt.estado != 'E'">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                             <button class="btn btn-warning btn-sm mr-1" (click)="expandDetalleMulta(dt)" placement="left" ngbTooltip="Ver detalle">

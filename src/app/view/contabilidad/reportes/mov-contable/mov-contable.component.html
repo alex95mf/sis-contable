@@ -40,7 +40,7 @@
                                 </div>
                                 <input type="text" #nameAccountM="ngModel" name="nameAccountM"
                                     [(ngModel)]="nombre" class="form-control form-control-sm"
-                                    [disabled]="true" placeholder="Nombre cuenta mayor">
+                                    disabled="true" placeholder="Nombre cuenta mayor">
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <input type="text" #nameAccountM="ngModel" name="nameAccountM"
                                     [(ngModel)]="nombre_hasta" class="form-control form-control-sm"
-                                    [disabled]="true" placeholder="Nombre cuenta mayor">
+                                    disabled="true" placeholder="Nombre cuenta mayor">
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                 <div class="input-group-prepend ">
                                     <span class="input-group-text size-span-campo font-weight-bold" id="">Número</span>
                                 </div>
-                                <select class="form-control form-control-sm custom-select" (ngModelChange)="filterNumero($event)" [disabled]=" tipo == 0" [(ngModel)]="numero">
+                                <select class="form-control form-control-sm custom-select" (ngModelChange)="filterNumero($event)" disabled=" tipo == 0" [(ngModel)]="numero">
                                     <option [value]="0">Seleccione Numero</option>
                                     <option *ngFor="let d of arrayCab" [value]="d.num_doc">{{ d.num_doc.padStart(10, 0)}} </option>
                                     </select>

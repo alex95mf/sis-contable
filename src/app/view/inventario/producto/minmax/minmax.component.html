@@ -32,7 +32,7 @@
                                     máximo</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio3" value="{{valueR5}}"
-                                (click)="changeFluctuacion()" [disabled]="actions.disabledAll">
+                                (click)="changeFluctuacion()" disabled="actions.disabledAll">
                         </div>
                     </div>
                     <div class="col-4 pl-5">
@@ -42,7 +42,7 @@
                                     Porcentaje</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio" value="{{valueR1}}"
-                                (click)="changeRadio()" [disabled]="actions.disabledAll">
+                                (click)="changeRadio()" disabled="actions.disabledAll">
                         </div>
                     </div>
                     <div class="col-4 pl-5">
@@ -53,7 +53,7 @@
                                     costo</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio2" value="{{valueR3}}"
-                                (click)="changeRadioCosto()" [disabled]="actions.disabledAll">
+                                (click)="changeRadioCosto()" disabled="actions.disabledAll">
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                                     producto</span>
                             </div>
                             <select class="form-control form-control-sm custom-select" [(ngModel)]="marcaSelect"
-                                (ngModelChange)="filterMarca($event)" [disabled]="actions.disabledAll">
+                                (ngModelChange)="filterMarca($event)" disabled="actions.disabledAll">
                                 <option [value]="0">Todos</option>
                                 <option *ngFor="let d of arrayMarcas" [value]="d">
                                     <span>{{d}}</span>
@@ -90,7 +90,7 @@
                                     mínimo</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio3" value="{{valueR6}}"
-                                (click)="changeFluctuacion()" [disabled]="actions.disabledAll">
+                                (click)="changeFluctuacion()" disabled="actions.disabledAll">
                         </div>
                     </div>
                     <div class="col-4 pl-5">
@@ -100,7 +100,7 @@
                                     valor</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio" value="{{valueR2}}"
-                                (click)="changeRadio()" [disabled]="actions.disabledAll">
+                                (click)="changeRadio()" disabled="actions.disabledAll">
                         </div>
                     </div>
                     <div class="col-4 pl-5">
@@ -111,7 +111,7 @@
                                     Pvp</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio2" value="{{valueR4}}"
-                                (click)="changeRadioCosto()" [disabled]="actions.disabledAll">
+                                (click)="changeRadioCosto()" disabled="actions.disabledAll">
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                                             [(ngModel)]="valuePricePorcentaje" placeholder="0.00" min="0"
                                             id="idInptPrice" style="padding-right: 25px !important;"
                                             (keypress)="commonServices.FormatDecimalVal($event)"
-                                            [disabled]="actions.disabledAll" #prc="ngModel" name="prc"
+                                            disabled="actions.disabledAll" #prc="ngModel" name="prc"
                                             [ngClass]="{'is-invalid':((valuePricePorcentaje <= 0) && (prc.dirty || prc.touched)),'is-valid':(valuePricePorcentaje > 0)}"
                                             required>
                                         <div class="invalid-feedback"
@@ -181,7 +181,7 @@
                                                 <th style="text-align: center;padding-left: 0px !important;width: 30px !important;"
                                                     [ngClass]="{'filter': precioSelect != 0}">
                                                     <input type="checkbox" (click)="activeSectionAll()"
-                                                        [(ngModel)]="checkAll" [disabled]="
+                                                        [(ngModel)]="checkAll" disabled="
                                                                 actions.disabledAll ||
                                                                 valueRadio == undefined ||
                                                                 valueRadioCosto == undefined ||
@@ -206,7 +206,7 @@
                                             <tr *ngFor="let dt of infoDt; let i = index">
                                                 <td style="width: 7px;">
                                                     <input type="checkbox" (click)="activeSection(i)"
-                                                        [(ngModel)]="dt.activeCheckbox" [disabled]="
+                                                        [(ngModel)]="dt.activeCheckbox" disabled="
                                                                 actions.disabledAll ||
                                                                 valueRadio == undefined ||
                                                                 valueRadioCosto == undefined ||
@@ -222,11 +222,11 @@
                                                 <td class="text-right pr-2">{{dt.PVP}}</td>
                                                 <td *ngIf="valuFluctuacion == 'minimo'">
                                                     <input type="text" [(ngModel)]="dt.pminAux" class="text-right pr-2"
-                                                        (keyup)="changePriceEdit(i)" [disabled]="!disableDropw">
+                                                        (keyup)="changePriceEdit(i)" disabled="!disableDropw">
                                                 </td>
                                                 <td *ngIf="valuFluctuacion == 'maximo'">
                                                     <input type="text" [(ngModel)]="dt.pmaxAux" class="text-right pr-2"
-                                                        (keyup)="changePriceEdit(i)" [disabled]="!disableDropw">
+                                                        (keyup)="changePriceEdit(i)" disabled="!disableDropw">
                                                 </td>
                                                 <td class="text-right pr-2">$ {{dt.utilidad}}</td>
                                             </tr>

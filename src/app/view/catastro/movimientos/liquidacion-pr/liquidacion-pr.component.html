@@ -133,7 +133,7 @@
                 <div class="col">
                     <span class="h4">Conceptos</span>
                     <button class="btn btn-sm btn-success float-right" matTooltip="Agregar Conceptos" 
-                        (click)="expandConceptos()" [disabled]="roPropiedadSelected || formReadOnly && false">
+                        (click)="expandConceptos()" disabled="roPropiedadSelected || formReadOnly && false">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
@@ -188,7 +188,7 @@
                 <div class="col">
                     <span class="h4">Exoneraciones</span>
                     <button class="btn btn-sm btn-success float-right" matTooltip="Agregar Exoneraciones" 
-                        (click)="expandExoneraciones()" [disabled]="liquidacion.conceptos.length == 0 || formReadOnly && false">
+                        (click)="expandExoneraciones()" disabled="liquidacion.conceptos.length == 0 || formReadOnly && false">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>

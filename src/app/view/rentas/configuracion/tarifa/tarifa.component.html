@@ -11,7 +11,7 @@
             </div>
             <div class="col-4">
                 <app-cc-input-group-prepend label="Concepto" styleSpan="font-weight-bold size-span-campo">
-                    <ng-select class="form-control" [clearable]="false" [searchable]="true" [disabled]="editMode"
+                    <ng-select class="form-control" [clearable]="false" [searchable]="true" disabled="editMode"
                         [(ngModel)]="tarifa.fk_concepto" (ngModelChange)="asignaConcepto($event)">
                         <ng-option [value]="0" disabled><strong>Seleccione un concepto</strong></ng-option>
                         <ng-option *ngFor="let c of conceptos" [value]="c.id">{{ c.codigo }} - {{ c.nombre }}</ng-option>

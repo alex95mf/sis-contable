@@ -6,7 +6,7 @@
             </div>
             <div class="col-sm-6">
                 <app-cc-input-group-prepend label="No. Factura" styleSpan="size-span-campo">
-                    <input type="text" [value]="invoice.num_doc" [disabled]="true" class="form-control form-control-sm font-weight-bold">
+                    <input type="text" [value]="invoice.num_doc" disabled="true" class="form-control form-control-sm font-weight-bold">
                 </app-cc-input-group-prepend>
             </div>
         </div>
@@ -53,7 +53,7 @@
                                     <td>
                                         <input type="number" class="form-control form-control-sm" style="text-align: right;" [(ngModel)]="d.cantidadEntregada" (keyup)="validateCantidadPendiente(i)" name="quanty" #quanty="ngModel" min="0" (keypress)="commonServices.FormatDecimalVal($event)"
                                             [ngClass]="{'is-invalid':(d.cantidadEntregada > d.pendiente_aux || d.cantidadEntregada > d.stock),'is-valid':((d.cantidadEntregada <= d.pendiente_aux || d.cantidadEntregada < d.stock)&& d.cantidadEntregada > 0)}"
-                                            required [disabled]="d.stock <= 0 || flagDispached">
+                                            required disabled="d.stock <= 0 || flagDispached">
                                         <div class="invalid-feedback" *ngIf="d.cantidadEntregada > d.pendiente_aux || d.cantidadEntregada > d.stock">
                                             <span>Valor no puede ser mayor a la cantidad pendiente o al stock actual</span>
                                         </div>

@@ -2,47 +2,47 @@
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="N° Documento" styleSpan="size-span-campo">
-                <input type="text" [value]="params.preficInvoice + '-' + invoice.num_doc" [disabled]="true" class="form-control form-control-sm">
+                <input type="text" [value]="params.preficInvoice + '-' + invoice.num_doc" disabled="true" class="form-control form-control-sm">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
-                <input type="text" [(ngModel)]="invoice.fecha" [disabled]="true" class="form-control form-control-sm">
+                <input type="text" [(ngModel)]="invoice.fecha" disabled="true" class="form-control form-control-sm">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Valor Total" styleSpan="size-span-campo">
-                <input type="text" [(ngModel)]="'$' + invoice.total" [disabled]="true" class="form-control form-control-sm text-right">
+                <input type="text" [(ngModel)]="'$' + invoice.total" disabled="true" class="form-control form-control-sm text-right">
             </app-cc-input-group-prepend>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo">
-                <input type="text" [value]="invoice.rucCliente" [disabled]="true" class="form-control form-control-sm">
+                <input type="text" [value]="invoice.rucCliente" disabled="true" class="form-control form-control-sm">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-8">
             <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
-                <input type="text" [(ngModel)]="invoice.cliente" [disabled]="true" class="form-control form-control-sm text-uppercase">
+                <input type="text" [(ngModel)]="invoice.cliente" disabled="true" class="form-control form-control-sm text-uppercase">
             </app-cc-input-group-prepend>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Tipo Pago" styleSpan="size-span-campo">
-                <input type="text" [value]="invoice.tipo_pago" [disabled]="true" class="form-control form-control-sm text-uppercase">
+                <input type="text" [value]="invoice.tipo_pago" disabled="true" class="form-control form-control-sm text-uppercase">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-3">
             <app-cc-input-group-prepend label="Pagada" styleSpan="size-span-campo">
-                <input type="text" *ngIf="invoice.pagada == 1" value="SI" [disabled]="true" class="form-control form-control-sm">
-                <input type="text" *ngIf="invoice.pagada == 0" value="NO" [disabled]="true" class="form-control form-control-sm">
+                <input type="text" *ngIf="invoice.pagada == 1" value="SI" disabled="true" class="form-control form-control-sm">
+                <input type="text" *ngIf="invoice.pagada == 0" value="NO" disabled="true" class="form-control form-control-sm">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-5">
             <app-cc-input-group-prepend label="Vendedor" styleSpan="size-span-campo">
-                <input type="text" [value]="invoice.vendedor" [disabled]="true" class="form-control form-control-sm text-uppercase">
+                <input type="text" [value]="invoice.vendedor" disabled="true" class="form-control form-control-sm text-uppercase">
             </app-cc-input-group-prepend>
         </div>
     </div>

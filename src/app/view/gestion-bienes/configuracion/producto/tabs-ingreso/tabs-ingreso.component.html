@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Cuenta Ventas" styleSpan="size-span-campo">
-                        <ng-select id="IdcajaChica" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.ventas" (ngModelChange)="ChangeSelect($event)" [searchable]="true">
+                        <ng-select id="IdcajaChica" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" disabled="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.ventas" (ngModelChange)="ChangeSelect($event)" [searchable]="true">
                             <ng-option [value]="0">Seleccione Cuenta</ng-option>
                             <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
                                 {{acc.nombre}}
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Cuenta Costos" styleSpan="size-span-campo">
-                        <ng-select id="ngSelInv" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.inventario" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                        <ng-select id="ngSelInv" class="form-control custom" appendTo="body" disabled="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.inventario" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
                             <ng-option [value]="0">Seleccione Cuenta</ng-option>
                             <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
                                 {{acc.nombre}}
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Cuenta Devoluciones" styleSpan="size-span-campo">
-                        <ng-select id="ngSelDevoluciones" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.devoluciones" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                        <ng-select id="ngSelDevoluciones" class="form-control custom" appendTo="body" disabled="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.devoluciones" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
                             <ng-option [value]="0">Seleccione Cuenta</ng-option>
                             <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
                                 {{acc.nombre}}
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Cuenta Descuentos" styleSpan="size-span-campo">
-                        <ng-select id="ngSelDescuentos" class="form-control custom" appendTo="body" [(ngModel)]="tabAccounting.descuentos" (ngModelChange)="ChangeSelect($event)" [disabled]="!actionsBtn.nuevo" [searchable]="true" [clearable]="true">
+                        <ng-select id="ngSelDescuentos" class="form-control custom" appendTo="body" [(ngModel)]="tabAccounting.descuentos" (ngModelChange)="ChangeSelect($event)" disabled="!actionsBtn.nuevo" [searchable]="true" [clearable]="true">
                             <ng-option [value]="0">Seleccione Cuenta</ng-option>
                             <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
                                 {{acc.nombre}}</ng-option>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Cuenta Perdidas" styleSpan="size-span-campo">
-                        <ng-select id="ngSelPerdidas" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.perdidas" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                        <ng-select id="ngSelPerdidas" class="form-control custom" appendTo="body" disabled="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.perdidas" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
                             <ng-option [value]="0">Seleccione Cuenta</ng-option>
                             <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">{{acc.nombre}}</ng-option>
                         </ng-select>
@@ -77,13 +77,13 @@
                 <div class="col-sm-4">
                     <div class="form-group" style="float:right;">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="checkIR" [disabled]="!actionsBtn.nuevo" (ngModelChange)="ChangeSelect($event)" [(ngModel)]="tabAccounting.impuestoRent">
+                            <input class="form-check-input" type="checkbox" id="checkIR" disabled="!actionsBtn.nuevo" (ngModelChange)="ChangeSelect($event)" [(ngModel)]="tabAccounting.impuestoRent">
                             <label class="form-check-label text-dark font-weight-bold" for="checkIR">
                                     Deducible I/R
                                 </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="checkIVA" [disabled]="!actionsBtn.nuevo" (ngModelChange)="ChangeSelect($event)" [(ngModel)]="tabAccounting.iva">
+                            <input class="form-check-input" type="checkbox" id="checkIVA" disabled="!actionsBtn.nuevo" (ngModelChange)="ChangeSelect($event)" [(ngModel)]="tabAccounting.iva">
                             <label class="form-check-label text-dark font-weight-bold" for="checkIVA">
                                     IVA
                                 </label>
@@ -93,7 +93,7 @@
 
                 <div class="col-sm-4" *ngIf="tabAccounting.iva === 1 || tabAccounting.iva === true">
                     <app-cc-input-group-prepend label="Cuenta IVA Compra" styleSpan="size-span-campo">
-                        <ng-select id="ngSelIvaCompra" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.iva_compra" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                        <ng-select id="ngSelIvaCompra" class="form-control custom" appendTo="body" disabled="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.iva_compra" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
                             <ng-option [value]="0">Seleccione Cuenta</ng-option>
                             <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
                                 {{acc.nombre}}
@@ -105,7 +105,7 @@
 
                 <div class="col-sm-4" *ngIf="tabAccounting.iva === 1 || tabAccounting.iva === true">
                     <app-cc-input-group-prepend label="Cuenta IVA Venta" styleSpan="size-span-campo">
-                        <ng-select id="ngSelIvaVentas" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.iva_venta" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                        <ng-select id="ngSelIvaVentas" class="form-control custom" appendTo="body" disabled="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.iva_venta" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
                             <ng-option [value]="0">Seleccione Cuenta</ng-option>
                             <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
                                 {{acc.nombre}}
@@ -129,7 +129,7 @@
                                             <i class="fa fa-upload prueba" aria-hidden="true" style="font-size:14px;"></i>
                                             SELECCIONE ARCHIVO
                                         </label>
-                                        <input type="file" id="files" name="files" class="form-control-file" multiple [disabled]="!actionsBtn.nuevo" (change)="selectFiles($event.target.files)">
+                                        <input type="file" id="files" name="files" class="form-control-file" multiple disabled="!actionsBtn.nuevo" (change)="selectFiles($event.target.files)">
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese Descripción">Descripción</span>
                                         </div>
-                                        <textarea id="descriptAnx" class="form-control form-control-sm" rows="3" [disabled]="!actionsBtn.nuevo" [(ngModel)]="anexos.description"></textarea>
+                                        <textarea id="descriptAnx" class="form-control form-control-sm" rows="3" disabled="!actionsBtn.nuevo" [(ngModel)]="anexos.description"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                             <div class="row mt-3">
                                 <div class="col-sm-6">
                                     <app-cc-input-group-prepend label="Tipo">
-                                        <select id="inpType" class="form-control custom-select" [disabled]="!actionsTabs.cancel || Disableenviadata" (ngModelChange)="onChangeFormuleType($event)" [(ngModel)]="tabFormule.typFormCab">
+                                        <select id="inpType" class="form-control custom-select" disabled="!actionsTabs.cancel || Disableenviadata" (ngModelChange)="onChangeFormuleType($event)" [(ngModel)]="tabFormule.typFormCab">
                                             <option [value]="0">Seleccione</option>    
                                             <option *ngFor="let t of typeFormuleCab" [value]="t.name">
                                                     {{ t.name }}
@@ -213,7 +213,7 @@
                                 </div>
                                 <!--                                 <div class="col-sm-4">
                                     <app-cc-input-group-prepend label="Magnitud">
-                                        <select id="inpMag" class="form-control custom-select" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabFormule.magFormCab">
+                                        <select id="inpMag" class="form-control custom-select" disabled="!actionsBtn.nuevo" [(ngModel)]="tabFormule.magFormCab">
                                             <option [value]="0">Seleccione</option>   
                                             <option *ngFor='let m of catalogs["MAGNITUD"]' [value]="m.valor">
                                                     {{ m.valor }}
@@ -223,20 +223,20 @@
                                 </div> -->
                                 <div class="col-sm-6">
                                     <app-cc-input-group-prepend label="Costo">
-                                        <input type="number" class="form-control text-right" [(ngModel)]="tabFormule.costFinalFormCab" [disabled]="true">
+                                        <input type="number" class="form-control text-right" [(ngModel)]="tabFormule.costFinalFormCab" disabled="true">
                                     </app-cc-input-group-prepend>
                                 </div>
                             </div>
 
                             <div class="row mt-4">
                                 <div class="col-sm-1">
-                                    <button class="btn btn-sm btn-primary" data-toggle="tooltip" (click)="setModalCatalog('Ingreso Manofactura', 'MANOFACTURA', 'Manofactura')" data-placement="top" title="Crear manofactura" [disabled]="!actionsTabs.formule">
+                                    <button class="btn btn-sm btn-primary" data-toggle="tooltip" (click)="setModalCatalog('Ingreso Manofactura', 'MANOFACTURA', 'Manofactura')" data-placement="top" title="Crear manofactura" disabled="!actionsTabs.formule">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                 </div>
                                 <div class="col-sm-5">
                                     <app-cc-input-group-prepend label="Manofactura">
-                                        <select id="inpComMan" class="form-control custom-select" [disabled]="!actionsTabs.formule" [(ngModel)]="tabFormuleCom.typFormDetCom">
+                                        <select id="inpComMan" class="form-control custom-select" disabled="!actionsTabs.formule" [(ngModel)]="tabFormuleCom.typFormDetCom">
                                             <option [value]="0">Seleccione</option>  
                                              <option *ngFor='let m of catalogs["MANOFACTURA"]' [value]="m.id_catalogo">
                                                     {{ m.valor }}
@@ -246,11 +246,11 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <app-cc-input-group-prepend label="Valor">
-                                        <input type="number" id="inpComVal" class="form-control" min="0" [disabled]="!actionsTabs.formule" (keypress)="FormatDecimalVal($event)" [(ngModel)]="tabFormuleCom.valFormDetCom" placeholder="Valor manofactura">
+                                        <input type="number" id="inpComVal" class="form-control" min="0" disabled="!actionsTabs.formule" (keypress)="FormatDecimalVal($event)" [(ngModel)]="tabFormuleCom.valFormDetCom" placeholder="Valor manofactura">
                                     </app-cc-input-group-prepend>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-sm btn-warning text-dark font-weight-bold" (click)="storeManofactura(tabFormuleCom)" [disabled]="!actionsTabs.formule">Agregar</button>
+                                    <button class="btn btn-sm btn-warning text-dark font-weight-bold" (click)="storeManofactura(tabFormuleCom)" disabled="!actionsTabs.formule">Agregar</button>
                                 </div>
                             </div>
                             <div class="row mt-4">
@@ -279,7 +279,7 @@
                                                         <strong>{{ commonServices.formatNumber(f.value) }}</strong>
                                                     </td>
                                                     <td>
-                                                        <button type="button" [disabled]="!actionsTabs.formule" (click)="deleteManofactura(f.id, i)" class="btn btn-sm btn-danger tooltip-test" style="color: white; border-radius: 10px" title="Remover Registro">
+                                                        <button type="button" disabled="!actionsTabs.formule" (click)="deleteManofactura(f.id, i)" class="btn btn-sm btn-danger tooltip-test" style="color: white; border-radius: 10px" title="Remover Registro">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </button>
                                                     </td>
@@ -296,7 +296,7 @@
                             <div class="row  mt-3">
                                 <div class="col-sm-12">
                                     <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo">
-                                        <ng-select id="ngSelProduct" class="form-control custom" appendTo="body" [disabled]="!actionsTabs.cancel" [(ngModel)]="tabDetFormule.prodFormDet" [searchable]="true" [clearable]="true" style="background-color: #e4e5e6 !important;" (ngModelChange)="searchProductDt($event)">
+                                        <ng-select id="ngSelProduct" class="form-control custom" appendTo="body" disabled="!actionsTabs.cancel" [(ngModel)]="tabDetFormule.prodFormDet" [searchable]="true" [clearable]="true" style="background-color: #e4e5e6 !important;" (ngModelChange)="searchProductDt($event)">
                                             <ng-option [value]="0">Seleccione Producto</ng-option>
                                             <ng-option *ngFor="let prod of products" [value]="prod.id_producto">
                                                 {{prod.nombre}}</ng-option>
@@ -307,7 +307,7 @@
                             <div class="row mt-2">
                                 <div class="col-sm-6">
                                     <!--  <app-cc-input-group-prepend label="UDM" styleSpan="size-span-campo">
-                                        <select id="inpType" class="form-control custom-select" [disabled]="!actionsTabs.formule" [(ngModel)]="tabDetFormule.udmFormDet">
+                                        <select id="inpType" class="form-control custom-select" disabled="!actionsTabs.formule" [(ngModel)]="tabDetFormule.udmFormDet">
                                             <option [value]="0">Seleccione Unidad de Medida</option>  
                                             <option *ngFor='let t of conversions' [value]="t.id_conversion">
                                                 {{ t.unidad }}
@@ -320,15 +320,15 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo">
-                                        <input type="number" id="inpCantStock" class="form-control" min="0" [disabled]="!actionsTabs.cancel" (keypress)="FormatDecimalVal($event)" [(ngModel)]="tabDetFormule.cantUseFormDet" placeholder="Cantidad a usar">
+                                        <input type="number" id="inpCantStock" class="form-control" min="0" disabled="!actionsTabs.cancel" (keypress)="FormatDecimalVal($event)" [(ngModel)]="tabDetFormule.cantUseFormDet" placeholder="Cantidad a usar">
                                     </app-cc-input-group-prepend>
                                 </div>
                             </div>
 
                             <div class="row mt-2 text-right d-flex flex-row-reverse">
                                 <div class="col-sm-6  mx-1 text-right ">
-                                    <button class="btn btn-sm btn-danger text-dark font-weight-bold" [disabled]="!actionsTabs.cancel" (click)="CancelFormule()">Cancelar</button>
-                                    <button class="btn btn-sm btn-warning text-dark font-weight-bold" [disabled]="!actionsTabs.cancel" (click)="storeProducts(tabDetFormule)">Agregar</button>
+                                    <button class="btn btn-sm btn-danger text-dark font-weight-bold" disabled="!actionsTabs.cancel" (click)="CancelFormule()">Cancelar</button>
+                                    <button class="btn btn-sm btn-warning text-dark font-weight-bold" disabled="!actionsTabs.cancel" (click)="storeProducts(tabDetFormule)">Agregar</button>
                                 </div>
                             </div>
                             <div class="row mt-1">
@@ -369,7 +369,7 @@
                                                         <strong>{{ commonServices.formatNumber(f.costoTotal) }}</strong>
                                                     </td>
                                                     <td style="width: 2%;">
-                                                        <button type="button" (click)="deleteFields(f.fk_product, i)" [disabled]="!actionsTabs.cancel" class="btn btn-sm btn-danger tooltip-test" style="color: white; border-radius: 10px" title="Remover Registro">
+                                                        <button type="button" (click)="deleteFields(f.fk_product, i)" disabled="!actionsTabs.cancel" class="btn btn-sm btn-danger tooltip-test" style="color: white; border-radius: 10px" title="Remover Registro">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </button>
                                                     </td>

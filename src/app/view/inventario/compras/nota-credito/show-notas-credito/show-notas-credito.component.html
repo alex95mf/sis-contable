@@ -41,7 +41,7 @@
                                             <div class="text-center">
                                                 <button class="btn btn-danger btn-sm" (click)="deleteNC(dt)" placement="top"
                                                     ngbTooltip="Rechazar nota de crédito"
-                                                    [disabled]="dt.filter_doc == latestStatus && dt.filter_doc != null">
+                                                    disabled="dt.filter_doc == latestStatus && dt.filter_doc != null">
                                                     <i class="fas fa-exclamation-triangle"></i>
                                                 </button>
                                                 <button class="btn btn-primary btn-sm" (click)="editarNC(dt)" placement="left"
@@ -49,7 +49,7 @@
                                                     <i class="far fa-edit"></i>
                                                 </button>
                                                 <!-- <button class="btn btn-warning btn-sm" (click)="nexStatus(dt)" placement="left"
-                                                    ngbTooltip="Aprobar nota crédito" [disabled]="dt.filter_doc == latestStatus && dt.filter_doc != null">
+                                                    ngbTooltip="Aprobar nota crédito" disabled="dt.filter_doc == latestStatus && dt.filter_doc != null">
                                                     <i class="fas fa-check-double" [ngClass]="{ 'no-aprobated' : dt.filter_doc != latestStatus ,
                                                     'aprobated': dt.filter_doc == latestStatus }"></i>
                                                 </button> -->

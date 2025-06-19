@@ -29,14 +29,14 @@
     <div class="col">
       <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
         <ng-select class="form-control" [clearable]="false" [(ngModel)]="data.estado" [readonly]="validacionDetalles" (ngModelChange)="deshabilitarFecha($event)">
-          <ng-option *ngFor="let estado of estados" [value]="estado.value" [disabled]="estado.value == 0">{{ estado.label }}</ng-option>
+          <ng-option *ngFor="let estado of estados" [value]="estado.value" disabled="estado.value == 0">{{ estado.label }}</ng-option>
         </ng-select>
       </app-cc-input-group-prepend>
     </div>
     <div class="col">
       <app-cc-input-group-prepend label="Notificador" styleSpan="size-span-campo font-weight-bold">
         <!-- <ng-select class="form-control" [clearable]="false" [(ngModel)]="data.notificador" [readonly]="validacionDetalles">
-          <ng-option *ngFor="let notificador of notificadores" [value]="notificador.descripcion" [disabled]="notificador.valor == 0">{{notificador.descripcion}}</ng-option>
+          <ng-option *ngFor="let notificador of notificadores" [value]="notificador.descripcion" disabled="notificador.valor == 0">{{notificador.descripcion}}</ng-option>
           
         </ng-select> -->
         <input type="text" readonly class="form-control" [(ngModel)]="data.notificador">
@@ -62,7 +62,7 @@
       <div class="row">
         <div class="col">
           <app-cc-input-group-prepend label="Fecha de recepción" styleSpan="size-span-campo font-weight-bold">
-            <input type="date" class="form-control" [(ngModel)]="data.fecha_recepcion" [readonly]="validacionDetalles" [disabled]="validarFecha">
+            <input type="date" class="form-control" [(ngModel)]="data.fecha_recepcion" [readonly]="validacionDetalles" disabled="validarFecha">
           </app-cc-input-group-prepend>
         </div>
       </div>

@@ -136,7 +136,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Tipo Desembolso</span>
                     </div>
-                    <ng-select id="tipo_desembolso" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="ordenesEdit.tipo_desembolso" maxlength="5">
+                    <ng-select id="tipo_desembolso" class="form-control form-control-sm" disabled="true" [(ngModel)]="ordenesEdit.tipo_desembolso" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
                         <ng-option *ngFor="let op of tipoDesembolso" [value]="op.valor">
                             {{ op.descripcion }}</ng-option>
@@ -172,7 +172,7 @@
                             [items]="estadoList" bindValue="value" bindLabel="label">
                         </ng-select>
                     </ng-template>
-                    <!-- <ng-select id="estado" class="form-control form-control-sm" [disabled]="deshabilitar" [(ngModel)]="gestOrden.estado">
+                    <!-- <ng-select id="estado" class="form-control form-control-sm" disabled="deshabilitar" [(ngModel)]="gestOrden.estado">
                         <ng-option disabled [value]="0">Seleccione un Estado</ng-option>
                         <ng-option *ngFor="let op of estadoList" [value]="op.value">
                             <i placement="bottom" [ngbTooltip]="(gestOrden.estado == 'P' || op.value == 'P') ? 'Pendiente' : (gestOrden.estado == 'E' || op.value == 'E') ? 'Emitido' : ((gestOrden.estado == 'A' || op.value == 'A') ? 'Aprobado' : 'Negado')" [class]="(gestOrden.estado == 'P' || op.value == 'P') ? 'fas fa-circle text-muted' : (gestOrden.estado == 'E' || op.value == 'E') ? 'fas fa-circle text-warning' : ((gestOrden.estado == 'A' || op.value == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
@@ -185,7 +185,7 @@
                 <div class="input-group input-group-sm mt-2 ">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Usuario de Gestión</span></div>
-                        <input type="text" class="form-control form-control-sm" [disabled]="deshabilitar" value=" {{ gestOrden.usuarioGestion | titlecase }}">
+                        <input type="text" class="form-control form-control-sm" disabled="deshabilitar" value=" {{ gestOrden.usuarioGestion | titlecase }}">
                     </div>
                 </div>
             </div>
@@ -193,7 +193,7 @@
                 <div class="input-group input-group-sm mt-2 ">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Fecha Gestíon</span></div>
-                        <input type="text" class="form-control form-control-sm" [disabled]="deshabilitar" value=" {{ gestOrden.fecha_gestion | date:'dd/MM/yyyy'}}">
+                        <input type="text" class="form-control form-control-sm" disabled="deshabilitar" value=" {{ gestOrden.fecha_gestion | date:'dd/MM/yyyy'}}">
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Observación</span>
                     </div>
-                    <textarea id="observacion" type="text" class="form-control form-control-sm" [disabled]="deshabilitar" placeholder="Observación" [(ngModel)]="gestOrden.observacion_gestion" maxlength="300"></textarea>
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" disabled="deshabilitar" placeholder="Observación" [(ngModel)]="gestOrden.observacion_gestion" maxlength="300"></textarea>
                 </div>
             </div>
             <div class="col-4">
@@ -212,7 +212,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Fecha de recepción</span>
                     </div>
-                    <input type="date" class="form-control form-control-sm" [disabled]="deshabilitar" [(ngModel)]="gestOrden.fecha_recepcion" >
+                    <input type="date" class="form-control form-control-sm" disabled="deshabilitar" [(ngModel)]="gestOrden.fecha_recepcion" >
                 </div>
             </div>
         </div>

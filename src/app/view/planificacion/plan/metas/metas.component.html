@@ -32,7 +32,7 @@
 
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step2<1" [(ngModel)]="seleccion.departamento"
+                            <ng-select disabled="step2<1" [(ngModel)]="seleccion.departamento"
                                 id="cuerpoMetasDepartamento" class="form-control">
                                 <ng-option disabled [value]="0">Seleccione un departamento...</ng-option>
                                 <ng-option *ngFor="let departamento of deptFiltrado" [value]="departamento">{{
@@ -51,7 +51,7 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
 
                         <app-cc-input-group-prepend label="ODS" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<2" [(ngModel)]="seleccion.ods" id="cuerpoMetasOds" class="form-control"
+                            <ng-select disabled="step<2" [(ngModel)]="seleccion.ods" id="cuerpoMetasOds" class="form-control"
                             (change)="cargaMetaODS($event)" [clearable]="false">
                             <ng-option disabled [value]="0">Seleccione un ODS...</ng-option>
                             <ng-option *ngFor="let o of cuerpoMetas.ods" [value]="o">{{ o.nombre }}</ng-option>
@@ -64,7 +64,7 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
 
                         <app-cc-input-group-prepend label="Meta ODS" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<3" [(ngModel)]="seleccion.meta_ods" id="cuerpoMetasMetaODS"
+                            <ng-select disabled="step<3" [(ngModel)]="seleccion.meta_ods" id="cuerpoMetasMetaODS"
                                 class="form-control" [clearable]="false">
                                 <ng-option disabled [value]="0">Seleccione una Meta ODS...</ng-option>
                                 <ng-option *ngFor="let o of cuerpoMetas.meta_ods" [value]="o">{{ o.nombre }}</ng-option>
@@ -84,7 +84,7 @@
             
                     <div class="col-12 col-md-6 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Eje" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<3" [(ngModel)]="seleccion.eje" id="cuerpoMetasEje" class="form-control"
+                            <ng-select disabled="step<3" [(ngModel)]="seleccion.eje" id="cuerpoMetasEje" class="form-control"
                                 (change)="cargaOPG($event)" [clearable]="false">
                                 <ng-option disabled [value]="0">Seleccione un Eje...</ng-option>
                                 <ng-option *ngFor="let o of cuerpoMetas.eje" [value]="o">{{ o.nombre }}</ng-option>
@@ -98,7 +98,7 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
 
                         <app-cc-input-group-prepend label="OPG" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<4" [(ngModel)]="seleccion.opg" id="cuerpoMetasOPG" class="form-control"
+                            <ng-select disabled="step<4" [(ngModel)]="seleccion.opg" id="cuerpoMetasOPG" class="form-control"
                                 [clearable]="false" (change)="cargaPPG($event)">
                                 <ng-option disabled [value]="0">Seleccione un OPG...</ng-option>
                                 <ng-option *ngFor="let o of cuerpoMetas.opg" [value]="o">{{ o.nombre }}</ng-option>
@@ -114,7 +114,7 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
 
                         <app-cc-input-group-prepend label="Politicas" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<5" [(ngModel)]="seleccion.ppg" id="cuerpoMetasPPG" class="form-control"
+                            <ng-select disabled="step<5" [(ngModel)]="seleccion.ppg" id="cuerpoMetasPPG" class="form-control"
                             [clearable]="false" (change)="cargaMetaZonal($event)">
                             <ng-option disabled [value]="0">Seleccione una Politica...</ng-option>
                             <ng-option *ngFor="let o of cuerpoMetas.ppg" [value]="o">{{ o.nombre }}</ng-option>
@@ -126,7 +126,7 @@
             
                     <div class="col-12 col-md-6 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Meta zonal" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<6" [(ngModel)]="seleccion.meta_zonal" id="cuerpoMetasMeta"
+                            <ng-select disabled="step<6" [(ngModel)]="seleccion.meta_zonal" id="cuerpoMetasMeta"
                             class="form-control" [clearable]="false">
                             <ng-option disabled [value]="0">Seleccione una Meta...</ng-option>
                             <ng-option *ngFor="let o of cuerpoMetas.meta_zonal" [value]="o">{{ o.nombre }}</ng-option>
@@ -284,7 +284,7 @@
                                 <td>{{ elem.intervencion.nombre }}</td>
                                 <td>
                                     <div class="btn-group-vertical" role="group">
-                                        <button [disabled]="elem.ods.id==null" class="btn btn-sm btn-primary"
+                                        <button disabled="elem.ods.id==null" class="btn btn-sm btn-primary"
                                             (click)="updateGoal(elem)">
                                             <i class="fas fa-edit"></i>
                                         </button>

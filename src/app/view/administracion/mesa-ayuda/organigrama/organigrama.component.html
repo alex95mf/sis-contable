@@ -73,7 +73,7 @@
                                         placeholder="-Seleccione-" appendTo="body"
                                         [clearable]="true" [searchable]="true" 
                                         [(ngModel)]="nuevoNivel.id_rol"
-                                        [disabled]="isReadOnly"
+                                        disabled="isReadOnly"
                                         >
                                         <ng-option [value]="item.id_rol" *ngFor="let item of lista_roles">
                                             {{item.nombre_rol}}

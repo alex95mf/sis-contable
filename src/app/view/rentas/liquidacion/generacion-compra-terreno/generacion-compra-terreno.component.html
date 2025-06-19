@@ -18,11 +18,11 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
-                    <input type="date" class="form-control" [disabled]="formReadOnly" [(ngModel)]="liquidacion.fecha">
+                    <input type="date" class="form-control" disabled="formReadOnly" [(ngModel)]="liquidacion.fecha">
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Fecha</span></div>
-                    <input type="date" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="liquidacion.fecha" >
+                    <input type="date" class="form-control form-control-sm" disabled="formReadOnly" [(ngModel)]="liquidacion.fecha" >
                 </div> -->
             </div>
             <div class="col-sm-4">
@@ -42,32 +42,32 @@
         <div class="row my-3">
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Resolucion No." styleSpan="size-span-campo font-weight-bold">
-                    <input type="text" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="liquidacion.resolucion_numero">
+                    <input type="text" class="form-control form-control-sm" disabled="formReadOnly" [(ngModel)]="liquidacion.resolucion_numero">
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Resolución No.</span></div>
-                    <input type="text" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="liquidacion.resolucion_numero">
+                    <input type="text" class="form-control form-control-sm" disabled="formReadOnly" [(ngModel)]="liquidacion.resolucion_numero">
                 </div> -->
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Resolucion Fecha" styleSpan="size-span-campo font-weight-bold">
-                    <input type="date" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="liquidacion.resolucion_fecha">
+                    <input type="date" class="form-control form-control-sm" disabled="formReadOnly" [(ngModel)]="liquidacion.resolucion_fecha">
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Resolución fecha</span></div>
-                    <input type="date" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="liquidacion.resolucion_fecha">
+                    <input type="date" class="form-control form-control-sm" disabled="formReadOnly" [(ngModel)]="liquidacion.resolucion_fecha">
                 </div> -->
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Tipo Compra" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select  id="tipo_compra"class="form-control form-control-sm" [(ngModel)]="liquidacion.tipo_compra" [disabled]="formReadOnly"  (change)="verificarTipoCompra($event)">
+                    <ng-select  id="tipo_compra"class="form-control form-control-sm" [(ngModel)]="liquidacion.tipo_compra" disabled="formReadOnly"  (change)="verificarTipoCompra($event)">
                         <ng-option disabled>Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of tipoCompra" [value]="c.valor">{{ c.descripcion }}</ng-option>
                     </ng-select>
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Tipo compra</span></div>
-                    <ng-select  id="tipo_compra"class="form-control form-control-sm" [(ngModel)]="liquidacion.tipo_compra" [disabled]="formReadOnly"  (change)="verificarTipoCompra($event)">
+                    <ng-select  id="tipo_compra"class="form-control form-control-sm" [(ngModel)]="liquidacion.tipo_compra" disabled="formReadOnly"  (change)="verificarTipoCompra($event)">
                         <ng-option disabled>Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of tipoCompra" [value]="c.valor">{{ c.descripcion }}</ng-option>
                     </ng-select>
@@ -86,7 +86,7 @@
             <div class="col-sm-8">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold text-white" style="width: 190px; background-color: #404A62;">Observación de Resolución</span></div>
-                    <textarea cols="30" rows="3" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="liquidacion.resolucion_observacion" maxlength="200"></textarea>
+                    <textarea cols="30" rows="3" class="form-control form-control-sm" disabled="formReadOnly" [(ngModel)]="liquidacion.resolucion_observacion" maxlength="200"></textarea>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                 <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
                     <div class="input-group-append">
-                        <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                        <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -104,7 +104,7 @@
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Contribuyente</span></div>
                     <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
-                    <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                    <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                         <i class="fas fa-search"></i>
                     </button>
                 </div> -->
@@ -114,7 +114,7 @@
                 <app-cc-input-group-prepend label="Arriendo" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control" readonly placeholder="Documento de Arriendo" (click)="expandArriendo()" [(ngModel)]="liquidacion.doc_arriendo">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-info" (click)="expandArriendo()" [disabled]="contribuyenteActive.id_cliente == undefined || contribuyenteActive.id_cliente == null">
+                        <button class="btn btn-sm btn-info" (click)="expandArriendo()" disabled="contribuyenteActive.id_cliente == undefined || contribuyenteActive.id_cliente == null">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -124,11 +124,11 @@
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Propiedad" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control" readonly [ngModel]="propiedadActive.cod_catastral">
-                    <!-- <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                    <!-- <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                         <ng-option disabled>Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                     </ng-select>
-                    <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                    <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                         <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                     </ng-select> -->
                 </app-cc-input-group-prepend>
@@ -214,42 +214,42 @@
         <div class="row my-2">
             <div class="col-sm-3 input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Norte/Mts</span></div>
-                <input type="text" class="form-control form-control-sm text-right" [disabled]="formReadOnly" [(ngModel)]="linderos.mts_norte" (input)="sumaMtsLinderos()" (keypress)="onlyNumberDot($event)">
+                <input type="text" class="form-control form-control-sm text-right" disabled="formReadOnly" [(ngModel)]="linderos.mts_norte" (input)="sumaMtsLinderos()" (keypress)="onlyNumberDot($event)">
             </div>
             <div class="col-sm-3 input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Sur/Mts</span></div>
-                <input type="text" class="form-control form-control-sm text-right" [disabled]="formReadOnly" [(ngModel)]="linderos.mts_sur" (input)="sumaMtsLinderos()" (keypress)="onlyNumberDot($event)">
+                <input type="text" class="form-control form-control-sm text-right" disabled="formReadOnly" [(ngModel)]="linderos.mts_sur" (input)="sumaMtsLinderos()" (keypress)="onlyNumberDot($event)">
             </div>
             <div class="col-sm-3 input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Este/Mts</span></div>
-                <input type="text" class="form-control form-control-sm text-right" [disabled]="formReadOnly" [(ngModel)]="linderos.mts_este" (input)="sumaMtsLinderos()" (keypress)="onlyNumberDot($event)">
+                <input type="text" class="form-control form-control-sm text-right" disabled="formReadOnly" [(ngModel)]="linderos.mts_este" (input)="sumaMtsLinderos()" (keypress)="onlyNumberDot($event)">
             </div>
             <div class="col-sm-3 input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Oeste/Mts</span></div>
-                <input type="text" class="form-control form-control-sm text-right" [disabled]="formReadOnly" [(ngModel)]="linderos.mts_oeste" (input)="sumaMtsLinderos()" (keypress)="onlyNumberDot($event)">
+                <input type="text" class="form-control form-control-sm text-right" disabled="formReadOnly" [(ngModel)]="linderos.mts_oeste" (input)="sumaMtsLinderos()" (keypress)="onlyNumberDot($event)">
             </div>
         </div>
         <div class="row my-2">
             <div class="col-sm-4">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Total mt2</span></div>
-                    <input type="text" class="form-control form-control-sm text-right" [disabled]="true" [(ngModel)]="cantidadTotalMts2"  >
+                    <input type="text" class="form-control form-control-sm text-right" disabled="true" [(ngModel)]="cantidadTotalMts2"  >
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Valor por mt2</span></div>
-                    <input type="text" class="form-control form-control-sm text-right" [disabled]="formReadOnly" [(ngModel)]="linderos.totalMts2" (input)="sumaMtsLinderos()" value="$ {{ propiedadActive.valor_metro_cuadrado ? propiedadActive.valor_metro_cuadrado : 0 | number:'1.2-2'}}" (keypress)="onlyNumberDot($event)">
+                    <input type="text" class="form-control form-control-sm text-right" disabled="formReadOnly" [(ngModel)]="linderos.totalMts2" (input)="sumaMtsLinderos()" value="$ {{ propiedadActive.valor_metro_cuadrado ? propiedadActive.valor_metro_cuadrado : 0 | number:'1.2-2'}}" (keypress)="onlyNumberDot($event)">
                 </div>
                 <!-- <div class="p-inputgroup  md:h-2rem">
                     <span class="p-inputgroup-addon">Valor por mt2</span>
-                    <p-inputNumber  [(ngModel)]="linderos.totalMts2" mode="currency" currency="USD" locale="en-US" [disabled]="formReadOnly" (input)="sumaMtsLinderos()"  value="$ {{ propiedadActive.valor_metro_cuadrado ? propiedadActive.valor_metro_cuadrado : 0 | number:'1.2-2'}}" (keypress)="onlyNumberDot($event)"></p-inputNumber>
+                    <p-inputNumber  [(ngModel)]="linderos.totalMts2" mode="currency" currency="USD" locale="en-US" disabled="formReadOnly" (input)="sumaMtsLinderos()"  value="$ {{ propiedadActive.valor_metro_cuadrado ? propiedadActive.valor_metro_cuadrado : 0 | number:'1.2-2'}}" (keypress)="onlyNumberDot($event)"></p-inputNumber>
                 </div> -->
             </div>
             <div class="col-sm-4">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Total</span></div>
-                    <input type="text" class="form-control form-control-sm text-right" [disabled]="true"  [ngModel]="totalValor | number:'1.2-2'"  >
+                    <input type="text" class="form-control form-control-sm text-right" disabled="true"  [ngModel]="totalValor | number:'1.2-2'"  >
                 </div>
             </div>
         </div>
@@ -328,7 +328,7 @@
                 <h5 class="mb-0 text-dark">Exoneraciones</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-success btn-sm ml-1 float-right" placement="left" ngbTooltip="Agregar Exoneración" [disabled]="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
+                <button class="btn btn-success btn-sm ml-1 float-right" placement="left" ngbTooltip="Agregar Exoneración" disabled="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -365,7 +365,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly || exoneracionDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly || exoneracionDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>

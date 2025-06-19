@@ -79,10 +79,10 @@
                     <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
                         <input placeholder="Departamento..." type="text" #departamento="ngModel"
                         name="departamento" [(ngModel)]="filter.dep_nombre" 
-                        class="form-control form-control-sm" [disabled]="dusuario" 
+                        class="form-control form-control-sm" disabled="dusuario" 
                         id="departamento">
                     <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" [disabled]="dusuario"
+                        <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" disabled="dusuario"
                             style="box-shadow: unset;outline: unset;">
                             Buscar
                         </button>
@@ -170,10 +170,10 @@
                                     <button *ngIf="dt.estado !== 'PA'" class="btn btn-danger btn-sm mx-1" (click)="anularTicket(dt.id_ticket)" placement="left" ngbTooltip="Anular Ticket">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
-                                    <button *ngIf="dt.estado !== 'C' && dt.estado !== 'PA' && dt.estado !== 'N'" class="btn btn-warning btn-sm mx-1" (click)="showReasignarUsusario(false, dt)" placement="left" ngbTooltip="Reasignar Ticket" [disabled] = "deshabilitarBotonReasignacion(dt)">
+                                    <button *ngIf="dt.estado !== 'C' && dt.estado !== 'PA' && dt.estado !== 'N'" class="btn btn-warning btn-sm mx-1" (click)="showReasignarUsusario(false, dt)" placement="left" ngbTooltip="Reasignar Ticket" disabled = "deshabilitarBotonReasignacion(dt)">
                                         <i class="far fa-user"></i>
                                     </button>
-                                    <!-- <button *ngIf="dt.estado === 'PA'" class="btn btn-success btn-sm mx-1" (click)="openAprobarModal(dt)" placement="left" ngbTooltip="Aprobar Ticket" [disabled] = "deshabilitarBotonAprobacion(dt)">
+                                    <!-- <button *ngIf="dt.estado === 'PA'" class="btn btn-success btn-sm mx-1" (click)="openAprobarModal(dt)" placement="left" ngbTooltip="Aprobar Ticket" disabled = "deshabilitarBotonAprobacion(dt)">
                                         <i class="far fa-check"></i>
                                     </button> -->
                                 </div>

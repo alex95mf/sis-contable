@@ -16,7 +16,7 @@
                     <div class="input-group-prepend">
                         <span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Categor&iacute;a</span>
                     </div>
-                    <ng-select id="categoria" class="form-control form-control-sm " [(ngModel)]="ticketEdit.categoria" [disabled]="deshabilitar" maxlength="5">
+                    <ng-select id="categoria" class="form-control form-control-sm " [(ngModel)]="ticketEdit.categoria" disabled="deshabilitar" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione una Categor&iacute;a</ng-option>
                         <ng-option *ngFor="let op of categorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
                     </ng-select>
@@ -27,7 +27,7 @@
                     <div class="input-group-prepend">
                         <span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Sub Categor&iacute;a</span>
                     </div>
-                    <ng-select id="sub_categoria" class="form-control form-control-sm" [(ngModel)]="ticketEdit.subcategoria" [disabled]="deshabilitar" maxlength="5">
+                    <ng-select id="sub_categoria" class="form-control form-control-sm" [(ngModel)]="ticketEdit.subcategoria" disabled="deshabilitar" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione una Sub Categor&iacute;a</ng-option>
                         <ng-option *ngFor="let op of subCategorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
                     </ng-select>
@@ -45,7 +45,7 @@
 
                 <app-cc-input-group-prepend label="Prioridad:" styleSpan="size-span-campo font-weight-bold">
 
-                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketEdit.prioridad" [disabled]="deshabilitar" maxlength="5">
+                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketEdit.prioridad" disabled="deshabilitar" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
                         <ng-option *ngFor="let op of prioridadList" [value]="op.value">
                             <i placement="bottom" [ngbTooltip]="(op.value == 'A') ? 'Alta' : (op.value == 'M') ? 'Media' : ((op.value == 'B') ? 'Baja' : 'No tiene')" [class]="(op.value == 'A') ? 'fas fa-circle text-danger' : (op.value == 'M') ? 'fas fa-circle text-warning' : ((op.value == 'B') ? 'fas fa-circle text-success' : 'fas fa-circle text-muted')">
@@ -64,7 +64,7 @@
                     <input type="text" class="form-control form-control-sm" readonly value=" {{ ticketEdit.usuario.departamento ? ticketEdit.usuario.departamento.dep_nombre : 'Sin departamento' }}">
                 </app-cc-input-group-prepend>
                 <app-cc-input-group-prepend label="Observación:" styleSpan="size-span-campo font-weight-bold">
-                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketEdit.observacion" [disabled]="deshabilitar" maxlength="300"></textarea>
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketEdit.observacion" disabled="deshabilitar" maxlength="300"></textarea>
                 </app-cc-input-group-prepend>
 
             </div>
@@ -129,7 +129,7 @@
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf"
                                 (change)="cargaArchivo2($event.target.files)"
-                                [disabled]="disabledCampo">
+                                disabled="disabledCampo">
                             <label class="custom-file-label" for="inputGroupFile02">{{ fileList2 !== undefined ?
                                 fileList2[0].name : "Seleccione un archivo" }}</label>
                             
@@ -179,7 +179,7 @@
                                 <div *ngIf="dt.foto!=null" class="multiple-image-container">
                                     <div  class="multiple-image-preview">
                                         <img [src]="dt.foto" (click)="expandirVistaFotos(dt.foto)" class="img-thumbnail">
-                                        <!-- <button  class="btn btn-sm btn-danger" [disabled]="true" placement="top" ngbTooltip="Eliminar Foto" (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button> -->
+                                        <!-- <button  class="btn btn-sm btn-danger" disabled="true" placement="top" ngbTooltip="Eliminar Foto" (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button> -->
                                     </div>
                                 </div>
                             </td>

@@ -9,7 +9,7 @@
                 <td class="text-right" *ngIf="!flag">
                     <div class="btn-group">
                         <div>
-                            <button class="btn btn-success btn-xs button_margin" (click)="confirmSave()" [disabled]="precioSelect == 0 ||
+                            <button class="btn btn-success btn-xs button_margin" (click)="confirmSave()" disabled="precioSelect == 0 ||
                                                                                                 precioSelect == undefined ||
                                                                                                 valuePricePorcentaje <= 0 ||
                                                                                                 valuePricePorcentaje == undefined ||
@@ -22,7 +22,7 @@
                                 <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                             </button>
 
-                            <button class="btn btn-primary btn-xs button_margin" (click)="btnCalculator()" [disabled]="precioSelect == 0 ||
+                            <button class="btn btn-primary btn-xs button_margin" (click)="btnCalculator()" disabled="precioSelect == 0 ||
                                                                 precioSelect == undefined ||
                                                                 valuePricePorcentaje <= 0 ||
                                                                 valuePricePorcentaje == undefined ||
@@ -36,7 +36,7 @@
                             </button>
                             <button class="btn btn-warning btn-xs button_margin" (click)="revertPrices()"
                                 matTooltip="Revertir cambios"
-                                [disabled]="precioSelect == 0 || precioSelect == undefined || change">
+                                disabled="precioSelect == 0 || precioSelect == undefined || change">
                                 <i class="fa fa-history" aria-hidden="true"></i> Revertir
                             </button>
 
@@ -62,7 +62,7 @@
                             </div>
                             <select class="form-control form-control-sm custom-select text-uppercase"
                                 [(ngModel)]="precioSelect" (ngModelChange)="searchTipePrice()"
-                                [disabled]="actions.disabledAllChange" id="idtipePrice">
+                                disabled="actions.disabledAllChange" id="idtipePrice">
                                 <option [value]="0">Todos</option>
                                 <option *ngFor="let d of dataTipoPrecios" [value]="d.name_ref">
                                     <span>{{d.name}}</span>
@@ -81,7 +81,7 @@
                                     precio</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio3" value="{{valueR5}}"
-                                (click)="changeFluctuacion()" [disabled]="actions.disabledAll">
+                                (click)="changeFluctuacion()" disabled="actions.disabledAll">
                         </div>
                     </div>
                     <div class="col-4 pl-5">
@@ -91,7 +91,7 @@
                                     Porcentaje</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio" value="{{valueR1}}"
-                                (click)="changeRadio()" [disabled]="actions.disabledAll">
+                                (click)="changeRadio()" disabled="actions.disabledAll">
                         </div>
                     </div>
                     <div class="col-4 pl-5">
@@ -102,7 +102,7 @@
                                     costo</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio2" value="{{valueR3}}"
-                                (click)="changeRadioCosto()" [disabled]="actions.disabledAll">
+                                (click)="changeRadioCosto()" disabled="actions.disabledAll">
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                             <ng-select class="form-control form-control-sm custom-select text-uppercase"
                                 [searchable]="true" [clearable]="false" [(ngModel)]="grupoSelect"
                                 (ngModelChange)="rerender($event)"
-                                [disabled]="!actions.dgrupo || actions.disabledAllChange " id="idGrupo">
+                                disabled="!actions.dgrupo || actions.disabledAllChange " id="idGrupo">
                                 <ng-option [value]="0">Todos</ng-option>
                                 <ng-option *ngFor="let d of dataGrupo" [value]="d.id_grupo">
                                     <span>{{d.nombre}}</span>
@@ -131,7 +131,7 @@
                         <div *ngIf = "fields != undefined" class="mt-1">
                             <ejs-dropdowntree #vaSelect id='default' [changeOnBlur]='false'  cssClass = "style-dropDow"
                             (change)='onChange($event)' [fields]='fields' 
-                            popupHeight='220px' popupWidth='400px' placeholder='{{varAux}}'><!-- [disabled]="!actions.new" -->
+                            popupHeight='220px' popupWidth='400px' placeholder='{{varAux}}'><!-- disabled="!actions.new" -->
                             </ejs-dropdowntree>
                         </div>
                         <div class="input-group input-group-sm mt-1" *ngIf = "fields == undefined">
@@ -152,7 +152,7 @@
                                     precio</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio3" value="{{valueR6}}"
-                                (click)="changeFluctuacion()" [disabled]="actions.disabledAll">
+                                (click)="changeFluctuacion()" disabled="actions.disabledAll">
                         </div>
                     </div>
                     <div class="col-4 pl-5">
@@ -162,7 +162,7 @@
                                     valor</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio" value="{{valueR2}}"
-                                (click)="changeRadio()" [disabled]="actions.disabledAll">
+                                (click)="changeRadio()" disabled="actions.disabledAll">
                         </div>
                     </div>
                     <div class="col-4 pl-5">
@@ -173,7 +173,7 @@
                                     Pvp</span>
                             </div>
                             <input type="radio" class="form-check-input" name="optradio2" value="{{valueR4}}"
-                                (click)="changeRadioCosto()" [disabled]="actions.disabledAll">
+                                (click)="changeRadioCosto()" disabled="actions.disabledAll">
                         </div>
                     </div>
                 </div>
@@ -207,7 +207,7 @@
                                             [(ngModel)]="valuePricePorcentaje" placeholder="0.00" min="0"
                                             id="idInptPrice" style="padding-right: 25px !important;"
                                             (keypress)="commonServices.FormatDecimalVal($event)"
-                                            [disabled]="actions.disabledAll" #prc="ngModel" name="prc"
+                                            disabled="actions.disabledAll" #prc="ngModel" name="prc"
                                             [ngClass]="{'is-invalid':((precioSelect == 0 || valuePricePorcentaje <= 0 || precioSelect == undefined) && (prc.dirty || prc.touched)),'is-valid':(precioSelect != 0 && valuePricePorcentaje > 0)}"
                                             required>
                                         <div class="invalid-feedback"
@@ -242,7 +242,7 @@
                                                 <th style="text-align: center;padding-left: 0px !important;width: 30px !important;"
                                                     [ngClass]="{'filter': precioSelect != 0}">
                                                     <input type="checkbox" (click)="activeSectionAll()"
-                                                        [(ngModel)]="checkAll" [disabled]="
+                                                        [(ngModel)]="checkAll" disabled="
                                                                 actions.disabledAll ||
                                                                 precioSelect == 0 ||
                                                                 valueRadio == undefined ||
@@ -357,7 +357,7 @@
                                             <tr *ngFor="let dt of infoDt; let i = index">
                                                 <td style="width: 7px;">
                                                     <input type="checkbox" (click)="activeSection(i)"
-                                                        [(ngModel)]="dt.activeCheckbox" [disabled]="
+                                                        [(ngModel)]="dt.activeCheckbox" disabled="
                                                                 actions.disabledAll ||
                                                                 precioSelect == 0 ||
                                                                 valueRadio == undefined ||
@@ -406,20 +406,20 @@
                                                     *ngIf="precioSelect == 'Consumidor final' && valueRadio == 'porcentaje' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll "
+                                                        disabled="dt.active || actions.disabledAll "
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Consumidor final' && valueRadio == 'valor' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll "
+                                                        disabled="dt.active || actions.disabledAll "
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Consumidor final' || precioSelect == 0 ">
                                                     <input type="number" [(ngModel)]="dt.PVP" style=" width: 60%;"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                     <div class="invalid-price"
                                                         *ngIf="dt.PVP < 0 && parsearNumber(dt.PVP, dt.costo) && change">
                                                         Verifique valor
@@ -438,20 +438,20 @@
                                                     *ngIf="precioSelect == 'Fijo' && valueRadio == 'porcentaje' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Fijo' && valueRadio == 'valor' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Fijo' || precioSelect == 0 ">
                                                     <input type="number" [(ngModel)]="dt.precio1" style=" width: 60%;"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                     <div class="invalid-price"
                                                         *ngIf="dt.precio1 < 0 && parsearNumber(dt.precio1, dt.costo) && change">
                                                         Verifique valor
@@ -470,20 +470,20 @@
                                                     *ngIf="precioSelect == 'Concurrente' && valueRadio == 'porcentaje' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Concurrente' && valueRadio == 'valor' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Concurrente' || precioSelect == 0">
                                                     <input type="number" [(ngModel)]="dt.precio2" style=" width: 50%;"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                     <div class="invalid-price"
                                                         *ngIf="dt.precio2 < 0 && parsearNumber(dt.precio2, dt.costo) && change">
                                                         Verifique valor
@@ -503,20 +503,20 @@
                                                     *ngIf="precioSelect == 'Minorista' && valueRadio == 'porcentaje' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Minorista' && valueRadio == 'valor' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Minorista' || precioSelect == 0 ">
                                                     <input type="number" [(ngModel)]="dt.precio3" style=" width: 50%;"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                     <div class="invalid-price"
                                                         *ngIf="dt.precio3 < 0 && parsearNumber(dt.precio3, dt.costo) && change">
                                                         Verifique
@@ -537,20 +537,20 @@
                                                     *ngIf="precioSelect == 'Medio' && valueRadio == 'porcentaje' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Medio' && valueRadio == 'valor' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Medio' || precioSelect == 0 ">
                                                     <input type="number" [(ngModel)]="dt.precio4" style=" width: 50%;"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                     <div class="invalid-price"
                                                         *ngIf="dt.precio4 < 0 && parsearNumber(dt.precio4, dt.costo) && change">
                                                         Verifique
@@ -571,20 +571,20 @@
                                                     *ngIf="precioSelect == 'Mayorista' && valueRadio == 'porcentaje' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Mayorista' && valueRadio == 'valor' && valueRadio != undefined ">
                                                     <input type="number" [(ngModel)]="dt.establecido"
                                                         style=" width: 50%;"
-                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        disabled="dt.active || actions.disabledAll"
                                                         (keypress)="commonServices.FormatDecimalVal($event)">
                                                 </td>
                                                 <td style="width: 7px;" class="text-right"
                                                     *ngIf="precioSelect == 'Mayorista' || precioSelect == 0">
                                                     <input type="number" [(ngModel)]="dt.precio5" style=" width: 50%;"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                     <div class="invalid-price"
                                                         *ngIf="dt.precio5 < 0 && parsearNumber(dt.precio5, dt.costo) && change">
                                                         Verifique

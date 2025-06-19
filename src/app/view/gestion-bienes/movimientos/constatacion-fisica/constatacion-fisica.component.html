@@ -13,7 +13,7 @@
             
                         <div class="col-12 col-md-3 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Tipo de bien" styleSpan="size-span-campo font-weight-bold">
-                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="periodo" [disabled]="constDisabled">
+                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="periodo" disabled="constDisabled">
                                   <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
                                   <ng-option *ngFor="let item of listaCatalogo"  [value]="item">{{item}}</ng-option>
                                 </ng-select>
@@ -23,7 +23,7 @@
                             
                             <!-- <div class="input-group input-group-sm">                    
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Tipo de bien</span></div>
-                                <input type="text"  class="form-control" [(ngModel)]="periodo" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
+                                <input type="text"  class="form-control" [(ngModel)]="periodo" disabled="yearDisabled" (keypress)="onlyNumber($event)">
                             </div> -->
                         </div>
                         <div class="col-12 col-md-3 pt-0 pb-0">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-12 col-md-3 pt-0 pb-0">
                             <div class="input-group input-group-sm">                    
-                                <button [disabled]="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Constatación física</button>
+                                <button disabled="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Constatación física</button>
                             </div>
                         </div> 
                         <div class="col-12 col-md-3 pt-0 pb-0">
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
-                                <input type="date" class="form-control form-control-sm" [(ngModel)]="fecha" [disabled]="constDisabled">
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="fecha" disabled="constDisabled">
                             </app-cc-input-group-prepend>
 
   
@@ -91,7 +91,7 @@
                         <div class="col-12 col-md-12 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
                                 <textarea cols="30" rows="3" class="form-control form-control-sm" 
-                                [(ngModel)]="observacion" maxlength="200" [disabled]="constDisabled"></textarea>
+                                [(ngModel)]="observacion" maxlength="200" disabled="constDisabled"></textarea>
                             </app-cc-input-group-prepend>
 
                            
@@ -157,7 +157,7 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control form-control-sm"  maxlength="200" [(ngModel)]="d.observacion" [disabled]="constDisabled"  > 
+                                        <input type="text" class="form-control form-control-sm"  maxlength="200" [(ngModel)]="d.observacion" disabled="constDisabled"  > 
                                     </div>
                                 </td>
                                 
@@ -187,7 +187,7 @@
                                 </td> -->
                                 
                                 <!-- <td class="text-center">
-                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" disabled="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
                                 </td> -->
                             </tr>
                         </tbody>

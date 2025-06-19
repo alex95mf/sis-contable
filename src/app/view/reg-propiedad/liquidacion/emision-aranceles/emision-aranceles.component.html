@@ -50,7 +50,7 @@
                 <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
                     <div class="input-group-append">
-                        <button class="btn btn-info btn-sm" [disabled]="formReadOnly || contribuyenteDisabled" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                        <button class="btn btn-info btn-sm" disabled="formReadOnly || contribuyenteDisabled" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -58,7 +58,7 @@
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text">Contribuyente</span></div>
                     <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
-                    <button class="btn btn-info btn-sm" [disabled]="formReadOnly || contribuyenteDisabled" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                    <button class="btn btn-info btn-sm" disabled="formReadOnly || contribuyenteDisabled" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                         <i class="fas fa-search"></i>
                     </button>
                 </div> -->
@@ -67,7 +67,7 @@
                 <app-cc-input-group-prepend label="Arancel" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control" [placeholder]="!arancelDisabled ? 'Seleccione un Arancel' : ''" readonly [(ngModel)]="arancelActive.descripcion">
                     <div class="input-group-append">
-                        <button class="btn btn-info btn-sm" [disabled]="arancelDisabled || formReadOnly" (click)="expandArancel()" placement="bottom" ngbTooltip="Buscar Arancel">
+                        <button class="btn btn-info btn-sm" disabled="arancelDisabled || formReadOnly" (click)="expandArancel()" placement="bottom" ngbTooltip="Buscar Arancel">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -75,7 +75,7 @@
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text">Arancel</span></div>
                     <input type="text" class="form-control" [placeholder]="!arancelDisabled ? 'Seleccione un Arancel' : ''" readonly [(ngModel)]="arancelActive.descripcion">
-                    <button class="btn btn-info btn-sm" [disabled]="arancelDisabled || formReadOnly" (click)="expandArancel()" placement="bottom" ngbTooltip="Buscar Arancel">
+                    <button class="btn btn-info btn-sm" disabled="arancelDisabled || formReadOnly" (click)="expandArancel()" placement="bottom" ngbTooltip="Buscar Arancel">
                         <i class="fas fa-search"></i>
                     </button>
                 </div> -->
@@ -86,14 +86,14 @@
             <div class="col-sm-3">
                 <app-cc-input-group-prepend label="Cod. Catastral" styleSpan="size-span-campo font-weight-bold">
                     <ng-select class="form-control" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" 
-                        [(ngModel)]="liquidacion.fk_lote" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)" [clearable]="false">
+                        [(ngModel)]="liquidacion.fk_lote" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)" [clearable]="false">
                         <ng-option disabled>Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of propiedades" [value]="c">{{ c.cod_catastral }}</ng-option>
                     </ng-select>
                 </app-cc-input-group-prepend>
                 <!-- <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text">Cod. Catastral</span></div>
-                    <ng-select id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="liquidacion.fk_lote" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                    <ng-select id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="liquidacion.fk_lote" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                         <ng-option disabled>Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of propiedades" [value]="c">{{ c.cod_catastral }}</ng-option>
                     </ng-select>
@@ -111,11 +111,11 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Cuantía" styleSpan="size-span-campo font-weight-bold">
-                    <input currencyMask class="form-control" [(ngModel)]="liquidacion.cuantia" [disabled]="cuantiaDisabled || formReadOnly" onclick="this.select()">
+                    <input currencyMask class="form-control" [(ngModel)]="liquidacion.cuantia" disabled="cuantiaDisabled || formReadOnly" onclick="this.select()">
                 </app-cc-input-group-prepend>
                 <!-- <div class="p-inputgroup  md:h-2rem">
                     <span class="p-inputgroup-addon">Cuant&iacute;a</span>
-                    <p-inputNumber  [(ngModel)]="liquidacion.cuantia" mode="currency" currency="USD" locale="en-US" [disabled]="cuantiaDisabled || formReadOnly"></p-inputNumber>
+                    <p-inputNumber  [(ngModel)]="liquidacion.cuantia" mode="currency" currency="USD" locale="en-US" disabled="cuantiaDisabled || formReadOnly"></p-inputNumber>
                 </div> -->
             </div>
             
@@ -124,8 +124,8 @@
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text">Cuantía</span></div>
                     <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                    <input  type="number" class="form-control form-control-sm" [(ngModel)]="liquidacion.cuantia" [disabled]="cuantiaDisabled || formReadOnly" (keypress)="onlyNumberDot($event)" (keyup)="changeAvalCuantia()">
-                    <p-inputNumber [(ngModel)]="liquidacion.cuantia" mode="currency" currency="USD" locale="en-US" class="form-control-sm" [disabled]="cuantiaDisabled || formReadOnly"></p-inputNumber>
+                    <input  type="number" class="form-control form-control-sm" [(ngModel)]="liquidacion.cuantia" disabled="cuantiaDisabled || formReadOnly" (keypress)="onlyNumberDot($event)" (keyup)="changeAvalCuantia()">
+                    <p-inputNumber [(ngModel)]="liquidacion.cuantia" mode="currency" currency="USD" locale="en-US" class="form-control-sm" disabled="cuantiaDisabled || formReadOnly"></p-inputNumber>
                     <p-inputNumber [(ngModel)]="liquidacion.cuantia" inputId="currency-us" mode="currency" currency="USD" locale="en-US">
                     </p-inputNumber>
                 </div>
@@ -136,7 +136,7 @@
             <div class="col-sm-2">
                 <div class="input-group input-group-sm">
                     <!--<div class="input-group-prepend"><span class="input-group-text">Calcular</span></div>-->
-                    <button class="btn btn-info btn-sm mt-1 w-100" placement="bottom" ngbTooltip="Calcular Subtotal" [disabled]="calcularDisabled" (click)="calcSubtotal()">
+                    <button class="btn btn-info btn-sm mt-1 w-100" placement="bottom" ngbTooltip="Calcular Subtotal" disabled="calcularDisabled" (click)="calcSubtotal()">
                         Calcular
                         <i class="fas fa-calculator"></i>
                     </button>
@@ -176,7 +176,7 @@
         <div class="row">
             <div class="col">
                 <span class="h5 mb-0 text-dark">Aranceles</span>
-                <button class="btn btn-success btn-sm ml-1 float-right" matTooltip="Agregar aranceles" [disabled]="ArancelesValid || formReadOnly" (click)="agregarDetalles()">
+                <button class="btn btn-success btn-sm ml-1 float-right" matTooltip="Agregar aranceles" disabled="ArancelesValid || formReadOnly" (click)="agregarDetalles()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -225,11 +225,11 @@
 
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <button class="btn btn-sm btn-primary" matTooltip="Exoneraciones" [disabled]="formReadOnly" (click)="expandExoneracion(d, false)"><i class="fas fa-file-signature"></i></button>
+                                        <button class="btn btn-sm btn-primary" matTooltip="Exoneraciones" disabled="formReadOnly" (click)="expandExoneracion(d, false)"><i class="fas fa-file-signature"></i></button>
                                         <ng-container *ngIf="d.exoneraciones.length > 0">
                                             <button  class="btn btn-sm btn-warning"  matTooltip="Visualizar las exoneraciones"  (click)="expandExoneracion(d, true)"><i class="fas fa-eye"></i></button>
                                         </ng-container>
-                                        <button class="btn btn-sm btn-danger ml-1"  matTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                        <button class="btn btn-sm btn-danger ml-1"  matTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -579,7 +579,7 @@
                 <div class="col-4">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text">Cuantía</span></div>
-                        <input type="text" class="form-control form-control-sm" [disabled]="cuantiaDisabled || formReadOnly" [(ngModel)]="liquidacion.cuantia" (keypress)="onlyNumber($event)" (keyup)="changeAvalCuantia()">
+                        <input type="text" class="form-control form-control-sm" disabled="cuantiaDisabled || formReadOnly" [(ngModel)]="liquidacion.cuantia" (keypress)="onlyNumber($event)" (keyup)="changeAvalCuantia()">
                         
                     </div>
                 </div>

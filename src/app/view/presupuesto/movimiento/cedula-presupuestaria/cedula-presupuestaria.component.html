@@ -30,7 +30,7 @@
                                     disabled
                                     [(ngModel)]="filter.mes_actual">
 
-                                    <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                    <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                         {{item.name}}
                                     </ng-option>
                                 </ng-select>
@@ -38,13 +38,13 @@
 
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
-                            <input type="checkbox" [(ngModel)]="checkPrograma" [disabled]="resumen" (change)="programaChecked()"> Por Programa
+                            <input type="checkbox" [(ngModel)]="checkPrograma" disabled="resumen" (change)="programaChecked()"> Por Programa
                         </div>
                     </div>
                     <div class="row m-0">
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Procesos" styleSpan="size-span-campo font-weight-bold">
-                                <ng-select id="proceso" [disabled]="procesoDisabled" class="form-control form-control-sm" (change)="asignarProceso($event)" [(ngModel)]="procesoSelected" [clearable]="false">
+                                <ng-select id="proceso" disabled="procesoDisabled" class="form-control form-control-sm" (change)="asignarProceso($event)" [(ngModel)]="procesoSelected" [clearable]="false">
                                     <ng-option disabled [value]="0" disabled>Seleccione un Proceso</ng-option>
                                     <ng-option *ngFor="let op of procesos" [value]="op.valor">{{op.descripcion }}</ng-option>
                                 </ng-select>

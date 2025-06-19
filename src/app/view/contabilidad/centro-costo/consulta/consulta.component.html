@@ -29,7 +29,7 @@
 
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Cuenta Mayor"  styleSpan="size-span-campo">                
-                <select class="form-control form-control-sm custom-select" [(ngModel)]="fk_account" [disabled]="arrayAccountHigher.length == 0 " (ngModelChange)="rerender()">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="fk_account" disabled="arrayAccountHigher.length == 0 " (ngModelChange)="rerender()">
                     <option [value]="0">Todos</option>
                     <option *ngFor="let d of arrayAccountHigher" [value]="d.codigo"> {{d.nombre}} </option>
                 </select>                
@@ -38,7 +38,7 @@
 
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Agrupar"  styleSpan="size-span-campo">                
-                <select class="form-control form-control-sm custom-select" [(ngModel)]="fk_group" [disabled]="fk_centro_costo == 0 " (ngModelChange)="rerender()">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="fk_group" disabled="fk_centro_costo == 0 " (ngModelChange)="rerender()">
                     <option [value]="0">Todos</option>
                     <option [value]="1">Agrupar por cuentas</option>
                 </select>                

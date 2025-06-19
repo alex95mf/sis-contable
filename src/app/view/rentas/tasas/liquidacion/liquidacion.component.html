@@ -20,8 +20,8 @@
             <div class="col-6">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold" >Contribuyente</span></div>
-                    <input type="text" class="form-control form-control-sm bg-white" [disabled]="formReadOnly" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
-                    <button class="btn btn-primary btn-sm" [disabled]="formReadOnly" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Ordenes de Inspección">
+                    <input type="text" class="form-control form-control-sm bg-white" disabled="formReadOnly" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
+                    <button class="btn btn-primary btn-sm" disabled="formReadOnly" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Ordenes de Inspección">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -29,7 +29,7 @@
             <div class="col-3">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span style="width: 60px;" class="input-group-text size-span-campo">Fecha</span></div>
-                    <input  [disabled]="formReadOnly" type="date" class="form-control form-control-sm" [(ngModel)]="liquidacion.fecha">
+                    <input  disabled="formReadOnly" type="date" class="form-control form-control-sm" [(ngModel)]="liquidacion.fecha">
                 </div>
                 <!-- <app-cc-input-group-prepend label="Fecha" styleSpan="font-weight-bold size-span-otro">
                     <input type="date" class="form-control form-control-sm" [(ngModel)]="liquidacion.fecha">
@@ -38,8 +38,8 @@
             <!-- <div class="col-6">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Orden de Inspección</span></div>
-                    <input type="text" class="form-control form-control-sm" [class]="!ordenDisabled ? 'bg-white' : ''" readonly [disabled]="ordenDisabled" placeholder="Seleccione una Orden de Inspección" (click)="expandInspecciones()" [value]="ordenActive.numero_orden">
-                    <button class="btn btn-primary btn-sm" [disabled]="ordenDisabled" (click)="expandInspecciones()" placement="bottom" ngbTooltip="Buscar Ordenes de Inspección">
+                    <input type="text" class="form-control form-control-sm" [class]="!ordenDisabled ? 'bg-white' : ''" readonly disabled="ordenDisabled" placeholder="Seleccione una Orden de Inspección" (click)="expandInspecciones()" [value]="ordenActive.numero_orden">
+                    <button class="btn btn-primary btn-sm" disabled="ordenDisabled" (click)="expandInspecciones()" placement="bottom" ngbTooltip="Buscar Ordenes de Inspección">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -51,7 +51,7 @@
             <!-- <div class="col-4">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Concepto</span></div>
-                    <ng-select [disabled]=" formReadOnly" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" >
+                    <ng-select disabled=" formReadOnly" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" >
                         <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
                         <ng-option *ngFor="let c of conceptosList" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
                     </ng-select>
@@ -103,7 +103,7 @@
                 <h5 class="mb-0 text-dark">Conceptos</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto" [disabled]="conceptosDisabled || formReadOnly" (click)="expandTasas()">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto" disabled="conceptosDisabled || formReadOnly" (click)="expandTasas()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -144,20 +144,20 @@
                                     <!-- si es de tipo FA se ingresa un factor que viene a ser la cantidad o medicion -->
                                     <td *ngIf="d.tipo_calculo=='FA'" class="text-right">
                                         <div class="input-group input-group-sm">
-                                            <input [disabled]="conceptosDisabled || formReadOnly" type="text" maxlength="8" class="form-control form-control-sm text-right" [(ngModel)]="d.cantidad" (keypress)="onlyNumberDot($event)" (keyup)="multiplicar(d)">
+                                            <input disabled="conceptosDisabled || formReadOnly" type="text" maxlength="8" class="form-control form-control-sm text-right" [(ngModel)]="d.cantidad" (keypress)="onlyNumberDot($event)" (keyup)="multiplicar(d)">
                                         </div>
                                     </td>
                                     <td *ngIf="d.tipo_calculo=='FA'" class="text-right">
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                            <input [disabled]="conceptosDisabled || formReadOnly" disabled  class="form-control form-control-sm text-right" [(ngModel)]="d.valor" readonly>
-                                            <!-- <input [disabled]="conceptosDisabled || formReadOnly" disabled type="number" class="form-control form-control-sm text-right" [(ngModel)]="d.valor" readonly> -->
+                                            <input disabled="conceptosDisabled || formReadOnly" disabled  class="form-control form-control-sm text-right" [(ngModel)]="d.valor" readonly>
+                                            <!-- <input disabled="conceptosDisabled || formReadOnly" disabled type="number" class="form-control form-control-sm text-right" [(ngModel)]="d.valor" readonly> -->
                                         </div>
                                     </td>
                                     <!-- factores para cuando es TA son un rango  -->
                                     <td *ngIf="d.tipo_calculo=='TA'" class="text-right">
                                         <div class="input-group input-group-sm">
-                                            <input [disabled]="conceptosDisabled || formReadOnly" type="text" placeholder="Valor entre rangos" maxlength="11" class="form-control form-control-sm text-right" [(ngModel)]="d.cantidad" (keypress)="onlyNumberDot($event)" (keyup)="calcTablasValor(d)">
+                                            <input disabled="conceptosDisabled || formReadOnly" type="text" placeholder="Valor entre rangos" maxlength="11" class="form-control form-control-sm text-right" [(ngModel)]="d.cantidad" (keypress)="onlyNumberDot($event)" (keyup)="calcTablasValor(d)">
                                         </div>
                                     </td>
                                     <td *ngIf="d.tipo_calculo=='TA'" class="text-center">
@@ -174,7 +174,7 @@
                                     <!-- SECCION para comentario todas pueden tener -->
                                     <td class="text-right">
                                         <div class="input-group input-group-sm">
-                                            <input maxlength="80" [disabled]="conceptosDisabled || formReadOnly" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario"> 
+                                            <input maxlength="80" disabled="conceptosDisabled || formReadOnly" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario"> 
                                         </div>
                                     </td>
 
@@ -182,7 +182,7 @@
                                     <td *ngIf="d.tipo_calculo=='IN'" class="text-right">
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                            <input [disabled]="conceptosDisabled || formReadOnly" type="text" maxlength="8" class="form-control form-control-sm text-right" (keypress)="onlyNumberDot($event)" (keyup)="calcSubtotal()" [(ngModel)]="d.total"> 
+                                            <input disabled="conceptosDisabled || formReadOnly" type="text" maxlength="8" class="form-control form-control-sm text-right" (keypress)="onlyNumberDot($event)" (keyup)="calcSubtotal()" [(ngModel)]="d.total"> 
                                         </div>
                                     </td>
                                     <td *ngIf="d.tipo_calculo!='IN'" class="text-right">$ {{ (d.total | number: '1.2-2') ?? 0 }}</td>
@@ -209,7 +209,7 @@
                                     </td> -->
 
                                     <td class="text-center">
-                                        <button [disabled]="conceptosDisabled || formReadOnly" class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Concepto" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
+                                        <button disabled="conceptosDisabled || formReadOnly" class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Concepto" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                             </ng-container>
@@ -233,7 +233,7 @@
                 <h5 class="mb-0 text-dark">Exoneraciones</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" [disabled]="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración" disabled="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -270,7 +270,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly || exoneracionDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly || exoneracionDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -308,7 +308,7 @@
             <div class="col-5">
                 <!-- <div class="input-group input-group-sm input-group-total">
                     <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >STA</span></div>
-                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.sta" (ngModelChange)="calcSubtotal_2()" [disabled]="formReadOnly || staTasas">
+                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.sta" (ngModelChange)="calcSubtotal_2()" disabled="formReadOnly || staTasas">
                 </div> -->
                 <div class="input-group input-group-lg input-group-total my-2">
                     <div class="input-group-prepend"><span class="label-saldo label-saldo_item">STA</span></div>
@@ -452,7 +452,7 @@
                     <h5 class="mb-0 text-dark">Conceptos</h5>
                 </div>
                 <div class="col text-right">
-                    <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto" [disabled]="conceptosDisabled || formReadOnly" (click)="expandTasas()">
+                    <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto" disabled="conceptosDisabled || formReadOnly" (click)="expandTasas()">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
@@ -492,21 +492,21 @@
                                         <!-- si es de tipo FA se ingresa un factor que viene a ser la cantidad o medicion -->
                                         <td *ngIf="d.tipo_calculo=='FA'" class="text-right">
                                             <!-- <div class="input-group input-group-sm">
-                                                <input [disabled]="conceptosDisabled || formReadOnly" type="text" maxlength="8" class="form-control form-control-sm text-right" [(ngModel)]="d.cantidad" (keypress)="onlyNumber($event)" (keyup)="multiplicar(d)">
+                                                <input disabled="conceptosDisabled || formReadOnly" type="text" maxlength="8" class="form-control form-control-sm text-right" [(ngModel)]="d.cantidad" (keypress)="onlyNumber($event)" (keyup)="multiplicar(d)">
                                             </div> -->
                                             {{ d.cantidad }}
                                         </td>
                                         <td *ngIf="d.tipo_calculo=='FA'" class="text-right">
                                             <!-- <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                                <input [disabled]="conceptosDisabled || formReadOnly" disabled type="number" class="form-control form-control-sm text-right" [(ngModel)]="d.valor" readonly>
+                                                <input disabled="conceptosDisabled || formReadOnly" disabled type="number" class="form-control form-control-sm text-right" [(ngModel)]="d.valor" readonly>
                                             </div> -->
                                             {{ (d.valor | number: '1.2-2') ?? 0}}
                                         </td>
                                         <!-- factores para cuando es TA son un rango  -->
                                         <td *ngIf="d.tipo_calculo=='TA'" class="text-right">
                                             <!-- <div class="input-group input-group-sm">
-                                                <input [disabled]="conceptosDisabled || formReadOnly" type="text" placeholder="Valor entre rangos" maxlength="11" class="form-control form-control-sm text-right" [(ngModel)]="d.cantidad" (keypress)="onlyNumberDot($event)" (keyup)="calcTablasValor(d)">
+                                                <input disabled="conceptosDisabled || formReadOnly" type="text" placeholder="Valor entre rangos" maxlength="11" class="form-control form-control-sm text-right" [(ngModel)]="d.cantidad" (keypress)="onlyNumberDot($event)" (keyup)="calcTablasValor(d)">
                                             </div> -->
                                             {{ d.cantidad }}
                                         </td>
@@ -524,7 +524,7 @@
                                         <!-- SECCION para comentario todas pueden tener -->
                                         <td class="text-right">
                                             <!-- <div class="input-group input-group-sm">
-                                                <input maxlength="80" [disabled]="conceptosDisabled || formReadOnly" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario"> 
+                                                <input maxlength="80" disabled="conceptosDisabled || formReadOnly" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario"> 
                                             </div> -->
                                             {{ d.comentario }}
                                         </td>
@@ -533,7 +533,7 @@
                                         <td *ngIf="d.tipo_calculo=='IN'" class="text-right">
                                             <!-- <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                                <input [disabled]="conceptosDisabled || formReadOnly" type="text" maxlength="8" class="form-control form-control-sm text-right" (keypress)="onlyNumberDot($event)" (keyup)="calcSubtotal()" [(ngModel)]="d.total"> 
+                                                <input disabled="conceptosDisabled || formReadOnly" type="text" maxlength="8" class="form-control form-control-sm text-right" (keypress)="onlyNumberDot($event)" (keyup)="calcSubtotal()" [(ngModel)]="d.total"> 
                                             </div> -->
                                             $ {{ (d.total | number: '1.2-2') ?? 0 }}
                                         </td>

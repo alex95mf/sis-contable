@@ -42,7 +42,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm " id="idnameG" [(ngModel)]="nameGroup" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm " id="idnameG" [(ngModel)]="nameGroup" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12 mt-1">
@@ -50,7 +50,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clase</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm " id="idClaseG" [(ngModel)]="claseGroup" [disabled]="permisions[0].editar == '0' || !disabledProduct">
+                                            <input type="text" class="form-control form-control-sm " id="idClaseG" [(ngModel)]="claseGroup" disabled="permisions[0].editar == '0' || !disabledProduct">
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm " id="idCodigoG" [(ngModel)]="codigoGroup" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm " id="idCodigoG" [(ngModel)]="codigoGroup" disabled="!disabledProduct">
                                         </div>
                                     </div>
 
@@ -69,7 +69,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nivel</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm " id="idlevelG" [(ngModel)]="levelGroup" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm " id="idlevelG" [(ngModel)]="levelGroup" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm " id="idEstadoG" [(ngModel)]="statusGroup" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm " id="idEstadoG" [(ngModel)]="statusGroup" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12 mt-1">
@@ -88,7 +88,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha
                                                     de creación</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm " id="idDateG" [(ngModel)]="dateGroup" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm " id="idDateG" [(ngModel)]="dateGroup" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idnameP" [(ngModel)]="nameProduct" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idnameP" [(ngModel)]="nameProduct" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -108,7 +108,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idStockP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="stock" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idStockP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="stock" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -116,7 +116,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Pvp</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idPVPP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="pvp" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idPVPP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="pvp" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -124,7 +124,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Marca</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idMarcaP" [(ngModel)]="marca" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idMarcaP" [(ngModel)]="marca" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -132,7 +132,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Modelo</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idModeloP" [(ngModel)]="modelo" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idModeloP" [(ngModel)]="modelo" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -140,7 +140,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Color</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idColorP" [(ngModel)]="color" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idColorP" [(ngModel)]="color" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -148,7 +148,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clase</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idClaseP" [(ngModel)]="claseProduct" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idClaseP" [(ngModel)]="claseProduct" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -157,7 +157,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Número
                                                     de parte</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idNumPP" [(ngModel)]="num_parte" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idNumPP" [(ngModel)]="num_parte" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -166,7 +166,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código
                                                     del producto</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idCodeProd" [(ngModel)]="codigo_producto" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idCodeProd" [(ngModel)]="codigo_producto" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -175,7 +175,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Aplica
                                                     descuento</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idDescuentoP" [(ngModel)]="descuento" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idDescuentoP" [(ngModel)]="descuento" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -184,7 +184,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tasa de
                                                     descuento</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idTasaP" [(ngModel)]="tasaDes" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idTasaP" [(ngModel)]="tasaDes" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -193,7 +193,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
                                                     transito Local</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idTLP" [(ngModel)]="inTransitoL" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idTLP" [(ngModel)]="inTransitoL" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -202,7 +202,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
                                                     Importación</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idIMP" [(ngModel)]="inImportacion" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idIMP" [(ngModel)]="inImportacion" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -211,7 +211,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
                                                     Producción</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idEPP" [(ngModel)]="inProduction" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idEPP" [(ngModel)]="inProduction" disabled="!disabledProduct">
                                         </div>
                                     </div>
 
@@ -221,7 +221,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre
                                                     Genérico</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idGeneP" [(ngModel)]="generico" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idGeneP" [(ngModel)]="generico" disabled="!disabledProduct">
                                         </div>
                                     </div>
 
@@ -231,7 +231,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock
                                                     sugerido</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idStSugeP" [(ngModel)]="stockSugerido" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idStSugeP" [(ngModel)]="stockSugerido" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -240,7 +240,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bajo en
                                                     Stock</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idBajSt" [(ngModel)]="bajoStock" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idBajSt" [(ngModel)]="bajoStock" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -249,7 +249,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
                                                     Formula</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idItinerisioP" [(ngModel)]="itinerario" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idItinerisioP" [(ngModel)]="itinerario" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                 </div>
@@ -261,7 +261,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idnameP" [(ngModel)]="nameProduct" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idnameP" [(ngModel)]="nameProduct" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -269,7 +269,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Pvp</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idPVPP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="pvp" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idPVPP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="pvp" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -277,7 +277,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clase</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idClaseP" [(ngModel)]="claseProduct" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idClaseP" [(ngModel)]="claseProduct" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -286,7 +286,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código
                                                     del producto</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idCodeProd" [(ngModel)]="codigo_producto" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idCodeProd" [(ngModel)]="codigo_producto" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -295,7 +295,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Aplica
                                                     descuento</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idDescuentoP" [(ngModel)]="descuento" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idDescuentoP" [(ngModel)]="descuento" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -304,7 +304,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tasa de
                                                     descuento</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idTasaP" [(ngModel)]="tasaDes" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idTasaP" [(ngModel)]="tasaDes" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -313,7 +313,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
                                                     transito Local</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idTLP" [(ngModel)]="inTransitoL" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idTLP" [(ngModel)]="inTransitoL" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -322,7 +322,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
                                                     Importación</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idIMP" [(ngModel)]="inImportacion" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idIMP" [(ngModel)]="inImportacion" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -331,7 +331,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
                                                     Producción</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idEPP" [(ngModel)]="inProduction" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idEPP" [(ngModel)]="inProduction" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -340,7 +340,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock
                                                     sugerido</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idStSugeP" [(ngModel)]="stockSugerido" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idStSugeP" [(ngModel)]="stockSugerido" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -349,7 +349,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bajo en
                                                     stock</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idBajSt" [(ngModel)]="bajoStock" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idBajSt" [(ngModel)]="bajoStock" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -358,7 +358,7 @@
                                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
                                                     Formula</span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" id="idItinerisioP" [(ngModel)]="itinerario" [disabled]="!disabledProduct">
+                                            <input type="text" class="form-control form-control-sm" id="idItinerisioP" [(ngModel)]="itinerario" disabled="!disabledProduct">
                                         </div>
                                     </div>
                                 </div>

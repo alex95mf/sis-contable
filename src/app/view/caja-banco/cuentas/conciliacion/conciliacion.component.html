@@ -21,7 +21,7 @@
 
                         <!-- <div class="col-sm-4">
                             <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo">
-                                <p-calendar view="year" dateFormat="yy" [disabled]="disabledFields"
+                                <p-calendar view="year" dateFormat="yy" disabled="disabledFields"
                                     [readonlyInput]="true" [(ngModel)]="selected_anio" [showIcon]="false" inputId="icon">
                                 </p-calendar>
                             </app-cc-input-group-prepend>
@@ -59,7 +59,7 @@
                                     disabled
                                     [(ngModel)]="mes_actual">
 
-                                    <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                    <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                         {{item.name}}
                                     </ng-option>
                                 </ng-select>
@@ -78,7 +78,7 @@
                             <app-cc-input-group-prepend label="Bancos" styleSpan="size-span-campo">
                                 <ng-select [clearable]=false [(ngModel)]="bankSelect"
                                     class="form-control form-control-sm custom-select"
-                                     [disabled]="false">
+                                     disabled="false">
                                     <ng-option *ngFor="let d of arrayBanks"
                                         [value]="d.id_banks">{{d.name_banks + ' ' +d.num_cuenta}}</ng-option>
                                 </ng-select>
@@ -95,7 +95,7 @@
                                 </div>
                                 <p-inputNumber
 
-                                [disabled]="true"
+                                disabled="true"
                                 [(ngModel)]="saldo_libros"
                                 mode="currency"
                                 currency="USD"
@@ -105,12 +105,12 @@
 
                             </div> -->
                             <app-cc-input-group-prepend label="Saldo segun libros" styleSpan="size-span-campo">
-                                <input currencyMask [(ngModel)]="saldo_libros" [disabled]="true"
+                                <input currencyMask [(ngModel)]="saldo_libros" disabled="true"
                                     placeholder="$ 0.00" class="form-control text-right">
                             </app-cc-input-group-prepend>
                             <!-- <div class="p-inputgroup  md:h-2rem">
                                 <span class="input-group-text size-span-campo text-bold" >Saldo anterior</span>
-                                <p-inputNumber  [(ngModel)]="saldo_bank" mode="currency" currency="USD" locale="en-US" [disabled]="true"></p-inputNumber>
+                                <p-inputNumber  [(ngModel)]="saldo_bank" mode="currency" currency="USD" locale="en-US" disabled="true"></p-inputNumber>
                             </div> -->
 
                             <!-- </app-cc-input-group-prepend> -->
@@ -121,7 +121,7 @@
                         <div class="col-sm-4">
                             <!-- <app-cc-input-group-prepend label="Saldo anterior" styleSpan="size-span-campo"> -->
                                 <app-cc-input-group-prepend label="Saldo anterior" styleSpan="size-span-campo">
-                                    <input currencyMask [(ngModel)]="saldo_bank" [disabled]="true"
+                                    <input currencyMask [(ngModel)]="saldo_bank" disabled="true"
                                         placeholder="$ 0.00" class="form-control text-right">
                                 </app-cc-input-group-prepend>
                             <!-- <div class="input-group input-group-sm mt-1">
@@ -131,7 +131,7 @@
                                 </div>
                                 <p-inputNumber
 
-                                [disabled]="true"
+                                disabled="true"
                                 [(ngModel)]="saldo_bank"
                                 mode="currency"
                                 currency="USD"
@@ -142,14 +142,14 @@
                             </div> -->
                             <!-- <div class="p-inputgroup  md:h-2rem">
                                 <span class="input-group-text size-span-campo text-bold" >Saldo anterior</span>
-                                <p-inputNumber  [(ngModel)]="saldo_bank" mode="currency" currency="USD" locale="en-US" [disabled]="true"></p-inputNumber>
+                                <p-inputNumber  [(ngModel)]="saldo_bank" mode="currency" currency="USD" locale="en-US" disabled="true"></p-inputNumber>
                             </div> -->
 
                             <!-- </app-cc-input-group-prepend> -->
                         </div>
                         <div class="col-sm-4">
                             <app-cc-input-group-prepend label="Estado Cuenta" styleSpan="size-span-campo">
-                                <input currencyMask [(ngModel)]="EstadoCuenta" [disabled]="disabledFields"
+                                <input currencyMask [(ngModel)]="EstadoCuenta" disabled="disabledFields"
                                     placeholder="$ 0.00" class="form-control text-right">
                             </app-cc-input-group-prepend>
                             <!-- <app-cc-input-group-prepend label="Estado Cuenta" styleSpan="size-span-campo"> -->
@@ -164,13 +164,13 @@
                                 mode="currency"
                                 currency="USD"
                                 locale="en-US"
-                                [disabled]="disabledFields"
+                                disabled="disabledFields"
                                 [inputStyle]="{'height':'30px','width':'13rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}"
                                 ></p-inputNumber>
                             </div> -->
                             <!-- <div class="p-inputgroup  md:h-2rem">
                                 <span class="p-inputgroup-addon">Estado Cuenta</span>
-                                <p-inputNumber  [(ngModel)]="EstadoCuenta" mode="currency" currency="USD" locale="en-US" [disabled]="disabledFields"></p-inputNumber>
+                                <p-inputNumber  [(ngModel)]="EstadoCuenta" mode="currency" currency="USD" locale="en-US" disabled="disabledFields"></p-inputNumber>
                             </div> -->
                                 <!--input type="numeric" min="0" [(ngModel)]="EstadoCuenta" placeholder="$ 0.00"
                                     class="form-control text-right"-->
@@ -178,7 +178,7 @@
                         </div>
                         <div class="col-sm-4">
                             <app-cc-input-group-prepend label="Saldo conciliado" styleSpan="size-span-campo">
-                                <input currencyMask [(ngModel)]="SaldoConciliado" [disabled]="true"
+                                <input currencyMask [(ngModel)]="SaldoConciliado" disabled="true"
                                     placeholder="$ 0.00" class="form-control text-right">
                             </app-cc-input-group-prepend>
                         </div>
@@ -186,7 +186,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <app-cc-input-group-prepend label="Saldo Final" styleSpan="size-span-campo">
-                                <input currencyMask [disabled]="true" [(ngModel)]="saldo_bank_final"
+                                <input currencyMask disabled="true" [(ngModel)]="saldo_bank_final"
                                     class="form-control text-right" placeholder="$ 0.00">
                             </app-cc-input-group-prepend>
                         </div>
@@ -203,7 +203,7 @@
 
                         <div class="col-sm-4">
                             <app-cc-input-group-prepend label="Fecha de Conciliacion" styleSpan="size-span-campo font-weight-bold">
-                              <input type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_conciliacion" [disabled]="true">
+                              <input type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_conciliacion" disabled="true">
                             </app-cc-input-group-prepend>
                           </div>
                     </div>
@@ -227,7 +227,7 @@
                                         <p-tableHeaderCheckbox
 
 
-                                        [disabled]="disabledFields"></p-tableHeaderCheckbox>
+                                        disabled="disabledFields"></p-tableHeaderCheckbox>
                                     </th>
                                     <th class="text-center" style="min-width:30px">#</th>
                                     <th class="text-center" style="min-width:100px">Fecha</th>
@@ -260,12 +260,12 @@
                             <ng-template pTemplate="body" let-inf>
                                 <tr style="font-size: 12px;">
                                     <td>
-                                        <p-tableCheckbox [value]="inf" [disabled]="isOutOfBlock(inf) || disabledFields"></p-tableCheckbox>
+                                        <p-tableCheckbox [value]="inf" disabled="isOutOfBlock(inf) || disabledFields"></p-tableCheckbox>
                                     </td>
                                     <td>{{inf.linea}}</td>
                                     <td>{{inf.fecha}}</td>
                                     <td>
-                                        <input id="fecha_concilia" type="date" class="form-control" [(ngModel)]="inf.fecha_conciliacion" max="2050-01-01"  [disabled]="isOutOfBlock(inf) || disabledFields">
+                                        <input id="fecha_concilia" type="date" class="form-control" [(ngModel)]="inf.fecha_conciliacion" max="2050-01-01"  disabled="isOutOfBlock(inf) || disabledFields">
                                     </td>
                                     <td>{{inf.documento}}</td>
                                     <td>{{inf.notas}}</td>
@@ -325,7 +325,7 @@
                                         disabled
                                         [(ngModel)]="filter.mes_actual_movimiento">
 
-                                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                        <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                             {{item.name}}
                                         </ng-option>
                                     </ng-select>
@@ -335,7 +335,7 @@
                                 <app-cc-input-group-prepend label="Tipo Movimiento" styleSpan="size-span-campo">
                                     <ng-select [clearable]=true [(ngModel)]="filter.tipo_movimiento"
                                         class="form-control form-control-sm custom-select"
-                                        [disabled]="false">
+                                        disabled="false">
                                         <ng-option [value]="0">Seleccione un tipo movimiento</ng-option>
                                         <ng-option *ngFor="let d of tipo_movimientos"
                                             [value]="d.id">{{d.name}}</ng-option>
@@ -358,7 +358,7 @@
                                 <app-cc-input-group-prepend label="Bancos" styleSpan="size-span-campo">
                                     <ng-select [clearable]=true [(ngModel)]="filter.banco"
                                         class="form-control form-control-sm custom-select"
-                                         [disabled]="false">
+                                         disabled="false">
                                          <ng-option [value]="0">Seleccione un Banco</ng-option>
                                         <ng-option *ngFor="let d of arrayBanks"
                                             [value]="d.id_banks">{{d.name_banks + ' ' +d.num_cuenta}}</ng-option>
@@ -510,7 +510,7 @@
                             <app-cc-input-group-prepend label="Bancos" styleSpan="size-span-campo">
                                 <ng-select [clearable]=false [(ngModel)]="bancoConsulta"
                                     class="form-control form-control-sm custom-select"
-                                     [disabled]="false">
+                                     disabled="false">
                                      <ng-option [value]="0">Seleccione un Banco</ng-option>
                                     <ng-option *ngFor="let d of arrayBanks"
                                         [value]="d.id_banks">{{d.name_banks + ' ' +d.num_cuenta}}</ng-option>

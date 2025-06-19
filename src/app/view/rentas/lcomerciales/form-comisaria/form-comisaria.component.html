@@ -76,7 +76,7 @@
                                     <span  class="input-group-text font-weight-bold size-span-campo size-span-campo">Resultado</span>
                                 </div>
                                 <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
-                                    <input type="checkbox" class="custom-control-input" id="aprueba" [disabled]="formReadOnly" [(ngModel)]="aprueba">
+                                    <input type="checkbox" class="custom-control-input" id="aprueba" disabled="formReadOnly" [(ngModel)]="aprueba">
                                     <label class="custom-control-label" for="aprueba"></label>
                                 </div>
                                 <input type="text" class="form-control form-control-sm" [class]="!formReadOnly ? 'bg-white' : ''" disabled [value]="aprueba ? 'FACTIBLE' : 'NO FACTIBLE'">
@@ -84,7 +84,7 @@
         
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo  size-span-campo">Próxima Inspección</span></div>
-                                <input type="date" class="form-control form-control-sm" [disabled]="aprueba" [readonly]="formReadOnly" [(ngModel)]="inspeccion.fecha_proxima_visita">
+                                <input type="date" class="form-control form-control-sm" disabled="aprueba" [readonly]="formReadOnly" [(ngModel)]="inspeccion.fecha_proxima_visita">
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
-                                <button [disabled]="disableVehiculos"
+                                <button disabled="disableVehiculos"
                                     class="btn btn-sm btn-link" (click)="registraVehiculos(inspeccion)">
                                     <i class="fas fa-box-check text-primary"></i>
                                     Registro de vehiculos
@@ -172,7 +172,7 @@
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo size-span-campo">Fotos</span></div>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple [disabled]="formReadOnly" (change)="cargaFoto($event.target.files)">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple disabled="formReadOnly" (change)="cargaFoto($event.target.files)">
                                                 <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a subir" }}</label>
                                             </div>
                                         </div>
@@ -195,7 +195,7 @@
                                                 <span class="input-group-text font-weight-bold  size-span-campo size-small-campo" >Archivos</span>
                                             </div>
                                             <div class="custom-file">
-                                                <input [disabled]="formReadOnly" type="file" class="custom-file-input" id="inputGroupFile02" 
+                                                <input disabled="formReadOnly" type="file" class="custom-file-input" id="inputGroupFile02" 
                                                     accept=".pdf" (change)="cargaArchivo($event.target.files)">
                                                 <label class="custom-file-label" for="inputGroupFile02">
                                                     {{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}
@@ -253,13 +253,13 @@
                                             </td>
                                             <td class="text-center">
                                                 <div class="input-group input-group-sm">
-                                                    <input type="text" maxlength="4" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-sm text-right" [readonly]="formReadOnly" [disabled]="!f.c_pregunta.includes('(APLICA AÑO)')" [(ngModel)]="f.c_anio">
+                                                    <input type="text" maxlength="4" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-sm text-right" [readonly]="formReadOnly" disabled="!f.c_pregunta.includes('(APLICA AÑO)')" [(ngModel)]="f.c_anio">
                                                 </div>
                                             </td>
                                             <td class="text-center">
                                                 <div class="input-group input-group-sm input-group-custom-switch">
                                                     <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
-                                                        <input type="checkbox" class="custom-control-input" [id]="i + '-c_respuesta'" [disabled]="formReadOnly" [(ngModel)]="f.c_respuesta" (change)="changePregunta(i)" (click)="handleCheck(f)">
+                                                        <input type="checkbox" class="custom-control-input" [id]="i + '-c_respuesta'" disabled="formReadOnly" [(ngModel)]="f.c_respuesta" (change)="changePregunta(i)" (click)="handleCheck(f)">
                                                         <label class="custom-control-label" [for]="i + '-c_respuesta'"></label>
                                                     </div>
                                                     <input type="text" class="form-control form-control-sm" [class]="!formReadOnly ? 'bg-white' : ''" disabled [value]="f.c_respuesta ? 'SI' : 'NO'">
@@ -267,17 +267,17 @@
                                             </td>
                                             <!-- <td>
                                                 <div class="input-group input-group-sm">
-                                                    <input type="text" class="form-control form-control-sm text-left" [readonly]="formReadOnly" [disabled]="f.c_placa" [(ngModel)]="f.c_dias">
+                                                    <input type="text" class="form-control form-control-sm text-left" [readonly]="formReadOnly" disabled="f.c_placa" [(ngModel)]="f.c_dias">
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="input-group input-group-sm">
-                                                    <input type="number" class="form-control form-control-sm text-right" [readonly]="formReadOnly" [disabled]="f.c_tonelaje" [(ngModel)]="f.c_dias">
+                                                    <input type="number" class="form-control form-control-sm text-right" [readonly]="formReadOnly" disabled="f.c_tonelaje" [(ngModel)]="f.c_dias">
                                                 </div>
                                             </td> -->
                                             <td>
                                                 <div class="input-group input-group-sm">
-                                                    <input type="number" class="form-control form-control-sm text-right" [readonly]="formReadOnly" [disabled]="f.c_respuesta" [(ngModel)]="f.c_dias">
+                                                    <input type="number" class="form-control form-control-sm text-right" [readonly]="formReadOnly" disabled="f.c_respuesta" [(ngModel)]="f.c_dias">
                                                 </div>
                                             </td>
                                             <td class="text-center">
@@ -314,7 +314,7 @@
         
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend"><span class="input-group-text">Próxima Inspección</span></div>
-                                <input type="date" class="form-control form-control-sm" [disabled]="aprueba" [(ngModel)]="inspeccion.fecha_proxima_visita">
+                                <input type="date" class="form-control form-control-sm" disabled="aprueba" [(ngModel)]="inspeccion.fecha_proxima_visita">
                             </div>
                         </div>
                     </div>-->

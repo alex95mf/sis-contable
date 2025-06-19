@@ -288,7 +288,7 @@
                                 </tr>
                                 <tr *ngFor="let item of listaSolicitudesAtribucion">
                                     <td class="text-center">
-                                        <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="changeValueCheck(item)" [disabled]="item.cantidad_solicitada == 0"/>
+                                        <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="changeValueCheck(item)" disabled="item.cantidad_solicitada == 0"/>
                                     </td>
                                     <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
                                     <td class="text-center">{{item.programa}}</td>
@@ -297,8 +297,8 @@
                                     <td class="text-center"> {{item.u_medida }}</td>
                                     <td class="text-center" >${{item.costo_total_por_solicitar | number:'1.2-2'}}</td>
                                     <!-- <td class="text-center" >$ {{item.costo_unitario | number: '1.2-2'}}</td> -->
-                                    <td class="text-center" style="width: 10%;" ><input class="form-control" type="number" [(ngModel)]="item.cantidad_requerida" (ngModelChange)="cantidadTotalItem(item)" [disabled]="!item.check"/></td>
-                                    <td class="text-center" style="width: 10%;"><input currencyMask class="form-control"  [(ngModel)]="item.costo_unitario" (ngModelChange)="cantidadTotalItem(item)" [disabled]="!item.check"/></td>
+                                    <td class="text-center" style="width: 10%;" ><input class="form-control" type="number" [(ngModel)]="item.cantidad_requerida" (ngModelChange)="cantidadTotalItem(item)" disabled="!item.check"/></td>
+                                    <td class="text-center" style="width: 10%;"><input currencyMask class="form-control"  [(ngModel)]="item.costo_unitario" (ngModelChange)="cantidadTotalItem(item)" disabled="!item.check"/></td>
                                     <td class="text-center" style="width: 10%;">
                                         <input class="form-control" currencyMask [(ngModel)]="item.precio_cotizado" readonly/>
                                     </td>

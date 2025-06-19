@@ -5,7 +5,7 @@
             <!-- <div class="col-4">
                 <div class="input-group input-group-sm">                    
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width:120px;">Periodo</span></div>
-                    <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="filter.periodo" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
+                    <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="filter.periodo" disabled="yearDisabled" (keypress)="onlyNumber($event)">
                 </div>
             </div> -->
             <!-- <div class="col-6">
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <input type="checkbox" [(ngModel)]="checkPrograma" [disabled]="resumen" (change)="programaChecked()"> Por Programa
+                <input type="checkbox" [(ngModel)]="checkPrograma" disabled="resumen" (change)="programaChecked()"> Por Programa
             </div> -->
         </div>
         <div  class="row">
@@ -61,7 +61,7 @@
         <!-- <div class="row my-2">
             <div class="col-4">
                     <app-cc-input-group-prepend label="Procesos" styleSpan="size-span-campo font-weight-bold">
-                        <ng-select id="proceso" [disabled]="procesoDisabled" class="form-control form-control-sm" (change)="asignarProceso($event)" [(ngModel)]="procesoSelected" [clearable]="false">
+                        <ng-select id="proceso" disabled="procesoDisabled" class="form-control form-control-sm" (change)="asignarProceso($event)" [(ngModel)]="procesoSelected" [clearable]="false">
                             <ng-option disabled [value]="0" disabled>Seleccione un Proceso</ng-option>
                             <ng-option *ngFor="let op of procesos" [value]="op.valor">{{op.descripcion }}</ng-option>
                         </ng-select>

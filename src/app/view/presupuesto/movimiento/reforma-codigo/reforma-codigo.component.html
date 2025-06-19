@@ -5,7 +5,7 @@
             <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
                 <!-- <input class="form-control" type="number" placeholder="Ingrese el periodo... " [(ngModel)]="atribucionParamsNew.periodo" /> -->
                 <ng-select class="form-control" (change)="handleSelectPeriodo($event)"
-                    [items]="periodos" bindValue="id" bindLabel="periodo" [disabled]="search">
+                    [items]="periodos" bindValue="id" bindLabel="periodo" disabled="search">
 
                 </ng-select>
             </app-cc-input-group-prepend>
@@ -14,7 +14,7 @@
         <div class="col">
             <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
                 <ng-select class="form-control" (change)="handleSelectPrograma($event)"
-                    [items]="programas" bindValue="descripcion" bindLabel="label" [disabled]="search">
+                    [items]="programas" bindValue="descripcion" bindLabel="label" disabled="search">
                 </ng-select>
             </app-cc-input-group-prepend>
         </div>
@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-4">
             <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
-                <input type="date" class="form-control" [(ngModel)]="atribucionParamsNew.fecha" [disabled]="search">
+                <input type="date" class="form-control" [(ngModel)]="atribucionParamsNew.fecha" disabled="search">
             </app-cc-input-group-prepend>
         </div>
         <!-- <div class="col-4">
@@ -160,7 +160,7 @@
                     <table class="table table-bordered no-footer table-hover mb-0" style="width: 1800px;" >
                         <thead class="thead-dark sticky-header">
                             <tr>
-                                <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()" [disabled]="search" /></th>
+                                <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()" disabled="search" /></th>
                                 <th class="text-center">Descripcion</th>
                                 <th class="text-center">Departamento</th>
                                 <th class="text-center">Atribucion</th>
@@ -182,7 +182,7 @@
                             <ng-container *ngIf="listaSolicitudesAtribucion?.length > 0; else emptyMessageReduccion">
                                 <tr *ngFor="let item of listaSolicitudesAtribucion" [ngClass]="{'table-warning': item.check}">
                                     <td class="text-center" style="width: 5%;"> 
-                                        <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal()" [disabled]="search" />
+                                        <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal()" disabled="search" />
                                     </td>
                                     <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
                                     <td class="text-center">{{item.departamento}}</td>
@@ -201,11 +201,11 @@
                                     </td>
                                     <!-- Reforma -->
                                     <td class="text-center">
-                                        <input class="form-control form-control-sm" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (blur)="calcularValorTotal()" (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check">
+                                        <input class="form-control form-control-sm" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (blur)="calcularValorTotal()" (ngModelChange)="actualizaTotalCotizado(item)" disabled="!item.check">
                                     </td>
                                     <td class="text-center" >
                                         <app-cc-input-group-prepend label="$" styleSpan="font-weight-bold">
-                                            <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.costo_unitario_mod" (blur)="calcularValorTotal()" (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check">
+                                            <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.costo_unitario_mod" (blur)="calcularValorTotal()" (ngModelChange)="actualizaTotalCotizado(item)" disabled="!item.check">
                                         </app-cc-input-group-prepend>
                                     </td>
                                     <td class="text-center" style="width: 10%;">
@@ -213,7 +213,7 @@
                                             <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.precio_cotizado_mod" disabled>
                                         </app-cc-input-group-prepend>
                                     </td>
-                                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)" [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)" disabled="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
                                 </tr>
                             </ng-container>
                             <ng-template #emptyMessageReduccion>
@@ -313,7 +313,7 @@
                             <ng-container *ngIf="listaSolicitudesAtribucion2?.length > 0; else emptyMessageIncremento">
                                 <tr *ngFor="let item of listaSolicitudesAtribucion2" [ngClass]="{'table-warning': item.check}">
                                     <td class="text-center" style="width: 5%;"> 
-                                        <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal2()" [disabled]="item.estado == 'I'" />
+                                        <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal2()" disabled="item.estado == 'I'" />
                                     </td>
                                     <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
                                     <td class="text-center">{{item.departamento}}</td>
@@ -332,11 +332,11 @@
                                     </td>
                                     <!-- Reforma -->
                                     <td class="text-center">
-                                        <input class="form-control form-control-sm" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (blur)="calcularValorTotal2()" (ngModelChange)="actualizaTotalCotizado2(item)" [disabled]="!item.check">
+                                        <input class="form-control form-control-sm" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (blur)="calcularValorTotal2()" (ngModelChange)="actualizaTotalCotizado2(item)" disabled="!item.check">
                                     </td>
                                     <td class="text-center" >
                                         <app-cc-input-group-prepend label="$" styleSpan="font-weight-bold">
-                                            <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.costo_unitario_mod" (blur)="calcularValorTotal2()" (ngModelChange)="actualizaTotalCotizado2(item)" [disabled]="!item.check">
+                                            <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.costo_unitario_mod" (blur)="calcularValorTotal2()" (ngModelChange)="actualizaTotalCotizado2(item)" disabled="!item.check">
                                         </app-cc-input-group-prepend>
                                     </td>
                                     <td class="text-center" style="width: 10%;">
@@ -344,7 +344,7 @@
                                             <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.precio_cotizado_mod" disabled>
                                         </app-cc-input-group-prepend>
                                     </td>
-                                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)" [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)" disabled="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
                                 </tr>
                             </ng-container>
                             <ng-template #emptyMessageIncremento>
@@ -490,8 +490,8 @@
                     <td class="text-center" >{{item.cantidad_solicitada}}</td>
                     <td class="text-center" >{{item.costo_unitario}}</td>
                     <td class="text-center" style="width: 10%;"> <input class="form-control" type="text" value="$ {{item.precio_cotizado | number: '1.2-2'}}"  readonly/></td>
-                    <td class="text-center" > <input class="form-control" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (ngModelChange)="calcularValorTotal()" [disabled]="search"/></td>
-                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.costo_unitario_mod" (ngModelChange)="calcularValorTotal()" [disabled]="search"/></td>
+                    <td class="text-center" > <input class="form-control" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (ngModelChange)="calcularValorTotal()" disabled="search"/></td>
+                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.costo_unitario_mod" (ngModelChange)="calcularValorTotal()" disabled="search"/></td>
                     <td class="text-center" style="width: 10%;"> <input class="form-control" type="text" value="$ {{item.precio_cotizado_mod | number: '1.2-2'}}"  readonly/></td>
                 </tr>
             </tbody>
@@ -632,8 +632,8 @@
                     <td class="text-center" >{{item.cantidad_solicitada}}</td>
                     <td class="text-center" >{{item.costo_unitario}}</td>
                     <td class="text-center" style="width: 10%;"><input class="form-control" type="text" value="$ {{item.precio_cotizado | number: '1.2-2'}}" readonly/></td>
-                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (ngModelChange)="calcularValorTotal2()" [disabled]="search"/></td>
-                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.costo_unitario_mod" (ngModelChange)="calcularValorTotal2()" [disabled]="search"/></td>
+                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (ngModelChange)="calcularValorTotal2()" disabled="search"/></td>
+                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.costo_unitario_mod" (ngModelChange)="calcularValorTotal2()" disabled="search"/></td>
                     <td class="text-center" style="width: 10%;"><input class="form-control" type="text" value="$ {{item.precio_cotizado_mod | number: '1.2-2'}}"  readonly/></td>
                 </tr>
             </tbody>

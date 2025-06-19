@@ -11,12 +11,12 @@
                     <div class="row  sectionOne p-2">
                         <div class="col-sm-6">
                             <app-cc-input-group-prepend label="{{HeaderInfo.doc_name}}" styleSpan="size-span-campo font-weight-bold">
-                                <input type="text" id="idNumAut" class="form-control" placeholder="número  autorización" [(ngModel)]="HeaderInfo.sec_parse" [disabled]="true">
+                                <input type="text" id="idNumAut" class="form-control" placeholder="número  autorización" [(ngModel)]="HeaderInfo.sec_parse" disabled="true">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-6">
                             <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
-                                <input type="date" class="form-control" [disabled]="permisions.agregar == '0' || !actionsDaily.new" [(ngModel)]="HeaderInfo.date" max="2050-01-01" >
+                                <input type="date" class="form-control" disabled="permisions.agregar == '0' || !actionsDaily.new" [(ngModel)]="HeaderInfo.date" max="2050-01-01" >
                                 
                             </app-cc-input-group-prepend>
                         </div>
@@ -34,7 +34,7 @@
                             <app-cc-input-group-prepend label="{{HeaderInfo.concepto}}" styleSpan="size-span-campo font-weight-bold">
                                 <textarea  (change)="AgregarConcepto()" class="form-control" id="inpConcept" rows="2"
                                     [(ngModel)]="HeaderInfo.concept" placeholder="Ingrese un concepto"
-                                    [disabled]="permisions.agregar == '0' || !actionsDaily.new"></textarea>
+                                    disabled="permisions.agregar == '0' || !actionsDaily.new"></textarea>
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-4" *ngIf="!isEdit" >
@@ -49,14 +49,14 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right btn-add">
                                     <div class="top_table_header">
                                         <button type="button" class="btn btn-success btn-sm btn_add_detalle"
-                                            [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                            disabled="permisions.agregar == '0' || !actionsDaily.new"
                                             title="Inserte nuevo registro" (click)="addFields()">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                     <!-- <div class="top_table_header">
                                         <button type="button" class="btn btn-success btn-sm btn_add_detalle"
-                                            [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                            disabled="permisions.agregar == '0' || !actionsDaily.new"
                                             title="Actualizar prueba" (click)="ediVoucherDailyNew()">
                                             <i class="fa fa-plus"></i>
                                         </button>
@@ -69,7 +69,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr class="text-center" style="font-size: 12px;">
-                                                <th [disabled]="false">Línea</th>
+                                                <th disabled="false">Línea</th>
                                                 <th class="headcol" style="text-align: center;width: 70px; height: 32px; "></th>
                                                 <th style="width: 150px; ">Cuenta</th>
                                                 <th style="width: 200px; left: 0px; position: sticky;z-index: 1;z-index: 99999 !important;   background-color: #FFFFFF;">Nombre</th>
@@ -91,18 +91,18 @@
                                                 <td class="headcol"  style="text-align: center; height: 45px; width: 70px; vertical-align: middle; ">
                                                     <div class="btn-group">
                                                     <button type="button" (click)="deleteFields(i)"
-                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        disabled="permisions.agregar == '0' || !actionsDaily.new"
                                                         class="btn btn-danger btn-sm tooltip-test mt-2"
                                                         title="Remover registro">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                     <button type="button" (click)="onClicConsultaPlanCuentas(i)"
-                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        disabled="permisions.agregar == '0' || !actionsDaily.new"
                                                         class="btn btn-success btn-sm tooltip-test mt-2 ml-1"
                                                         title="Agregar Cuenta">
                                                         <i class="far fa-search"></i>
                                                     </button>
-                                                    <button type="button" [disabled]="!f.auxiliar" 
+                                                    <button type="button" disabled="!f.auxiliar" 
                                                         (click)="onClicConsultaAuxiliar(i)"
                                                         class="btn btn-warning btn-sm mt-2 ml-1"
                                                         matTooltip="Seleccionar Auxiliar">
@@ -113,26 +113,26 @@
                                                 <td>
                                                     <input style="width: 150px;" placeholder="codigo cuenta" [value]="f.account"
                                                         name="detAccounts" [(ngModel)]="f.account"
-                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        disabled="permisions.agregar == '0' || !actionsDaily.new"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.account}}" />
                                                 </td>
                                                 <td style="left: 0px; position: sticky;z-index: 1;z-index: 99999 !important; background-color: #FFFFFF;">
                                                     <input style="width: 250px;" placeholder="cuenta" [value]="f.name" name="detName"
                                                         [(ngModel)]="f.name"
-                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        disabled="permisions.agregar == '0' || !actionsDaily.new"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.name}}" />
                                                 </td>
                                                 <td>
                                                     <input style="width: 250px;" [(ngModel)]="f.detail" placeholder="Ingrese un detalle"
-                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        disabled="permisions.agregar == '0' || !actionsDaily.new"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.detail}}" />
                                                 </td>
                                                 <td style="width: 200px;">
                                                     <ng-select loadingText="Cargando.." 
-                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        disabled="permisions.agregar == '0' || !actionsDaily.new"
                                                         [clearable]=false [loading]="f.LoadOpcionCentro"
                                                         placeholder="-seleccionar centro-" [(ngModel)]="f.centro"
                                                         class="form-control form-control-sm custom-select"
@@ -144,14 +144,14 @@
                                                 </td>
                                                 <td>
                                                     <input style="width: 120px;" [(ngModel)]="f.debit" currencyMask
-                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new || f.grupo == 'INGRESOS'"
+                                                        disabled="permisions.agregar == '0' || !actionsDaily.new || f.grupo == 'INGRESOS'"
                                                         class="form-control form-control-sm pr-1"
                                                          (ngModelChange)="EventoNumberAsiento(i,'D')"
                                                          name="{{f.debit}}" />
                                                 </td>
                                                 <td >
                                                     <input style="width: 120px;" [(ngModel)]="f.credit" currencyMask
-                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new || f.grupo == 'GASTOS' "
+                                                        disabled="permisions.agregar == '0' || !actionsDaily.new || f.grupo == 'GASTOS' "
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (ngModelChange)="EventoNumberAsiento(i,'C')"
                                                         name="{{f.credit}}" />
@@ -159,12 +159,12 @@
                                                 </td>
                                                 <td style="width: 120px;">
                                                     <input style="width: 120px;" [(ngModel)]="f.codpresupuesto"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.codpresupuesto}}" />
                                                     <!--div style="width: 180px;">
                                                         <ng-select loadingText="Cargando.."
-                                                            [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                            disabled="permisions.agregar == '0' || !actionsDaily.new"
                                                             [loading]="f.LoadOpcionCatalogoPresupuesto"
                                                             placeholder="-seleccionar codigo presupuesto-"
                                                             [(ngModel)]="f.codpresupuesto"
@@ -183,7 +183,7 @@
                                                 </td>
                                                 <td >
                                                     <input style="width: 250px;" [(ngModel)]="f.presupuesto"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.presupuesto?.nombre}}" />
                                                     
@@ -194,7 +194,7 @@
                                                 </td>
                                                 <td >
                                                     <input style="width: 150px;" currencyMask [(ngModel)]="f.valor_presupuesto" placeholder="0.00"
-                                                    [disabled]="!actionsDaily.new || f.disabled || !f.codpresupuesto"
+                                                    disabled="!actionsDaily.new || f.disabled || !f.codpresupuesto"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (ngModelChange)="presupuestoChange()"
                                                         name="{{f.valor_presupuesto}}" />
@@ -399,7 +399,7 @@
                                         </tr>
                                         <tr *ngFor="let dt of dtConsultaAsiento">
                                             <td>
-                                                <input type="checkbox" (change)="onRowSelect($event, dt)" [(ngModel)]="dt.check" [disabled]="(dt.estado == 0 || dt.estado == 3)">
+                                                <input type="checkbox" (change)="onRowSelect($event, dt)" [(ngModel)]="dt.check" disabled="(dt.estado == 0 || dt.estado == 3)">
                                             </td>
                                             <td class="text-center d-none">{{dt.id}}</td>
                                             <td class="text-center pointer-cursor">
@@ -466,7 +466,7 @@
                                     <ng-template pTemplate="body" let-dt>
                                         <tr>
                                             <td>
-                                                <p-tableCheckbox [value]="dt" [disabled]="isOutOfStock(dt)"></p-tableCheckbox>
+                                                <p-tableCheckbox [value]="dt" disabled="isOutOfStock(dt)"></p-tableCheckbox>
                                             </td>
                                             <td class="text-center d-none">{{dt.id}}</td>
                                             <td class="text-center pointer-cursor">

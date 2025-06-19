@@ -43,7 +43,7 @@
             </div>
             <!-- <div class="col-4">
               <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
-                <ng-select class="form-control" [(ngModel)]="filter.estado" [clearable]="false" [disabled]="true">
+                <ng-select class="form-control" [(ngModel)]="filter.estado" [clearable]="false" disabled="true">
                   <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
                 </ng-select>
               </app-cc-input-group-prepend>
@@ -71,7 +71,7 @@
             <!-- <div class="col-4">
                 <app-cc-input-group-prepend label="Sector" styleSpan="size-span-campo font-weight-bold">
                   <ng-select class="form-control" [clearable]="false" [(ngModel)]="filter.sector">
-                    <ng-option *ngFor="let sector of sectores" [value]="sector.valor" [disabled]="sector.valor == 0">{{ sector.valor }}. {{ sector.descripcion }}</ng-option>
+                    <ng-option *ngFor="let sector of sectores" [value]="sector.valor" disabled="sector.valor == 0">{{ sector.valor }}. {{ sector.descripcion }}</ng-option>
                   </ng-select>
                 </app-cc-input-group-prepend>
               </div> -->
@@ -118,7 +118,7 @@
               </tr>
               <tr *ngFor="let dt of liquidacionesDt, let i = index">
                 <td>
-                  <input type="checkbox" [(ngModel)]="dt.check" [disabled]="dt.expediente">
+                  <input type="checkbox" [(ngModel)]="dt.check" disabled="dt.expediente">
                 </td>
                 <td class="text-center">{{ dt.id_cob_notificacion }}</td>
                 <td>
@@ -178,7 +178,7 @@
                       <i class="fas fa-eye"></i>
                     </button>
                     <!-- <button class="btn btn-warning btn-sm" (click)="modalEditDetalles(dt)" matTooltip="Editar Detalles"
-                      [disabled]="dt.notificador != null">
+                      disabled="dt.notificador != null">
                       <i class="fas fa-edit"></i>
                     </button> -->
                   </div>

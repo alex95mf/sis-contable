@@ -20,7 +20,7 @@
                 <td>{{ lote.lote }}</td>
                 <td>{{ lote.fecha_caducidad }}</td>
                 <td>
-                    <input type="number" class="form-control form-control-sm" [disabled]="disabled || lote.disponible == 0" [(ngModel)]="lote.cantidad_egreso">
+                    <input type="number" class="form-control form-control-sm" disabled="disabled || lote.disponible == 0" [(ngModel)]="lote.cantidad_egreso">
                 </td>
             </tr>
         </tbody>

@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo">
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.Ingresotipo" [disabled]="permisions.editar=='0' || !actions.dComponet " id="IdTipo">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.Ingresotipo" disabled="permisions.editar=='0' || !actions.dComponet " id="IdTipo">
                         <option value="Ingreso">Ingreso</option>
                         <option value="Egreso">Egreso</option>
                     </select>
@@ -17,17 +17,17 @@
                 <app-cc-input-group-prepend label="Cuenta" styleSpan="size-span-campo">
                     <div class="input-group-prepend">
                         <button type="button" class="btn btn-primary" id="idbuscar"
-                        [disabled]="permisions[0].editar == '0' || !actions.dComponet" placement="top" ngbTooltip="Buscar Cuenta" (click)="searchCuenta()">
+                        disabled="permisions[0].editar == '0' || !actions.dComponet" placement="top" ngbTooltip="Buscar Cuenta" (click)="searchCuenta()">
                             <i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i>
                         </button>
                     </div>  
                     <input type="text" class="form-control form-control-sm " id="idCuenta" placeholder="Buscar Cuenta" [(ngModel)]="parameters.IngresoCuenta"
-                    [disabled]="permisions[0].editar == '0' || !Discuentas"> 
+                    disabled="permisions[0].editar == '0' || !Discuentas"> 
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="¿Requiere Formula?">
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.tipoFormula" [disabled]="permisions[0].editar == '0' || !actions.dComponet " id="idTipoFormula">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.tipoFormula" disabled="permisions[0].editar == '0' || !actions.dComponet " id="idTipoFormula">
                         <option value="S">SI</option>
                         <option value="N">NO</option>
                     </select>
@@ -39,13 +39,13 @@
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
                     <input type="text" class="form-control form-control-sm" id="idNombre" placeholder="Nombre del Parametro" [(ngModel)]="parameters.IngresoNombre"
-                    [disabled]="permisions[0].editar=='0' || !actions.dComponet">
+                    disabled="permisions[0].editar=='0' || !actions.dComponet">
                 </app-cc-input-group-prepend>
             </div>
                 
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Crédito/Débito" styleSpan="size-span-campo">
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.IngresoDC" [disabled]="permisions[0].editar == '0' || !actions.dComponet " id="idDC">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.IngresoDC" disabled="permisions[0].editar == '0' || !actions.dComponet " id="idDC">
                         <option value="Debito">Débito</option>
                         <option value="Credito">Crédito</option>
                     </select>
@@ -53,7 +53,7 @@
             </div>
             <div class="col-sm-4" *ngIf="parameters.tipoFormula == 'S'">
                 <app-cc-input-group-prepend label="Formula">
-                    <textarea type="text" class="form-control form-control-sm" rows="1" [(ngModel)]="parameters.formula" id="idformula" [disabled]="permisions[0].editar=='0' || !actions.dComponet " maxlength="100">
+                    <textarea type="text" class="form-control form-control-sm" rows="1" [(ngModel)]="parameters.formula" id="idformula" disabled="permisions[0].editar=='0' || !actions.dComponet " maxlength="100">
                     </textarea>
                 </app-cc-input-group-prepend>
             </div>
@@ -64,21 +64,21 @@
             <!-- <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Valor (%)" styleSpan="size-span-campo">
                     <input type="number" min="0" max="100" [(ngModel)]="parameters.IngresoValor" (click)="ValorPorcentaje()" (keypress)="commonServices.FormatDecimalVal($event)"
-                    class="form-control form-control-sm" [disabled]="permisions[0].editar=='0' || !actions.dComponet || !valorupdate " id="IdValor">
+                    class="form-control form-control-sm" disabled="permisions[0].editar=='0' || !actions.dComponet || !valorupdate " id="IdValor">
                 </app-cc-input-group-prepend>
             </div> -->
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Sueldo Unificado" styleSpan="size-span-campo">
                     <input type="number" class="form-control form-control-sm text-right" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="parameters.sueldoUnificado"
-                    [disabled]="permisions[0].editar=='0' || !actions.dComponet || !sueldData" id="idsuelundificado">
+                    disabled="permisions[0].editar=='0' || !actions.dComponet || !sueldData" id="idsuelundificado">
                     <div class="input-group-text btn" id="inputLabel-prepend">
-                        <input type="checkbox" title="" [(ngModel)]="parameters.checkUnificado" (ngModelChange)="setsueldoUni()" [disabled]="permisions[0].editar=='0' || !actions.dComponet " id="checksueldouni">
+                        <input type="checkbox" title="" [(ngModel)]="parameters.checkUnificado" (ngModelChange)="setsueldoUni()" disabled="permisions[0].editar=='0' || !actions.dComponet " id="checksueldouni">
                     </div>
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Clase" styleSpan="size-span-campo">
-                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.IngresoClase" [disabled]="permisions[0].editar == '0' ||  !actions.dComponet " id="IdClase">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.IngresoClase" disabled="permisions[0].editar == '0' ||  !actions.dComponet " id="IdClase">
                         <option value="Rol">Rol</option>
                         <option value="Provision">Provision</option>
                         <option value="Anticipo">Anticipo</option>
@@ -95,9 +95,9 @@
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Valor Cantidad" styleSpan="size-span-campo"> 
                     <input type="number" (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm  text-right" [(ngModel)]="parameters.cantidadMulta" id="idmulta"
-                    [disabled]="permisions[0].editar=='0' || !actions.dComponet || !descuentoData">
+                    disabled="permisions[0].editar=='0' || !actions.dComponet || !descuentoData">
                     <div class="input-group-text btn" id="inputLabel-prepend">
-                        <input type="checkbox" [(ngModel)]="parameters.checkMulta" (ngModelChange)="setMulta()" [disabled]="permisions[0].editar=='0' || !actions.dComponet " id="checkmulta">
+                        <input type="checkbox" [(ngModel)]="parameters.checkMulta" (ngModelChange)="setMulta()" disabled="permisions[0].editar=='0' || !actions.dComponet " id="checkmulta">
                     </div>
                 </app-cc-input-group-prepend>
             </div>

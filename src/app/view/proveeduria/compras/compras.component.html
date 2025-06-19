@@ -11,11 +11,11 @@
             [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
           <div class="input-group-append">
             <button class="btn btn-primary" (click)="getPrevRecord()" matTooltip="Registro Anterior"
-              [disabled]="lastRecord == null">
+              disabled="lastRecord == null">
               <i class="far fa-chevron-left"></i>
             </button>
             <button class="btn btn-primary" (click)="getNextRecord()" matTooltip="Registro Siguiente"
-              [disabled]="lastRecord == null">
+              disabled="lastRecord == null">
               <i class="far fa-chevron-right"></i>
             </button>
             <button class="btn btn-primary" (click)="getLatest()" matTooltip="Ultimo Registro">
@@ -28,7 +28,7 @@
         <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo">
           <ng-select [clearable]=false placeholder="-seleccionar tipo" [(ngModel)]="buyProv.fk_doc"
             (change)="CambioTipoComprobante()" class="form-control form-control-sm custom-select" [items]="tip_documeto"
-            bindLabel="nombre" bindValue="id" [disabled]="busqueda"></ng-select>
+            bindLabel="nombre" bindValue="id" disabled="busqueda"></ng-select>
         </app-cc-input-group-prepend>
       </div>
       <div class="col-sm-8">
@@ -38,10 +38,10 @@
           </div>
           <input [(ngModel)]="buyProv.fk_id_proveedor" type="text" class="form-control form-control-sm d-none" disabled>
           <input [(ngModel)]="buyProv.proveedor_name" type="text" class="form-control form-control-sm"
-            placeholder="Busqueda proveedor" [disabled]="busqueda">
+            placeholder="Busqueda proveedor" disabled="busqueda">
           <div class="input-group-append">
             <button (click)="onClickConsultaProveedores()" class="btn btn-primary btn-sm" type="button"
-              [disabled]="busqueda">
+              disabled="busqueda">
               <i class="fa fa-search"></i>
             </button>
           </div>
@@ -54,7 +54,7 @@
               {{ proveedor?.tipo_documento }}
             </span>
           </div>
-          <input [disabled]="true" placeholder="Identificacion Proveedor" type="text"
+          <input disabled="true" placeholder="Identificacion Proveedor" type="text"
             class="form-control form-control-sm" [(ngModel)]="buyProv.identificacion_proveedor" min="0" maxlength="15"
             disabled>
         </div>
@@ -62,7 +62,7 @@
       <div class="col-sm-1">
         <div class="button-carga-xml mt-1" appDnd (fileDropped)="onFileDropped($event)">
           <input accept="text/xml" class="d-none" type="file" #fileDropRef id="fileDropRef"
-            (change)="fileBrowseHandler($event.target.files)" [disabled]="busqueda" />
+            (change)="fileBrowseHandler($event.target.files)" disabled="busqueda" />
           <label for="fileDropRef"><i class="fa fa-upload btn-primary" aria-hidden="true"></i> XML</label>
         </div>
       </div>
@@ -72,19 +72,19 @@
             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. de proceso/Contrato</span>
           </div>
           <!-- <ng-select loadingText="Cargando.." [loading]="LoadOpcionContratos"
-                            [disabled]="buyProv.fk_doc == 20 "
+                            disabled="buyProv.fk_doc == 20 "
                             (ngModelChange)="CargarAnticipoProveedor($event)"
                             placeholder="-seleccionar contrato-" [(ngModel)]="buyProv.num_contraro"
                             class="form-control form-control-sm custom-select" (open)="CargarContratosProveedor()"
                             [items]="infoContrato" bindLabel="contrato" bindValue="id_contrato" id="idUserReceibed">
                         </ng-select> -->
           <ng-select loadingText="Cargando.." [loading]="LoadOpcionContratos"
-            [disabled]="buyProv.fk_doc == 20 || busqueda" (ngModelChange)="handleSelectProceso($event)"
+            disabled="buyProv.fk_doc == 20 || busqueda" (ngModelChange)="handleSelectProceso($event)"
             [clearable]="false" placeholder="-seleccionar contrato-" [(ngModel)]="buyProv.num_contrato"
             class="form-control form-control-sm custom-select" (open)="CargarContratosProveedor()" id="idUserReceibed">
             <ng-option *ngFor="let op of contratos" [value]="op.id_solicitud">{{ op.num_solicitud }}</ng-option>
           </ng-select>
-          <!--input [disabled]="buyProv.fk_doc == 20 " placeholder="No. de proceso/Contrato" type="text" class="form-control form-control-sm"
+          <!--input disabled="buyProv.fk_doc == 20 " placeholder="No. de proceso/Contrato" type="text" class="form-control form-control-sm"
                             [(ngModel)]="buyProv.num_contraro" min="0" maxlength="15"-->
         </div>
       </div>
@@ -105,11 +105,11 @@
                         class="form-control form-control-sm"  
                         id="idNominaDatef" 
                         [(ngModel)]="fecha_compra" 
-                        [disabled]="busqueda">
+                        disabled="busqueda">
                     </div> -->
         <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
           <p-calendar dateFormat="dd/mm/yy" [(ngModel)]="fecha_compra" (change)="ChangeFechaCompras($event)"
-            id="idNominaDatef" [showIcon]="true" inputId="icon" [disabled]="busqueda"
+            id="idNominaDatef" [showIcon]="true" inputId="icon" disabled="busqueda"
             [style]="{'height':'30px','display': 'inline-flex'}"
             [inputStyle]="{'height':'30px','width':'9rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
           </p-calendar>
@@ -126,7 +126,7 @@
           <ng-select loadingText="Cargando.." [clearable]=false [loading]="LoadOpcionTipoDoc"
             placeholder="-seleccionar tipo doc-" [(ngModel)]="buyProv.tipo_documento"
             class="form-control form-control-sm custom-select" (open)="CargarTipoDocumento()"
-            [disabled]="buyProv.fk_doc == 20 || busqueda" [items]="tip_doc" bindLabel="nombre" bindValue="id"
+            disabled="buyProv.fk_doc == 20 || busqueda" [items]="tip_doc" bindLabel="nombre" bindValue="id"
             id="idTipDocSelect"></ng-select>
         </div>
       </div>
@@ -139,7 +139,7 @@
           <ng-select loadingText="Cargando.." [loading]="LoadOpcionCondiciones" placeholder="-seleccionar condición-"
             [(ngModel)]="buyProv.condicion" class="form-control form-control-sm custom-select"
             [items]="ListaCondiciones" bindLabel="condicion" bindValue="id_condicion" id="idUserReceibed"
-            [disabled]="busqueda">
+            disabled="busqueda">
           </ng-select>
         </div>
       </div>
@@ -152,7 +152,7 @@
           <ng-select loadingText="Cargando.." [clearable]=false [loading]="LoadOpcion"
             placeholder="-seleccionar forma pago-" [(ngModel)]="buyProv.forma_pago"
             class="form-control form-control-sm custom-select" (open)="cargaInfoFormaPago()" [items]="forma_pago"
-            bindLabel="valor" bindValue="valor" [disabled]="busqueda"></ng-select>
+            bindLabel="valor" bindValue="valor" disabled="busqueda"></ng-select>
         </div>
       </div>
     </div>
@@ -163,7 +163,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
           </div>
-          <input [disabled]="buyProv.fk_doc == 20 || busqueda" placeholder="Ej. 001002000000001" type="text"
+          <input disabled="buyProv.fk_doc == 20 || busqueda" placeholder="Ej. 001002000000001" type="text"
             class="form-control form-control-sm" id="idmudoc" [(ngModel)]="buyProv.num_doc" min="0" maxlength="15"
             (input)="quitarGuion(buyProv.num_doc)">
         </div>
@@ -176,7 +176,7 @@
             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No.
               Autorización</span>
           </div>
-          <input [disabled]="buyProv.fk_doc == 20 || busqueda" placeholder="número  autorización" type="text"
+          <input disabled="buyProv.fk_doc == 20 || busqueda" placeholder="número  autorización" type="text"
             class="form-control form-control-sm" id="idNumAut" [(ngModel)]="buyProv.num_aut" min="0" maxlength="49"
             (keypress)="commonServices.FormatDecimalVal($event)">
         </div>
@@ -190,7 +190,7 @@
             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sustento
               Tributario</span>
           </div>
-          <ng-select [disabled]="buyProv.fk_doc == 20 || busqueda" loadingText="Cargando.." [clearable]=false
+          <ng-select disabled="buyProv.fk_doc == 20 || busqueda" loadingText="Cargando.." [clearable]=false
             [loading]="LoadOpcionSustento" placeholder="-seleccionar sustento-" [(ngModel)]="buyProv.sustento"
             class="form-control form-control-sm custom-select" (open)="cargaInfoSustento()" [items]="sustento_array"
             bindLabel="descripcion" bindValue="id_sustento_tributario">
@@ -221,10 +221,10 @@
             placeholder="-seleccionar tipo pago-" [(ngModel)]="buyProv.tipo_pago"
             class="form-control form-control-sm custom-select" (open)="cargaInfoTipoPago()" [items]="tipo_pago"
             bindLabel="valor" bindValue="valor" (ngModelChange)="changeDisabledBtn()" id="idTipoPagoSelect"
-            [disabled]="busqueda"></ng-select>
+            disabled="busqueda"></ng-select>
           <div class="input-group-append">
             <button class="btn btn-primary btn-sm" (click)="setNumCuotas()" style="box-shadow: unset;outline: unset;"
-              id="idbtndifered" [disabled]="!flagBtnDired || busqueda" placement="top" ngbTooltip="Diferir cuotas">
+              id="idbtndifered" disabled="!flagBtnDired || busqueda" placement="top" ngbTooltip="Diferir cuotas">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
           </div>
@@ -240,7 +240,7 @@
             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Egresos
               Corrientes</span>
           </div>
-          <ng-select [disabled]="buyProv.fk_doc == 20 || busqueda" loadingText="Cargando.." [clearable]=false
+          <ng-select disabled="buyProv.fk_doc == 20 || busqueda" loadingText="Cargando.." [clearable]=false
             [loading]="LoadOpcionEgreCorriente" placeholder="-seleccionar egreso corriente-"
             [(ngModel)]="buyProv.egreso_corriente" class="form-control form-control-sm custom-select"
             (open)="getEgreCorrientes()" [items]="egreso_corriente_array" bindLabel="descripcion" bindValue="valor">
@@ -256,7 +256,7 @@
           <ng-select loadingText="Cargando.." [loading]="LoadOpcionUsuario" placeholder="-seleccionar usuario-"
             [(ngModel)]="buyProv.fk_usuario_receive" class="form-control form-control-sm custom-select"
             (open)="CargarComboUsuario()" [items]="infoUsers" bindLabel="nombre" bindValue="id_usuario"
-            id="idUserReceibed" [disabled]="busqueda">
+            id="idUserReceibed" disabled="busqueda">
           </ng-select>
         </div>
       </div>
@@ -276,7 +276,7 @@
             <span class="input-group-text input-group-textarea" placeholder="Ingrese observación">Concepto</span>
           </div>
           <textarea class="form-control form-control-sm" aria-label="With textarea" [(ngModel)]="buyProv.observacion"
-            id="idtxta" placeholder="Ingrese una observación" [disabled]="busqueda"></textarea>
+            id="idtxta" placeholder="Ingrese una observación" disabled="busqueda"></textarea>
         </div>
       </div>
       <div class="col-sm-4" *ngIf="retencionIsActive">
@@ -284,11 +284,11 @@
           <div class="input-group-prepend">
             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Retención</span>
           </div>
-          <input [disabled]="buyProv.fk_doc == 20 || busqueda" type="text" class="form-control form-control-sm"
+          <input disabled="buyProv.fk_doc == 20 || busqueda" type="text" class="form-control form-control-sm"
             id="idmudoc" [(ngModel)]="num_retencion">
           <!-- <div class="input-group-append">
                             <button (click)="verReporteRetencion()" class="btn btn-danger btn-sm"
-                                type="button" [disabled]="busqueda">
+                                type="button" disabled="busqueda">
                                 <i class="fa fa-file-pdf-0"></i>
                             </button>
                         </div> -->
@@ -325,7 +325,7 @@
                         binary="true" 
                         [(ngModel)]="isAsignaOrden"
                         (ngModelChange) ="seleccionado($event)"
-                        [disabled]="busqueda">
+                        disabled="busqueda">
                         </p-checkbox>
                     </div>
                     
@@ -337,7 +337,7 @@
       <div class="col-sm-2 mt-4">
         <!-- <p-checkbox (onChange)="selectedFechaLimite($event)" name="group1" value="S" [(ngModel)]="isAsignaFecha" inputId="ch"></p-checkbox><label class="label_multa_compras" for="ch">¿Tiene fecha límite?:</label> -->
         <p-checkbox class="font-weight-bold" label="¿Tiene fecha límite?:" binary="true" [(ngModel)]="isAsignaFecha"
-          (ngModelChange)="selectedFechaLimite($event)" [disabled]="busqueda">
+          (ngModelChange)="selectedFechaLimite($event)" disabled="busqueda">
         </p-checkbox>
 
       </div>
@@ -350,7 +350,7 @@
           <p-calendar [readonlyInput]="true" dateFormat="dd/mm/yy" [(ngModel)]="fecha_limite" [showIcon]="true"
             class="ui-calendar ui-calendar-button" inputId="icon" [style]="{'height':'30px','display': 'inline-flex'}"
             [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}"
-            [disabled]="busqueda">
+            disabled="busqueda">
           </p-calendar>
         </div>
       </div>
@@ -368,7 +368,7 @@
                             [(ngModel)]="fecha_limite" 
                             [showIcon]="true" 
                             class="ui-calendar ui-calendar-button"
-                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}" [disabled]="busqueda">
+                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}" disabled="busqueda">
                         </p-calendar>
                     </div>
                 </div>
@@ -378,13 +378,13 @@
       <div class="col-sm-2 mt-4">
         <!-- <p-checkbox [checked]="" (onChange)="selectedMetodoPago($event)" name="group1" value="S" [(ngModel)]="isAsignaMetodo" inputId="ch"></p-checkbox><label class="label_multa_compras" for="ch">¿Tiene metodo de pago?:</label> -->
         <p-checkbox class="font-weight-bold" label="¿Tiene metodo de pago?:" binary="true" [(ngModel)]="isAsignaMetodo"
-          (ngModelChange)="selectedMetodoPago($event)" [disabled]="busqueda"></p-checkbox>
+          (ngModelChange)="selectedMetodoPago($event)" disabled="busqueda"></p-checkbox>
       </div>
       <div class="col-sm-5 mt-4" [hidden]="mostrarMetodos">
         <app-cc-input-group-prepend label="Método de Pago" styleSpan="size-span-campo">
           <ng-select [clearable]=false placeholder="-seleccionar tipo" [(ngModel)]="buyProv.metodo_pago"
             (change)="CambioMetodoPago()" class="form-control form-control-sm custom-select" [items]="metodo_pago"
-            bindLabel="descripcion" bindValue="valor" [disabled]="busqueda"></ng-select>
+            bindLabel="descripcion" bindValue="valor" disabled="busqueda"></ng-select>
         </app-cc-input-group-prepend>
       </div>
       <div class="col-sm-5 mt-4" [hidden]="mostrarMetodos">
@@ -403,7 +403,7 @@
                     <app-cc-input-group-prepend label="Método de Pago" styleSpan="size-span-campo">
                         <ng-select [clearable]=false placeholder="-seleccionar tipo" [(ngModel)]="buyProv.metodo_pago"
                             (change)="CambioMetodoPago()" class="form-control form-control-sm custom-select"
-                            [items]="metodo_pago" bindLabel="descripcion" bindValue="valor" [disabled]="busqueda" ></ng-select>
+                            [items]="metodo_pago" bindLabel="descripcion" bindValue="valor" disabled="busqueda" ></ng-select>
                     </app-cc-input-group-prepend>
                 </div>
                 <div class="col-sm-4">
@@ -423,7 +423,7 @@
                     binary="true" 
                     [(ngModel)]="isAsignaMulta"
                     (ngModelChange) ="AsignarMulta($event)"
-                    [disabled]="busqueda"></p-checkbox>
+                    disabled="busqueda"></p-checkbox>
                 </div>
                 <div class="col-sm-10 mt-4">
                     <p-divider></p-divider>
@@ -440,10 +440,10 @@
                                     cuenta Multa:</span>
                             </div>
                             <input [(ngModel)]="buyProv.CodacountMulta" type="text"
-                                class="form-control form-control-sm" placeholder="Código cuenta registro multa" [disabled]="busqueda">
+                                class="form-control form-control-sm" placeholder="Código cuenta registro multa" disabled="busqueda">
                             <div class="input-group-append">
                                 <button (click)="onClicConsultaPlanCuentas(content)"
-                                    class="btn btn-default btn-ligth-default" type="button" [disabled]="busqueda">
+                                    class="btn btn-default btn-ligth-default" type="button" disabled="busqueda">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
@@ -457,7 +457,7 @@
                             </div>
                             <input type="text" #nameAccountM="ngModel" name="nameAccountM"
                                 [(ngModel)]="buyProv.acountMulta" class="form-control form-control-sm"
-                                [disabled]="true" placeholder="Nombre cuenta registro multa">
+                                disabled="true" placeholder="Nombre cuenta registro multa">
                         </div>
                     </div>
 
@@ -470,10 +470,10 @@
                                     contrapartida Multa:</span>
                             </div>
                             <input [(ngModel)]="buyProv.CodacountMultaContrapartida" type="text"
-                                class="form-control form-control-sm" placeholder="Código cuenta registro multa" [disabled]="busqueda">
+                                class="form-control form-control-sm" placeholder="Código cuenta registro multa" disabled="busqueda">
                             <div class="input-group-append">
                                 <button (click)="onClicConsultaPlanCuentasContraPartida(content)"
-                                    class="btn btn-default btn-ligth-default" type="button" [disabled]="busqueda">
+                                    class="btn btn-default btn-ligth-default" type="button" disabled="busqueda">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
@@ -487,7 +487,7 @@
                             </div>
                             <input type="text" #nameAccountM="ngModel" name="nameAccountM"
                                 [(ngModel)]="buyProv.acountMultaContrapartida" class="form-control form-control-sm"
-                                [disabled]="true" placeholder="Nombre cuenta registro multa" [disabled]="busqueda">
+                                disabled="true" placeholder="Nombre cuenta registro multa" disabled="busqueda">
                         </div>
                     </div>
                 </div>
@@ -499,7 +499,7 @@
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor Multa</span>
                             </div>
                             <input type="number" class="form-control form-control-sm text-right pr-2"
-                                [(ngModel)]="buyProv.multa" min="0" [disabled]="busqueda">
+                                [(ngModel)]="buyProv.multa" min="0" disabled="busqueda">
                         </div>
                     </div>
                     
@@ -511,7 +511,7 @@
                             </div>
                             <textarea class="form-control form-control-sm" aria-label="With textarea"
                                 [(ngModel)]="buyProv.motivo_multa" id="idtxta"
-                                placeholder="Ingrese una observación" [disabled]="busqueda"></textarea>
+                                placeholder="Ingrese una observación" disabled="busqueda"></textarea>
                         </div>
                     </div>
                 </div>
@@ -523,7 +523,7 @@
     <div class="row mt-4 mb-3  pl-2 pr-2">
       <div class="col-12">
         <p-tabView styleClass="tab_content_compras" class="overflow" (onChange)="functemp($event)" [(activeIndex)]="activeIndex">
-          <p-tabPanel [disabled]="ExistenItems" class="p-0" header="ITEMS" [headerStyle]="{'font-size': '0.7rem'}">
+          <p-tabPanel disabled="ExistenItems" class="p-0" header="ITEMS" [headerStyle]="{'font-size': '0.7rem'}">
             <div class="col-4">
               <ng-container *ngIf="!busqueda; else showIngreso">
                 <app-cc-input-group-prepend label="Ingreso de Bodega" styleSpan="size-span-campo">
@@ -542,7 +542,7 @@
             </div>
             <!-- <div class="col-4">
                                 <div class="text-left m-2">
-                                    <button class="btn btn-primary" (click)="cargarIngresoBodega()" [disabled]="busqueda">
+                                    <button class="btn btn-primary" (click)="cargarIngresoBodega()" disabled="busqueda">
                                         Cargar Ingreso
                                     </button>
                                 </div>
@@ -577,7 +577,7 @@
                                                 <td *ngIf="f.tipo != 'T'">
                                                     <input style="width: 150px;" placeholder="codigo cuenta" [value]="f.numero_ingreso_bodega"
                                                         name="detAccounts" [(ngModel)]="f.account"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.numero_ingreso_bodega}}" />
                                                 </td>
@@ -585,21 +585,21 @@
                                                 <td *ngIf="f.tipo != 'T'">
                                                     <input style="width: 250px;" placeholder="cuenta" [value]="f.description" name="detName"
                                                         [(ngModel)]="f.name"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.description}}" />
                                                 </td>
                                                 <td *ngIf="f.tipo == 'T'"><span ></span></td>
                                                 <td *ngIf="f.tipo != 'T'">
                                                     <input style="width: 250px;" [(ngModel)]="f.detail" placeholder="Ingrese un detalle"
-                                                        [disabled]="busqueda"
+                                                        disabled="busqueda"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.detail}}" />
                                                 </td>
                                                 <td  [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} "  *ngIf="f.tipo == 'T'"><span >TOTALES</span></td>
                                                 <td *ngIf="f.tipo != 'T'">
                                                     <ng-select style="width: 120px;" loadingText="Cargando.." 
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         [clearable]=false [loading]="f.LoadOpcionCentro"
                                                         placeholder="-seleccionar centro-" [(ngModel)]="f.centro"
                                                         class="form-control form-control-sm custom-select"
@@ -610,14 +610,14 @@
                                                 </td>
                                                 <td>
                                                     <input [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} "  style="width: 120px;" [(ngModel)]="f.debit" placeholder="0.00"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (keypress)="inputNumVal($event)" (ngModelChange)="debitChange()"
                                                         type="number" name="{{f.debit}}" />
                                                 </td>
                                                 <td >
                                                     <input [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " style="width: 120px;" [(ngModel)]="f.credit" placeholder="0.00"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (keypress)="inputNumVal($event)"
                                                         (ngModelChange)="creditChange()" type="number"
@@ -627,21 +627,21 @@
                                                 <td *ngIf="f.tipo == 'T'"><span ></span></td>
                                                 <td *ngIf="f.tipo != 'T'" style="width: 180px;">
                                                     <input style="width: 180px;" [(ngModel)]="f.codigo"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.codigo}}" />
                                                 </td>
                                                 <td *ngIf="f.tipo == 'T'"><span ></span></td>
                                                 <td *ngIf="f.tipo != 'T'" >
                                                     <input style="width: 250px;" [(ngModel)]="f.presupuesto"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.presupuesto}}" />
                                                     
                                                 </td>
                                                  <td>
                                                     <input [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " style="width: 150px;" [(ngModel)]="f.valor_presupuesto" placeholder="0.00"
-                                                        [disabled]="busqueda"
+                                                        disabled="busqueda"
                                                         class="form-control form-control-sm pr-1 text-right" type="number"
                                                         name="{{f.valor_presupuesto}}" />
                                                     
@@ -695,30 +695,30 @@
                                                         style="text-align: center; height: 45px; width: 70px; vertical-align: middle;">
                                                         <button class="btn btn-danger btn-sm mt-2" placement="top"
                                                             ngbTooltip="Eliminar Items" (click)="deleteItems(i)"><i
-                                                                class="fa fa-trash-o" aria-hidden="true" [disabled]="busqueda"></i>
+                                                                class="fa fa-trash-o" aria-hidden="true" disabled="busqueda"></i>
                                                         </button>
 
                                                         <button class="btn btn-primary btn-sm mt-2 ml-1" placement="top"
                                                             ngbTooltip="Eliminar Items"
                                                             (click)="onClickConsultaProductos(i)"><i
-                                                                class="fa fa-search" aria-hidden="true" [disabled]="busqueda"></i>
+                                                                class="fa fa-search" aria-hidden="true" disabled="busqueda"></i>
                                                         </button>
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control form-control-sm pr-1"
                                                             style="width: 250px;" [(ngModel)]="d.nombre"
-                                                            [disabled]="true" id="product_{{i}}">
+                                                            disabled="true" id="product_{{i}}">
                                                        
                                                     </td>
                                                     <td style="display: none; text-align: center;">
-                                                        <input type="text" [(ngModel)]="d.codigo" [disabled]="true"
+                                                        <input type="text" [(ngModel)]="d.codigo" disabled="true"
                                                             placeholder="Código">
                                                     </td>
                                                     <td style="display: none; text-align: center;">
                                                         <textarea class="form-control form-control-sm"
                                                             [(ngModel)]="d.observacion"
                                                             placeholder="Ingrese descripción" rows="1"
-                                                            [disabled]="busqueda">
+                                                            disabled="busqueda">
                                                     </textarea>
                                                     </td>
                                                     <td>
@@ -726,7 +726,7 @@
                                                             placeholder="0.00" style="width: 100px; text-align: right;"
                                                             [(ngModel)]="d.cantidad" (keyup)="sumRegistroDetalle(i)"
                                                             min="0" (keypress)="commonServices.FormatDecimalVal($event)"
-                                                            [disabled]="d.InputDisabledCantidad || busqueda" id="cantidad_{{i}}">
+                                                            disabled="d.InputDisabledCantidad || busqueda" id="cantidad_{{i}}">
                                                     </td>
                                                     <td>
                                                         <input style="width: 60px" type="text"
@@ -735,7 +735,7 @@
                                                             style="width: 100px; text-align: right;"
                                                             [(ngModel)]="d.precio" (keyup)="sumRegistroDetalle(i)"
                                                             min="0" (keypress)="commonServices.FormatDecimalVal($event)"
-                                                            [disabled]="d.fk_producto == undefined || busqueda">
+                                                            disabled="d.fk_producto == undefined || busqueda">
                                                     </td>
                                                     <td
                                                         style="text-align: right; width: 100px; vertical-align: middle;">
@@ -749,7 +749,7 @@
                                                             style="width: 100px; text-align: right;"
                                                             [(ngModel)]="d.desc" (keyup)="sumRegistroDetalle(i)" min="0"
                                                             (keypress)="commonServices.FormatDecimalVal($event)"
-                                                            [disabled]="d.fk_producto == undefined || busqueda">
+                                                            disabled="d.fk_producto == undefined || busqueda">
                                                     </td>
                                                     <td>
                                                         <div>
@@ -762,7 +762,7 @@
                                                                 (open)="getImpuestosDetalle(i,dataProducto)"
                                                                 [items]="impuestos" bindLabel="descripcion"
                                                                 bindValue="valor" appendTo="body"
-                                                                id="idTipImpuestoSelect" [disabled]="busqueda"></ng-select>
+                                                                id="idTipImpuestoSelect" disabled="busqueda"></ng-select>
                                                         </div>
                                                     </td>
                                                     <td
@@ -782,7 +782,7 @@
                                                                 bindLabel="combo" bindValue="id_reten_fuente"
                                                                 (change)="ChangeFuente($event,dataProducto,i)"
                                                                 id="idReteFuente" appendTo="body" style="width: 200px;"
-                                                                [disabled]="busqueda">
+                                                                disabled="busqueda">
                                                                 <ng-template ng-option-tmp let-item="item">
                                                                     <strong>{{item.combo}}</strong>
                                                                 </ng-template>
@@ -799,7 +799,7 @@
                                                                 (open)="getRetencionIva(i,dataProducto)"
                                                                 [items]="rte_iva"
                                                                 (change)="ChangeImpuestoIva($event,dataProducto,i)"
-                                                                [disabled]="d.isRetencionIva || busqueda"
+                                                                disabled="d.isRetencionIva || busqueda"
                                                                 bindLabel="descripcion_tipo_servicio"
                                                                 bindValue="codigo_sri_iva" id="idRteIva"
                                                                 appendTo="body"></ng-select>
@@ -815,13 +815,13 @@
                                                                 (open)="getCentroDetalle(i)" [items]="centros"
                                                                 bindLabel="nombre" bindValue="id"
                                                                 appendTo="body" id="idCentroCosto"
-                                                                [disabled]="busqueda"></ng-select>
+                                                                disabled="busqueda"></ng-select>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control form-control-sm pr-1"
                                                             placeholder="$ 0.00" style="width: 60px; text-align: right;"
-                                                            [(ngModel)]="d.iva_detalle" min="0" [disabled]="true">
+                                                            [(ngModel)]="d.iva_detalle" min="0" disabled="true">
                                                     </td>
 
                                                 </tr>
@@ -850,7 +850,7 @@
                       <i class="fa fa-file-excel-o" aria-hidden="true"> Excel</i>
                     </button>
                     <button class="btn btn-success btn-sm btn_add_detalle " placement="top" ngbTooltip="Añadir Items"
-                      (click)="addCuentas()" [disabled]="busqueda">
+                      (click)="addCuentas()" disabled="busqueda">
                       <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                   </div>
@@ -927,24 +927,24 @@
                           <div style="width: 130px;">
                             <button class="btn btn-danger btn-sm mt-2" placement="top" ngbTooltip="Eliminar Items"
                               (click)="deleteItemCuenta(i)"><i class="fa fa-trash-o" aria-hidden="true"
-                                [disabled]="busqueda"></i>
+                                disabled="busqueda"></i>
                             </button>
                             <button class="btn btn-primary btn-sm mt-2 ml-1" placement="top" ngbTooltip="Carga Cuenta"
-                              (click)="onClickConsultaCuentas(i)" [disabled]="busqueda"><i class="fa fa-search"
+                              (click)="onClickConsultaCuentas(i)" disabled="busqueda"><i class="fa fa-search"
                                 aria-hidden="true"></i>
                             </button>
                             <!-- <button class="btn btn-warning btn-sm mt-2 ml-1" placement="top"
                                                             ngbTooltip="Asignar CXP"
                                                             (click)="onClickConsultaCuentasPorPagar(i)" 
-                                                            [disabled]="busqueda">
+                                                            disabled="busqueda">
                                                             <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                                                         </button> -->
                             <button class="btn btn-warning btn-sm mt-2 ml-1" placement="top" ngbTooltip="Asignar CXP"
-                              (click)="expandCuentasPorPagar(i,c)" [disabled]="busqueda">
+                              (click)="expandCuentasPorPagar(i,c)" disabled="busqueda">
                               <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                             </button>
                             <button class="btn btn-secondary btn-sm mt-2 ml-1" ngbTooltip="Aplicar CxP desde aqui"
-                              placement="top" [disabled]="busqueda" (click)="aplicarCxpDesde(i)">
+                              placement="top" disabled="busqueda" (click)="aplicarCxpDesde(i)">
                               <i class="fas fa-angle-double-down"></i>
                             </button>
                           </div>
@@ -952,17 +952,17 @@
                         <!-- Cuenta -->
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" style="width: 250px;"
-                            [(ngModel)]="c.cuenta_detalle" [disabled]="true" id="product_{{i}}">
+                            [(ngModel)]="c.cuenta_detalle" disabled="true" id="product_{{i}}">
                         </td>
                         <!-- Codigo -->
                         <td style="display: none; text-align: center;">
-                          <input type="text" [(ngModel)]="c.codigo" [disabled]="true" placeholder="Código">
+                          <input type="text" [(ngModel)]="c.codigo" disabled="true" placeholder="Código">
                         </td>
                         <!-- Descripcion -->
                         <td style="text-align: center;">
                           <textarea class="form-control form-control-sm" style="width: 150px;"
                             [(ngModel)]="c.observacion" placeholder="Ingrese descripción" rows="1"
-                            [disabled]="busqueda">
+                            disabled="busqueda">
                                                         </textarea>
                         </td>
                         <!-- Cantidad -->
@@ -971,14 +971,14 @@
                             style="width: 100px; text-align: right;" [(ngModel)]="c.cantidad"
                             (blur)="sumRegistroDetalleCuenta(i)" min="0"
                             (keypress)="commonServices.FormatDecimalVal($event)"
-                            [disabled]="c.InputDisabledCantidad || busqueda" id="cantidad_cuenta_{{i}}">
+                            disabled="c.InputDisabledCantidad || busqueda" id="cantidad_cuenta_{{i}}">
                         </td>
                         <!-- (change)="generaPreviewAsientoContable()" -->
                         <!-- Precio Unitario -->
                         <td>
                           <input currencyMask style="width: 60px" class="form-control form-control-sm pr-1"
                             style="width: 100px; text-align: right;" [(ngModel)]="c.precio"
-                            (blur)="sumRegistroDetalleCuenta(i)" [disabled]="c.cuenta_detalle == undefined || busqueda">
+                            (blur)="sumRegistroDetalleCuenta(i)" disabled="c.cuenta_detalle == undefined || busqueda">
                         </td>
                         <!-- (change)="generaPreviewAsientoContable()" -->
                         <!-- Subtotal -->
@@ -992,7 +992,7 @@
                           <input currencyMask class="form-control form-control-sm pr-1"
                             style="width: 100px; text-align: right;" [(ngModel)]="c.desc"
                             (blur)="sumRegistroDetalleCuenta(i)"
-                            [disabled]="c.cuenta_detalle == undefined  || busqueda">
+                            disabled="c.cuenta_detalle == undefined  || busqueda">
                         </td>
                         <!-- Impuesto -->
                         <td>
@@ -1002,7 +1002,7 @@
                               [(ngModel)]="c.impuesto" (ngModelChange)="CambioImpuestoCuenta(i)"
                               class="form-control form-control-sm custom-select"
                               (open)="getImpuestosDetalle(i,dataCuenta)" [items]="impuestos" bindLabel="descripcion"
-                              bindValue="valor" appendTo="body" id="idTipImpuestoSelect" [disabled]="busqueda">
+                              bindValue="valor" appendTo="body" id="idTipImpuestoSelect" disabled="busqueda">
                             </ng-select>
                           </div>
                         </td>
@@ -1014,7 +1014,7 @@
                               (change)="ChangeIceSri($event,dataCuenta,i)"
                               class="form-control form-control-sm custom-select" (open)="getIceSri(i,dataCuenta)"
                               [items]="iceSri" bindLabel="combo_ice" bindValue="id" appendTo="body" id="idIceSriSelect"
-                              [disabled]="busqueda"></ng-select>
+                              disabled="busqueda"></ng-select>
                           </div>
                         </td>
                         <!-- Total -->
@@ -1031,7 +1031,7 @@
                               class="form-control form-control-sm custom-select"
                               (change)="ChangeFuente($event,dataCuenta,i)" (open)="getRetencionFuente(i)"
                               [items]="rete_fuente" bindLabel="combo" bindValue="id_reten_fuente" id="idReteFuente"
-                              appendTo="body" style="width: 400px;" [disabled]="busqueda">
+                              appendTo="body" style="width: 400px;" disabled="busqueda">
                               <ng-template ng-option-tmp let-item="item">
                                 {{item.combo}}
                               </ng-template>
@@ -1045,7 +1045,7 @@
                               placeholder="-seleccionar cuenta rte. fuente-" [(ngModel)]="c.cuenta_rte_fuente"
                               class="form-control form-control-sm" (change)="ChangeFuenteCuenta($event,dataCuenta,i)"
                               [items]="rete_fuente_acount" bindLabel="tipo" bindValue="cuenta" id="idReteFuente"
-                              appendTo="body" style="width: 200px;" [disabled]="busqueda">
+                              appendTo="body" style="width: 200px;" disabled="busqueda">
                             </ng-select>
                           </div>
                         </td>
@@ -1053,7 +1053,7 @@
                           <div style="width: 200px;">
                             <input style="width: 80px" type="text" class="form-control form-control-sm pr-1"
                               [(ngModel)]="c.cuenta_rte_fuente" (change)="ChangeFuenteCuenta($event,dataCuenta,i)"
-                              [disabled]=" busqueda">
+                              disabled=" busqueda">
                             <!-- <span> {{c.cuenta_rte_fuente}}</span> -->
                           </div>
                         </td>
@@ -1064,7 +1064,7 @@
                               [loading]="c.LoadOpcionRteIva" placeholder="-seleccionar rte. IVA-"
                               [(ngModel)]="c.rte_iva" class="form-control form-control-sm custom-select"
                               (change)="ChangeImpuestoIva($event,dataCuenta,i)"
-                              [disabled]="c.isRetencionIva || busqueda" (open)="getRetencionIva(i,dataCuenta)"
+                              disabled="c.isRetencionIva || busqueda" (open)="getRetencionIva(i,dataCuenta)"
                               [items]="rte_iva" bindLabel="descripcion_tipo_servicio" bindValue="codigo_sri_iva"
                               id="idRteIva" appendTo="body"></ng-select>
                           </div>
@@ -1076,13 +1076,13 @@
                               [loading]="c.LoadOpcionCentro" placeholder="-seleccionar centro-" [(ngModel)]="c.centro"
                               class="form-control form-control-sm custom-select" (open)="getCentroDetalle(i)"
                               [items]="centros" bindLabel="nombre" bindValue="id" appendTo="body" id="idCentroCosto"
-                              [disabled]="busqueda"></ng-select>
+                              disabled="busqueda"></ng-select>
                           </div>
                         </td>
                         <td *ngIf="busqueda" style="width: 200px;">
                           <div style="width: 150px;">
                             <input style="width: 80px" type="text" class="form-control form-control-sm pr-1"
-                              [(ngModel)]="c.centro_nombre" [disabled]=" busqueda">
+                              [(ngModel)]="c.centro_nombre" disabled=" busqueda">
                             <!-- <span> {{c.cuenta_rte_fuente}}</span> -->
                           </div>
                         </td>
@@ -1090,26 +1090,26 @@
                         <td>
                           <input currencyMask class="form-control form-control-sm pr-1"
                             style="width: 60px; text-align: right;" [(ngModel)]="c.iva_detalle" min="0"
-                            [disabled]="true">
+                            disabled="true">
                         </td>
                         <!-- Valor ICE -->
                         <td>
                           <input currencyMask class="form-control form-control-sm pr-1"
                             style="width: 60px; text-align: right;" [(ngModel)]="c.ice_detalle" min="0"
-                            [disabled]="true">
+                            disabled="true">
                         </td>
                         <!-- Cod. Partida Presupuestaria -->
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1W" 
                             style="width: 60px; text-align: right;" [(ngModel)]="c.codigo_presupuesto" min="0"
-                            [disabled]="true"> <!-- class="form-control form-control-sm custom-select"  -->
+                            disabled="true"> <!-- class="form-control form-control-sm custom-select"  -->
                         </td>
                         <!-- Cod. Partida icp -->
                         <td>
-                          <ng-select placeholder="-seleccionar codigo partida idp-" [(ngModel)]="c.codigo_partida_icp" [disabled]="busqueda"
-                            class="form-control form-control-sm custom-select"  appendTo="body" [disabled]="c.codigo_presupuesto == null || c.codigo_presupuesto == ''"
+                          <ng-select placeholder="-seleccionar codigo partida idp-" [(ngModel)]="c.codigo_partida_icp" disabled="busqueda"
+                            class="form-control form-control-sm custom-select"  appendTo="body" disabled="c.codigo_presupuesto == null || c.codigo_presupuesto == ''"
                             (change)="asignarValores($event, i)">
-                            <ng-option *ngFor="let op of codigos_partidas_idp" [value]="op.codigopartida" [disabled]="c.codigo_presupuesto != op.partida">{{ op.codigopartida }}</ng-option>
+                            <ng-option *ngFor="let op of codigos_partidas_idp" [value]="op.codigopartida" disabled="c.codigo_presupuesto != op.partida">{{ op.codigopartida }}</ng-option>
                           </ng-select>
                           <input type="hidden" [(ngModel)]="c.proyecto">
                           <input type="hidden" [(ngModel)]="c.orientacion">
@@ -1120,24 +1120,24 @@
 
        <!--    <input type="text" class="form-control form-control-sm pr-1"
                             style="width: 60px; text-align: right;" [(ngModel)]="c.codigo_partida_icp" min="0"
-                            [disabled]="true"> -->
+                            disabled="true"> -->
                         </td>
                         <!-- Cod. Cuenta por Pagar -->
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" placeholder=""
                             style="width: 150px; text-align: right;" [(ngModel)]="c.cod_cuenta_por_pagar"
-                            [disabled]="true">
+                            disabled="true">
                         </td>
                         <!-- Cuenta por Pagar -->
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 350px; " [(ngModel)]="c.cuenta_por_pagar" [disabled]="true">
+                            style="width: 350px; " [(ngModel)]="c.cuenta_por_pagar" disabled="true">
                         </td>
                         <!-- Cod. Retencion en Fuente -->
                         <td>
                           <div class="input-group input-group-sm" style="width: 180px;">
                             <input type="text" class="form-control form-control-sm pr-1" placeholder=""
-                              style="text-align: right;" [(ngModel)]="c.cod_cuenta_impuesto_rtefte" [disabled]="true">
+                              style="text-align: right;" [(ngModel)]="c.cod_cuenta_impuesto_rtefte" disabled="true">
                             <div class="input-group-append">
                               <button class="btn btn-primary" (click)="expandCuentasRteFte(i)">
                                 <i class="fas fa-search"></i>
@@ -1148,18 +1148,18 @@
                         <!-- Retencion en Fuente -->
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 350px; " [(ngModel)]="c.cuenta_impuesto_rtefte" [disabled]="true">
+                            style="width: 350px; " [(ngModel)]="c.cuenta_impuesto_rtefte" disabled="true">
                         </td>
                         <!-- Valor Retencion en Fuente -->
                         <td>
                           <input currencyMask class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 100px; " [ngModel]="c?.retencion" [disabled]="true">
+                            style="width: 100px; " [ngModel]="c?.retencion" disabled="true">
                         </td>
                         <!-- Cod. Retencion IVA -->
                         <td>
                           <div class="input-group input-group-sm" style="width: 380px;">
                             <input type="text" class="form-control form-control-sm pr-1" placeholder=""
-                              [ngModel]="c?.cod_cuenta_impuesto_iva" [disabled]="true">
+                              [ngModel]="c?.cod_cuenta_impuesto_iva" disabled="true">
                             <div class="input-group-append">
                               <button class="btn btn-primary" (click)="expandCuentasRteIva(i)">
                                 <i class="fas fa-search"></i>
@@ -1170,42 +1170,42 @@
                         <!-- Cuenta Retencion IVA -->
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 350px; " [ngModel]="c?.nombre_cuenta_impuesto_iva" [disabled]="true">
+                            style="width: 350px; " [ngModel]="c?.nombre_cuenta_impuesto_iva" disabled="true">
                         </td>
                         <!-- Valor Retencion IVA -->
                         <td>
                           <input currencyMask class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 100px; " [ngModel]="c?.retencion_iva" [disabled]="true">
+                            style="width: 100px; " [ngModel]="c?.retencion_iva" disabled="true">
                         </td>
                         <!-- Proporcional -->
                         <td>
                           <input input="text" class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 100px; " [ngModel]="c?.proporcional" [disabled]="true">
+                            style="width: 100px; " [ngModel]="c?.proporcional" disabled="true">
                         </td>
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" placeholder=""
                             style="width: 150px; text-align: right;" [ngModel]="c?.cod_cuenta_anticipo"
-                            [disabled]="true">
+                            disabled="true">
                         </td>
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 350px; " [ngModel]="c?.cuenta_anticipo" [disabled]="true">
+                            style="width: 350px; " [ngModel]="c?.cuenta_anticipo" disabled="true">
                         </td>
                         <td>
                           <input currencyMask class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 100px;" [ngModel]="c?.valor_anticipo" [disabled]="true">
+                            style="width: 100px;" [ngModel]="c?.valor_anticipo" disabled="true">
                         </td>
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 150px; text-align: right;" [ngModel]="c?.cod_cuenta_multa" [disabled]="true">
+                            style="width: 150px; text-align: right;" [ngModel]="c?.cod_cuenta_multa" disabled="true">
                         </td>
                         <td>
                           <input type="text" class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 350px; " [ngModel]="c?.cuenta_multa" [disabled]="true">
+                            style="width: 350px; " [ngModel]="c?.cuenta_multa" disabled="true">
                         </td>
                         <td>
                           <input currencyMask class="form-control form-control-sm pr-1" placeholder=""
-                            style="width: 100px;" [ngModel]="c?.valor_multa" [disabled]="true">
+                            style="width: 100px;" [ngModel]="c?.valor_multa" disabled="true">
                         </td>
                       </tr>
                     </tbody>
@@ -1281,7 +1281,7 @@
                           <small>{{f.account}}</small>
                           <!--   <input style="width: 150px;" placeholder="codigo cuenta" [value]="f.account"
                                                         name="detAccounts" [(ngModel)]="f.account"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.account}}" /> -->
                         </td>
@@ -1290,7 +1290,7 @@
                           <small>{{f.name}}</small>
                           <!--    <input style="width: 350px;" placeholder="cuenta" [value]="f.name" name="detName"
                                                         [(ngModel)]="f.name"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.name}}" /> -->
                         </td>
@@ -1298,7 +1298,7 @@
                         <td *ngIf="f.tipo != 'T'">
                           <small>{{f.detail}}</small>
                           <!--   <input style="width: 250px;" [(ngModel)]="f.detail" placeholder="Ingrese un detalle"
-                                                        [disabled]="busqueda"
+                                                        disabled="busqueda"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.detail}}" /> -->
                         </td>
@@ -1307,7 +1307,7 @@
                         <td *ngIf="f.tipo != 'T'">
                           <small>{{f.centro}}</small>
                           <!--  <ng-select style="width: 120px;" loadingText="Cargando.." 
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         [clearable]=false [loading]="f.LoadOpcionCentro"
                                                         placeholder="-seleccionar centro-" [(ngModel)]="f.centro"
                                                         class="form-control form-control-sm custom-select"
@@ -1323,7 +1323,7 @@
                                                         currencyMask 
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} "  style="width: 120px;" 
                                                         [(ngModel)]="f.debit"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (keypress)="inputNumVal($event)" (ngModelChange)="debitChange()"
                                                         name="{{f.debit}}" /> -->
@@ -1335,7 +1335,7 @@
                                                         currencyMask
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " style="width: 120px;" 
                                                         [(ngModel)]="f.credit" 
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (keypress)="inputNumVal($event)"
                                                         (ngModelChange)="creditChange()" 
@@ -1347,7 +1347,7 @@
                           <small>
                             <!-- {{f.codigo}} -  -->{{f.codpresupuesto}}</small>
                           <!--  <input style="width: 180px;" [(ngModel)]="f.codigo"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.codigo}}" /> -->
                           <!--div style="width: 180px;">
@@ -1374,7 +1374,7 @@
                         <td *ngIf="f.tipo != 'T'">
                           <small>{{f.nombrepresupuesto}}</small>
                           <!--  <input style="width: 250px;" [(ngModel)]="f.presupuesto"  nombrepresupuesto
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.presupuesto}}" /> -->
 
@@ -1399,7 +1399,7 @@
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " 
                                                         style="width: 150px;" 
                                                         [(ngModel)]="f.valor_presupuesto" 
-                                                        [disabled]="busqueda"
+                                                        disabled="busqueda"
                                                         class="form-control form-control-sm pr-1 text-right" 
                                                         name="{{f.valor_presupuesto}}" /> -->
 
@@ -1422,7 +1422,7 @@
               </div>
             </div>
           </p-tabPanel>
-          <p-tabPanel class="p-0" [disabled]="ExistenAnticipos" header="ANTICIPOS"
+          <p-tabPanel class="p-0" disabled="ExistenAnticipos" header="ANTICIPOS"
             [headerStyle]="{'font-size': '0.7rem'}">
           
 <div class="row">
@@ -1471,56 +1471,56 @@
                     <tr *ngFor="let imp of ListaAnticipos; let a = index">
                       <td>
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.id_documento" [disabled]="true">
+                          [(ngModel)]="imp.id_documento" disabled="true">
                       </td>
                       <td>
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.documento" [disabled]="true">
+                          [(ngModel)]="imp.documento" disabled="true">
                       </td>
                       <td>
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.tipo_documento" [disabled]="true">
+                          [(ngModel)]="imp.tipo_documento" disabled="true">
                       </td>
                       <td>
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.fecha" [disabled]="true">
+                          [(ngModel)]="imp.fecha" disabled="true">
                       </td>
                       <!-- <td>
                                                     <input type="text" class="form-control form-control-sm pr-1"
-                                                        style="height: 32px;" [(ngModel)]="imp.nombre" [disabled]="true">
+                                                        style="height: 32px;" [(ngModel)]="imp.nombre" disabled="true">
                                                 </td> -->
                       <td>
                         <input currencyMask class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.total" [disabled]="true">
+                          [ngModel]="imp.total" disabled="true">
                       </td>
                       <td>
                         <input currencyMask class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.saldo" [disabled]="true">
+                          [ngModel]="imp.saldo" disabled="true">
                       </td>
                       <td>
                         <input currencyMask class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.valor_aplicado" [disabled]="imp.disabled"
+                          [(ngModel)]="imp.valor_aplicado" disabled="imp.disabled"
                           (ngModelChange)="selectAnticipo(imp,a)">
                       </td>
                       <td  *ngIf="!busqueda" style="width: 200px;">
                         
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.orden_pago?.detalles[0].cuentas?.codigo" [disabled]="true">
+                          [ngModel]="imp.orden_pago?.detalles[0].cuentas?.codigo" disabled="true">
                       </td>
                       <td  *ngIf="busqueda" style="width: 200px;">
                         <!-- <div class="row ml-1" *ngFor="let c of imp.orden_pago?.detalles">
                                                         <small class="col text-muted">({{ c.cuentas?.codigo}}){{c.cuentas?.nombre}}</small>
                                                     </div> -->
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.cod_cuenta_anticipo" [disabled]="true">
+                          [ngModel]="imp.cod_cuenta_anticipo" disabled="true">
                       </td>
                       <td *ngIf="!busqueda" style="width: 200px;"><!-- imp.orden_pago?.detalles[0].cuentas?.codigo orden_pago?.detalles[0].cuentas?.nombre -->
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.orden_pago?.detalles[0].cuentas?.nombre" [disabled]="true">
+                          [ngModel]="imp.orden_pago?.detalles[0].cuentas?.nombre" disabled="true">
                       </td>
                       <td *ngIf="busqueda" style="width: 200px;"><!--   -->
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.nom_cuenta_anticipo" [disabled]="true">
+                          [ngModel]="imp.nom_cuenta_anticipo" disabled="true">
                       </td>
                       <td *ngIf="!busqueda" style="width: 200px;" style="width: 200px;">
                         <div>
@@ -1543,7 +1543,7 @@
                                                             class="form-control form-control-sm custom-select"
                                                             [items]="ListaCuentasPagarAnticipos" bindLabel="label"
                                                             bindValue="ListaCuentasPagarAnticipos" appendTo="body"
-                                                            id="idCuentaPagar" [disabled]="busqueda"></ng-select> -->
+                                                            id="idCuentaPagar" disabled="busqueda"></ng-select> -->
                         </div>
                         
                       </td>
@@ -1555,7 +1555,7 @@
                       <td style="width: 80px;" class="text-center">
                         <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
                           <input [id]="imp.id_documento" type="checkbox" class="custom-control-input"
-                            [(ngModel)]="imp.aplica" [disabled]="imp.deshabilitar || busqueda"
+                            [(ngModel)]="imp.aplica" disabled="imp.deshabilitar || busqueda"
                             (change)="cargaAnticipo($event,imp,a)">
                           <label class="custom-control-label" [for]="imp.id_documento"></label>
                         </div>
@@ -1608,7 +1608,7 @@
                           <!-- 
                                                     <input style="width: 150px;" placeholder="codigo cuenta" [value]="f.account"
                                                         name="detAccounts" [(ngModel)]="f.account"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.account}}" /> -->
                         </td>
@@ -1617,7 +1617,7 @@
                           <small>{{f.name}}</small>
                           <!--  <input style="width: 350px;" placeholder="cuenta" [value]="f.name" name="detName"
                                                         [(ngModel)]="f.name"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.name}}" /> -->
                         </td>
@@ -1625,7 +1625,7 @@
                         <td *ngIf="f.tipo != 'T'">
                           <small>{{f.detail}}</small>
                           <!-- <input style="width: 250px;" [(ngModel)]="f.detail" placeholder="Ingrese un detalle"
-                                                        [disabled]="busqueda"
+                                                        disabled="busqueda"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.detail}}" /> -->
                         </td>
@@ -1634,7 +1634,7 @@
                         <td *ngIf="f.tipo != 'T'">
                           <small>{{f.centro}}</small>
                           <!--    <ng-select style="width: 120px;" loadingText="Cargando.." 
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         [clearable]=false [loading]="f.LoadOpcionCentro"
                                                         placeholder="-seleccionar centro-" [(ngModel)]="f.centro"
                                                         class="form-control form-control-sm custom-select"
@@ -1651,7 +1651,7 @@
                                                         currencyMask 
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} "  style="width: 120px;" 
                                                         [(ngModel)]="f.debit"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (keypress)="inputNumVal($event)" (ngModelChange)="debitChange()"
                                                         name="{{f.debit}}" /> -->
@@ -1663,7 +1663,7 @@
                                                         currencyMask
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " style="width: 120px;" 
                                                         [(ngModel)]="f.credit" 
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (keypress)="inputNumVal($event)"
                                                         (ngModelChange)="creditChange()" 
@@ -1674,7 +1674,7 @@
                         <td *ngIf="f.tipo != 'T'" style="width: 180px;">
                           <small>{{f.codpresupuesto}}</small><!-- codigo -->
                           <!-- <input style="width: 180px;" [(ngModel)]="f.codigo"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.codigo}}" /> -->
                           <!--div style="width: 180px;">
@@ -1699,7 +1699,7 @@
                         <td *ngIf="f.tipo != 'T'">
                           <small>{{f.presupuesto}}</small>
                           <!-- <input style="width: 250px;" [(ngModel)]="f.presupuesto"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.presupuesto}}" /> -->
 
@@ -1729,7 +1729,7 @@
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " 
                                                         style="width: 150px;" 
                                                         [(ngModel)]="f.valor_presupuesto" 
-                                                        [disabled]="busqueda"
+                                                        disabled="busqueda"
                                                         class="form-control form-control-sm pr-1 text-right" 
                                                         name="{{f.valor_presupuesto}}" /> -->
 
@@ -1774,7 +1774,7 @@
             </div>
 
           </p-tabPanel>
-          <p-tabPanel class="p-0" [disabled]="ExistenMultas" header="MULTAS" [headerStyle]="{'font-size': '0.7rem'}">
+          <p-tabPanel class="p-0" disabled="ExistenMultas" header="MULTAS" [headerStyle]="{'font-size': '0.7rem'}">
 
             <div class="row">
               <h4> Asiento No.: {{asientoMultasname}}</h4> 
@@ -1820,35 +1820,35 @@
                     <tr *ngFor="let imp of ListaMultas; let a = index">
                       <td>
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.id_documento" [disabled]="true">
+                          [(ngModel)]="imp.id_documento" disabled="true">
                       </td>
                       <td>
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.documento" [disabled]="true">
+                          [(ngModel)]="imp.documento" disabled="true">
                       </td>
                       <td>
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.tipo_documento" [disabled]="true">
+                          [(ngModel)]="imp.tipo_documento" disabled="true">
                       </td>
                       <td>
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.fecha" [disabled]="true">
+                          [(ngModel)]="imp.fecha" disabled="true">
                       </td>
                       <!-- <td>
                                                     <input type="text" class="form-control form-control-sm pr-1"
-                                                        style="height: 32px;" [(ngModel)]="imp.nombre" [disabled]="true">
+                                                        style="height: 32px;" [(ngModel)]="imp.nombre" disabled="true">
                                                 </td> -->
                       <td>
                         <input currencyMask class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.total" [disabled]="true">
+                          [ngModel]="imp.total" disabled="true">
                       </td>
                       <td>
                         <input currencyMask class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.saldo" [disabled]="true">
+                          [ngModel]="imp.saldo" disabled="true">
                       </td>
                       <td>
                         <input currencyMask class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [(ngModel)]="imp.valor_aplicado" [disabled]="imp.disabled || busquedad"
+                          [(ngModel)]="imp.valor_aplicado" disabled="imp.disabled || busquedad"
                           (ngModelChange)="selectMulta(imp,a)">
                       </td>
                       <td *ngIf="!busqueda" style="width: 200px;">
@@ -1856,11 +1856,11 @@
                                                         <small class="col text-muted">({{ c.cuentas?.codigo}}){{c.cuentas?.nombre}}</small>
                                                     </div> -->
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.cuenta_contable?.codigo" [disabled]="true">
+                          [ngModel]="imp.cuenta_contable?.codigo" disabled="true">
                       </td>
                       <td *ngIf="!busqueda" style="width: 350px;">
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.cuenta_contable?.nombre" [disabled]="true">
+                          [ngModel]="imp.cuenta_contable?.nombre" disabled="true">
                       </td>
 
                       <td *ngIf="busqueda" style="width: 200px;">
@@ -1868,11 +1868,11 @@
                                                         <small class="col text-muted">({{ c.cuentas?.codigo}}){{c.cuentas?.nombre}}</small>
                                                     </div> -->
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.cod_cuenta_multa" [disabled]="true">
+                          [ngModel]="imp.cod_cuenta_multa" disabled="true">
                       </td>
                       <td *ngIf="busqueda" style="width: 350px;">
                         <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                          [ngModel]="imp.nom_cuenta_multa" [disabled]="true">
+                          [ngModel]="imp.nom_cuenta_multa" disabled="true">
                       </td>
                       <td *ngIf="!busqueda" style="width: 200px;">
                         <div>
@@ -1894,7 +1894,7 @@
                       <td style="width: 150px;" class="text-center">
                         <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
                           <input [id]="imp.id_documento" type="checkbox" class="custom-control-input"
-                            [(ngModel)]="imp.aplica" [disabled]="imp.deshabilitar || busqueda"
+                            [(ngModel)]="imp.aplica" disabled="imp.deshabilitar || busqueda"
                             (change)="cargaMulta($event,imp,a)">
                           <label class="custom-control-label" [for]="imp.id_documento"></label>
                         </div>
@@ -1948,7 +1948,7 @@
                           <!-- 
                                                     <input style="width: 150px;" placeholder="codigo cuenta" [value]="f.account"
                                                         name="detAccounts" [(ngModel)]="f.account"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.account}}" /> -->
                         </td>
@@ -1957,7 +1957,7 @@
                           <small>{{f.name}}</small>
                           <!--  <input style="width: 350px;" placeholder="cuenta" [value]="f.name" name="detName"
                                                         [(ngModel)]="f.name"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.name}}" /> -->
                         </td>
@@ -1965,7 +1965,7 @@
                         <td *ngIf="f.tipo != 'T'">
                           <small>{{f.detail}}</small>
                           <!--  <input style="width: 250px;" [(ngModel)]="f.detail" placeholder="Ingrese un detalle"
-                                                        [disabled]="busqueda"
+                                                        disabled="busqueda"
                                                         class="form-control form-control-sm " type="text"
                                                         name="{{f.detail}}" /> -->
                         </td>
@@ -1974,7 +1974,7 @@
                         <td *ngIf="f.tipo != 'T'">
                           <small>{{f.centro}}</small>
                           <!--  <ng-select style="width: 120px;" loadingText="Cargando.." 
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         [clearable]=false [loading]="f.LoadOpcionCentro"
                                                         placeholder="-seleccionar centro-" [(ngModel)]="f.centro"
                                                         class="form-control form-control-sm custom-select"
@@ -1989,7 +1989,7 @@
                                                         currencyMask 
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} "  style="width: 120px;" 
                                                         [(ngModel)]="f.debit"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (keypress)="inputNumVal($event)" (ngModelChange)="debitChange()"
                                                         name="{{f.debit}}" /> -->
@@ -2000,7 +2000,7 @@
                                                         currencyMask
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " style="width: 120px;" 
                                                         [(ngModel)]="f.credit" 
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         (keypress)="inputNumVal($event)"
                                                         (ngModelChange)="creditChange()" 
@@ -2011,7 +2011,7 @@
                         <td *ngIf="f.tipo != 'T'" style="width: 180px;">
                           <small>{{f.codigo}}</small>
                           <!--  <input style="width: 180px;" [(ngModel)]="f.codigo"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.codigo}}" /> -->
 
@@ -2019,7 +2019,7 @@
                         <td *ngIf="f.tipo == 'T'"><span></span></td>
                         <td *ngIf="f.tipo != 'T'">
                           <!--  <input style="width: 250px;" [(ngModel)]="f.presupuesto"  
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right" type="text"
                                                         name="{{f.presupuesto}}" /> -->
                           <small>{{f.presupuesto }}</small>
@@ -2050,7 +2050,7 @@
                                                         [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " 
                                                         style="width: 150px;" 
                                                         [(ngModel)]="f.valor_presupuesto" 
-                                                        [disabled]="busqueda"
+                                                        disabled="busqueda"
                                                         class="form-control form-control-sm pr-1 text-right" 
                                                         name="{{f.valor_presupuesto}}" /> -->
 
@@ -2094,7 +2094,7 @@
             </div>
 
           </p-tabPanel>
-          <p-tabPanel [disabled]="!ExisteHistorial" class="p-0" header="MOVIMIENTOS"
+          <p-tabPanel disabled="!ExisteHistorial" class="p-0" header="MOVIMIENTOS"
             [headerStyle]="{'font-size': '0.7rem'}">
             <table class="table mat-elevation-z2">
               <thead>
@@ -2167,23 +2167,23 @@
                 <tr *ngFor="let imp of detalleImpuesto; let a = index">
                   <td>
                     <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                      [(ngModel)]="imp.tipo" [disabled]="true">
+                      [(ngModel)]="imp.tipo" disabled="true">
                   </td>
                   <td>
                     <input type="text" class="form-control form-control-sm pr-1" style="height: 32px;"
-                      [(ngModel)]="imp.codigo" [disabled]="true">
+                      [(ngModel)]="imp.codigo" disabled="true">
                   </td>
                   <td>
                     <input currencyMask class="form-control form-control-sm pr-1" style="height: 32px;"
-                      [ngModel]="imp.base" [disabled]="true">
+                      [ngModel]="imp.base" disabled="true">
                   </td>
                   <td>
                     <input currencyMask [options]="{prefix: '', suffix: '%'}" class="form-control form-control-sm pr-1"
-                      style="height: 32px;" [ngModel]="imp.porcentaje" [disabled]="true">
+                      style="height: 32px;" [ngModel]="imp.porcentaje" disabled="true">
                   </td>
                   <td>
                     <input currencyMask class="form-control form-control-sm pr-1" style="height: 32px;"
-                      [ngModel]="imp.total" [disabled]="true">
+                      [ngModel]="imp.total" disabled="true">
                   </td>
                 </tr>
                 <tr>
@@ -2316,7 +2316,7 @@
             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Propina</span>
           </div>
           <input type="text" class="form-control form-control-sm text-right pr-2" [(ngModel)]="buyProv.propina" min="0"
-            (keyup)="sumTotalizados()" [disabled]="busqueda">
+            (keyup)="sumTotalizados()" disabled="busqueda">
         </div>
         <div class="input-group input-group-sm mt-1">
           <div class="input-group-prepend">

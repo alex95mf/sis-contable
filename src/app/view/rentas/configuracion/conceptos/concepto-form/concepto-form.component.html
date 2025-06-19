@@ -19,7 +19,7 @@
             <div class="col-12">
                 <app-cc-input-group-prepend label="Cuenta Acreedora" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control" readonly [(ngModel)]="concepto.cuenta_acreedora" placeholder="Cuenta Acreedora" maxlength="15">
-                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Acreedora')" [disabled]="searching.acreedora"> Consultar</button>
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Acreedora')" disabled="searching.acreedora"> Consultar</button>
                     <!-- <datalist id="lst_ctas_acreedoras">
                         <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
                     </datalist> -->
@@ -35,7 +35,7 @@
             <div class="col-12">
                 <app-cc-input-group-prepend label="C&oacute;digo Presupuestario" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control" readonly  [(ngModel)]="concepto.codigo_presupuesto" placeholder="C&oacute;digo Presupuesto" maxlength="15">
-                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" [disabled]="searching.presupuesto"> Consultar</button>
+                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" disabled="searching.presupuesto"> Consultar</button>
                     <!-- <datalist id="lst_ctas_presupuesto">
                         <option *ngFor="let cta of cuentas.presupuesto" [value]="cta.codigo">{{ cta.codigo }} {{ cta.nombre }}</option>
                     </datalist> -->
@@ -51,7 +51,7 @@
             <div class="col-12">
                 <app-cc-input-group-prepend label="Cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control" readonly  [(ngModel)]="concepto.cuenta_deudora" placeholder="Cuenta Deudora" maxlength="15">
-                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('Deudora')" [disabled]="searching.deudora"> Consultar</button>
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('Deudora')" disabled="searching.deudora"> Consultar</button>
                     <!-- <datalist id="lst_ctas_deudoras">
                         <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
                     </datalist> -->

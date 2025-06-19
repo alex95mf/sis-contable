@@ -11,7 +11,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Tipo de Egreso" styleSpan="size-span-campo font-weight-bold">
                                 <ng-select class="form-control custom" appendTo="body" 
-                                    [(ngModel)]="tipoEgreso" [disabled]="!actions.dComponet" (change)="mostrarCampos($event)"
+                                    [(ngModel)]="tipoEgreso" disabled="!actions.dComponet" (change)="mostrarCampos($event)"
                                     [items]="tipo" bindValue="valor" bindLabel="descripcion">
                                 </ng-select>
                                 <!-- <input class="form-control" [(ngModel)]="grupo.estado" type="text"/> -->
@@ -20,7 +20,7 @@
             
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo font-weight-bold">
-                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="motivo" [disabled]="motivoBol" (change)="mostrarCamMotiv($event)">
+                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="motivo" disabled="motivoBol" (change)="mostrarCamMotiv($event)">
                                     <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
                                     <ng-option *ngFor="let item of motivosCR"  [value]="item.valor">{{item.descripcion}}</ng-option>
                                     </ng-select>
@@ -32,7 +32,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
 
                             <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
-                                <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="num_doc">
+                                <input type="text" class="form-control form-control-sm" disabled="true" [(ngModel)]="num_doc">
 
                             </app-cc-input-group-prepend>
 
@@ -57,7 +57,7 @@
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
                                 </div>
                                 <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
-                                    [disabled]="actions.dComponet || dataProducto.length > 1 || disabled"
+                                    disabled="actions.dComponet || dataProducto.length > 1 || disabled"
                                     style="padding-left: 7px;font-size: 13px;" [(ngModel)]="customerSelect" [clearable]="false"
                                     (keyup)="getCustomerFilter($event.target.value)" (ngModelChange)="getCustomer($event)">
                                     <ng-option [value]="0">Seleccione razón social</ng-option>
@@ -68,7 +68,7 @@
                         </div> -->
                         <!-- <div class="col-sm-4">
                             <app-cc-input-group-prepend label="Bodega" styleSpan="input-group-text font-weight-bold size-span-campo inputGroup-sizing-sm">
-                                <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [disabled]="disabled" [(ngModel)]="bodega">
+                                <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" disabled="disabled" [(ngModel)]="bodega">
                                     <ng-option [value]="0">Seleccione Bodega</ng-option>
                                     <ng-option *ngFor="let d of arrayBodega" [value]="d.id_bodega_cab">{{d.nombre}}</ng-option>
                                 </ng-select>
@@ -80,7 +80,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Usuario gestión:</span>
                                 </div>
-                                <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                <input type="text" class="form-control form-control-sm" disabled="true"
                                     [(ngModel)]="dataUser.nombre">
                             </div>
                         </div> -->
@@ -89,7 +89,7 @@
          
                         <div class="col-12 col-md-6 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Bodege de Origen" styleSpan="size-span-campo font-weight-bold">
-                                <ng-select class="form-control form-control-sm" [(ngModel)]="bodegaOrigen" [disabled]="!actions.dComponet || fixedBodega" (change)="detectBodega()"
+                                <ng-select class="form-control form-control-sm" [(ngModel)]="bodegaOrigen" disabled="!actions.dComponet || fixedBodega" (change)="detectBodega()"
                                 [items]="cmb_bodegas" bindValue="id_bodega_cab" bindLabel="nombre" [clearable]="false">
                             </ng-select>
                             </app-cc-input-group-prepend>
@@ -97,7 +97,7 @@
                    
                     <div *ngIf="tipoEgreso && tipoEgreso == 'TRASLADO'" class="col-12 col-md-6 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Bodege de Origen" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select class="form-control form-control-sm" [(ngModel)]="bodegaDestino" [disabled]="!actions.dComponet" (change)="detectBodega()"
+                            <ng-select class="form-control form-control-sm" [(ngModel)]="bodegaDestino" disabled="!actions.dComponet" (change)="detectBodega()"
                             [items]="cmb_bodegas" bindValue="id_bodega_cab" bindLabel="nombre" [clearable]="false">
                         </ng-select>
                         </app-cc-input-group-prepend>
@@ -119,7 +119,7 @@
                         <!-- <app-cc-input-group-prepend label="Vehiculo" styleSpan="size-span-campo font-weight-bold">
                             <input type="text" class="form-control" [(ngModel)]="nomComerPro" disabled placeholder="Nombre comercial proveedor... ">
                             <div class="input-group-append">
-                                <button [disabled]="!actions.dComponet || formReadOnly" 
+                                <button disabled="!actions.dComponet || formReadOnly" 
                                 class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -135,7 +135,7 @@
             </div>
         </div>
 
-        <!-- [disabled]="!actions.dComponet" -->
+        <!-- disabled="!actions.dComponet" -->
 
         <!-- *ngIf="datoGene" -->
 
@@ -150,10 +150,10 @@
                                 <input placeholder="Departamento..." type="text" #departamento="ngModel"
                                     name="departamento" readonly [(ngModel)]="departamentoSelect.dep_nombre" 
                                     class="form-control form-control-sm" 
-                                    id="departamento" [disabled]="!actions.dComponet">
+                                    id="departamento" disabled="!actions.dComponet">
                                
                                     <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" 
-                                        style="box-shadow: unset;outline: unset;" [disabled]="responsable1">
+                                        style="box-shadow: unset;outline: unset;" disabled="responsable1">
                                         Buscar
                                     </button>
 
@@ -164,20 +164,20 @@
                     <div class="row m-0">
                         <!-- <div class="col">
                             <app-cc-input-group-prepend label="Responsable" styleSpan="size-span-campo font-weight-bold">
-                                <input class="form-control form-control-sm" [(ngModel)]="UserSelect" [disabled]="!actions.dComponet" readonly placeholder="Responsable... "/>
-                                <button class="btn btn-primary btn-sm" (click)="modalEncargado()" [disabled]="!actions.dComponet">Buscar</button>
+                                <input class="form-control form-control-sm" [(ngModel)]="UserSelect" disabled="!actions.dComponet" readonly placeholder="Responsable... "/>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado()" disabled="!actions.dComponet">Buscar</button>
                             </app-cc-input-group-prepend>
                         </div> -->
                         <div class="col-12 col-md-6 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Responsable" styleSpan="size-span-campo font-weight-bold">
-                                <input class="form-control form-control-sm" [(ngModel)]="responsable" [disabled]="!actions.dComponet" readonly placeholder="Responsable... "/>
-                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(4)" [disabled]="responsable1">Buscar</button>
+                                <input class="form-control form-control-sm" [(ngModel)]="responsable" disabled="!actions.dComponet" readonly placeholder="Responsable... "/>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(4)" disabled="responsable1">Buscar</button>
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-12 col-md-6 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Solicitado por:" styleSpan="size-span-campo font-weight-bold">
-                                <input class="form-control form-control-sm" [(ngModel)]="UserSelect" [disabled]="!actions.dComponet" readonly placeholder="Solicitado por... "/>
-                                <button class="btn btn-primary btn-sm" (click)="modalEncargado()" [disabled]="responsable1">Buscar</button>
+                                <input class="form-control form-control-sm" [(ngModel)]="UserSelect" disabled="!actions.dComponet" readonly placeholder="Solicitado por... "/>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado()" disabled="responsable1">Buscar</button>
                             </app-cc-input-group-prepend>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
 
                             <app-cc-input-group-prepend label="Proveedores" styleSpan="size-span-campo font-weight-bold">
                                 <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [value]="proveedorActive.razon_social">
-                                <button [disabled]="prooved" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                                <button disabled="prooved" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                                     <i class="fas fa-search"></i>
                                 </button>
 
@@ -207,7 +207,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             
                             <app-cc-input-group-prepend label="Institucion" styleSpan="size-span-campo font-weight-bold">
-                                <input class="form-control form-control-sm" [(ngModel)]="institucion" [disabled]="instintic"  placeholder="Responsable... "/>
+                                <input class="form-control form-control-sm" [(ngModel)]="institucion" disabled="instintic"  placeholder="Responsable... "/>
                             </app-cc-input-group-prepend>
         
                             
@@ -234,7 +234,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Recibido por" styleSpan="size-span-campo font-weight-bold">
                                 <input class="form-control form-control-sm" [(ngModel)]="recibido.recibido"  readonly placeholder="Recibido por... "/>
-                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(1)" [disabled]="datoRecepVal">Buscar</button>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(1)" disabled="datoRecepVal">Buscar</button>
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
@@ -242,7 +242,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Departamento</span>
                                 </div>
-                                <input type="text" class="form-control form-control-sm"  [disabled]="true" [(ngModel)]="recibido.nombre_departamento_recibido">                
+                                <input type="text" class="form-control form-control-sm"  disabled="true" [(ngModel)]="recibido.nombre_departamento_recibido">                
                             </div>
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
@@ -250,7 +250,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Cargo</span>
                                 </div>
-                                <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="recibido.nombre_cargo_recibido">                
+                                <input type="text" class="form-control form-control-sm" disabled="true" [(ngModel)]="recibido.nombre_cargo_recibido">                
                             </div>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Autorizado por" styleSpan="size-span-campo font-weight-bold">
                                 <input class="form-control form-control-sm" [(ngModel)]="autorizado.recibido"  readonly placeholder="Recibido por... "/>
-                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(2)" [disabled]="datoRecepVal">Buscar</button>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(2)" disabled="datoRecepVal">Buscar</button>
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
@@ -266,7 +266,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Departamento</span>
                                 </div>
-                                <input type="text" class="form-control form-control-sm"  [disabled]="true" [(ngModel)]="autorizado.nombre_departamento_recibido">                
+                                <input type="text" class="form-control form-control-sm"  disabled="true" [(ngModel)]="autorizado.nombre_departamento_recibido">                
                             </div>
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
@@ -274,7 +274,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Cargo</span>
                                 </div>
-                                <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="autorizado.nombre_cargo_recibido">                
+                                <input type="text" class="form-control form-control-sm" disabled="true" [(ngModel)]="autorizado.nombre_cargo_recibido">                
                             </div>
                         </div>
                     </div>
@@ -282,7 +282,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Entregado por" styleSpan="size-span-campo font-weight-bold">
                                 <input class="form-control form-control-sm" [(ngModel)]="entrega.recibido"  readonly placeholder="Recibido por... "/>
-                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(3)" [disabled]="datoRecepVal1">Buscar</button>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(3)" disabled="datoRecepVal1">Buscar</button>
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
@@ -290,7 +290,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Departamento</span>
                                 </div>
-                                <input type="text" class="form-control form-control-sm"  [disabled]="true" [(ngModel)]="entrega.nombre_departamento_recibido">                
+                                <input type="text" class="form-control form-control-sm"  disabled="true" [(ngModel)]="entrega.nombre_departamento_recibido">                
                             </div>
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
@@ -298,7 +298,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Cargo</span>
                                 </div>
-                                <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="entrega.nombre_cargo_recibido">                
+                                <input type="text" class="form-control form-control-sm" disabled="true" [(ngModel)]="entrega.nombre_cargo_recibido">                
                             </div>
                         </div>
                     </div>
@@ -315,7 +315,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Tipo de bienes" styleSpan="size-span-campo font-weight-bold">
                                 <ng-select class="form-control" appendTo="body" [searchable]="true"
-                                    [(ngModel)]="grupo.tipo_bien" [disabled]="!actions.dComponet" (change)="buscarGrupoProducto($event)" #TipoBienes>
+                                    [(ngModel)]="grupo.tipo_bien" disabled="!actions.dComponet" (change)="buscarGrupoProducto($event)" #TipoBienes>
                                     <ng-option [value]="0" disabled>Escoger un Tipo de Bien</ng-option>
                                     <ng-option *ngFor="let item of catalog"  [value]="item.valor">{{item.descripcion}}</ng-option>
                                 </ng-select>
@@ -325,7 +325,7 @@
                         <div class="col-12 col-md-8 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Grupo Producto" styleSpan="size-span-campo font-weight-bold">
                                 <ng-select class="form-control" appendTo="body" [searchable]="true"
-                                    [(ngModel)]="claseSelect" [disabled]="disabledGrupo" (change)="selectedGrupo($event)">
+                                    [(ngModel)]="claseSelect" disabled="disabledGrupo" (change)="selectedGrupo($event)">
                                     <ng-option [value]="0" disabled>Escoger un Grupo de Producto</ng-option>
                                     <ng-option *ngFor="let d of listaProductos"  [value]="d">
                                         {{d.codigo_grupo_producto}} - {{d.descripcion}} - {{d.tipo_bien}}
@@ -336,13 +336,13 @@
                         </div>
                         <div class="col-4">
                             <label for="chk_generaoc" class="font-weight-bold">
-                                <input id="chk_generaoc" type="checkbox" [(ngModel)]="genera_nota_credito" [disabled]="!actions.dComponet">
+                                <input id="chk_generaoc" type="checkbox" [(ngModel)]="genera_nota_credito" disabled="!actions.dComponet">
                                 Genera Nota de Credito
                             </label>
                         </div>
                         <div class="col-8">
                             <button class="btn btn-success btn-sm float-right" placement="top"
-                                ngbTooltip="Agregar productos" (click)="addProduct()" [disabled]="!actions.dComponet">
+                                ngbTooltip="Agregar productos" (click)="addProduct()" disabled="!actions.dComponet">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -370,50 +370,50 @@
                                             <tr *ngFor="let d of dataProducto; let i = index">
                                                 <td style="width: 18%;" *ngIf="d.action">
                                                     <input type="text" class="form-control form-control-sm" placeholder="Producto"
-                                                        [(ngModel)]="d.nombre" [disabled]="true"></td>
+                                                        [(ngModel)]="d.nombre" disabled="true"></td>
                                                 <td style="width: 13%;" *ngIf="d.action">
                                                     <input type="text"  class="form-control form-control-sm" placeholder="Código" [(ngModel)]="d.codigoProducto"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                 </td>
                                                 <td style="width: 10%;" *ngIf="d.action">
                                                     <input type="text" class="form-control form-control-sm"
-                                                        placeholder="$ {{d.precio_normal ?? d.price}}" [disabled]="true"
+                                                        placeholder="$ {{d.precio_normal ?? d.price}}" disabled="true"
                                                         style="text-align: right !important;" >
                                                     </td>
                                                 <!-- <td style="width: 10%;" *ngIf="d.action"><input type="text"
-                                                        placeholder="{{d.porcen_promocion}} %" [disabled]="true"
+                                                        placeholder="{{d.porcen_promocion}} %" disabled="true"
                                                         style="text-align: right !important;"></td> -->
                                                 <td style="width: 7%;" *ngIf="d.action">
                                                     <!-- <div *ngIf="(d.stock-d.cantidad_reservada) > 0">
                                                         <input type="text" placeholder="0.00" style="text-align: right !important;"
                                                             placeholder="{{(d.stock-d.cantidad_reservada).toFixed(2)}}"
-                                                            [disabled]="true">
+                                                            disabled="true">
                                                     </div>
                                                     <div *ngIf="(d.stock-d.cantidad_reservada) <= 0">
-                                                        <input type="text" placeholder="0.00" [disabled]="true || disabled"
+                                                        <input type="text" placeholder="0.00" disabled="true || disabled"
                                                             style="text-align: right !important;">
                                                     </div> -->
                                                     <input type="text" class="form-control form-control-sm" placeholder="0.00"
                                                         style="text-align: right;padding-right: 10px;" [value]="d.bodega_stock?.cantidad"
                                                         id="stock"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                 </td>
                                                 <td style="width: 10%;text-align: right;" *ngIf="d.action">
                                                     <input type="text" class="form-control form-control-sm" placeholder="0.00"
                                                         style="text-align: right;padding-right: 10px;" [(ngModel)]="d.quantity"
                                                         (keyup)="sumTotal(i)" min="0" id="quantyId"
                                                         (keypress)="commonServices.FormatDecimalVal($event)"
-                                                        [disabled]="!actions.dComponet || disabledCantidad">
+                                                        disabled="!actions.dComponet || disabledCantidad">
                                                 </td>
                                                 <td style="width: 10%;" *ngIf="d.action">
                                                     <input type="text" class="form-control form-control-sm" placeholder="$ 0.00"
                                                         style="text-align: right;padding-right: 10px;" [(ngModel)]="d.price"
                                                         (keyup)="sumTotal(i)" min="0"
                                                         (keypress)="commonServices.FormatDecimalVal($event)"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                 </td>
                                                 <td style="width: 9%;" *ngIf="d.action">
-                                                    <input type="text" placeholder="$ {{d.totalAux}}" [disabled]="true"
+                                                    <input type="text" placeholder="$ {{d.totalAux}}" disabled="true"
                                                         class="form-control form-control-sm" style="text-align: right !important;">
                                                 </td>
                                                 <td style="width: 9%;text-align: center;" *ngIf="d.action">
@@ -423,7 +423,7 @@
                                                     </button>
                                                     <button class="btn btn-danger btn-sm" placement="top"
                                                         ngbTooltip="Eliminar Items" (click)="deleteItems(i)"
-                                                        [disabled]="!actions.dComponet || disabled">
+                                                        disabled="!actions.dComponet || disabled">
                                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                     </button>
                                                 </td>
@@ -448,7 +448,7 @@
                         <div class="row">
                             <div class="col">
                                 <app-cc-input-group-prepend label="Tipo de bienes" styleSpan="size-span-campo font-weight-bold">
-                                    <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [(ngModel)]="grupo.tipo_bien" [disabled]="!actions.dComponet" (change)="buscarGrupoProducto($event)">
+                                    <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [(ngModel)]="grupo.tipo_bien" disabled="!actions.dComponet" (change)="buscarGrupoProducto($event)">
                                         <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
                                         <ng-option *ngFor="let item of catalog"  [value]="item.valor">{{item.descripcion}}</ng-option>
                                     </ng-select>
@@ -457,7 +457,7 @@
                             </div>
                             <div class="col">
                                 <app-cc-input-group-prepend label="Grupo Producto" styleSpan="size-span-campo font-weight-bold">
-                                    <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="claseSelect" [disabled]="disabledGrupo" (change)="selectedGrupo($event)">
+                                    <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="claseSelect" disabled="disabledGrupo" (change)="selectedGrupo($event)">
                                         <ng-option  [value]= "0" >Seleccione un grupo del producto</ng-option>
                                         <ng-option *ngFor="let d of listaProductos"  [value]="d">{{d.codigo_grupo_producto}} -
                                             {{d.descripcion}} - {{d.tipo_bien}}
@@ -473,7 +473,7 @@
                                 <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
                                     <button class="btn btn-success btn-sm" placement="top"
                                         ngbTooltip="Agregar productos" (click)="addProduct()"
-                                        [disabled]="agregaProduct">
+                                        disabled="agregaProduct">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -498,14 +498,14 @@
                                         <tr *ngFor="let d of dataProducto; let i = index">
                                             <td style="width: 18%;" *ngIf="d.action">
                                                 <input type="text" class="form-control form-control-sm" placeholder="Producto"
-                                                    [(ngModel)]="d.nombre" [disabled]="true"></td>
+                                                    [(ngModel)]="d.nombre" disabled="true"></td>
                                             <td style="width: 13%;" *ngIf="d.action">
                                                 <input type="text"  class="form-control form-control-sm" placeholder="Código" [(ngModel)]="d.codigoProducto"
-                                                    [disabled]="true">
+                                                    disabled="true">
                                             </td>
                                             <td style="width: 10%;" *ngIf="d.action">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    placeholder="$ {{d.precio_normal}}" [disabled]="true"
+                                                    placeholder="$ {{d.precio_normal}}" disabled="true"
                                                     style="text-align: right !important;" >
                                                 </td>
 
@@ -516,7 +516,7 @@
                                                 <input type="text" class="form-control form-control-sm" placeholder="0.00"
                                                     style="text-align: right;padding-right: 10px;" [(ngModel)]="d.stock"
                                                     id="stock"
-                                                    [disabled]="true">
+                                                    disabled="true">
                                             </td>
 
                                             <td style="width: 10%;text-align: right;" *ngIf="d.action">
@@ -524,7 +524,7 @@
                                                     style="text-align: right;padding-right: 10px;" [(ngModel)]="d.quantity"
                                                     (keyup)="sumTotal(i)" min="0" id="quantyId"
                                                     (keypress)="commonServices.FormatDecimalVal($event)"
-                                                    [disabled]="!actions.dComponet || disabled || disabledCantidad">
+                                                    disabled="!actions.dComponet || disabled || disabledCantidad">
                                             </td>
 
                                             <td style="width: 10%;" *ngIf="d.action">
@@ -532,16 +532,16 @@
                                                     style="text-align: right;padding-right: 10px;" [(ngModel)]="d.price"
                                                     (keyup)="sumTotal(i)" min="0"
                                                     (keypress)="commonServices.FormatDecimalVal($event)"
-                                                    [disabled]="true">
+                                                    disabled="true">
                                             </td>
                                             <td style="width: 9%;" *ngIf="d.action">
-                                                <input type="text" placeholder="$ {{d.totalAux}}" [disabled]="true"
+                                                <input type="text" placeholder="$ {{d.totalAux}}" disabled="true"
                                                     class="form-control form-control-sm" style="text-align: right !important;">
                                             </td>
                                             <td style="width: 9%;text-align: center;" *ngIf="d.action">
                                                 <button class="btn btn-danger btn-sm" placement="top"
                                                     ngbTooltip="Eliminar Items" (click)="deleteItems(i)"
-                                                    [disabled]="!actions.dComponet || disabled">
+                                                    disabled="!actions.dComponet || disabled">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </button>
                                             </td>
@@ -563,7 +563,7 @@
                                     letras</span>
                             </div>
                             <input placeholder="total en letras" type="text" class="form-control form-control-sm"
-                                id="idtotalsLetras" [disabled]="true" [(ngModel)]="valueLethers">
+                                id="idtotalsLetras" disabled="true" [(ngModel)]="valueLethers">
                         </div>
                     </div>
                 </div>
@@ -577,7 +577,7 @@
                                     Factura</span>
                             </div>
                             <input placeholder="$ {{dataTotales.totalPagado.toFixed(4)}}" type="text"
-                                class="form-control form-control-sm text-right" id="idtotalFacturado" [disabled]="true">
+                                class="form-control form-control-sm text-right" id="idtotalFacturado" disabled="true">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -587,7 +587,7 @@
                                     Recibido</span>
                             </div>
                             <input placeholder="$ {{dataTotales.totalPagado.toFixed(4)}}" type="text"
-                                class="form-control form-control-sm text-right" id="idtotalRecibido" [disabled]="true">
+                                class="form-control form-control-sm text-right" id="idtotalRecibido" disabled="true">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -597,7 +597,7 @@
                                     Cambio</span>
                             </div>
                             <input placeholder="$ {{dataTotales.totalPagado.toFixed(4)}}" type="text"
-                                class="form-control form-control-sm text-right" id="idtotalRecibido" [disabled]="true">
+                                class="form-control form-control-sm text-right" id="idtotalRecibido" disabled="true">
                         </div>
                     </div>
                 </div>

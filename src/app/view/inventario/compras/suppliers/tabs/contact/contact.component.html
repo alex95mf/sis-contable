@@ -10,7 +10,7 @@
                                 <span class="input-group-text " id="inputGroup-sizing-sm">Nombre</span>
                             </div>
                             <input type="text" class="form-control form-control-sm" placeholder="Ingrese un nombre"
-                                id="idName" [(ngModel)]="dataContact.nombre" [disabled]="!dAction">
+                                id="idName" [(ngModel)]="dataContact.nombre" disabled="!dAction">
                         </div>
                     </div>
                     <div class="col-sm-6 pl-0">
@@ -20,7 +20,7 @@
                             </div>
                             <input type="text" class="form-control form-control-sm" placeholder="Ingrese un teléfono"
                                 id="idTelefono" [(ngModel)]="dataContact.telefono" maxlength="10"
-                                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="!dAction">
+                                (keypress)="commonServices.FormatDecimalVal($event)" disabled="!dAction">
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                                 <span class="input-group-text " id="inputGroup-sizing-sm">Cargo</span>
                             </div>
                             <input type="text" class="form-control form-control-sm" placeholder="Ingrese un cargo"
-                                id="idCargo" [(ngModel)]="dataContact.cargo" [disabled]="!dAction">
+                                id="idCargo" [(ngModel)]="dataContact.cargo" disabled="!dAction">
                         </div>
                     </div>
                     <div class="col-sm-6 pl-0">
@@ -41,7 +41,7 @@
                             </div>
                             <input type="text" class="form-control form-control-sm" placeholder="Ingrese un celular"
                                 id="idCelular" [(ngModel)]="dataContact.celular" maxlength="10"
-                                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="!dAction">
+                                (keypress)="commonServices.FormatDecimalVal($event)" disabled="!dAction">
                         </div>
                     </div>
                 </div>
@@ -52,17 +52,17 @@
                                 <span class="input-group-text " id="inputGroup-sizing-sm">Correo</span>
                             </div>
                             <input type="text" class="form-control form-control-sm" placeholder="Ingrese un correo"
-                                id="idCorreo" [(ngModel)]="dataContact.correo" [disabled]="!dAction">
+                                id="idCorreo" [(ngModel)]="dataContact.correo" disabled="!dAction">
                         </div>
                     </div>
                     <div class="col-sm-6 text-center pl-0">
                         <div class="btn-group  pt-1">
                             <button class="btn btn-warning btn-sm" *ngIf="!editInfoContact" placement="top"
-                                ngbTooltip="Limpiar formulario" (click)="cleanForm()" [disabled]="!dAction">
+                                ngbTooltip="Limpiar formulario" (click)="cleanForm()" disabled="!dAction">
                                 <i class="fas fa-eraser"></i> Limpiar
                             </button>&nbsp;
                             <button class="btn btn-success btn-sm" (click)="addContact()" *ngIf="!editInfoContact"
-                                placement="top" ngbTooltip="Agregar a la lista de contactos" [disabled]="!dAction">
+                                placement="top" ngbTooltip="Agregar a la lista de contactos" disabled="!dAction">
                                 <i class="far fa-plus-square"></i> Agregar
                             </button>&nbsp;
                             <button class="btn btn-primary btn-sm" (click)="updateContact()" *ngIf="editInfoContact"
@@ -105,13 +105,13 @@
                                             <button class="btn btn-sm tooltip-test my-1"
                                                 style="background-color: #2E76BD; color: white; border-radius: 10px;box-shadow: unset;outline: unset;"
                                                 (click)="editContact(dt,i)" placement="top" ngbTooltip="Editar contacto"
-                                                [disabled]="!dAction">
+                                                disabled="!dAction">
                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                             </button>
                                             <button type="button" (click)="deleteContact(dt,i)"
                                                 class="btn btn-sm tooltip-test my-1"
                                                 style="background-color: #F86C6B; color: white; border-radius: 10px;box-shadow: unset;outline: unset;"
-                                                placement="top" ngbTooltip="Remover contacto" [disabled]="!dAction">
+                                                placement="top" ngbTooltip="Remover contacto" disabled="!dAction">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </td>

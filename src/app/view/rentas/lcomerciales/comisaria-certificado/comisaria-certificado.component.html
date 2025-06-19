@@ -33,7 +33,7 @@
                 <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
                     <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento"
                         [(ngModel)]="NoDocumento" maxlength="{{NOCedula}}" [readonly]="false">
-                    <button [disabled]="disabledBuscarContri" class="btn btn-primary btn-sm" ngbTooltip="Buscar" (click)="validacionContribu()"><i
+                    <button disabled="disabledBuscarContri" class="btn btn-primary btn-sm" ngbTooltip="Buscar" (click)="validacionContribu()"><i
                         class="fas fa-search"></i>Buscar</button>
                 </app-cc-input-group-prepend>
             </div>
@@ -65,7 +65,7 @@
         </div>
         <div class="row" *ngIf="mostrarBtnVerificar">
             <div class="col text-center">
-                <button class="btn btn-primary btn-sm" ngbTooltip="Verificar Deuda" (click)="verificarDeuda()" [disabled]="!nombreContribuyente">Verificar Deuda</button>
+                <button class="btn btn-primary btn-sm" ngbTooltip="Verificar Deuda" (click)="verificarDeuda()" disabled="!nombreContribuyente">Verificar Deuda</button>
             </div>
         </div>
         <div class="row" *ngIf="mostrarBtnCertificado">

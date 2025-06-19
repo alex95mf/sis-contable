@@ -11,7 +11,7 @@
                     <app-cc-input-group-prepend label="Tipo de Bien" styleSpan="size-span-campo">
                         <ng-select id="IdProducto" class="form-control custom" appendTo="body" [searchable]="true"
                             [clearable]="false" [(ngModel)]="productoSelect" (change)="getTableInitPrice()">
-                            <!-- [disabled]="disProducto" -->
+                            <!-- disabled="disProducto" -->
                             <ng-option [value]="0">Todos</ng-option>
                             <ng-option *ngFor="let d of listaCatalogo" [value]="d.valor">{{d.descripcion}}</ng-option>
                         </ng-select>

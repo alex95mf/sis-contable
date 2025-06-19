@@ -32,7 +32,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
                                         </div>
-                                        <input placeholder="Ingrese Nombre" type="text" [(ngModel)]="bodega.nombre" class="form-control form-control-sm" [disabled]=" disabledBodega" id="Idnombre">
+                                        <input placeholder="Ingrese Nombre" type="text" [(ngModel)]="bodega.nombre" class="form-control form-control-sm" disabled=" disabledBodega" id="Idnombre">
                                     </div>
                                 </div>
                                 
@@ -41,7 +41,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ciudad</span>
                                         </div>
-                                        <select [(ngModel)]="bodega.ciudad" class="form-control form-control-sm custom-select" [disabled]=" disabledBodega">
+                                        <select [(ngModel)]="bodega.ciudad" class="form-control form-control-sm custom-select" disabled=" disabledBodega">
                                             <option *ngFor="let d of dataCatalogo['CIUDAD']" [value]="d.valor">
                                                 {{d.valor}}
                                             </option>
@@ -55,7 +55,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
                                         </div>
-                                        <input placeholder="Ingrese Dirección" type="text" [(ngModel)]="bodega.direccion" class="form-control form-control-sm" [disabled]=" disabledBodega" id="IdAddress">
+                                        <input placeholder="Ingrese Dirección" type="text" [(ngModel)]="bodega.direccion" class="form-control form-control-sm" disabled=" disabledBodega" id="IdAddress">
                                     </div>
                                 </div>
                     
@@ -64,7 +64,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
                                         </div>
-                                        <select class="form-control form-control-sm custom-select" [(ngModel)]="bodega.estado" [disabled]=" disabledBodega">
+                                        <select class="form-control form-control-sm custom-select" [(ngModel)]="bodega.estado" disabled=" disabledBodega">
                                             <option value="A">Activo</option>
                                             <option value="I">Inactivo</option>
                                         </select>
@@ -77,7 +77,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
                                         </div>
-                                        <input placeholder="Ingrese Teléfono" type="text" [(ngModel)]="bodega.telefono" class="form-control form-control-sm" (keypress)="inputNumVal($event)" maxlength="10" [disabled]=" disabledBodega" id="IdTelefono">
+                                        <input placeholder="Ingrese Teléfono" type="text" [(ngModel)]="bodega.telefono" class="form-control form-control-sm" (keypress)="inputNumVal($event)" maxlength="10" disabled=" disabledBodega" id="IdTelefono">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -86,11 +86,11 @@
                                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Encargado</span>
                                         </div>
                                         <input placeholder="Encargado... " type="text" [(ngModel)]="bodega.encargado_input" class="form-control form-control-sm" disabled  id="Idencargado">
-                                        <!-- <select [(ngModel)]="bodega.encargado" class="form-control form-control-sm custom-select" [disabled]=" disbledUser|| !disabledBodega">
+                                        <!-- <select [(ngModel)]="bodega.encargado" class="form-control form-control-sm custom-select" disabled=" disbledUser|| !disabledBodega">
                                             <option *ngFor="let d of dataUsers" [value]="d.id_usuario">{{d.nombre}}
                                             </option>
                                         </select> -->
-                                        <button class="btn btn-primary btn-sm" (click)="modalEncargado()" [disabled]=" disabledBodega"><i class="fas fa-search"></i></button>
+                                        <button class="btn btn-primary btn-sm" (click)="modalEncargado()" disabled=" disabledBodega"><i class="fas fa-search"></i></button>
                                     </div>
                                 </div>
                                 <!-- <div class="col-sm-4 switch-container">
@@ -98,7 +98,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock menor 0</span>
                                         </div>
-                                        <input type="checkbox" [(ngModel)]="bodega.stock_menor_cero" class="form-control form-control-sm" [disabled]=" disabledBodega">
+                                        <input type="checkbox" [(ngModel)]="bodega.stock_menor_cero" class="form-control form-control-sm" disabled=" disabledBodega">
                                     </div>
                                 </div> -->
                             </div>

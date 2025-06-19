@@ -5,7 +5,7 @@
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Forma pago" styleSpan="size-span-campo">
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="compbt.metodo_pago"
-                        (ngModelChange)="validateForPag($event)" id="idFormaPago" [disabled]="btnMov  ">
+                        (ngModelChange)="validateForPag($event)" id="idFormaPago" disabled="btnMov  ">
                         <option [value]="0">Seleccione forma</option>
                         <option *ngFor="let el of forma_pago['FORMA PAGO PROVEEDOR']" [value]="el.valor">
                             {{ el.valor }}
@@ -44,25 +44,25 @@
             
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo">
-                    <input type="text" placeholder="Ingrese beneficiario" [(ngModel)]="compbt.beneficiario" id="idBenf" [disabled]=" compbt.metodo_pago == 0" class="form-control form-control-sm">
+                    <input type="text" placeholder="Ingrese beneficiario" [(ngModel)]="compbt.beneficiario" id="idBenf" disabled=" compbt.metodo_pago == 0" class="form-control form-control-sm">
                 </app-cc-input-group-prepend>
             </div>
 
             <div class="col-sm-4"  *ngIf="compbt.metodo_pago == 'NDC-C'">
                 <app-cc-input-group-prepend label="{{compbt.num_doc_adq == 0?'No. Doc. Nota': valueNDV}}" styleSpan="size-span-campo">
-                    <select class="form-control form-control-sm custom-select" *ngIf="!btnMov" [(ngModel)]="compbt.num_doc_adq" [disabled]="compbt.metodo_pago != 'NDC-C'"
+                    <select class="form-control form-control-sm custom-select" *ngIf="!btnMov" [(ngModel)]="compbt.num_doc_adq" disabled="compbt.metodo_pago != 'NDC-C'"
                         (ngModelChange)="getValue($event)">
                         <option value="0">Seleccione documento</option>
                         <option *ngFor="let d of arrayNotas" [value]="d.secuencia_doc">{{d.secuencia_doc.toString().padStart(10, '0')}}</option>
                     </select>
-                    <input type="text" [disabled]="true" *ngIf="btnMov" placeholder="{{compbt.secuencial.toString().padStart(10, '0')}}">
+                    <input type="text" disabled="true" *ngIf="btnMov" placeholder="{{compbt.secuencial.toString().padStart(10, '0')}}">
                 </app-cc-input-group-prepend>
             </div>            
 
             <div class="col-sm-4" *ngIf="compbt.metodo_pago == 'Cheque' || compbt.metodo_pago == 'Transferencia' || compbt.metodo_pago == 'Tarjeta Crédito' || compbt.metodo_pago == 'Tarjeta Débito' || compbt.metodo_pago == 'Depósito'">
                 <app-cc-input-group-prepend label="Cuenta Banco" styleSpan="size-span-campo">
                     <select class="form-control form-control-sm custom-select"
-                        [disabled]=" compbt.metodo_pago == 0 || compbt.metodo_pago == 'Efectivo' || compbt.metodo_pago == 'NDC-C'"
+                        disabled=" compbt.metodo_pago == 0 || compbt.metodo_pago == 'Efectivo' || compbt.metodo_pago == 'NDC-C'"
                         [(ngModel)]="compbt.typ_acc" (ngModelChange)="selectAccountBanck($event)">
                         <option [value]="0">Seleccione Cuenta</option>
                         <option *ngFor="let el of type_payments" [value]="el.id_banks">
@@ -75,21 +75,21 @@
             <div class="col-sm-4" *ngIf="compbt.metodo_pago == 'Cheque' || compbt.metodo_pago == 'Transferencia' || compbt.metodo_pago == 'Tarjeta Crédito' || compbt.metodo_pago == 'Tarjeta Débito' || compbt.metodo_pago == 'Depósito'">
                 <app-cc-input-group-prepend label="Num. trx/cheque" styleSpan="size-span-campo">
                     <input type="text" placeholder="Transacción" [(ngModel)]="compbt.num_tx" class="form-control form-control-sm"
-                    [disabled]=" compbt.metodo_pago == 0 || compbt.metodo_pago == 'Efectivo' || compbt.metodo_pago == 'NDC-C'" id="idNumTrx" min="0"
+                    disabled=" compbt.metodo_pago == 0 || compbt.metodo_pago == 'Efectivo' || compbt.metodo_pago == 'NDC-C'" id="idNumTrx" min="0"
                     (keypress)="commonServices.FormatDecimalVal($event)">
                 </app-cc-input-group-prepend>
             </div>
             
             <div class="col-sm-4" *ngIf="compbt.metodo_pago == 'Cheque'">
                 <app-cc-input-group-prepend label="Fecha cheque" styleSpan="size-span-campo">
-                    <ejs-datepicker [(ngModel)]="compbt.fecha_post" name="dateFrom" format='yyyy-MM-dd' [disabled]=" compbt.metodo_pago != 'Cheque' " class="form-control"></ejs-datepicker>
+                    <ejs-datepicker [(ngModel)]="compbt.fecha_post" name="dateFrom" format='yyyy-MM-dd' disabled=" compbt.metodo_pago != 'Cheque' " class="form-control"></ejs-datepicker>
                 </app-cc-input-group-prepend>
             </div>        
             
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Centro Costo" styleSpan="size-span-campo">
                     <select class="form-control form-control-sm custom-select"
-                        [disabled]="compbt.metodo_pago == 0"
+                        disabled="compbt.metodo_pago == 0"
                         [(ngModel)]="compbt.fk_centro_costo">
                         <option [value]="0">Seleccione centro costo</option>
                         <option *ngFor="let d of arrayCentroCosto" [value]="d.id">

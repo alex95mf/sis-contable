@@ -8,7 +8,7 @@
                     </div>
                     <input type="text" class="form-control form-control-sm" placeholder="Seleccione Registro" id="idCuenta" disabled [(ngModel)]="parametro.Codigo">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Cambiar Cuenta" id="idbtnCuenta" (click)="showCuenta()" [disabled]="parametro.Codigo == undefined"> <i class="fas fa-clipboard-check" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Cambiar Cuenta" id="idbtnCuenta" (click)="showCuenta()" disabled="parametro.Codigo == undefined"> <i class="fas fa-clipboard-check" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>

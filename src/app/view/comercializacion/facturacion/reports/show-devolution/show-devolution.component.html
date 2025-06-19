@@ -9,7 +9,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre comercial</span>
                     </div>
                     <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
-                        [disabled]="true" [(ngModel)]="info.client.nombre_comercial_cli">
+                        disabled="true" [(ngModel)]="info.client.nombre_comercial_cli">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -18,7 +18,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
                     </div>
                     <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
-                        [disabled]="true" [(ngModel)]="info.client.razon_social">
+                        disabled="true" [(ngModel)]="info.client.razon_social">
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo</span>
                     </div>
-                    <input type="text" class="form-control form-control-sm text-right pr-1" [disabled]="true"
+                    <input type="text" class="form-control form-control-sm text-right pr-1" disabled="true"
                         placeholder="$ {{commonServices.formatNumber(info.client.cupo_credito)}}">
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                    <input type="text" class="form-control form-control-sm" disabled="true"
                         placeholder="{{info.doc_auth}}">
                 </div>
             </div>
@@ -48,7 +48,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Vendedor</span>
                     </div>
                     <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
-                        id="idAsesor" [disabled]="true" [(ngModel)]="info.asesor.nombre">
+                        id="idAsesor" disabled="true" [(ngModel)]="info.asesor.nombre">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -56,7 +56,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo</span>
                     </div>
-                    <input type="text" class="form-control form-control-sm text-right pr-1" [disabled]="true"
+                    <input type="text" class="form-control form-control-sm text-right pr-1" disabled="true"
                         placeholder=" $ {{commonServices.formatNumber(info.client.saldo_credito)}}">
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo pago</span>
                     </div>
-                    <input placeholder="Tipo de pago" type="text" class="form-control form-control-sm" [disabled]="true"
+                    <input placeholder="Tipo de pago" type="text" class="form-control form-control-sm" disabled="true"
                         [(ngModel)]="info.tipo_pago">
                 </div>
             </div>
@@ -77,7 +77,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Forma de pago</span>
                     </div>
-                    <input placeholder="Tipo de pago" type="text" class="form-control form-control-sm" [disabled]="true"
+                    <input placeholder="Tipo de pago" type="text" class="form-control form-control-sm" disabled="true"
                         [(ngModel)]="info.forma_pago">
                 </div>
             </div>
@@ -100,7 +100,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha venta</span>
                     </div>
                     <input placeholder="Fecha venta" type="text" class="form-control form-control-sm"
-                        format='yyyy-MM-dd' [disabled]="true" [(ngModel)]="info.created_at">
+                        format='yyyy-MM-dd' disabled="true" [(ngModel)]="info.created_at">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -139,7 +139,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" id="idSalCre" [disabled]="true"
+                    <input type="text" class="form-control form-control-sm" id="idSalCre" disabled="true"
                         [(ngModel)]="info.status">
                 </div>
             </div>
@@ -181,7 +181,7 @@
                             <td>
                                 <input style="text-align: right;padding-right: 10px;" type="text" min="0"
                                     [(ngModel)]="d.cant_devuelta" (keypress)="commonServices.FormatDecimalVal($event)"
-                                    [disabled]="num_doc_search == null " (keyup)="sumTotal(i)">
+                                    disabled="num_doc_search == null " (keyup)="sumTotal(i)">
                             </td>
                             <td style="text-align: right;">
                                 {{commonServices.formatNumber(d.costo_total)}}</td>
@@ -207,7 +207,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tota devolución</span>
                     </div>
-                    <input type="text" class="form-control form-control-sm text-right pr-1" [disabled]="true"
+                    <input type="text" class="form-control form-control-sm text-right pr-1" disabled="true"
                         placeholder="$ {{commonServices.formatNumber(totalView.total_devolucion)}}">
                 </div>
             </div>

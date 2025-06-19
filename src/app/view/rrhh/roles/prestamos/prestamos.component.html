@@ -14,14 +14,14 @@
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="prestamos.tipo" id="IdTipo"
-                            [disabled]="permisions.editar == '0'  || !actions.dComponet">
+                            disabled="permisions.editar == '0'  || !actions.dComponet">
                     </app-cc-input-group-prepend>
                 </div>
 
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Tipo Pago" styleSpan="size-span-campo">
                         <select [(ngModel)]="prestamos.tipoPago" class="form-control form-control-sm custom-select"
-                            id="IdTipoPago" [disabled]="permisions.editar == '0' || !actions.dComponet">
+                            id="IdTipoPago" disabled="permisions.editar == '0' || !actions.dComponet">
                             <option *ngFor="let d of catalog.pagoPrestamo" [value]="d.valor">{{ d.valor }}</option>
                         </select>
                     </app-cc-input-group-prepend>
@@ -30,7 +30,7 @@
                 <div class="col-sm-4">
                     <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
                         <ejs-datepicker [(ngModel)]="prestamos.fecha" class="form-control form-control-sm"
-                            format="yyyy-MM-dd" id="" [disabled]="permisions.editar == '0'  || !actions.dComponet ">
+                            format="yyyy-MM-dd" id="" disabled="permisions.editar == '0'  || !actions.dComponet ">
                         </ejs-datepicker>
                     </app-cc-input-group-prepend>
                 </div>
@@ -41,7 +41,7 @@
                     <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-primary" id="idbuscar"
-                                [disabled]="permisions[0].editar == '0' || !actions.dComponet" placement="top"
+                                disabled="permisions[0].editar == '0' || !actions.dComponet" placement="top"
                                 matTooltip="Buscar Cuenta" (click)="searchCuenta()">
                                 <i class="fa fa-search fa-lg" style="font-size:12px" aria-hidden="true"></i>
                             </button>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-success" id="idlimpiar"
-                                [disabled]="permisions[0].editar == '0' || !actions.dComponet" placement="top"
+                                disabled="permisions[0].editar == '0' || !actions.dComponet" placement="top"
                                 matTooltip="Limpiar Empleado" (click)="resetEmpleado()">
                                 <i class="fas fa-eraser  fa-lg" style="font-size:12px"></i>
                             </button>
@@ -136,7 +136,7 @@
                             <app-cc-input-group-prepend label="Monto" styleSpan="size-span-otro">
                                 <input type="number" min="0" [(ngModel)]="prestamos.monto" id="IdMonto"
                                     class="form-control form-control-sm text-right"
-                                    [disabled]="permisions.editar == '0'  || !actions.dComponet">
+                                    disabled="permisions.editar == '0'  || !actions.dComponet">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-6">
@@ -152,7 +152,7 @@
                             <app-cc-input-group-prepend label="N° Cuotas" styleSpan="size-span-otro">
                                 <input type="number" class="form-control form-control-sm text-right"
                                     [(ngModel)]="prestamos.cuotas" id="IdCuotas"
-                                    [disabled]="permisions.editar == '0'  || !actions.dComponet">
+                                    disabled="permisions.editar == '0'  || !actions.dComponet">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-6">
@@ -168,7 +168,7 @@
                             <app-cc-input-group-prepend label="Intereses" styleSpan="size-span-otro">
                                 <input type="number" class="form-control form-control-sm text-right"
                                     [(ngModel)]="prestamos.porcentaje" id="Idporcentaje"
-                                    [disabled]="permisions.editar == '0'  || !actions.dComponet">
+                                    disabled="permisions.editar == '0'  || !actions.dComponet">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-6" *ngIf="showCalculo">
@@ -187,14 +187,14 @@
                                 <div class="input-group-prepend">
                                     <button class="btn btn-primary l" (click)="calcularDatos()" placement="top"
                                         matTooltip="Calcular Prestamo"
-                                        [disabled]="permisions.editar == '0'  || prestamos.monto == '0' ">
+                                        disabled="permisions.editar == '0'  || prestamos.monto == '0' ">
                                         <i class="fas fa-calculator fa-lg" style="font-size: 20px;"></i>
                                     </button>
                                 </div>
                                 <div class="input-group-prepend">
                                     <button class="btn btn-primary l" (click)="resetCalculo()" placement="top"
                                         matTooltip="Limpiar Prestamo"
-                                        [disabled]="permisions.editar == '0'  || !actions.dComponet ">
+                                        disabled="permisions.editar == '0'  || !actions.dComponet ">
                                         <i class="fas fa-redo  fa-lg"></i>
                                     </button>
                                 </div>
@@ -213,7 +213,7 @@
                             <app-cc-input-group-prepend label="Detalle" styleSpan="size-span-otro">
                                 <textarea [(ngModel)]="prestamos.descripcion" id="idDescripcion"
                                     class="form-control form-control-sm" rows="2" placeholder="Ingresar Detalle"
-                                    [disabled]="permisions.editar == '0'  || !actions.dComponet "> </textarea>
+                                    disabled="permisions.editar == '0'  || !actions.dComponet "> </textarea>
                             </app-cc-input-group-prepend>
                         </div>
                     </div>
@@ -255,7 +255,7 @@
                                     <td style="width: 5%;">
                                         <select [(ngModel)]="dt.estado"
                                             class="form-control form-control-sm custom-select" id="idEstado"
-                                            [disabled]="!estadoDisabled" style="width: 100%;">
+                                            disabled="!estadoDisabled" style="width: 100%;">
                                             <option *ngFor="let d of arrayStatus" [value]="d.estado">{{ d.estado }}
                                             </option>
                                         </select>
@@ -313,7 +313,7 @@
                                         <button class="btn btn-sm tooltip-test my-1"
                                             style="cursor:pointer;background-color: #2E76BD; color: black; border-radius: 10px;box-shadow: unset;outline: unset;"
                                             (click)="editPrestamo(dt,i)" placement="top" matTooltip="Ver Prestamo"
-                                            [disabled]="dt.isModuleCaja == 1">
+                                            disabled="dt.isModuleCaja == 1">
                                             <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
                                         </button>
                                         <button type="button" (click)="imprimirAsiento(dt)"
@@ -325,7 +325,7 @@
                                         <button type="button" (click)="deletePrestamo(dt)"
                                             class="btn btn-sm tooltip-test my-1"
                                             style="cursor:pointer;background-color: #FF4A4A ; color: black; border-radius: 10px"
-                                            placement="top" matTooltip="Eliminar" [disabled]="dt.isModuleCaja == 1">
+                                            placement="top" matTooltip="Eliminar" disabled="dt.isModuleCaja == 1">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>

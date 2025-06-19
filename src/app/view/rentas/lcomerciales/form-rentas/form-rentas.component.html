@@ -135,7 +135,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo size-span-campo" >Fotos</span></div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple [disabled]="!letEdit" (change)="cargaFoto($event.target.files)">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple disabled="!letEdit" (change)="cargaFoto($event.target.files)">
                             <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Se han encontrado " + fotos.length + " fotos" : "No se han encontrado fotos" }}</label>
                         </div>
                     </div>
@@ -155,7 +155,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                             <span class="input-group-text font-weight-bold size-span-campo size-span-campo" >Archivos</span>
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf" [disabled]="!letEdit" (change)="cargaArchivo($event.target.files)">
+                            <input type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf" disabled="!letEdit" (change)="cargaArchivo($event.target.files)">
                             <label class="custom-file-label" for="inputGroupFile02">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
                         </div>
                     </div>
@@ -215,7 +215,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                             <div class="input-group-prepend">
                                 <span class="input-group-text font-weight-bold size-span-campo"  id="inputGroup-sizing-sm">Área del local (m<sup>2</sup>)</span>
                             </div>
-                            <input [disabled]="!letEdit" id="area_local" type="text" maxlength="8" (keypress)="commonSrv.FormatDecimalVal($event)" placeholder="Ingrese área del local" class="form-control form-control-sm" [(ngModel)]="rentas_res.area_local">
+                            <input disabled="!letEdit" id="area_local" type="text" maxlength="8" (keypress)="commonSrv.FormatDecimalVal($event)" placeholder="Ingrese área del local" class="form-control form-control-sm" [(ngModel)]="rentas_res.area_local">
                         </div>
                     </div>
     
@@ -224,7 +224,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                             <div class="input-group-prepend">
                                 <span class="input-group-text font-weight-bold size-span-campo"  id="inputGroup-sizing-sm">¿Es local turístico?</span>
                             </div>
-                            <ng-select [disabled]="!letEdit" id="es_turistico" class="form-control form-control-sm" [(ngModel)]="rentas_res.es_turistico" (change)="handleLocalTuristico($event)" [clearable]="false">
+                            <ng-select disabled="!letEdit" id="es_turistico" class="form-control form-control-sm" [(ngModel)]="rentas_res.es_turistico" (change)="handleLocalTuristico($event)" [clearable]="false">
                                 <ng-option disabled [value]="0">Seleccione una respuesta</ng-option>
                                 <ng-option *ngFor="let op of listaRespuestas" [value]="op">{{ op }}</ng-option>
                             </ng-select>
@@ -236,7 +236,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                             <div class="input-group-prepend">
                                 <span class="input-group-text font-weight-bold size-span-campo"  id="inputGroup-sizing-sm">Categoría local turístico</span>
                             </div>
-                            <ng-select [disabled]="!letEdit || rentas_res.es_turistico!='SI'" id="categoria" class="form-control form-control-sm" [(ngModel)]="rentas_res.categoria" (change)="cargarSubCategorias($event)" [clearable]="false">
+                            <ng-select disabled="!letEdit || rentas_res.es_turistico!='SI'" id="categoria" class="form-control form-control-sm" [(ngModel)]="rentas_res.categoria" (change)="cargarSubCategorias($event)" [clearable]="false">
                                 <ng-option disabled [value]="0">Seleccione categoría</ng-option>
                                 <ng-option *ngFor="let op of listaCategorias" [value]="op.codigo">{{ op.nombre }}</ng-option>
                             </ng-select>
@@ -248,7 +248,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                             <div class="input-group-prepend">
                                 <span class="input-group-text font-weight-bold size-span-campo"  id="inputGroup-sizing-sm">Subcategoría</span>
                             </div>
-                            <ng-select [disabled]="!letEdit || rentas_res.es_turistico!='SI' || cat_step!=2" id="subcategoria" class="form-control form-control-sm" [(ngModel)]="rentas_res.subcategoria" [clearable]="false">
+                            <ng-select disabled="!letEdit || rentas_res.es_turistico!='SI' || cat_step!=2" id="subcategoria" class="form-control form-control-sm" [(ngModel)]="rentas_res.subcategoria" [clearable]="false">
                                 <ng-option disabled [value]="0">Seleccione subcategoría</ng-option>
                                 <ng-option *ngFor="let op of listaSubCatFiltrada" [value]="op.codigo">{{ op.nombre }}</ng-option>
                             </ng-select>
@@ -260,14 +260,14 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                             <div class="input-group-prepend">
                                 <span class="input-group-text font-weight-bold size-span-campo"  id="inputGroup-sizing-sm">{{cantidad_label}} </span>
                             </div>
-                            <input id="local_cantidad" type="text" maxlength="8" (keypress)="this.commonSrv.FormatIntegerVal($event)" [disabled]="!letEdit || rentas_res.es_turistico!='SI' || cantidad_disabled" class="form-control form-control-sm" [(ngModel)]="rentas_res.local_cantidad">
+                            <input id="local_cantidad" type="text" maxlength="8" (keypress)="this.commonSrv.FormatIntegerVal($event)" disabled="!letEdit || rentas_res.es_turistico!='SI' || cantidad_disabled" class="form-control form-control-sm" [(ngModel)]="rentas_res.local_cantidad">
                         </div>
                     </div>
     
                     <!-- <div class="col-12">
                         <div class="input-group input-group-sm mt-1 mb-3">
                             <div class="input-group-prepend "><span class="input-group-text font-weight-bold size-span-campo"  >Observaciones</span></div>
-                            <textarea [disabled]="!letEdit" id="observacion" cols="30" rows="3" class="form-control form-control-sm" [(ngModel)]="rentas_res.observacion"></textarea>
+                            <textarea disabled="!letEdit" id="observacion" cols="30" rows="3" class="form-control form-control-sm" [(ngModel)]="rentas_res.observacion"></textarea>
                         </div>
                     </div>
     
@@ -283,7 +283,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                     <div class="col-3">
                         <div class="input-group input-group-sm mt-1 mb-2">
                         <div class="input-group-prepend "><span class="input-group-text font-weight-bold size-span-campo" >Fecha de inspección</span></div>
-                        <input [disabled]="!letEdit" type="date" class="form-control form-control-sm" [(ngModel)]="rentas_res.fecha">
+                        <input disabled="!letEdit" type="date" class="form-control form-control-sm" [(ngModel)]="rentas_res.fecha">
                     </div>
                     </div>
     
@@ -293,7 +293,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                                 <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">¿Se aprueba la inspección?</span>
                             </div>
                             <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
-                                <input [disabled]="!letEdit" type="checkbox" class="custom-control-input" id="rentas_res.aprobado" [(ngModel)]="rentas_res.aprobado" >
+                                <input disabled="!letEdit" type="checkbox" class="custom-control-input" id="rentas_res.aprobado" [(ngModel)]="rentas_res.aprobado" >
                                 <label class="custom-control-label" for="rentas_res.aprobado"></label>
                             </div>
                             <input type="text" class="form-control form-control-sm" [class]="letEdit ? 'bg-white' : ''" disabled [value]="rentas_res.aprobado ? 'SI' : 'NO'">
@@ -303,7 +303,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                     <div class="col-3">
                         <div class="input-group input-group-sm mt-1 mb-2">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" >Próxima revisión</span></div>
-                        <input [disabled]="!letEdit || rentas_res.aprobado" type="date" class="form-control form-control-sm" [(ngModel)]="rentas_res.plazo_maximo">
+                        <input disabled="!letEdit || rentas_res.aprobado" type="date" class="form-control form-control-sm" [(ngModel)]="rentas_res.plazo_maximo">
                     </div>
                     </div>
     
@@ -331,7 +331,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                     <div class="offset-4 col-12 col-md-4 pt-0 pb-0 mb-2">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Fecha de Inspección</span></div>
-                            <input type="date" class="form-control form-control-sm" [disabled]="!letEdit" [(ngModel)]="rentas_res.fecha">
+                            <input type="date" class="form-control form-control-sm" disabled="!letEdit" [(ngModel)]="rentas_res.fecha">
                         </div>
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
@@ -355,7 +355,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                     <div class="col-12 col-md-8 pt-0 pb-0 mb-2">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Observaciones</span></div>
-                            <textarea [disabled]="!letEdit" cols="30" rows="3" class="form-control form-control-sm" [(ngModel)]="rentas_res.observacion"></textarea>
+                            <textarea disabled="!letEdit" cols="30" rows="3" class="form-control form-control-sm" [(ngModel)]="rentas_res.observacion"></textarea>
                         </div>
                     </div>
                     
@@ -365,15 +365,15 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                                 <span  class="input-group-text font-weight-bold size-span-campo">Resultado</span>
                             </div>
                             <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
-                                <input type="checkbox" class="custom-control-input" id="aprobado" [disabled]="!letEdit" [(ngModel)]="rentas_res.aprobado">
+                                <input type="checkbox" class="custom-control-input" id="aprobado" disabled="!letEdit" [(ngModel)]="rentas_res.aprobado">
                                 <label class="custom-control-label" for="aprobado"></label>
                             </div>
-                            <input type="text" class="form-control form-control-sm" [disabled]="!letEdit" [value]="rentas_res.aprobado ? 'FACTIBLE' : 'NO FACTIBLE'">
+                            <input type="text" class="form-control form-control-sm" disabled="!letEdit" [value]="rentas_res.aprobado ? 'FACTIBLE' : 'NO FACTIBLE'">
                         </div>
     
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Próxima Inspección</span></div>
-                            <input type="date" class="form-control form-control-sm" [disabled]="!letEdit || rentas_res.aprobado " [(ngModel)]="rentas_res.plazo_maximo">
+                            <input type="date" class="form-control form-control-sm" disabled="!letEdit || rentas_res.aprobado " [(ngModel)]="rentas_res.plazo_maximo">
                         </div>
                     </div>
                 </div>
@@ -681,7 +681,7 @@ filtroBoton="btnsFormRentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoG
                     </div>
         
                     <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
-                        <button [disabled]="disableVehiculos"
+                        <button disabled="disableVehiculos"
                             class="btn btn-sm btn-link text-center" (click)="registraVehiculos(inspec)">
                             <i class="fas fa-eye text-primary"></i>
                             Ver registro de vehiculos

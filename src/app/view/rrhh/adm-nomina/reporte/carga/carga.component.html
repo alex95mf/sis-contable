@@ -2,7 +2,7 @@
     <div class="col-sm-6">
         <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
             <input type="text" readonly placeholder="Seleccione">
-            <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Empleado">
+            <button class="btn btn-info btn-sm" disabled="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Empleado">
                 <i class="fas fa-search"></i>
             </button>
         </app-cc-input-group-prepend>

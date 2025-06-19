@@ -15,7 +15,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
                     </div>
                     <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
-                        [disabled]="!actions.dComponet || dPrPromocion " style="padding-left: 7px;font-size: 11px;"
+                        disabled="!actions.dComponet || dPrPromocion " style="padding-left: 7px;font-size: 11px;"
                         [(ngModel)]="customerSelect" [clearable]="false" (ngModelChange)="getCustomer($event)">
                         <ng-option [value]="0">Seleccione razón social</ng-option>
                         <ng-option *ngFor="let d of arrayCustomerAux" [value]="d.id_cliente">
@@ -30,7 +30,7 @@
                             contribuyente</span>
                     </div>
                     <input placeholder="tipo contribuyente" type="text" class="form-control form-control-sm"
-                        id="idTipCont" [disabled]="true" [(ngModel)]="customer.contribuyente">
+                        id="idTipCont" disabled="true" [(ngModel)]="customer.contribuyente">
                 </div>
             </div> -->
             <div class="col-sm-4">
@@ -49,7 +49,7 @@
                             cliente</span>
                     </div>
                     <input placeholder="tipo documento" type="text" class="form-control form-control-sm" id="idTipDoc"
-                        [disabled]="true" [(ngModel)]="customer.tipo_documento">
+                        disabled="true" [(ngModel)]="customer.tipo_documento">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -58,7 +58,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo crédito</span>
                     </div>
                     <input placeholder="cupo crédito" type="text" class="form-control form-control-sm" id="idCupoCre"
-                        [disabled]="true" [(ngModel)]="customer.cupo_credito">
+                        disabled="true" [(ngModel)]="customer.cupo_credito">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -67,7 +67,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Asesor</span>
                     </div>
                     <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
-                        id="idAsesor" [disabled]="true" [(ngModel)]="customer['asesor']['nombre']">
+                        id="idAsesor" disabled="true" [(ngModel)]="customer['asesor']['nombre']">
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Doc. cliente</span>
                     </div>
                     <input placeholder="numero documento" type="text" [(ngModel)]="customer.num_documento"
-                        class="form-control form-control-sm" id="idNumDoc" [disabled]="true">
+                        class="form-control form-control-sm" id="idNumDoc" disabled="true">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -87,7 +87,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo crédito</span>
                     </div>
                     <input placeholder="saldo crédito" type="text" class="form-control form-control-sm" id="idSalCre"
-                        [disabled]="true" [(ngModel)]="customer.saldo_credito">
+                        disabled="true" [(ngModel)]="customer.saldo_credito">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -96,7 +96,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo pago</span>
                     </div>
                     <select id="idFormPago" class="form-control form-control-sm" [(ngModel)]="customer.formaPagoSelect"
-                        [disabled]="!actions.dComponet">
+                        disabled="!actions.dComponet">
                         <option value="0">Seleccione tipo</option>
                         <option value="Contado">Contado</option>
                         <option value="Crédito">Crédito</option>
@@ -114,7 +114,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupo cliente</span>
                     </div>
                     <input placeholder="Grupo cliente" type="text" class="form-control form-control-sm" id="idGrupo"
-                        [disabled]="true" [(ngModel)]="customer.group.name">
+                        disabled="true" [(ngModel)]="customer.group.name">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -123,7 +123,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
                     </div>
                     <input placeholder="dirección" type="text" class="form-control form-control-sm" id="idAddress"
-                        [disabled]="true" [(ngModel)]="customer.direccion">
+                        disabled="true" [(ngModel)]="customer.direccion">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -152,7 +152,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
                     </div>
                     <input placeholder="teléfono" type="text" class="form-control form-control-sm" id="idTelefono"
-                        [disabled]="true" [(ngModel)]="customer.telefono">
+                        disabled="true" [(ngModel)]="customer.telefono">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -194,7 +194,7 @@
                 <div class="row justify-content-end pt-2">
                     <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
                         <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Agregar productos"
-                            (click)="addProduct()" [disabled]="!actions.dComponet || !validateIdCliente">
+                            (click)="addProduct()" disabled="!actions.dComponet || !validateIdCliente">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -219,30 +219,30 @@
                                 <tr *ngFor="let d of dataProducto; let i = index">
                                     <td style="width: 14%;" *ngIf="d.action">
                                         <input type="text" placeholder="Código" [(ngModel)]="d.codigoProducto"
-                                            [disabled]="true">
+                                            disabled="true">
                                     </td>
                                     <td style="width: 20%;" *ngIf="d.action">
                                         <div placement="top" ngbTooltip="{{d.nombre}}">
                                             <input type="text" placeholder="Producto" [(ngModel)]="d.nombre"
-                                                [disabled]="true">
+                                                disabled="true">
                                         </div>
                                     </td>
                                     <td style="width: 10%;" *ngIf="d.action"><input type="text"
-                                            placeholder="$ {{d.precio_normal}}" [disabled]="true"
+                                            placeholder="$ {{d.precio_normal}}" disabled="true"
                                             style="text-align: right !important;"></td>
 
                                     <td style="width: 10%;" *ngIf="d.action"><input type="text"
-                                            placeholder="{{d.porcen_promocion}} %" [disabled]="true"
+                                            placeholder="{{d.porcen_promocion}} %" disabled="true"
                                             style="text-align: right !important;"></td>
 
                                     <td style="width: 7%;" *ngIf="d.action">
                                         <div *ngIf="(d.stock-d.cantidad_reservada) > 0">
                                             <input type="text" placeholder="0.00" style="text-align: right !important;"
                                                 placeholder="{{(d.stock-d.cantidad_reservada).toFixed(2)}}"
-                                                [disabled]="true">
+                                                disabled="true">
                                         </div>
                                         <div *ngIf="(d.stock-d.cantidad_reservada) <= 0">
-                                            <input type="text" placeholder="0.00" [disabled]="true"
+                                            <input type="text" placeholder="0.00" disabled="true"
                                                 style="text-align: right !important;">
                                         </div>
                                     </td>
@@ -251,22 +251,22 @@
                                             style="text-align: right;padding-right: 10px;" [(ngModel)]="d.quantity"
                                             (keyup)="sumTotal(i)" min="0" id="quantyId"
                                             (keypress)="commonServices.FormatDecimalVal($event)"
-                                            [disabled]="!actions.dComponet">
+                                            disabled="!actions.dComponet">
                                     </td>
                                     <td style="width: 10%;" *ngIf="d.action">
                                         <input type="text" class="form-control form-control-sm" placeholder="$ 0.00"
                                             style="text-align: right;padding-right: 10px;" [(ngModel)]="d.price"
                                             (keyup)="sumTotal(i)" min="0"
                                             (keypress)="commonServices.FormatDecimalVal($event)"
-                                            [disabled]="!actions.dComponet">
+                                            disabled="!actions.dComponet">
                                     </td>
                                     <td style="width: 9%;" *ngIf="d.action">
-                                        <input type="text" placeholder="$ {{d.totalItems.toFixed(4)}}" [disabled]="true"
+                                        <input type="text" placeholder="$ {{d.totalItems.toFixed(4)}}" disabled="true"
                                             class="form-control form-control-sm" style="text-align: right !important;">
                                     </td>
                                     <td style="width: 9%;text-align: center;" *ngIf="d.action">
                                         <button class="btn btn-danger btn-sm" placement="top"
-                                            ngbTooltip="Eliminar Items" [disabled]="!actions.dComponet"
+                                            ngbTooltip="Eliminar Items" disabled="!actions.dComponet"
                                             (click)="deleteItems(i)"><i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </td>

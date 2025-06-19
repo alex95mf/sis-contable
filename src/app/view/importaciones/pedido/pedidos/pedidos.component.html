@@ -41,7 +41,7 @@
                                     <div class="input-group-append">
                                         <button class="btn btn-primary btn-sm" (click)="setNumCuotas()"
                                             style="box-shadow: unset;outline: unset;" id="idbtndifered"
-                                            [disabled]="!flagBtnDired " placement="top" ngbTooltip="Diferir cuotas">
+                                            disabled="!flagBtnDired " placement="top" ngbTooltip="Diferir cuotas">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -54,7 +54,7 @@
                                             id="inputGroup-sizing-sm">Anulado</span>
                                     </div>
                                     <select class="form-control form-control-sm custom-select"
-                                        [(ngModel)]="importPed.anulado" id="idAnulado" [disabled]="true">
+                                        [(ngModel)]="importPed.anulado" id="idAnulado" disabled="true">
                                         <option [value]="0">No</option>
                                         <option [value]="1">Si</option>
                                     </select>
@@ -69,7 +69,7 @@
                                             proveedor</span>
                                     </div>
                                     <input type="text" placeholder="Ruc proveedor" [(ngModel)]="importPed.ruc" id="idruc"
-                                        [disabled]="true" class="form-control form-control-sm">
+                                        disabled="true" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -145,7 +145,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No.
                                             documento</span>
                                     </div>
-                                    <input type="text" placeholder="Ingrese número" [disabled]="actions.btnmod"
+                                    <input type="text" placeholder="Ingrese número" disabled="actions.btnmod"
                                         [(ngModel)]="importPed.num_doc_compra" id="iddocref" min="0"
                                         class="form-control form-control-sm"
                                         (keypress)="commonServices.FormatDecimalVal($event)">
@@ -165,7 +165,7 @@
                                             id="inputGroup-sizing-sm">Pagado</span>
                                     </div>
                                     <select class="form-control form-control-sm custom-select"
-                                        [(ngModel)]="importPed.pagado" id="idPagado" [disabled]="true">
+                                        [(ngModel)]="importPed.pagado" id="idPagado" disabled="true">
                                         <option [value]="0">No</option>
                                         <option [value]="1">Si</option>
                                     </select>
@@ -180,7 +180,7 @@
                                             id="inputGroup-sizing-sm">Estado</span>
                                     </div>
                                     <select class="form-control form-control-sm custom-select"
-                                        [(ngModel)]="importPed.estado" [disabled]="true">
+                                        [(ngModel)]="importPed.estado" disabled="true">
                                         <option value="Pendiente">Pendiente</option>
                                         <option value="Aprobado">Aprobado</option>
                                         <option value="Facturado">Facturado</option>
@@ -209,7 +209,7 @@
                                             Seguro</span>
                                     </div>
                                     <input type="text" placeholder="$ {{importPed.total_seguro}}" id="idtotalSeg"
-                                        [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                                        disabled="true" class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
                         </div>
@@ -220,7 +220,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">T.
                                             Pedido</span>
                                     </div>
-                                    <input type="text" placeholder="$ {{importPed.total_pedido}}" id="idtfob" [disabled]="true"
+                                    <input type="text" placeholder="$ {{importPed.total_pedido}}" id="idtfob" disabled="true"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">T.
                                             Transporte</span>
                                     </div>
-                                    <input type="text" placeholder="$ {{importPed.total_transp}}" id="idttrasnp" [disabled]="true"
+                                    <input type="text" placeholder="$ {{importPed.total_transp}}" id="idttrasnp" disabled="true"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -240,7 +240,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">T.
                                             Gastos</span>
                                     </div>
-                                    <input type="text" placeholder="$ {{importPed.total_gasto}}" id="idtgastos" [disabled]="true"
+                                    <input type="text" placeholder="$ {{importPed.total_gasto}}" id="idtgastos" disabled="true"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -262,7 +262,7 @@
                                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">T.
                                             General</span>
                                     </div>
-                                    <input type="text" placeholder="$ {{importPed.total}}" id="idtotal" [disabled]="true"
+                                    <input type="text" placeholder="$ {{importPed.total}}" id="idtotal" disabled="true"
                                         class="form-control form-control-sm text-right pr-1">
                                 </div>
                             </div>
@@ -314,16 +314,16 @@
                                     </td>
                                     <td style="width: 14%;">
                                         <input type="text" class="form-control form-control-sm p-0"
-                                            [(ngModel)]="d.codigo_pro" [disabled]="true" style="width: 100%;">
+                                            [(ngModel)]="d.codigo_pro" disabled="true" style="width: 100%;">
                                     </td>
                                     <td style="width: 8%;">
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.pesoKg)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.pesoKg)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
                                     <td style="width: 8%;">
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.volumenm3)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.volumenm3)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
                                     <td style="width: 8%;">
@@ -331,7 +331,7 @@
                                             <input type="text" class="form-control form-control-sm pr-1"
                                                 style="text-align: right;" [(ngModel)]="d.cantidad" (keyup)="sumTotal(i)"
                                                 min="0" (keypress)="commonServices.FormatDecimalVal($event)"
-                                                [disabled]="d.fk_producto == 0  " id="quanty{{i}}" placeholder="0.00">
+                                                disabled="d.fk_producto == 0  " id="quanty{{i}}" placeholder="0.00">
                                         </div>
                                     </td>
                                     <td style="width: 8%;">
@@ -339,22 +339,22 @@
                                             <input type="number" class="form-control form-control-sm pr-1"
                                                 style="text-align: right;" [(ngModel)]="d.precio" (keyup)="sumTotal(i)"
                                                 min="0" (keypress)="commonServices.FormatDecimalVal($event)"
-                                                [disabled]="d.fk_producto == 0 ">
+                                                disabled="d.fk_producto == 0 ">
                                         </div>
                                     </td>
                                     <td style="width: 8%;">
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.total)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.total)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
                                     <td style="width: 8%;text-align: right;">
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.peso)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.peso)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
                                     <td style="width: 8%;text-align: right;">
                                         <input type="text" class="form-control form-control-sm pr-1"
-                                            placeholder="{{commonServices.formatNumber(d.volumen)}}" [disabled]="true"
+                                            placeholder="{{commonServices.formatNumber(d.volumen)}}" disabled="true"
                                             style="width: 100%;text-align: right;">
                                     </td>
     

@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Tipo gasto" styleSpan="size-span-campo">
-                <select class="form-control form-control-sm custom-select" [(ngModel)]="smallBox.fk_tipo_mov" id="idTipMov" (ngModelChange)="setTotalTwo()" [disabled]="smallBox.fk_caja_chica == 0">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="smallBox.fk_tipo_mov" id="idTipMov" (ngModelChange)="setTotalTwo()" disabled="smallBox.fk_caja_chica == 0">
                     <option [value]="0">Seleccione Gasto</option>
                     <option *ngFor="let d of arrayTpGasto" [value]="d.fk_cuenta_contable">{{d.nombre_cuenta}}</option>
                 </select>
@@ -19,12 +19,12 @@
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="Monto Asig." styleSpan="size-span-otro">
-                <input placeholder="nombre quien recibe" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.monto" [disabled]="true">
+                <input placeholder="nombre quien recibe" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.monto" disabled="true">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="Sub Total" styleSpan="size-span-otro">
-                <input type="number" class="form-control form-control-sm  text-right" id="idSubtotal" [(ngModel)]="smallBox.sub_total" min="0" [disabled]="smallBox.fk_caja_chica == 0 ||  smallBox.fk_tipo_doc   == 21 || smallBox.fk_tipo_doc   == 0 || disbInfo" (keyup)="calculateTotal()"
+                <input type="number" class="form-control form-control-sm  text-right" id="idSubtotal" [(ngModel)]="smallBox.sub_total" min="0" disabled="smallBox.fk_caja_chica == 0 ||  smallBox.fk_tipo_doc   == 21 || smallBox.fk_tipo_doc   == 0 || disbInfo" (keyup)="calculateTotal()"
                     (keypress)="commonServices.FormatDecimalVal($event)">
             </app-cc-input-group-prepend>
         </div>
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Tipo documento" styleSpan="size-span-campo">
-                <select class="form-control form-control-sm custom-select" [(ngModel)]="smallBox.fk_tipo_doc" id="idTipDoc" [disabled]="smallBox.fk_caja_chica == 0" (ngModelChange)="setTotal()">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="smallBox.fk_tipo_doc" id="idTipDoc" disabled="smallBox.fk_caja_chica == 0" (ngModelChange)="setTotal()">
                     <option [value]="0">Seleccione Documento</option>
                     <option *ngFor="let d of arrayTypeDoc" [value]="d.id">{{d.nombre}}</option>
                 </select>
@@ -42,7 +42,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Centro Costo" styleSpan="size-span-campo">
-                <select class="form-control form-control-sm custom-select" [disabled]="smallBox.fk_caja_chica == 0" [(ngModel)]="smallBox.fk_centro_costo">
+                <select class="form-control form-control-sm custom-select" disabled="smallBox.fk_caja_chica == 0" [(ngModel)]="smallBox.fk_centro_costo">
                     <option [value]="0">Seleccione centro costo</option>
                     <option *ngFor="let d of arrayCentroCosto" [value]="d.id">{{d.nombre}}</option>
                 </select>
@@ -50,12 +50,12 @@
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="Saldo" styleSpan="size-span-otro">
-                <input placeholder="numero autorización" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.saldo" [disabled]="true">
+                <input placeholder="numero autorización" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.saldo" disabled="true">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="Iva {{smallBox.iva}}%" styleSpan="size-span-otro">
-                <input placeholder="numero autorización" type="number" class="form-control form-control-sm text-right" id="iIvaValor" [(ngModel)]="smallBox.iva_valor" min="0" [disabled]="true" (keypress)="commonServices.FormatDecimalVal($event)">
+                <input placeholder="numero autorización" type="number" class="form-control form-control-sm text-right" id="iIvaValor" [(ngModel)]="smallBox.iva_valor" min="0" disabled="true" (keypress)="commonServices.FormatDecimalVal($event)">
             </app-cc-input-group-prepend>
         </div>
     </div>
@@ -64,22 +64,22 @@
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="No. Autorización" styleSpan="size-span-campo">
-                <input placeholder="Número autorización" type="number" [disabled]="smallBox.fk_caja_chica == 0" class="form-control form-control-sm" id="idNumAut" [(ngModel)]="smallBox.num_aut" min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+                <input placeholder="Número autorización" type="number" disabled="smallBox.fk_caja_chica == 0" class="form-control form-control-sm" id="idNumAut" [(ngModel)]="smallBox.num_aut" min="0" (keypress)="commonServices.FormatDecimalVal($event)">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo">
-                <input placeholder="Nombre quien recibe" type="text" class="form-control form-control-sm" id="idNameBen" [(ngModel)]="smallBox.beneficiario" [disabled]="smallBox.fk_caja_chica == 0">
+                <input placeholder="Nombre quien recibe" type="text" class="form-control form-control-sm" id="idNameBen" [(ngModel)]="smallBox.beneficiario" disabled="smallBox.fk_caja_chica == 0">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="Reposición" styleSpan="size-span-otro">
-                <input placeholder="Número autorización" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.reposicion" [disabled]="true">
+                <input placeholder="Número autorización" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.reposicion" disabled="true">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="Total" styleSpan="size-span-otro">
-                <input placeholder="Número documento" type="number" class="form-control form-control-sm text-right" id="idTotal" [(ngModel)]="smallBox.total" min="0" [disabled]="true" (keypress)="commonServices.FormatDecimalVal($event)">
+                <input placeholder="Número documento" type="number" class="form-control form-control-sm text-right" id="idTotal" [(ngModel)]="smallBox.total" min="0" disabled="true" (keypress)="commonServices.FormatDecimalVal($event)">
             </app-cc-input-group-prepend>
         </div>
     </div>
@@ -87,17 +87,17 @@
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo">
-                <input placeholder="Número Documento" type="number" class="form-control form-control-sm" id="idmudoc" [(ngModel)]="smallBox.num_doc" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="smallBox.fk_caja_chica == 0">
+                <input placeholder="Número Documento" type="number" class="form-control form-control-sm" id="idmudoc" [(ngModel)]="smallBox.num_doc" min="0" (keypress)="commonServices.FormatDecimalVal($event)" disabled="smallBox.fk_caja_chica == 0">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-4" *ngIf="disbInfo">
             <app-cc-input-group-prepend label="Valor del vale" styleSpan="size-span-campo">
-                <input type="number" class="form-control form-control-sm text-right" id="idValMov" [disabled]="smallBox.fk_caja_chica == 0 || !disbInfo" [(ngModel)]="smallBox.valor_mov" min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+                <input type="number" class="form-control form-control-sm text-right" id="idValMov" disabled="smallBox.fk_caja_chica == 0 || !disbInfo" [(ngModel)]="smallBox.valor_mov" min="0" (keypress)="commonServices.FormatDecimalVal($event)">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo">
-                <textarea class="form-control" rows="1" [(ngModel)]="smallBox.concepto" placeholder="Ingrese concepto del vale" [disabled]="smallBox.fk_caja_chica == 0" id="idconcepto"></textarea>
+                <textarea class="form-control" rows="1" [(ngModel)]="smallBox.concepto" placeholder="Ingrese concepto del vale" disabled="smallBox.fk_caja_chica == 0" id="idconcepto"></textarea>
             </app-cc-input-group-prepend>
         </div>
     </div>

@@ -24,7 +24,7 @@
                 <app-cc-input-group-prepend label="Debitar desde" styleSpan="size-span-campo"
                     *ngIf="values.method != 'Nota de Débito'">
                     <select id="inpAccount" class="form-control form-control-sm" *ngIf="values.method === 0"
-                        [disabled]="true">
+                        disabled="true">
                         <option hidden disabled selected [value]="0">Seleccione nota de débito</option>
                     </select>
                     <select id="inpAccount" class="form-control form-control-sm" [(ngModel)]="values.typ_acc"
@@ -63,19 +63,19 @@
         <div class="form-row pl-2 pr-2">
             <div class="form-group col-sm-12 col-md-3">
                 <app-cc-input-group-prepend label="Monto a pagar" styleSpan="size-span-campo">
-                    <input type="text" class="form-control text-right" id="inpTotal" [disabled]="true"
+                    <input type="text" class="form-control text-right" id="inpTotal" disabled="true"
                         [(ngModel)]="values.parseTotal">
                 </app-cc-input-group-prepend>
             </div>
             <div class="form-group col-sm-12 col-md-3">
                 <app-cc-input-group-prepend label="Monto acreditado" styleSpan="size-span-campo">
-                    <input type="text" class="form-control text-right" id="inpAccredited" [disabled]="true"
+                    <input type="text" class="form-control text-right" id="inpAccredited" disabled="true"
                         [(ngModel)]="values.parseAccredited">
                 </app-cc-input-group-prepend>
             </div>
             <div class="form-group col-sm-12 col-md-3">
                 <app-cc-input-group-prepend label="Monto pendiente" styleSpan="size-span-campo">
-                    <input type="text" class="form-control text-right" id="inpPending" [disabled]="true"
+                    <input type="text" class="form-control text-right" id="inpPending" disabled="true"
                         [(ngModel)]="values.parsePending">
                 </app-cc-input-group-prepend>
             </div>

@@ -40,7 +40,7 @@
                                             </div>
                                             <input placeholder="Ingrese Nombre" type="text" #nombre="ngModel"
                                                 name="nombre" [(ngModel)]="nombres" minlength="20"
-                                                class="form-control form-control-sm" [disabled]="dusuario"
+                                                class="form-control form-control-sm" disabled="dusuario"
                                                 id="Idnombre">
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                             </div>
                                             <input placeholder="Ingrese Clave" type="password" #clave="ngModel"
                                                 name="clave" [(ngModel)]="claves" minlength="8" maxlength="12"
-                                                class="form-control form-control-sm" [disabled]="dusuario"
+                                                class="form-control form-control-sm" disabled="dusuario"
                                                 id="password">
                                             <!-- <div class="input-group-addon input-image" style="cursor: pointer;">
                                                 <i class="fa fa-eye-slash eyePass " aria-hidden="true" (click)="showPass()"></i>
@@ -74,7 +74,7 @@
                                             </div>
                                             <input placeholder="Ingrese Usuario" type="text" #usuario="ngModel"
                                                 name="usuario" [(ngModel)]="usuarios" minlength="20" maxlength="20"
-                                                class="form-control form-control-sm" [disabled]="dusuario"
+                                                class="form-control form-control-sm" disabled="dusuario"
                                                 id="Idusuario">
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@
                                             </div>
                                             <input placeholder="00:00" type="time" class="form-control form-control-sm"
                                                 #fechae="ngModel" name="fechae" id="fechae" [(ngModel)]="fentrada"
-                                                [disabled]="dusuario">
+                                                disabled="dusuario">
                                         </div>
                                     </div>
 
@@ -98,7 +98,7 @@
                                             </div>
                                             <input placeholder="Ingrese ejemplo@ejemplo.com" type="email"
                                                 #email="ngModel" name="email" [(ngModel)]="emails"
-                                                class="form-control form-control-sm" [disabled]="dusuario" id="Idemail">
+                                                class="form-control form-control-sm" disabled="dusuario" id="Idemail">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -109,7 +109,7 @@
                                             </div>
                                             <input placeholder="00:00" type="time" class="form-control form-control-sm"
                                                 #fechas="ngModel" name="fechas" id="fechas" [(ngModel)]="fsalida"
-                                                [disabled]="dusuario">
+                                                disabled="dusuario">
                                         </div>
                                     </div>
 
@@ -120,7 +120,7 @@
                                                     id="inputGroup-sizing-sm">Empresa</span>
                                             </div>
                                             <select [(ngModel)]="empresaSeleccionado"
-                                                class="form-control form-control-sm custom-select" [disabled]="dusuario"
+                                                class="form-control form-control-sm custom-select" disabled="dusuario"
                                                 (ngModelChange)="obtenerEmpresa($event)">
                                                 <option [value]="undefined">Seleccione empresa</option>
                                                 <option *ngFor="let d of dataEmpresa" [value]="d.id_empresa">
@@ -131,7 +131,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <app-cc-input-group-prepend label="Surcursal" styleSpan="size-span-campo font-weight-bold">
-                                            <ng-select class="form-control" [(ngModel)]="sucursalSeleccionado" [disabled]="!disbledSucursal || dusuario"
+                                            <ng-select class="form-control" [(ngModel)]="sucursalSeleccionado" disabled="!disbledSucursal || dusuario"
                                                 [items]="dataSucursal" bindValue="id_sucursal" bindLabel="nombre" (change)="obtenerSucursal($event)">
                                             </ng-select>
                                         </app-cc-input-group-prepend>
@@ -142,7 +142,7 @@
                                             </div>
                                             <select [(ngModel)]="sucursalSeleccionado"
                                                 class="form-control form-control-sm custom-select"
-                                                [disabled]="!disbledSucursal || dusuario"
+                                                disabled="!disbledSucursal || dusuario"
                                                 (ngModelChange)="obtenerSucursal($event)">
                                                 <option [value]="undefined">Seleccione sucursal</option>
                                                 <option *ngFor="let d of dataSucursal" [value]="d.id_sucursal">
@@ -160,7 +160,7 @@
                                             </div>
                                             <select [(ngModel)]="rolSeleccionado" id="rol"
                                                 class="form-control form-control-sm custom-select"
-                                                (ngModelChange)="obtenerRol($event)" [disabled]="dusuario">
+                                                (ngModelChange)="obtenerRol($event)" disabled="dusuario">
                                                 <option [value]="undefined">Seleccione rol</option>
                                                 <option *ngFor="let d of roles" [value]="d.id_rol">{{d.nombre_rol}}
                                                 </option>
@@ -174,7 +174,7 @@
                                                     id="inputGroup-sizing-sm">Módulo</span>
                                             </div>
                                             <select [(ngModel)]="perfilSeleccionadoUser"
-                                                class="form-control form-control-sm custom-select" [disabled]="dusuario"
+                                                class="form-control form-control-sm custom-select" disabled="dusuario"
                                                 (ngModelChange)="obtenerPerfilUserSelected($event)">
                                                 <option [value]="undefined">Seleccione módulo</option>
                                                 <option *ngFor="let d of perfiles" [value]="d.id_modulo">
@@ -193,10 +193,10 @@
                                             </div>
                                             <input placeholder="Departamento..." type="text" #departamento="ngModel"
                                                 name="departamento" readonly [(ngModel)]="departamentoSelect.dep_nombre" 
-                                                class="form-control form-control-sm" [disabled]="dusuario" 
+                                                class="form-control form-control-sm" disabled="dusuario" 
                                                 id="departamento">
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" [disabled]="dusuario"
+                                                <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" disabled="dusuario"
                                                     style="box-shadow: unset;outline: unset;">
                                                     Buscar
                                                 </button>
@@ -207,14 +207,14 @@
                                     <div class="col-sm-6">
                                         <app-cc-input-group-prepend label="Atiende Mesa de Ayuda" styleSpan="size-span-campo font-weight-bold">
                                             <ng-select class="form-control" [(ngModel)]="mda_atiende" [clearable]="false" (change)="handleCategorias($event)"
-                                                [items]="cmb_mesaayuda_atiende" bindValue="value" bindLabel="label" [disabled]="dusuario">
+                                                [items]="cmb_mesaayuda_atiende" bindValue="value" bindLabel="label" disabled="dusuario">
                                             </ng-select>
                                         </app-cc-input-group-prepend>
                                     </div>
                                     <div class="col-sm-6">
                                         <app-cc-input-group-prepend label="Categoria" styleSpan="size-span-campo font-weight-bold">
                                             <ng-select class="form-control" [(ngModel)]="mda_categoria" [clearable]="false" #mdaCategorias
-                                                [items]="cmb_mesaayuda_categoria" bindValue="valor" bindLabel="descripcion" [disabled]="true">
+                                                [items]="cmb_mesaayuda_categoria" bindValue="valor" bindLabel="descripcion" disabled="true">
                                             </ng-select>
                                         </app-cc-input-group-prepend>
                                     </div>
@@ -227,7 +227,7 @@
                                             </div>
                                             <select class="form-control form-control-sm custom-select"
                                                 #estadou="ngModel" name="estadou" id="estadou" [(ngModel)]="eusuario"
-                                                [disabled]="dusuario">
+                                                disabled="dusuario">
                                                 <option value="A">Activo</option>
                                                 <option value="I">Inactivo</option>
                                             </select>
@@ -249,7 +249,7 @@
                                             </ng-template>
                                             <ng-template #sinAnexo>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFile" accept=".p12" (change)="cargaFirma($event.target.files)" [disabled]="dusuario">
+                                                    <input type="file" class="custom-file-input" id="customFile" accept=".p12" (change)="cargaFirma($event.target.files)" disabled="dusuario">
                                                     <label class="custom-file-label" for="customFile" id="lbl_firma">Seleccionar Firma Digital</label>
                                                   </div>
                                             </ng-template>
@@ -258,7 +258,7 @@
                                     <div class="col-sm-3">
                                         <div class="input-group input-group-sm mt-1">
                                             <input id="fichero" type="file" accept="image/*" (change)="onselect($event)"
-                                                [disabled]="dusuario">
+                                                disabled="dusuario">
                                             <label for="fichero" class="btn btn-primary "
                                                 style="font-size:11px;line-height:0.5"><i class="fa fa-upload"
                                                     aria-hidden="true" style="font-size:13px;"></i>SELECCIONE
@@ -268,7 +268,7 @@
                                     <div class="col-sm-3">
                                         <div class="input-group input-group-sm mt-1">
                                             <input id="firma" type="file" accept="image/*" (change)="onselectFirma($event)"
-                                                [disabled]="dusuario">
+                                                disabled="dusuario">
                                             <label for="firma" class="btn btn-primary "
                                                 style="font-size:11px;line-height:0.5"><i class="fa fa-upload"
                                                     aria-hidden="true" style="font-size:13px;"></i>SELECCIONE
@@ -279,7 +279,7 @@
                                     <!-- <div class="col-sm-6">
                                         <app-cc-input-group-prepend label="Departamento" styleSpan="input-group-text size-span-campo">
                                             <input class="form-control form-control-sm" [(ngModel)]="DepartamentoSelect" readonly placeholder="Departamento... "/>
-                                            <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" [disabled]="dusuario">Buscar</button>
+                                            <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" disabled="dusuario">Buscar</button>
                                         </app-cc-input-group-prepend>
                                     </div> -->
                                 </div>
@@ -376,7 +376,7 @@
                                     </div>
                                     <select [(ngModel)]="componenteSeleccionado"
                                         class="form-control form-control-sm custom-select"
-                                        (ngModelChange)="obtenerComponente($event)" [disabled]="!disbledComp">
+                                        (ngModelChange)="obtenerComponente($event)" disabled="!disbledComp">
                                         <option [value]="undefined">Seleccione componente</option>
                                         <option *ngFor="let d of componentes" [value]="d.tipo_componente">
                                             <span *ngIf="d.tipo_componente == 'MENUTWO'">MENU SEGURIDAD</span>

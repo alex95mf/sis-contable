@@ -5,7 +5,7 @@
 
             <div class="col-12 col-md-4 pt-0 pb-0">
                 <app-cc-input-group-prepend label="Categoría" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.categoria" [disabled]="deshabilitar" (change)="getCatalogoSubCategoria($event)" maxlength="5">
+                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.categoria" disabled="deshabilitar" (change)="getCatalogoSubCategoria($event)" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione una Categor&iacute;a</ng-option>
                         <ng-option *ngFor="let op of categorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
                     </ng-select>
@@ -18,7 +18,7 @@
             <div class="col-12 col-md-4 pt-0 pb-0">
 
                 <app-cc-input-group-prepend label="Subcategoría" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select id="subcategoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.subcategoria" [disabled]="deshabilitar" maxlength="5">
+                    <ng-select id="subcategoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.subcategoria" disabled="deshabilitar" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione una Sub Categor&iacute;a</ng-option>
                         <ng-option *ngFor="let op of subCategorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
                     </ng-select>
@@ -26,7 +26,7 @@
             </div>
             <div class="col-12 col-md-4 pt-0 pb-0">
                 <app-cc-input-group-prepend label="Prioridad" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.prioridad" [disabled]="deshabilitar" maxlength="5">
+                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.prioridad" disabled="deshabilitar" maxlength="5">
                         <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
                         <ng-option *ngFor="let op of prioridadList" [value]="op.value">
                             <i placement="bottom" [ngbTooltip]="(op.value == 'A') ? 'Alta' : (op.value == 'M') ? 'Media' : ((op.value == 'B') ? 'Baja' : 'No tiene')" [class]="(op.value == 'A') ? 'fas fa-circle text-danger' : (op.value == 'M') ? 'fas fa-circle text-warning' : ((op.value == 'B') ? 'fas fa-circle text-success' : 'fas fa-circle text-muted')">
@@ -43,7 +43,7 @@
 
                 <app-cc-input-group-prepend label="Observación:" styleSpan="size-span-campo font-weight-bold">
 
-                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketNew.observacion" [disabled]="deshabilitar" maxlength="300"></textarea>
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketNew.observacion" disabled="deshabilitar" maxlength="300"></textarea>
                 </app-cc-input-group-prepend>
 
             </div>

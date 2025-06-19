@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="N° Documento" styleSpan="size-span-campo">
-                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [disabled]="inDocumento"
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true" disabled="inDocumento"
                     [clearable]="false" [(ngModel)]="documento" (ngModelChange)="filterDocumento($event)">
                     <ng-option *ngFor="let d of arrayIngreso" [value]="d.secuencial">
                         {{d.fk_empresa.toString().padStart(3, 0)}}-{{d.fk_sucursal.toString().padStart(3,
@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
-                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [disabled]="inBeneficiario"
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true" disabled="inBeneficiario"
                     [clearable]="false" [(ngModel)]="cliente" (ngModelChange)="filterBeneficiario($event)">
                     <ng-option *ngFor="let d of arrayIngreso" [value]="d.id">
                         {{d.ruc}}
@@ -57,7 +57,7 @@
             <app-cc-input-group-prepend label="N° Transaccion" styleSpan="size-span-campo">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true" id="idTransaccion"
                     [clearable]="false" [(ngModel)]="transaccion" (ngModelChange)="filterTransaccion($event)"
-                    [disabled]="inTransaccion">
+                    disabled="inTransaccion">
                     <ng-option *ngFor="let d of arraytx" [value]="d.num_tx">{{d.num_tx}}</ng-option>
                 </ng-select>
             </app-cc-input-group-prepend>

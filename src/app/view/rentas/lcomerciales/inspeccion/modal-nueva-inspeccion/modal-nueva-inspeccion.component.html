@@ -12,12 +12,12 @@
         <div class="row mb-2">
             <div class="col">
                 <app-cc-input-group-prepend label="# de Visita" styleSpan="size-span-campo font-weight-bold">
-                    <input type="number" class="form-control" [(ngModel)]="inspeccion.secuencia" min="1" [disabled]="edit">
+                    <input type="number" class="form-control" [(ngModel)]="inspeccion.secuencia" min="1" disabled="edit">
                 </app-cc-input-group-prepend>
             </div>
             <div class="col">
                 <app-cc-input-group-prepend label="Fecha Visita" styleSpan="size-span-campo font-weight-bold">
-                    <input type="date" class="form-control" [disabled]="edit" [(ngModel)]="inspeccion.fecha">
+                    <input type="date" class="form-control" disabled="edit" [(ngModel)]="inspeccion.fecha">
                 </app-cc-input-group-prepend>
             </div>
         </div>
@@ -29,7 +29,7 @@
                             <input type="checkbox" aria-label="Checkbox for following text input" [(ngModel)]="inspeccion.retroactivo">
                         </div>
                       </div>                    
-                    <input type="date" class="form-control" [disabled]="edit" [(ngModel)]="inspeccion.fecha_reorden" [disabled]="!inspeccion.retroactivo">
+                    <input type="date" class="form-control" disabled="edit" [(ngModel)]="inspeccion.fecha_reorden" disabled="!inspeccion.retroactivo">
                 </app-cc-input-group-prepend>
             </div>
         </div>

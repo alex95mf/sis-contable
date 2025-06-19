@@ -9,7 +9,7 @@
 <div class="row">
 
     <!--<app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
-        <ng-select id="idProducto" class="form-control custom" appendTo="body" [disabled]="!dAction || otroProducto " [(ngModel)]="solicitudProducto.fk_producto" (ngModelChange)="obtenerProducto($event)" [searchable]="true" [clearable]="true" style="border: 0.5px solid #000000; background-color: #e4e5e6 !important;height:28px;">
+        <ng-select id="idProducto" class="form-control custom" appendTo="body" disabled="!dAction || otroProducto " [(ngModel)]="solicitudProducto.fk_producto" (ngModelChange)="obtenerProducto($event)" [searchable]="true" [clearable]="true" style="border: 0.5px solid #000000; background-color: #e4e5e6 !important;height:28px;">
             <ng-option *ngFor="let dt of dataProducto" [value]="dt.id_producto">
                 {{dt.nombre}}</ng-option>
         </ng-select>

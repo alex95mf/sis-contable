@@ -26,13 +26,13 @@
                                         <td class="text-right">${{ commonServices.formatNumber(dt.total)}}</td>
                                         <td class="text-center">{{ dt.created_at | date:'dd-MM-yyyy'}}</td>
                                         <td class="text-center">
-                                            <button class="btn btn-sm tooltip-test my-1" [disabled]="actions.ver" style="background-color: #FFC107; color: black; border-radius: 30px" (click)="showInformation(dt)" placement="left" ngbTooltip="Mostrar Información">
+                                            <button class="btn btn-sm tooltip-test my-1" disabled="actions.ver" style="background-color: #FFC107; color: black; border-radius: 30px" (click)="showInformation(dt)" placement="left" ngbTooltip="Mostrar Información">
                                             <i class="fa fa-eye fa-xs"></i>
                                         </button>
-                                            <button class="btn btn-sm tooltip-test my-1" [disabled]="dt.despacho == 1" (click)="ConfirmPurchase(dt)" style="background-color: #404A63; color: white; border-radius: 30px" placement="left" ngbTooltip="Confirmar">
+                                            <button class="btn btn-sm tooltip-test my-1" disabled="dt.despacho == 1" (click)="ConfirmPurchase(dt)" style="background-color: #404A63; color: white; border-radius: 30px" placement="left" ngbTooltip="Confirmar">
                                             <i class="fa fa-check-square-o fa-xs" ></i>
                                         </button>
-                                            <!--  <button class="btn btn-sm tooltip-test my-1" [disabled]="actions.perchar" style="background-color: #00FF00; color: white; border-radius: 10px" placement="top" ngbTooltip="Perchar/Ubicar" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <!--  <button class="btn btn-sm tooltip-test my-1" disabled="actions.perchar" style="background-color: #00FF00; color: white; border-radius: 10px" placement="top" ngbTooltip="Perchar/Ubicar" data-toggle="modal" data-target="#exampleModalCenter">
                                             <i class="fa fa-archive"></i>
                                         </button> -->
                                         </td>

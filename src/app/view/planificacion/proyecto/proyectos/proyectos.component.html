@@ -34,7 +34,7 @@
                                 disabled
                                 [(ngModel)]="filter.fk_programa">
 
-                                <ng-option [value]="item.id_catalogo" [disabled]="item.disabled" *ngFor="let item of programas">
+                                <ng-option [value]="item.id_catalogo" disabled="item.disabled" *ngFor="let item of programas">
                                     {{item.descripcion}}. {{item.valor}}
                                 </ng-option>
                             </ng-select>
@@ -57,7 +57,7 @@
                                 disabled
                                 [(ngModel)]="filter.estado">
 
-                                <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados">
+                                <ng-option [value]="item.estado" disabled="item.disabled" *ngFor="let item of lista_estados">
                                     {{item.descripcion}}
                                 </ng-option>
                             </ng-select>

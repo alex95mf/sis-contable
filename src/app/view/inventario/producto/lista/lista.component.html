@@ -7,7 +7,7 @@
                 <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo">
                     <ng-select id="IdProducto" class="form-control custom" appendTo="body" [searchable]="true"
                         [clearable]="false" [(ngModel)]="productoSelect" (ngModelChange)="searchProducto($event)">
-                        <!-- [disabled]="disProducto" -->
+                        <!-- disabled="disProducto" -->
                         <ng-option [value]="0">Todos</ng-option>
                         <ng-option *ngFor="let d of arrayProducto" [value]="d.id_producto">{{d.nombre}}</ng-option>
                     </ng-select>
@@ -17,7 +17,7 @@
                 <app-cc-input-group-prepend label="Precio" styleSpan="size-span-campo">
                     <select class="form-control form-control-sm custom" style="height: 30px;" id="IdPrecio"
                         [(ngModel)]="precioSelect" (ngModelChange)="searchTipePrice()">
-                        <!-- [disabled]="disPrecio" -->
+                        <!-- disabled="disPrecio" -->
                         <option class="text-uppercase" [value]="0">Todos</option>
                         <option *ngFor="let d of dataTipoPrecios" [value]="d.name_ref">
                             <span>{{d.name}}</span>

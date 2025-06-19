@@ -19,7 +19,7 @@
                 <div class="col-sm-5"><!-- Inversión  -->
                     <app-cc-input-group-prepend label="Cuenta Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                         <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaInvDeb" placeholder="Cuenta Deudora" maxlength="15">
-                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('1')" [disabled]="deudora" [disabled]="rubro.tipoRubro == 9"> Consultar</button>
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('1')" disabled="deudora" disabled="rubro.tipoRubro == 9"> Consultar</button>
                         <!-- <datalist id="lst_ctas_deudoras">
                             <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
                         </datalist> -->
@@ -37,7 +37,7 @@
                 <div class="col-sm-5"><!-- Inversión  -->
                     <app-cc-input-group-prepend label="Cuenta Presupuesta Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                         <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaPresupuestoInvDeb" placeholder="C&oacute;digo Presupuesto" maxlength="15">
-                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p1')" [disabled]="presupuesto"> Consultar</button>
+                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p1')" disabled="presupuesto"> Consultar</button>
                         <!-- <datalist id="lst_ctas_presupuesto">
                             <option *ngFor="let cta of cuentas.presupuesto" [value]="cta.codigo">{{ cta.codigo }} {{ cta.nombre }}</option>
                         </datalist> -->
@@ -55,7 +55,7 @@
                 <div class="col-sm-5"><!-- Inversión -->
                     <app-cc-input-group-prepend label="Cuenta Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                         <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaInvHab" placeholder="Cuenta Acreedora" maxlength="15">
-                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('4')" [disabled]="false"> Consultar</button>
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('4')" disabled="false"> Consultar</button>
                         <!-- <datalist id="lst_ctas_deudoras">
                             <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
                         </datalist> -->
@@ -80,7 +80,7 @@
                 <div class="col-sm-5">
                     <app-cc-input-group-prepend label="Cuenta Corriente Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                         <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaCorrDeb" placeholder="Cuenta Deudora" maxlength="15">
-                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('2')" [disabled]="deudora"> Consultar</button>
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('2')" disabled="deudora"> Consultar</button>
 
                     </app-cc-input-group-prepend>
                 </div>
@@ -97,7 +97,7 @@
                 <div class="col-sm-5">
                     <app-cc-input-group-prepend label="Cuenta Presupuestaria Corriente Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                         <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaPresupuestoCorrDeb" placeholder="C&oacute;digo Presupuesto" maxlength="15">
-                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p2')" [disabled]="presupuesto"> Consultar</button>
+                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p2')" disabled="presupuesto"> Consultar</button>
 
                     </app-cc-input-group-prepend>
                 </div>
@@ -113,7 +113,7 @@
             <div class="col-sm-5">
                 <app-cc-input-group-prepend label="Cuenta Corriente Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                     <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaCorrHab" placeholder="Cuenta Acreedora" maxlength="15">
-                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('5')" [disabled]="deudora"> Consultar</button>
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('5')" disabled="deudora"> Consultar</button>
 
                 </app-cc-input-group-prepend>
             </div>
@@ -137,7 +137,7 @@
                 <div class="col-sm-5">
                     <app-cc-input-group-prepend label="Cuenta Producción Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                         <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaProdDeb" placeholder="Cuenta Deudora" maxlength="15">
-                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('3')" [disabled]="deudora"> Consultar</button>
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('3')" disabled="deudora"> Consultar</button>
 
                     </app-cc-input-group-prepend>
                 </div>
@@ -153,7 +153,7 @@
                 <div class="col-sm-5">
                     <app-cc-input-group-prepend label="Cuenta Presupuesta Producción Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                         <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaPresupuestoProdDeb" placeholder="C&oacute;digo Presupuesto" maxlength="15">
-                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p3')" [disabled]="presupuesto"> Consultar</button>
+                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p3')" disabled="presupuesto"> Consultar</button>
 
                     </app-cc-input-group-prepend>
                 </div>
@@ -169,7 +169,7 @@
                 <div class="col-sm-5">
                     <app-cc-input-group-prepend label="Cuenta Producción Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
                         <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaProdHab" placeholder="Cuenta Acreedora" maxlength="15">
-                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('6')" [disabled]="deudora"> Consultar</button>
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('6')" disabled="deudora"> Consultar</button>
 
                     </app-cc-input-group-prepend>
                 </div>
@@ -193,7 +193,7 @@
         <!-- <div class="col-12">
             <app-cc-input-group-prepend label="C&oacute;digo Presupuestario" styleSpan="size-span-campo font-weight-bold">
                 <input type="text" class="form-control" readonly  [(ngModel)]="rubro.codigo" placeholder="C&oacute;digo Presupuesto" maxlength="15">
-                <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" [disabled]="searching.presupuesto"> Consultar</button>
+                <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" disabled="searching.presupuesto"> Consultar</button>
 
             </app-cc-input-group-prepend>
         </div>

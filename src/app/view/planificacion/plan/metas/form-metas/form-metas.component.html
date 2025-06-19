@@ -63,7 +63,7 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
 
                         <app-cc-input-group-prepend label="Meta ODS" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<3" [(ngModel)]="seleccion.meta_ods" id="modalMetasMetaODS" class="form-control" [clearable]="false" (change)="handleMetaODS($event)">
+                            <ng-select disabled="step<3" [(ngModel)]="seleccion.meta_ods" id="modalMetasMetaODS" class="form-control" [clearable]="false" (change)="handleMetaODS($event)">
                                 <ng-option disabled [value]="0">Seleccione una Meta ODS...</ng-option>
                                 <ng-option *ngFor="let o of cuerpoMetas.meta_ods" [value]="o">{{ o.nombre }}</ng-option>
                             </ng-select>
@@ -82,7 +82,7 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
 
                         <app-cc-input-group-prepend label="Eje" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<3" [(ngModel)]="seleccion.eje" id="modalMetasEje" class="form-control" (change)="handleEje($event)" [clearable]="false" >
+                            <ng-select disabled="step<3" [(ngModel)]="seleccion.eje" id="modalMetasEje" class="form-control" (change)="handleEje($event)" [clearable]="false" >
                                 <ng-option disabled [value]="0">Seleccione un Eje...</ng-option>
                                 <ng-option *ngFor="let o of cuerpoMetas.eje" [value]="o">{{ o.nombre }}</ng-option>
                             </ng-select>
@@ -96,7 +96,7 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
 
                         <app-cc-input-group-prepend label="OPG" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<4" [(ngModel)]="seleccion.opg" id="modalMetasOPG" class="form-control" [clearable]="false" (change)="handleOPG($event)">
+                            <ng-select disabled="step<4" [(ngModel)]="seleccion.opg" id="modalMetasOPG" class="form-control" [clearable]="false" (change)="handleOPG($event)">
                                 <ng-option disabled [value]="0">Seleccione un OPG...</ng-option>
                                 <ng-option *ngFor="let o of cuerpoMetas.opg" [value]="o">{{ o.nombre }}</ng-option>
                             </ng-select>
@@ -113,7 +113,7 @@
                    
                     <div class="col-12 col-md-12 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Politicas" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<5" [(ngModel)]="seleccion.ppg" id="modalMetasPPG" class="form-control" [clearable]="false" (change)="handlePPG($event)" >
+                            <ng-select disabled="step<5" [(ngModel)]="seleccion.ppg" id="modalMetasPPG" class="form-control" [clearable]="false" (change)="handlePPG($event)" >
                                 <ng-option disabled [value]="0">Seleccione una Politica...</ng-option>
                                 <ng-option *ngFor="let o of cuerpoMetas.ppg" [value]="o">{{ o.nombre }}</ng-option>
                             </ng-select>
@@ -129,7 +129,7 @@
                 <div class="row m-0">
                     <div class="col-12 col-md-12 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Meta Zonal" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select [disabled]="step<6" [(ngModel)]="seleccion.meta_zonal" id="modalMetasMeta" class="form-control" [clearable]="false" (change)="handleMetaZonal($event)">
+                            <ng-select disabled="step<6" [(ngModel)]="seleccion.meta_zonal" id="modalMetasMeta" class="form-control" [clearable]="false" (change)="handleMetaZonal($event)">
                                 <ng-option disabled [value]="0">Seleccione una Meta...</ng-option>
                                 <ng-option *ngFor="let o of cuerpoMetas.meta_zonal" [value]="o">{{ o.nombre }}</ng-option>
                             </ng-select>

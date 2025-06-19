@@ -44,7 +44,7 @@
         <div class="row justify-content-center mb-4">
             <div class="col-sm-12">
                 <app-cc-input-group-prepend label="Confirmar Contraseña" styleSpan="size-span-campo">
-                    <input type="password" id="passConfirPass" class="form-control " [(ngModel)]="passwordConfirs" placement="top" ngbTooltip="{{passwordConfirs}}" [disabled]="passwordNuevos == undefined">
+                    <input type="password" id="passConfirPass" class="form-control " [(ngModel)]="passwordConfirs" placement="top" ngbTooltip="{{passwordConfirs}}" disabled="passwordNuevos == undefined">
                     <div class="input-group-text btn" id="inputLabel-prepend">
                         <span class="fa fa-fw fa-eye  password-icon" (click)="showPassConfirm()" placement="top" ngbTooltip="{{passwordConfirs}}"></span>
                     </div>

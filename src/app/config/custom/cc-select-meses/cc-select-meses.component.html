@@ -7,10 +7,10 @@
             appendTo="body"
             [clearable]="false"
             [searchable]="true"
-            [disabled]=presentar
+            disabled=presentar
             [(ngModel)]="mes_actual">
             
-            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+            <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                 {{item.name}}
             </ng-option>
 </ng-select>

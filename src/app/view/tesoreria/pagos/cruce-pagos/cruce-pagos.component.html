@@ -44,7 +44,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <h5 class="mb-0 text-dark">Detalle de Facturas</h5>
     </div>
     <div class="col text-right">
-        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalFacturas()" [disabled]="formReadOnly">
+        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalFacturas()" disabled="formReadOnly">
             <i class="fas fa-plus"></i> Agregar factura
         </button>
     </div>
@@ -80,14 +80,14 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td> {{item.forma_pago}}  </td>
                             <td>$ {{item.saldo | number: '1.2-2'}}  </td>
                             <td>
-                                <input currencyMask [disabled]="formReadOnly" class="form-control form-control-sm" [(ngModel)]="item.valor_pagar" (ngModelChange)="calculationSaldo(item)"/>
+                                <input currencyMask disabled="formReadOnly" class="form-control form-control-sm" [(ngModel)]="item.valor_pagar" (ngModelChange)="calculationSaldo(item)"/>
                             </td>
                             <td>$ {{item.saldo_factura | number: '1.2-2'}}  </td>
                             <td class="text-center">
                                 <!-- <button class="btn btn-warning btn-sm mr-1" (click)="expandDetalleMulta(d)" placement="left" ngbTooltip="Ver detalle">
                                     <i class="far fa-eye"></i>
                                 </button> -->
-                                <button  class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]=" formReadOnly" (click)="removeTitulo(i, item)"><i class="far fa-trash-alt"></i></button>
+                                <button  class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" disabled=" formReadOnly" (click)="removeTitulo(i, item)"><i class="far fa-trash-alt"></i></button>
                                 <!-- <button *ngIf="formReadOnly" class="btn btn-sm btn-info" placement="left" ngbTooltip="Imprimir" (click)="printTitulo(d)"><i class="far fa-print"></i></button> -->
                             </td>
                         </tr>
@@ -129,7 +129,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
         <div class="input-group input-group-sm">            
             <div class="input-group-prepend"><span class="input-group-text size-span-campo" >Formas de pago</span></div>
-            <ng-select [disabled]="formReadOnly " class="form-control" [(ngModel)]="formaPagoCCH" [clearable]="false" (change)="handlePago($event)">
+            <ng-select disabled="formReadOnly " class="form-control" [(ngModel)]="formaPagoCCH" [clearable]="false" (change)="handlePago($event)">
                 <ng-option [value]="0" disabled>Seleccione forma de pago</ng-option>
                 <ng-option *ngFor="let op of formasDePago" [value]="op">{{ op.nombre }}</ng-option>
             </ng-select>
@@ -137,7 +137,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
     </div>
     <div class="col">
-        <button [disabled]="formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Seleccionar documento" (click)="expandModalCaja()">
+        <button disabled="formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Seleccionar documento" (click)="expandModalCaja()">
             <i class="fas fa-expand-alt"></i>
         </button>      
     </div>
@@ -179,11 +179,11 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td>$ {{item.subtotal | number: '1.2-2'}}  </td>
                             <td>$ {{item.saldo | number: '1.2-2'}}  </td>
                             <td>
-                                <input currencyMask [disabled]="formReadOnly" class="form-control form-control-sm" [(ngModel)]="item.valor_descontar" (ngModelChange)="calculationCajaChica(item)"/>
+                                <input currencyMask disabled="formReadOnly" class="form-control form-control-sm" [(ngModel)]="item.valor_descontar" (ngModelChange)="calculationCajaChica(item)"/>
                             </td>
                             <td>$ {{item.descuento | number: '1.2-2'}}  </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]=" formReadOnly" (click)="removeFormaPago(i, item)"><i class="far fa-trash-alt"></i></button>
+                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" disabled=" formReadOnly" (click)="removeFormaPago(i, item)"><i class="far fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     </ng-container>
@@ -353,7 +353,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>   
                                                 <input maxlength="100" class="form-control form-control-sm"
-                                                [disabled]="titulosDisabled || formReadOnly"  [(ngModel)]="d.cobro" (ngModelChange)="calcCobroTotal($event)" (keyup)="restar(d)">
+                                                disabled="titulosDisabled || formReadOnly"  [(ngModel)]="d.cobro" (ngModelChange)="calcCobroTotal($event)" (keyup)="restar(d)">
                                             </div>
                                             <!-- $ {{ d.cobro }} -->
                                         </td>
@@ -363,7 +363,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                             <button class="btn btn-warning btn-sm mr-1" (click)="expandDetalleMulta(d)" placement="left" ngbTooltip="Ver detalle">
                                                 <i class="far fa-eye"></i>
                                             </button>
-                                            <button *ngIf="!formReadOnly" class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
+                                            <button *ngIf="!formReadOnly" class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" disabled="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
                                             <button *ngIf="formReadOnly" class="btn btn-sm btn-info" placement="left" ngbTooltip="Imprimir" (click)="printTitulo(d)"><i class="far fa-print"></i></button>
                                         </td>
                                     </tr>
@@ -418,7 +418,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                         <td class="text-center">{{ d.banco==''?'-':d.banco  }}</td>
                                         <!-- <td class="text-center">
                                             <div class="input-group input-group-sm">                                    
-                                                <input type="text" maxlength="50" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
+                                                <input type="text" maxlength="50" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
                                             </div>
                                         </td> -->
             

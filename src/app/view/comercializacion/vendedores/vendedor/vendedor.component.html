@@ -171,27 +171,27 @@
                                     <tbody *ngIf="dataProductos !== []">
                                         <tr *ngFor="let d of dataProductos">
                                             <td *ngIf="d.action"><input type="text" placeholder="Producto"
-                                                [(ngModel)]="d.nombre" [disabled]="true"></td>
+                                                [(ngModel)]="d.nombre" disabled="true"></td>
                                             <td *ngIf="d.action">
                                                 <input type="text" placeholder="Código" [(ngModel)]="d.codigoProducto"
-                                                    [disabled]="true">
+                                                    disabled="true">
                                             </td>
                                             <td *ngIf="d.action"><input type="text"
-                                                    placeholder="$ {{d.precio_normal}}" [disabled]="true"
+                                                    placeholder="$ {{d.precio_normal}}" disabled="true"
                                                     style="text-align: right !important;"></td>
         
                                             <td *ngIf="d.action"><input type="text"
-                                                    placeholder="{{d.porcen_promocion}} %" [disabled]="true"
+                                                    placeholder="{{d.porcen_promocion}} %" disabled="true"
                                                     style="text-align: right !important;"></td>
         
                                             <td *ngIf="d.action">
                                                 <div *ngIf="(d.stock-d.cantidad_reservada) > 0">
                                                     <input type="text" placeholder="0.00" style="text-align: right !important;"
                                                         placeholder="{{(d.stock-d.cantidad_reservada).toFixed(2)}}"
-                                                        [disabled]="true">
+                                                        disabled="true">
                                                 </div>
                                                 <div *ngIf="(d.stock-d.cantidad_reservada) <= 0">
-                                                    <input type="text" placeholder="0.00" [disabled]="true"
+                                                    <input type="text" placeholder="0.00" disabled="true"
                                                         style="text-align: right !important;">
                                                 </div>
                                             </td>
@@ -200,23 +200,23 @@
                                                 <input type="text" class="form-control form-control-sm" placeholder="0.00"
                                                     style="text-align: right;padding-right: 10px;" [(ngModel)]="d.quantity"
                                                     min="0" id="quantyId"
-                                                    [disabled]="actions.dComponet">
+                                                    disabled="actions.dComponet">
                                             </td><!-- (keyup)="sumTotal(i)" (keypress)="commonServices.FormatDecimalVal($event)" -->
         
                                             <td *ngIf="d.action">
                                                 <input type="text" class="form-control form-control-sm" placeholder="$ 0.00"
                                                     style="text-align: right;padding-right: 10px;" [(ngModel)]="d.price"
                                                     min="0"
-                                                    [disabled]="actions.dComponet">
+                                                    disabled="actions.dComponet">
                                             </td><!-- (keyup)="sumTotal(i)" (keypress)="commonServices.FormatDecimalVal($event)" -->
                                             <td *ngIf="d.action">
-                                                <input type="text" placeholder="$ {{d.totalAux}}" [disabled]="true"
+                                                <input type="text" placeholder="$ {{d.totalAux}}" disabled="true"
                                                     class="form-control form-control-sm" style="text-align: right !important;">
                                             </td>
                                             <td style="text-align: center;" *ngIf="d.action">
                                                 <button class="btn btn-danger btn-sm" placement="top"
                                                     ngbTooltip="Eliminar Items" (click)="deleteItems(i)"
-                                                    [disabled]="actions.dComponet">
+                                                    disabled="actions.dComponet">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </button>
                                             </td>

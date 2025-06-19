@@ -8,7 +8,7 @@
                 <div class="row m-0">
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Tipo de Orden" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select id="tipo" class="form-control form-control-sm"  (change)="tipoSelected($event)" [(ngModel)]="documento.tipo" maxlength="5" [disabled]="formReadOnly">
+                            <ng-select id="tipo" class="form-control form-control-sm"  (change)="tipoSelected($event)" [(ngModel)]="documento.tipo" maxlength="5" disabled="formReadOnly">
                                 <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
                                 <ng-option *ngFor="let op of tipoOrden" [value]="op.valor">
                                     {{ op.descripcion }}</ng-option>
@@ -24,7 +24,7 @@
                     <div *ngIf="!cajaVL" class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Proveedores" styleSpan="size-span-campo font-weight-bold">
                             <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [value]="proveedorActive.razon_social">
-                            <button [disabled]="formReadOnly" class="btn btn-action btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                            <button disabled="formReadOnly" class="btn btn-action btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                                 <i class="fas fa-search"></i>
                             </button>
                         </app-cc-input-group-prepend>
@@ -63,7 +63,7 @@
                             <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">No.
                                     Proceso</span></div>
                             <input type="text" class="form-control form-control-sm"  readonly [(ngModel)]="documento.nro_proceso" maxlength="20" placeholder="No. Proceso">
-                            <button [disabled]="formReadOnly"  class="btn btn-action btn-sm" ngbTooltip="Buscar solicitudes" (click)="modalSolicitud()"><i class="fas fa-search"></i> Buscar</button>
+                            <button disabled="formReadOnly"  class="btn btn-action btn-sm" ngbTooltip="Buscar solicitudes" (click)="modalSolicitud()"><i class="fas fa-search"></i> Buscar</button>
                         </div>
                     </div>
                     <div class="col-12 col-md-4 pt-1 pb-0">
@@ -112,7 +112,7 @@
                             <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">No.
                                     Proceso</span></div>
                             <input type="text" class="form-control form-control-sm"  readonly [(ngModel)]="documento.nro_proceso" maxlength="20" placeholder="No. Proceso">
-                            <button [disabled]="formReadOnly"  class="btn btn-action btn-sm" ngbTooltip="Buscar solicitudes" (click)="modalSolicitud()"><i class="fas fa-search"></i> Buscar</button>
+                            <button disabled="formReadOnly"  class="btn btn-action btn-sm" ngbTooltip="Buscar solicitudes" (click)="modalSolicitud()"><i class="fas fa-search"></i> Buscar</button>
                         </div>
                     </div>
                     <div class="col-12 col-md-4 pt-1 pb-0">
@@ -159,7 +159,7 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
                             <input class="form-control" [(ngModel)]="grupo.codigo_cuenta_contable" type="text" readonly/>
-                            <button class="btn btn-action btn-sm" (click)="modalCuentaContable()" [disabled]="formReadOnly || cuentaDisabled" > Consultar</button>
+                            <button class="btn btn-action btn-sm" (click)="modalCuentaContable()" disabled="formReadOnly || cuentaDisabled" > Consultar</button>
                         </app-cc-input-group-prepend>
                     </div>
 
@@ -174,7 +174,7 @@
                     <div  class="col-12 col-md-6 pt-0 pb-0" *ngIf="!procesoUnaFactura || !procesoCompra">
                         <app-cc-input-group-prepend label="Cuenta Bancaria" styleSpan="size-span-campo font-weight-bold">
                             <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                                [(ngModel)]="cuenta" [disabled]="formValid">
+                                [(ngModel)]="cuenta" disabled="formValid">
                                 <ng-option [value]="0" disabled>Chosee.. </ng-option>
                                 <ng-option *ngFor="let item of listaCuentas"
                                     [value]="item">{{item.name_banks + ' ' + item.num_cuenta }}</ng-option>
@@ -184,7 +184,7 @@
                     <div  class="col-12 col-md-6 pt-0 pb-0"*ngIf="changeBeneficiario && this.documento.tipo =='PF'">
                         <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo font-weight-bold">
                             <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Beneficiario" (click)="expandListProveedores()" [value]="beneficiarioActive.razon_social">
-                            <button [disabled]="formReadOnly" class="btn btn-action btn-sm" (click)="expandListBeneficiarios()" placement="bottom" ngbTooltip="Buscar Beneficiario">
+                            <button disabled="formReadOnly" class="btn btn-action btn-sm" (click)="expandListBeneficiarios()" placement="bottom" ngbTooltip="Buscar Beneficiario">
                                 <i class="fas fa-search"></i>
                             </button>
                         </app-cc-input-group-prepend>
@@ -196,12 +196,12 @@
                         <!-- <app-cc-input-group-prepend label="Tiene divisas" styleSpan="size-span-campo">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <input type="checkbox" [(ngModel)]="documento.tiene_divisas" (ngModelChange)="openDivisas($event)" [disabled]="formReadOnly">
+                                    <input type="checkbox" [(ngModel)]="documento.tiene_divisas" (ngModelChange)="openDivisas($event)" disabled="formReadOnly">
                                 </div>
                             </div>
                         </app-cc-input-group-prepend> -->
                         <div class="form-check">
-                            <input class="form-check-input" id="flexCheckDefault" type="checkbox" [(ngModel)]="documento.tiene_divisas" (ngModelChange)="openDivisas($event)" [disabled]="formReadOnly"/>
+                            <input class="form-check-input" id="flexCheckDefault" type="checkbox" [(ngModel)]="documento.tiene_divisas" (ngModelChange)="openDivisas($event)" disabled="formReadOnly"/>
                             <label class="form-check-label" for="flexCheckDefault">
                             <h6>Tiene divisas</h6>
                             </label>
@@ -214,7 +214,7 @@
                             </div>
                         </app-cc-input-group-prepend> -->
                         <div class="form-check">
-                            <input class="form-check-input"  type="checkbox" [(ngModel)]="documento.tiene_beneficiario" (change)="openBeneficiario($event)" [disabled]="formReadOnly"/>
+                            <input class="form-check-input"  type="checkbox" [(ngModel)]="documento.tiene_beneficiario" (change)="openBeneficiario($event)" disabled="formReadOnly"/>
                             <label class="form-check-label">
                             <h6>Tiene Beneficiario</h6>
                             </label>
@@ -238,11 +238,11 @@
                             </div>
                             <div class="col-12 col-md-4 pt-0 pb-0">
                                 <app-cc-input-group-prepend label="Ingresar tipo de cambio" styleSpan="size-span-campo font-weight-bold">
-                                    <input currencyMask onclick="this.select()" class="form-control" [(ngModel)]="documento.tipo_cambio" [disabled]="cambioVal"/>
+                                    <input currencyMask onclick="this.select()" class="form-control" [(ngModel)]="documento.tipo_cambio" disabled="cambioVal"/>
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12 col-md-4 pt-0 pb-0">
-                                <button class="btn btn-success btn-sm mr-1" (click)="cambioDeDivisas()" [disabled]="cambioVal">Ingresar</button>
+                                <button class="btn btn-success btn-sm mr-1" (click)="cambioDeDivisas()" disabled="cambioVal">Ingresar</button>
                                 <button class="btn btn-danger btn-sm" (click)="regresarDeDivisas()" *ngIf="botonRegresa">Regresar</button>
                             </div>
                         </div>
@@ -273,12 +273,12 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend"><span class="input-group-text size-span-campo" style="width:120px;">Conceptos</span></div>
-                                <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="formaPago" [clearable]="false" (click)="selectConcepto()">
+                                <ng-select disabled="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="formaPago" [clearable]="false" (click)="selectConcepto()">
                                     <ng-option [value]="0" disabled>Seleccione un concepto</ng-option>
                                     <ng-option *ngFor="let op of conceptos" [value]="op.valor">{{ op.descripcion }}</ng-option>
                                 </ng-select>
                                 <div class="col-1"></div>
-                                <button [disabled]="formReadOnly || addConcepto" class="btn btn-sm btn-success" ngbTooltip="Agregar conceptos" (click)="agregaConceptos()"><i class="fas fa-plus"></i></button>
+                                <button disabled="formReadOnly || addConcepto" class="btn btn-sm btn-success" ngbTooltip="Agregar conceptos" (click)="agregaConceptos()"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -308,7 +308,7 @@
                                                 <td class="text-center">
                                                     <div class="input-group input-group-sm">
 
-                                                        <textarea  type="text" maxlength="200" class="form-control form-control-sm" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
+                                                        <textarea  type="text" maxlength="200" class="form-control form-control-sm" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">{{ d.codigo_cuenta }}</td>
@@ -316,11 +316,11 @@
                                                 <td class="text-right">
                                                     <div class="input-group input-group-sm">
                                                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                                        <input currencyMask maxlength="8" class="form-control form-control-sm text-right" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
+                                                        <input currencyMask maxlength="8" class="form-control form-control-sm text-right" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Removerconcepto" [disabled]="titulosDisabled || formReadOnly" (click)="removeFormaPago(i)"><i class="far fa-trash-alt"></i></button>
+                                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Removerconcepto" disabled="titulosDisabled || formReadOnly" (click)="removeFormaPago(i)"><i class="far fa-trash-alt"></i></button>
                                                 </td>
                                             </tr>
                                         </ng-container>
@@ -352,12 +352,12 @@
                                 <div class="col-12 col-md- pt-0 pb-0">
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend ml-2"><span class="input-group-text size-span-campo" >Condiciones</span></div>
-                                        <ng-select [disabled]="formReadOnly || titulosDisabled || condicionDisabled" class="form-control" [(ngModel)]="condicionesPago" [clearable]="false" (click)="selectCondicion()">
+                                        <ng-select disabled="formReadOnly || titulosDisabled || condicionDisabled" class="form-control" [(ngModel)]="condicionesPago" [clearable]="false" (click)="selectCondicion()">
                                             <ng-option [value]="0" disabled>Seleccione una Condición</ng-option>
                                             <ng-option *ngFor="let op of condiciones" [value]="op.condicion"><span class="font-weight-bold">Descripción:</span> {{ op.condicion }} | <span class="font-weight-bold">Fecha Max. Pago:</span> {{ op.plazo }} | <span class="font-weight-bold">Valor:</span> $ {{ op.valor !=null ? (op.valor | number: '1.2-2') : '' }}</ng-option>
                                         </ng-select>
                                         <div class="col-1"></div>
-                                        <button [disabled]="formReadOnly || addCondicion" class="btn btn-sm btn-success" ngbTooltip="Agregar condiciones" (click)="agregaCondiciones()"><i class="fas fa-plus"></i></button>
+                                        <button disabled="formReadOnly || addCondicion" class="btn btn-sm btn-success" ngbTooltip="Agregar condiciones" (click)="agregaCondiciones()"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -387,7 +387,7 @@
                                                         <td class="text-center">
                                                             <div class="input-group input-group-sm">
 
-                                                                <textarea  type="text" maxlength="200" class="form-control form-control-sm" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
+                                                                <textarea  type="text" maxlength="200" class="form-control form-control-sm" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td class="text-center">{{ d.codigo_cuenta }}</td>
@@ -395,11 +395,11 @@
                                                         <td class="text-right">
                                                             <div class="input-group input-group-sm">
                                                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                                                <input currencyMask maxlength="8" class="form-control form-control-sm text-right" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
+                                                                <input currencyMask maxlength="8" class="form-control form-control-sm text-right" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
-                                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Removerconcepto" [disabled]="titulosDisabled || formReadOnly" (click)="removeCondicion(i)"><i class="far fa-trash-alt"></i></button>
+                                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Removerconcepto" disabled="titulosDisabled || formReadOnly" (click)="removeCondicion(i)"><i class="far fa-trash-alt"></i></button>
                                                         </td>
                                                     </tr>
                                                 </ng-container>
@@ -521,7 +521,7 @@
                                                 <td class="text-center">
                                                     <div class="input-group input-group-sm">
                                                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                                        <input currencyMask readonly maxlength="8" class="form-control form-control-sm text-right"  [disabled]="true" [(ngModel)]="d.total">
+                                                        <input currencyMask readonly maxlength="8" class="form-control form-control-sm text-right"  disabled="true" [(ngModel)]="d.total">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -567,7 +567,7 @@
                                 <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
                                     <button class="btn btn-success btn-sm" placement="top"
                                         ngbTooltip="Agregar Factura" (click)="expandModalCompras()"
-                                        [disabled]="addCompra || formReadOnly ">
+                                        disabled="addCompra || formReadOnly ">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -599,7 +599,7 @@
                                                         <td class="text-center">$ {{ d.saldo | number:'1.2-2'}}</td>
                                                         <td class="text-center">$ {{ d.saldo_orden_pago | number:'1.2-2'}}</td>
                                                         <td class="text-center">
-                                                            <input currencyMask class="form-control form-control-sm"  [disabled]="formReadOnly" [(ngModel)]="d.valor"  (keyup)="calcPagoTotal()" onclick="this.select()">
+                                                            <input currencyMask class="form-control form-control-sm"  disabled="formReadOnly" [(ngModel)]="d.valor"  (keyup)="calcPagoTotal()" onclick="this.select()">
                                                         </td>
                                                     </tr>
                                                 </ng-container>
@@ -626,7 +626,7 @@
                                                         <td class="text-center">$ {{ d.saldo | number:'1.2-2'}}</td>
                                                         <td class="text-center">$ {{ d.saldo_orden_pago | number:'1.2-2'}}</td>
                                                         <td class="text-center">
-                                                            <input currencyMask class="form-control form-control-sm"  [disabled]="formReadOnly" [(ngModel)]="d.valor"  (input)="calcPagoTotal()">
+                                                            <input currencyMask class="form-control form-control-sm"  disabled="formReadOnly" [(ngModel)]="d.valor"  (input)="calcPagoTotal()">
                                                         </td>
                                                     </tr>
                                                 </ng-container> -->
@@ -647,12 +647,12 @@
                                <div class="col-12 col-md- pt-0 pb-0">
                                    <div class="input-group input-group-sm">
                                        <div class="input-group-prepend ml-2"><span class="input-group-text size-span-campo" >Condiciones</span></div>
-                                       <ng-select [disabled]="formReadOnly || titulosDisabled || condicionDisabled" class="form-control" [(ngModel)]="condicionesPago" [clearable]="false" (click)="selectCondicion()">
+                                       <ng-select disabled="formReadOnly || titulosDisabled || condicionDisabled" class="form-control" [(ngModel)]="condicionesPago" [clearable]="false" (click)="selectCondicion()">
                                            <ng-option [value]="0" disabled>Seleccione una Condición</ng-option>
                                            <ng-option *ngFor="let op of condiciones" [value]="op.condicion"><span class="font-weight-bold">Descripción:</span> {{ op.condicion }} | <span class="font-weight-bold">Fecha Max. Pago:</span> {{ op.plazo }} | <span class="font-weight-bold">Valor:</span> $ {{ op.valor !=null ? (op.valor | number: '1.2-2') : '' }}</ng-option>
                                        </ng-select>
                                        <div class="col-1"></div>
-                                       <button [disabled]="formReadOnly || addCondicion" class="btn btn-sm btn-success" ngbTooltip="Agregar condiciones" (click)="agregaCondiciones()"><i class="fas fa-plus"></i></button>
+                                       <button disabled="formReadOnly || addCondicion" class="btn btn-sm btn-success" ngbTooltip="Agregar condiciones" (click)="agregaCondiciones()"><i class="fas fa-plus"></i></button>
                                    </div>
                                </div>
                            </div>
@@ -682,7 +682,7 @@
                                                        <td class="text-center">
                                                            <div class="input-group input-group-sm">
 
-                                                               <textarea  type="text" maxlength="200" class="form-control form-control-sm" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
+                                                               <textarea  type="text" maxlength="200" class="form-control form-control-sm" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
                                                            </div>
                                                        </td>
                                                        <td class="text-center">{{ d.codigo_cuenta }}</td>
@@ -690,11 +690,11 @@
                                                        <td class="text-right">
                                                            <div class="input-group input-group-sm">
                                                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                                               <input currencyMask maxlength="8" class="form-control form-control-sm text-right" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
+                                                               <input currencyMask maxlength="8" class="form-control form-control-sm text-right" disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
                                                            </div>
                                                        </td>
                                                        <td class="text-center">
-                                                           <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Removerconcepto" [disabled]="titulosDisabled || formReadOnly" (click)="removeCondicion(i)"><i class="far fa-trash-alt"></i></button>
+                                                           <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Removerconcepto" disabled="titulosDisabled || formReadOnly" (click)="removeCondicion(i)"><i class="far fa-trash-alt"></i></button>
                                                        </td>
                                                    </tr>
                                                </ng-container>

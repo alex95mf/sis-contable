@@ -39,7 +39,7 @@
                                                     <i class="far fa-edit"></i>
                                                 </button>
                                                 <button class="btn btn-warning btn-sm" (click)="nexStatus(dt)" placement="left"
-                                                    ngbTooltip="Aprobar nota débito" [disabled]="dt.filter_doc == latestStatus">
+                                                    ngbTooltip="Aprobar nota débito" disabled="dt.filter_doc == latestStatus">
                                                     <i class="fas fa-check-double" [ngClass]="{ 'no-aprobated' : dt.filter_doc != latestStatus ,
                                                     'aprobated': dt.filter_doc == latestStatus }"></i>
                                                 </button>

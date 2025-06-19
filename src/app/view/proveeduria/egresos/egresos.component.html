@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <app-cc-input-group-prepend label="Departamento solicitante" styleSpan="size-span-campo">
-                            <select [(ngModel)]="solicitud.fk_departamento" (ngModelChange)="changerequest($event)" class="form-control form-control-sm custom-select" [disabled]="permisions.editar == '0' || infoProduct.length != 0" id="Idgrupo">
+                            <select [(ngModel)]="solicitud.fk_departamento" (ngModelChange)="changerequest($event)" class="form-control form-control-sm custom-select" disabled="permisions.editar == '0' || infoProduct.length != 0" id="Idgrupo">
                                 <option [value]="0">Seleccione departamento</option>
                                 <option *ngFor="let d of dataGrupo" [value]="d.id_grupo">{{d.nombre_grupo}}</option>
                             </select>
@@ -18,14 +18,14 @@
                 <div class="row">
                     <div class="col-sm">
                         <app-cc-input-group-prepend label="Nombre solicitante" styleSpan="size-span-campo">
-                            <input placeholder="Ingrese nombre solicitante" type="text" id="idNamerequest" class="form-control form-control-sm" [disabled]="infoProduct.length != 0" [(ngModel)]="solicitud.nombre_solicitante">
+                            <input placeholder="Ingrese nombre solicitante" type="text" id="idNamerequest" class="form-control form-control-sm" disabled="infoProduct.length != 0" [(ngModel)]="solicitud.nombre_solicitante">
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm">
                         <app-cc-input-group-prepend label="Usuario autorizador" styleSpan="size-span-campo">
-                            <ng-select id="IdRolesUsersDoc" class="form-control form-control-sm" appendTo="body" [searchable]="true" [disabled]="true" [clearable]="false" [(ngModel)]="solicitud.fk_usuario_sol">
+                            <ng-select id="IdRolesUsersDoc" class="form-control form-control-sm" appendTo="body" [searchable]="true" disabled="true" [clearable]="false" [(ngModel)]="solicitud.fk_usuario_sol">
                                 <ng-option [value]="0">Seleccione usuario</ng-option>
                                 <ng-option *ngFor="let d of infoUsers" [value]="d.id_usuario">{{d.nombre}}</ng-option>
                             </ng-select>
@@ -47,12 +47,12 @@
                 <div class="row">
                     <div class="col-sm">
                         <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo">
-                            <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [disabled]="permisions.editar == '0'" [clearable]="false" [(ngModel)]="productSelect" (ngModelChange)="getDataProduct($event,i)">
+                            <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" disabled="permisions.editar == '0'" [clearable]="false" [(ngModel)]="productSelect" (ngModelChange)="getDataProduct($event,i)">
                                 <ng-option [value]="0">Seleccione Producto</ng-option>
                                 <ng-option *ngFor="let d of arrayProduct" [value]="d.id">{{d.nombre}}</ng-option>
                             </ng-select>
                             <div class="input-group-prepend">
-                                <button class="btn btn-success btn-block" (click)="addProduct()" [disabled]="this.product.cantidad_solicitada > this.product.detalle.cantidad">Añadir</button>
+                                <button class="btn btn-success btn-block" (click)="addProduct()" disabled="this.product.cantidad_solicitada > this.product.detalle.cantidad">Añadir</button>
                             </div>
                         </app-cc-input-group-prepend>
                     </div>
@@ -60,21 +60,21 @@
                 <div class="row">
                     <div class="col-sm">
                         <app-cc-input-group-prepend label="Unidad de medida" styleSpan="size-span-campo">
-                            <input placeholder="unidad de medida" type="text" class="form-control form-control-sm" [(ngModel)]="product.udm" [disabled]="true">
+                            <input placeholder="unidad de medida" type="text" class="form-control form-control-sm" [(ngModel)]="product.udm" disabled="true">
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm">
                         <app-cc-input-group-prepend label="Stock" styleSpan="size-span-campo">
-                            <input placeholder="0" type="number" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="product.detalle.cantidad">
+                            <input placeholder="0" type="number" class="form-control form-control-sm" disabled="true" [(ngModel)]="product.detalle.cantidad">
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-sm">
                         <app-cc-input-group-prepend label="Cantidad solicitada" styleSpan="size-span-campo">
-                            <input type="number" class="form-control form-control-sm" [(ngModel)]="product.cantidad_solicitada" [disabled]="productSelect == 0" (keyup)="validaCantidad()" id="idAmount">
+                            <input type="number" class="form-control form-control-sm" [(ngModel)]="product.cantidad_solicitada" disabled="productSelect == 0" (keyup)="validaCantidad()" id="idAmount">
                             <span *ngIf="this.product.cantidad_solicitada > this.product.detalle.cantidad" style="color: red;font-size: 10px;">La cantidad solicitada no puede ser mayor al
                                 stock</span>
                         </app-cc-input-group-prepend>

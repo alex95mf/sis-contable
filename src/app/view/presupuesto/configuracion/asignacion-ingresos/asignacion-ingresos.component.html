@@ -7,7 +7,7 @@
             
             <div class="col-3">
                 <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select class="form-control" [clearable]="false" [(ngModel)]="periodo" [disabled]="yearDisabled"
+                    <ng-select class="form-control" [clearable]="false" [(ngModel)]="periodo" disabled="yearDisabled"
                         [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" style="z-index: 99999 !important;">
                     </ng-select>
                     <div class="input-group-append">
@@ -30,7 +30,7 @@
             </div>
             <div class="col">
                 <div class="input-group input-group-sm">                    
-                    <button [disabled]="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Presupuesto</button>
+                    <button disabled="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Presupuesto</button>
                 </div>
             </div> 
             <div class="col">
@@ -107,7 +107,7 @@
                                 </td>
                                 
                                 <!-- <td class="text-center">
-                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" disabled="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
                                 </td> -->
                             </tr>
                         </tbody>

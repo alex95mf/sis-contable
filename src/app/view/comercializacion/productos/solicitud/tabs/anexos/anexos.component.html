@@ -11,7 +11,7 @@
                                 <i class="fa fa-upload prueba" aria-hidden="true" style="font-size:14px;"></i>
                                 SELECCIONE ARCHIVO
                             </label>
-                            <input type="file" id="ficher" lang="es" accept=".pdf,.doc,.docx,.xlsx,.xls,.pptx" name="file" multiple (change)="subiendoando($event.target.files)" [disabled]="!dAction">
+                            <input type="file" id="ficher" lang="es" accept=".pdf,.doc,.docx,.xlsx,.xls,.pptx" name="file" multiple (change)="subiendoando($event.target.files)" disabled="!dAction">
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese observación">Descripción</span>
                             </div>
-                            <textarea id="idDescripcion" #descrip="ngModel" name="descrip" class="show" [(ngModel)]="desDocument " style="height: 40px;" class="form-control form-control-sm" rows="3" [disabled]="!dAction"></textarea>
+                            <textarea id="idDescripcion" #descrip="ngModel" name="descrip" class="show" [(ngModel)]="desDocument " style="height: 40px;" class="form-control form-control-sm" rows="3" disabled="!dAction"></textarea>
                         </div>
                     </div>
                 </div>
@@ -60,12 +60,12 @@
                                             <strong>{{dt.status}}</strong>
                                         </td>
                                         <td *ngIf="dataSearch == true" style="width: 25%;text-align: center;">
-                                            <button type="button" class="btn btn-sm tooltip-test my-1" (click)="AnexoView(dt)" style="background-color: #FFC107; color: black; border-radius: 10px" title="Mostrar anexo" [disabled]="!dAction"><i class="fa fa-eye"></i>
+                                            <button type="button" class="btn btn-sm tooltip-test my-1" (click)="AnexoView(dt)" style="background-color: #FFC107; color: black; border-radius: 10px" title="Mostrar anexo" disabled="!dAction"><i class="fa fa-eye"></i>
                                             </button>
-                                            <button class="btn btn-sm tooltip-test my-1" (click)="AnexoDownload(dt)" style="background-color: #404A63; color: white; border-radius: 10px" title="Descargar anexo" [disabled]="!dAction">
+                                            <button class="btn btn-sm tooltip-test my-1" (click)="AnexoDownload(dt)" style="background-color: #404A63; color: white; border-radius: 10px" title="Descargar anexo" disabled="!dAction">
                                                 <i class="fa fa-download"></i>
                                             </button>
-                                            <button type="button" (click)="AnexoDelete(dt,i)" class="btn btn-sm tooltip-test my-1" style="background-color: #F86C6B; color: white; border-radius: 10px" title="Remover Anexo" [disabled]="!dAction">
+                                            <button type="button" (click)="AnexoDelete(dt,i)" class="btn btn-sm tooltip-test my-1" style="background-color: #F86C6B; color: white; border-radius: 10px" title="Remover Anexo" disabled="!dAction">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </td>

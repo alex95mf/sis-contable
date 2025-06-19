@@ -24,7 +24,7 @@
                         <td>
                             <!-- {{ dt.porcentaje * 100 }} % -->
                             <input currencyMask [options]="{prefix: '', suffix:'%'}" [(ngModel)]="dt.porcentaje"
-                                [disabled]="dt.con_det_codigo != 'OEX'" class="form-control form-control-sm">
+                                disabled="dt.con_det_codigo != 'OEX'" class="form-control form-control-sm">
                         </td>
                         <!-- <td>
                             <button class="btn btn-sm btn-primary" (click)="aplicarExoneracion(dt)">

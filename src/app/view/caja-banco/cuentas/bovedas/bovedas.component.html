@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="País moneda" styleSpan="size-span-campo">
-                <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true" [disabled]="permisions.editar == '0' " [clearable]="false"
+                <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true" disabled="permisions.editar == '0' " [clearable]="false"
                     [(ngModel)]="boveda.fk_pais_moneda" (ngModelChange)="getCountry($event)">
                     <ng-option [value]="0">Seleccione país de la moneda</ng-option>
                     <ng-option *ngFor="let d of arrayCountrys" [value]="d.id">{{d.nom_pais}}</ng-option>
@@ -19,7 +19,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Cuenta contable" styleSpan="size-span-campo">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="boveda.cuenta_contable" id="idcuentacontable" [disabled]="true" placeholder="cuenta contable">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="boveda.cuenta_contable" id="idcuentacontable" disabled="true" placeholder="cuenta contable">
                 <div class="input-group-prepend"> 
                     <button class="btn btn-primary btn-sm" (click)="showAccounts()" 
                         style="box-shadow: unset;outline: unset;border-radius: 0px 3px 3px 0px;" 
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Sucursales" styleSpan="size-span-campo">
-                <select [(ngModel)]="boveda.name_jefe_cuenta" class="form-control form-control-sm custom-select" [disabled]="permisions.editar == '0'">
+                <select [(ngModel)]="boveda.name_jefe_cuenta" class="form-control form-control-sm custom-select" disabled="permisions.editar == '0'">
                     <option [value]="0">Seleccione sucursal</option>
                     <option *ngFor="let d of sucursales" [value]="d.nombre">{{d.nombre}}</option>
                 </select>
@@ -42,18 +42,18 @@
         </div>
         <div class="col-sm-4"> 
             <app-cc-input-group-prepend label="Moneda" styleSpan="size-span-campo">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="boveda.moneda" [disabled]="true">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="boveda.moneda" disabled="true">
             </app-cc-input-group-prepend> 
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Nombre cuenta" styleSpan="size-span-campo">
-                <input type="text" class="form-control form-control-sm " placeholder="{{boveda.name_cuenta}}" [disabled]="true">
+                <input type="text" class="form-control form-control-sm " placeholder="{{boveda.name_cuenta}}" disabled="true">
             </app-cc-input-group-prepend> 
         </div>
 
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
-                <select [(ngModel)]="boveda.status" class="form-control form-control-sm custom-select" [disabled]="permisions.editar == '0'">
+                <select [(ngModel)]="boveda.status" class="form-control form-control-sm custom-select" disabled="permisions.editar == '0'">
                     <option [value]="1">Activo</option>
                     <option [value]="0">Inactivo</option>
                 </select>
@@ -62,7 +62,7 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Saldo" styleSpan="size-span-campo">
                 <input type="text" class="form-control form-control-sm text-right" placeholder="$ {{boveda.saldo_cuenta}}" id="idsaldo" min="0" 
-                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                (keypress)="commonServices.FormatDecimalVal($event)" disabled="true">
             </app-cc-input-group-prepend> 
         </div>
     </div>

@@ -23,7 +23,7 @@
               disabled
               [(ngModel)]="filter.mes_actual">
 
-              <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+              <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                   {{item.name}}
               </ng-option>
           </ng-select>
@@ -43,7 +43,7 @@
       <div class="col-sm-4">
         <app-cc-input-group-prepend label="Tipo de Afectación" styleSpan="size-span-campo"
           style="width: 220px;">
-          <ng-select id="proceso" [disabled]="procesoDisabled" class="form-control form-control-sm"
+          <ng-select id="proceso" disabled="procesoDisabled" class="form-control form-control-sm"
             (change)="asignarProceso($event)" [(ngModel)]="filter.tipo_afectacion"  >
             <ng-option disabled [value]="0" disabled>Seleccione un Proceso</ng-option>
             <ng-option *ngFor="let op of tipoAfectacionList" [value]="op.valor">{{op.descripcion }}</ng-option>

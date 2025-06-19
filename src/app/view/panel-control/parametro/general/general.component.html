@@ -34,7 +34,7 @@
                                         </div>
                                         <input placeholder="Ingrese tipo.. " type="text" #tipoCatalo="ngModel"
                                             name="tipoCatalo" [(ngModel)]="tipoCatalogo"
-                                            class="form-control form-control-sm" [disabled]="!newCatalogo" id="IdTipo">
+                                            class="form-control form-control-sm" disabled="!newCatalogo" id="IdTipo">
                                     </div>
                                     <div class="input-group input-group-sm mt-1" *ngIf="isMultiple">
                                         <div class="input-group-prepend">
@@ -43,7 +43,7 @@
                                         </div>
                                         <ng-select id="IdTipo" [(ngModel)]="tipoCatalogo" [searchable]="true"
                                             class="form-control form-control-sm custom-select custom" appendTo="body"
-                                            [clearable]="true" [disabled]="!newCatalogo"
+                                            [clearable]="true" disabled="!newCatalogo"
                                             (ngModelChange)="validateSubgroup($event)">
                                             <ng-option [value]="0">Seleccione un tipo</ng-option>
                                             <ng-option *ngFor="let g of groups" [value]="g.tipo">
@@ -60,7 +60,7 @@
                                         </div>
                                         <textarea placeholder="Ingrese valor" type="text" #valCatalogo="ngModel"
                                             name="valCatalogo" [(ngModel)]="valorCatalogo"
-                                            class="form-control form-control-sm" [disabled]="!newCatalogo"
+                                            class="form-control form-control-sm" disabled="!newCatalogo"
                                             id="IdValorCatalogo"></textarea>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                         id="IdValorCatalogo">
                                         <ng-select id="IdSubgrupo" [(ngModel)]="subTipo" [searchable]="true"
                                             class="form-control form-control-sm custom-select custom" appendTo="body"
-                                            [clearable]="true" [disabled]="!isSubGroup || !newCatalogo" *ngIf="!newGrupo && !validacionNuevoSub">
+                                            [clearable]="true" disabled="!isSubGroup || !newCatalogo" *ngIf="!newGrupo && !validacionNuevoSub">
                                             <ng-option [value]="0">Seleccione un Subgrupo</ng-option>
                                             <ng-option *ngFor="let g of subgroups" [value]="g.grupo">
                                                 {{g.grupo}}
@@ -102,7 +102,7 @@
                                         <select class="form-control form-control-sm custom-select" #estadocat="ngModel"
                                             name="estadocat" [(ngModel)]="estadoCatalogo"
                                             style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
-                                            [disabled]="!newCatalogo" id="IdestadoCatalogo">
+                                            disabled="!newCatalogo" id="IdestadoCatalogo">
                                             <option value="A">Activo</option>
                                             <option value="I">Inactivo</option>
                                         </select>
@@ -134,7 +134,7 @@
                                             <span class="input-group-text"
                                                 placeholder="Ingrese observación">Descripción</span>
                                         </div>
-                                        <textarea class="form-control form-control-sm" aria-label="With textarea" [disabled]="!newCatalogo"
+                                        <textarea class="form-control form-control-sm" aria-label="With textarea" disabled="!newCatalogo"
                                             [(ngModel)]="desCatalogo" id="idtxta"
                                             placeholder="Ingrese una descripción"></textarea>
                                     </div>
@@ -176,7 +176,7 @@
                                             <ejs-multiselect id='multifilterdoc' [(ngModel)]='selectFilters'
                                                 [dataSource]='filters' [fields]='fields' mode='Box'
                                                 [placeholder]='waterMark'
-                                                [disabled]="!actionsDoc.edit || !documents.aprobaciones">
+                                                disabled="!actionsDoc.edit || !documents.aprobaciones">
                                             </ejs-multiselect>
                                         </div>
                                     </div>
@@ -188,7 +188,7 @@
                                                 id="inputGroup-sizing-sm">Aplica filtro</span>
                                         </div>
                                         <input type="checkbox" [(ngModel)]="documents.aprobaciones"
-                                            [disabled]="!actionsDoc.edit" class="form-control form-control-sm"
+                                            disabled="!actionsDoc.edit" class="form-control form-control-sm"
                                             style="height: 18px;margin-top: 7px;">
                                     </div>
                                 </div>

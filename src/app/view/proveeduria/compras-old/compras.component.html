@@ -31,7 +31,7 @@
                     </select>
                     <div class="input-group-append">
                         <button class="btn btn-primary btn-sm" (click)="setNumCuotas()"
-                            style="box-shadow: unset;outline: unset;" id="idbtndifered" [disabled]="!flagBtnDired "
+                            style="box-shadow: unset;outline: unset;" id="idbtndifered" disabled="!flagBtnDired "
                             placement="top" ngbTooltip="Diferir cuotas">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
@@ -99,7 +99,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo documento</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="buyProv.fk_doc"
-                        [disabled]="true" id="idTipDocSelect">
+                        disabled="true" id="idTipDocSelect">
                         <option *ngFor="let d of tip_doc" [value]="d.id">
                             {{d.nombre}}
                         </option>
@@ -208,7 +208,7 @@
                                         </div>
                                     </td>
                                     <td >
-                                        <input type="text" [(ngModel)]="d.codigo" [disabled]="true"
+                                        <input type="text" [(ngModel)]="d.codigo" disabled="true"
                                             placeholder="Código">
                                     </td>
                                     <td>
@@ -222,7 +222,7 @@
                                                 placeholder="0.00" style="text-align: right;" [(ngModel)]="d.cantidad"
                                                 (keyup)="sumTotal(i)" min="0"
                                                 (keypress)="commonServices.FormatDecimalVal($event)"
-                                                [disabled]="d.fk_producto == undefined  ">
+                                                disabled="d.fk_producto == undefined  ">
                                         </div>
                                     </td>
                                     <td>
@@ -231,7 +231,7 @@
                                                 placeholder="$ 0.00" style="text-align: right;" [(ngModel)]="d.precio"
                                                 (keyup)="sumTotal(i)" min="0"
                                                 (keypress)="commonServices.FormatDecimalVal($event)"
-                                                [disabled]="d.fk_producto == undefined ">
+                                                disabled="d.fk_producto == undefined ">
                                         </div>
                                     </td>
                                     <td style="text-align: right;">

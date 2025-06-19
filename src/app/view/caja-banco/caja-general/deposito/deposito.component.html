@@ -23,7 +23,7 @@
                         <span class="input-group-text " id="inputGroup-sizing-sm">Registro</span>
                     </div>
                     <select class="form-control form-control-sm custom-select" [(ngModel)]="registroSelect"
-                        [disabled]="arrayRegistros.length == 0 || cajaSelect == 0" (ngModelChange)="rerender($event)">
+                        disabled="arrayRegistros.length == 0 || cajaSelect == 0" (ngModelChange)="rerender($event)">
                         <option [value]="0">Seleccione registro</option>
                         <option *ngFor="let d of arrayRegistros" [value]="d.id">
                             RDC-{{d.id.toString().padStart(10, '0')}}
@@ -78,7 +78,7 @@
                                     <td class="text-center p-0"
                                         style="width: 5%;padding-left: 0px !important;cursor: pointer;">
                                         <input type="checkbox" style="cursor: pointer;" [(ngModel)]="dt.validate_sum"
-                                            (click)="changeVal(i)" [disabled]="changeAll || dt.fecha_post > viewDate
+                                            (click)="changeVal(i)" disabled="changeAll || dt.fecha_post > viewDate
                                                                                           || dt.isCobrated == 1">
                                     </td>
                                     <td>{{ dt.fecha_post }}</td>

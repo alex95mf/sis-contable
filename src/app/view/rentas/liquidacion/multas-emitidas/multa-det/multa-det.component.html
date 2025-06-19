@@ -28,7 +28,7 @@ filtroBoton="btnDetMulta" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlob
                                     $ {{d.total | number:'1.2-2'}}
                                 </td>
                                 <!-- <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Concepto" [disabled]="formReadOnly || conceptosDisabled" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Concepto" disabled="formReadOnly || conceptosDisabled" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
                                 </td> -->
                         </tr>
                     </tbody>

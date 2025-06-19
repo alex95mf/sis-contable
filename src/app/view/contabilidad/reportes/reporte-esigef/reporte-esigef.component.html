@@ -48,7 +48,7 @@
                                 disabled
                                 [(ngModel)]="selected_mes">
 
-                                <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                     {{item.name}}
                                 </ng-option>
                             </ng-select>

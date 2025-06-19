@@ -23,7 +23,7 @@
                         <span style="width: 155px;" class="input-group-text font-weight-bold">SubCategoría</span>
                     </div>
     
-                    <ng-select [disabled]="cat_step!=2" id="inputGroup-sizing-sm" class="form-control form-control-sm" [(ngModel)]="lugar_turistico.subcategoria" >
+                    <ng-select disabled="cat_step!=2" id="inputGroup-sizing-sm" class="form-control form-control-sm" [(ngModel)]="lugar_turistico.subcategoria" >
                         <ng-option disabled [value]="0">Seleccione una SubCategoría</ng-option>
                         <ng-option *ngFor="let op of lista_subc_fil" [value]="op.codigo" >{{op.nombre}}</ng-option>
                     </ng-select>

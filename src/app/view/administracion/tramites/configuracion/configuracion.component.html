@@ -95,7 +95,7 @@
                     </ng-select> 
                   
                   </app-cc-input-group-prepend>
-                  <button class="btn btn-success btn-sm " [disabled]="disabled" ngbTooltip="Agregar Roles" (click)="modalAgregarRoles()"><i
+                  <button class="btn btn-success btn-sm " disabled="disabled" ngbTooltip="Agregar Roles" (click)="modalAgregarRoles()"><i
                     class="fas fa-plus"></i></button>
                 </div>
                 
@@ -170,7 +170,7 @@
 
       <div class="text-right mt-2 mb-0 mr-2">
         
-        <button class="btn btn-success btn-sm " [disabled]="disabledPasos" ngbTooltip="Agregar Pasos" (click)="agregarPasos()"><i
+        <button class="btn btn-success btn-sm " disabled="disabledPasos" ngbTooltip="Agregar Pasos" (click)="agregarPasos()"><i
             class="fas fa-plus"></i></button>
         
       </div>
@@ -226,38 +226,38 @@
 
               </td>
               <td style="width: 300px;">
-                <input class="form-control" [(ngModel)]="pasos.pregunta_texto" maxlength="400" [disabled]=" pasos.tiene_pregunta == 'N' ? true : false "/> 
+                <input class="form-control" [(ngModel)]="pasos.pregunta_texto" maxlength="400" disabled=" pasos.tiene_pregunta == 'N' ? true : false "/> 
               </td>
               <td style="width: 100px;">
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                  [(ngModel)]="pasos.nro_paso_si" [disabled]=" pasos.tiene_pregunta == 'N'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.nro_paso_si, pasos, 'S', $event)"-->
+                  [(ngModel)]="pasos.nro_paso_si" disabled=" pasos.tiene_pregunta == 'N'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.nro_paso_si, pasos, 'S', $event)"-->
                   <ng-option *ngFor="let doc of listaPasos; let i = index" [value]="doc.nro_paso">P{{doc.nro_paso}}</ng-option>
                 </ng-select>
 
               </td>
               <td style="width: 100px;"> 
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                  [(ngModel)]="pasos.nro_paso_no" [disabled]=" pasos.tiene_pregunta == 'N'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.nro_paso_no, pasos, 'N')"-->
+                  [(ngModel)]="pasos.nro_paso_no" disabled=" pasos.tiene_pregunta == 'N'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.nro_paso_no, pasos, 'N')"-->
                   <ng-option *ngFor="let doc of listaPasos; let i = index" [value]="doc.nro_paso">P{{doc.nro_paso}}</ng-option>
                 </ng-select> 
               </td>
               <td style="width: 100px;"> 
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                  [(ngModel)]="pasos.siguiente_paso" [disabled]=" pasos.tiene_pregunta == 'S'  ? true : false " ><!-- (ngModelChange)="eliminarlPaso($event,pasos.nro_paso,'SP', i)" (ngModelChange)="eliminarlPaso($event,pasos.nro_paso,'S',index)" (ngModelChange)="eliminarlPaso(pasos.siguiente_paso, pasos, 'SP')"-->
+                  [(ngModel)]="pasos.siguiente_paso" disabled=" pasos.tiene_pregunta == 'S'  ? true : false " ><!-- (ngModelChange)="eliminarlPaso($event,pasos.nro_paso,'SP', i)" (ngModelChange)="eliminarlPaso($event,pasos.nro_paso,'S',index)" (ngModelChange)="eliminarlPaso(pasos.siguiente_paso, pasos, 'SP')"-->
                   <ng-option *ngFor="let doc of listaPasos; let i = index" [value]="doc.nro_paso" >P{{doc.nro_paso}}</ng-option>
                   <ng-option [value]="0">Termina</ng-option>
                 </ng-select>
               </td>
               <td style="width: 100px;"> 
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                  [(ngModel)]="pasos.siguiente_paso_dos" [disabled]=" pasos.tiene_pregunta == 'S'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.siguiente_paso_dos, pasos, 'SP')"-->
+                  [(ngModel)]="pasos.siguiente_paso_dos" disabled=" pasos.tiene_pregunta == 'S'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.siguiente_paso_dos, pasos, 'SP')"-->
                   <ng-option *ngFor="let docD of listaPasos; let i = index" [value]="docD.nro_paso" >P{{docD.nro_paso}}</ng-option>
                   <ng-option [value]="0">Termina</ng-option>
                 </ng-select>
               </td>
               <td style="width: 100px;"> 
                 <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                  [(ngModel)]="pasos.siguiente_paso_tres" [disabled]=" pasos.tiene_pregunta == 'S'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.siguiente_paso_tres, pasos, 'SP')"-->
+                  [(ngModel)]="pasos.siguiente_paso_tres" disabled=" pasos.tiene_pregunta == 'S'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.siguiente_paso_tres, pasos, 'SP')"-->
                   <ng-option *ngFor="let docT of listaPasos; let i = index" [value]="docT.nro_paso" >P{{docT.nro_paso}}</ng-option>
                   <ng-option [value]="0">Termina</ng-option>
                 </ng-select>
@@ -314,7 +314,7 @@
               </td>
               <td>
                 <div>
-                  <button class="btn btn-danger btn-sm" (click)="eliminarPaso(pasos, i)" [disabled]="pasos.id_flujo_pasos != 0"><i class="fas fa-trash-alt"></i></button>
+                  <button class="btn btn-danger btn-sm" (click)="eliminarPaso(pasos, i)" disabled="pasos.id_flujo_pasos != 0"><i class="fas fa-trash-alt"></i></button>
                 </div>
 
               </td>

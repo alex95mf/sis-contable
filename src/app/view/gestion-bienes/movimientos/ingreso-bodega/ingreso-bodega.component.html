@@ -11,7 +11,7 @@
                         <div class="col-12 col-md-4 pt-0 pb-0">
                            <app-cc-input-group-prepend label="Tipo de ingreso" styleSpan="size-span-campo">
                                <ng-select id="IdProvidersDoc" class="form-control custom" appendTo="body" [searchable]="true"
-                                   [clearable]="false" [(ngModel)]="tipoIngreso" [disabled]="!actions.dComponet || deshabilitarTi"
+                                   [clearable]="false" [(ngModel)]="tipoIngreso" disabled="!actions.dComponet || deshabilitarTi"
                                    (ngModelChange)="validacionIngreso($event)">
                                    <ng-option [value]="0" disabled>Seleccione tipo de ingreso</ng-option>
                                    <ng-option *ngFor="let d of catalog" [value]="d" >
@@ -46,7 +46,7 @@
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
                             </div>
                             <ng-select id="IdProvidersDoc" class="form-control custom" appendTo="body" [searchable]="true"
-                                [clearable]="false" [(ngModel)]="providersSelec" [disabled]="!actions.dComponet"
+                                [clearable]="false" [(ngModel)]="providersSelec" disabled="!actions.dComponet"
                                 (ngModelChange)="getFilterProveedor($event)">
                                 <ng-option [value]="0" disabled>Seleccione proveedor</ng-option>
                                 <ng-option *ngFor="let d of arrayProveedor" [value]="d.id_proveedor">
@@ -59,7 +59,7 @@
                         <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo font-weight-bold">
                             <input type="text" class="form-control" [(ngModel)]="nomComerPro" disabled placeholder="Nombre comercial proveedor... ">
                             <div class="input-group-append">
-                                <button [disabled]="!actions.dComponet || formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                                <button disabled="!actions.dComponet || formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Nro Factura" styleSpan="size-span-campo">
-                            <input class="form-control form-control-sm" placeholder="Ingreso de factura... " [(ngModel)]="lineaPro" [disabled]="!actions.dComponet || donaciones">
+                            <input class="form-control form-control-sm" placeholder="Ingreso de factura... " [(ngModel)]="lineaPro" disabled="!actions.dComponet || donaciones">
         
                         </app-cc-input-group-prepend>
         
@@ -95,7 +95,7 @@
                             <input type="text" class="form-control form-control-sm" [(ngModel)]="nomComerPro" disabled
                                 placeholder="Nombre comercial proveedor... ">
                             <div class="input-group-append">
-                                <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                                <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Tipo de proceso" styleSpan="input-group-text font-weight-bold size-span-campo inputGroup-sizing-sm">
-                            <ng-select id="tipo_proceso" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [disabled]="!actions.dComponet"
+                            <ng-select id="tipo_proceso" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" disabled="!actions.dComponet"
                              [(ngModel)]="tipoProceso">
                                 <ng-option [value]="0" disabled>Seleccione un tipo</ng-option>
                                 <ng-option *ngFor="let d of tipoProcesoList" [value]="d.value">{{d.label}}</ng-option>
@@ -113,7 +113,7 @@
                             <!-- <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo de proceso</span>
                             </div> -->
-                            <!-- <input type="text" [(ngModel)]="tipoProceso" class="form-control form-control-sm" [disabled]="true"
+                            <!-- <input type="text" [(ngModel)]="tipoProceso" class="form-control form-control-sm" disabled="true"
                                 placeholder="Tipo de proceso... "> -->
                         <!-- </div> -->
                         <div class="input-group input-group-sm mt-1" *ngIf="!flagUser">
@@ -122,7 +122,7 @@
                             </div>
                             <input type="text" [(ngModel)]="editCorreo" id="edtemail" class="form-control form-control-sm"
                                 style="border: 1px solid !important;border-color: #dfe2e4 !important;"
-                                [disabled]="permisions.editar == 0" placeholder="Correo cliente">
+                                disabled="permisions.editar == 0" placeholder="Correo cliente">
                         </div>
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
@@ -132,7 +132,7 @@
                             </div>
                             <input type="text" class="form-control form-control-sm" [(ngModel)]="numProceso" disabled
                                 placeholder="Numero de pproceso... ">
-                            <button class="btn btn-primary btn-sm" (click)="modalSolicitud()" [disabled]="!actions.dComponet || donaciones">Buscar</button>
+                            <button class="btn btn-primary btn-sm" (click)="modalSolicitud()" disabled="!actions.dComponet || donaciones">Buscar</button>
                         </div>
                     </div>
                     
@@ -142,7 +142,7 @@
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Quien recibe" styleSpan="size-span-campo">
                             <input class="form-control form-control-sm" [(ngModel)]="UserSelect" readonly placeholder="Quien recibe... "/>
-                            <button class="btn btn-primary btn-sm" (click)="modalEncargado()" [disabled]="!actions.dComponet">Buscar</button>
+                            <button class="btn btn-primary btn-sm" (click)="modalEncargado()" disabled="!actions.dComponet">Buscar</button>
         
                         </app-cc-input-group-prepend>
         
@@ -172,7 +172,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cargo municipal</span>
                             </div>
-                            <input type="text" [(ngModel)]="moduloUser" class="form-control form-control-sm" [disabled]="true"
+                            <input type="text" [(ngModel)]="moduloUser" class="form-control form-control-sm" disabled="true"
                                 placeholder="Cargo cliente... ">
                         </div>
                         <div class="input-group input-group-sm mt-1" *ngIf="!flagUser">
@@ -181,13 +181,13 @@
                             </div>
                             <input type="text" [(ngModel)]="editPerfil" id="edtmod" class="form-control form-control-sm"
                                 style="border: 1px solid !important;border-color: #dfe2e4 !important;"
-                                [disabled]="!actions.dComponet" placeholder="Cargo cliente... ">
+                                disabled="!actions.dComponet" placeholder="Cargo cliente... ">
                         </div>
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
         
                         <app-cc-input-group-prepend label="IDP" styleSpan="size-span-campo">
-                            <input type="text" [(ngModel)]="num_partida" class="form-control form-control-sm" [disabled]="true"
+                            <input type="text" [(ngModel)]="num_partida" class="form-control form-control-sm" disabled="true"
                             placeholder="IDP... ">
                         </app-cc-input-group-prepend>
         
@@ -196,7 +196,7 @@
                     <div *ngIf="tipoProceso == 'Catalogo Electronico'" cclass="col-12 col-md-4 pt-0 pb-0">
         
                         <app-cc-input-group-prepend label="No. Orden" styleSpan="size-span-campo">
-                            <input type="text" [(ngModel)]="num_orden" class="form-control form-control-sm" [disabled]="true"
+                            <input type="text" [(ngModel)]="num_orden" class="form-control form-control-sm" disabled="true"
                             placeholder="No. Orden... ">
                         </app-cc-input-group-prepend>
         
@@ -218,7 +218,7 @@
                             <input type="text" class="form-control form-control-sm"
                                 placeholder="{{anexoAdd.length}} Anexos Adjuntos" disabled>
                             <div class="input-group-append">
-                                <button class="btn btn-success" (click)="showAnexosProduct()" [disabled]="!actions.dComponet"
+                                <button class="btn btn-success" (click)="showAnexosProduct()" disabled="!actions.dComponet"
                                     placement="top" ngbTooltip="Adjuntar anexos">
                                     <i class="fa fa-paperclip" aria-hidden="true"></i>
                                 </button>
@@ -238,7 +238,7 @@
                 <div class="row m-0">
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Bodega" styleSpan="input-group-text font-weight-bold size-span-campo inputGroup-sizing-sm">
-                            <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [disabled]="!actions.dComponet" [(ngModel)]="bodega">
+                            <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" disabled="!actions.dComponet" [(ngModel)]="bodega">
                                 <ng-option [value]="0" disabled>Seleccione Bodega</ng-option>
                                 <ng-option *ngFor="let d of arrayBodega" [value]="d.id_bodega_cab">{{d.nombre}}</ng-option>
                             </ng-select>
@@ -258,7 +258,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor Orden</span>
                             </div>
-                            <input currencyMask [(ngModel)]="valor_orden" class="form-control form-control-sm" [disabled]="true"
+                            <input currencyMask [(ngModel)]="valor_orden" class="form-control form-control-sm" disabled="true"
                                 placeholder="Valor Orden... ">
                         </div>
                     </div>
@@ -268,7 +268,7 @@
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Condiciones</span>
                             </div>
                             <input class="form-control form-control-sm" id="idCondition" [(ngModel)]="condiciones"
-                                placeholder="Ingrese Condiciones" [disabled]="!actions.dComponet">
+                                placeholder="Ingrese Condiciones" disabled="!actions.dComponet">
                         </div>
                     </div> -->
                 </div>
@@ -278,7 +278,7 @@
         
                         <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
                             <textarea class="form-control form-control-sm" aria-label="With textarea" [(ngModel)]="observacion"
-                                id="idtxta" placeholder="Ingrese una observación" [disabled]="!actions.dComponet"></textarea>
+                                id="idtxta" placeholder="Ingrese una observación" disabled="!actions.dComponet"></textarea>
                         </app-cc-input-group-prepend>
                         
         
@@ -303,10 +303,10 @@
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
                                         (change)="cargaArchivo($event.target.files)"
-                                        [disabled]="!actions.dComponet">
+                                        disabled="!actions.dComponet">
                                     <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ?
                                         fileList[0].name : "Seleccione un archivo" }}</label>
-                                    <!-- <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="guardarArchivo()" placement="bottom" ngbTooltip="Guardar Archivo">
+                                    <!-- <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="guardarArchivo()" placement="bottom" ngbTooltip="Guardar Archivo">
                                        Guardar
                                     </button> -->
                                 </div>
@@ -352,7 +352,7 @@
                                         style="width: 155px;">Grupos</span></div>
                                 <input type="text" class="form-control form-control-sm" placeholder="Seleccione un Grupo"
                                 [(ngModel)]="grupo_descripcion" readonly >
-                                <button class="btn btn-primary btn-sm" (click)="modalGrupos()" placement="bottom" [disabled]="!actions.dComponet" 
+                                <button class="btn btn-primary btn-sm" (click)="modalGrupos()" placement="bottom" disabled="!actions.dComponet" 
                                     ngbTooltip="Buscar Grupo" >
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -361,7 +361,7 @@
                         <div class="col-sm-6">
                             <app-cc-input-group-prepend label="Nombre Producto" styleSpan="size-span-campo">
                                 <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
-                                    placeholder="Ingrese un nombre" id="idname" [(ngModel)]="listaProducto.nombre" [disabled]="catalogoDisabled == true">
+                                    placeholder="Ingrese un nombre" id="idname" [(ngModel)]="listaProducto.nombre" disabled="catalogoDisabled == true">
                             </app-cc-input-group-prepend>
                         </div>
                     </div>
@@ -373,9 +373,9 @@
                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo"
                                         style="width: 155px;">Catalogo bienes</span></div>
                                 <input type="text" class="form-control form-control-sm" placeholder="Seleccione " 
-                                     [(ngModel)]="codigoBienesDescripcion" readonly [disabled]="!actions.dComponet" >
+                                     [(ngModel)]="codigoBienesDescripcion" readonly disabled="!actions.dComponet" >
                                 <button class="btn btn-primary btn-sm" (click)="expandCodigoBienes()" placement="bottom" 
-                                    ngbTooltip="Busca" [disabled]="deshabilitarCatalogo" >
+                                    ngbTooltip="Busca" disabled="deshabilitarCatalogo" >
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -385,7 +385,7 @@
                                 <ng-select class="form-control custom" appendTo="body" [searchable]="false" [clearable]="false"
                                     [(ngModel)]="listaProducto.udmcompra"
                     
-                                    id="idUDMC" [disabled]="catalogoDisabled == true">
+                                    id="idUDMC" disabled="catalogoDisabled == true">
                                     <ng-option [value]="0">Seleccione la Unidad de Medida
                                     </ng-option>
                                     <ng-option *ngFor="let d of dataUDM" [value]="d.valor">{{d.valor}}
@@ -399,7 +399,7 @@
                             <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo">
                                 <input  class="form-control form-control-sm" #SMi="ngModel" name="SMi"
                                     placeholder="Ingrese la cantidad" id="idSMinimo" [(ngModel)]="listaProducto.stock" min="0"
-                                    [disabled]="catalogoDisabled == true" >
+                                    disabled="catalogoDisabled == true" >
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-6">
@@ -421,7 +421,7 @@
                     <div class="row m-0">
                         <div class="col-12 text-right">
                             <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Añadir Items"
-                                (click)="addItems()" [disabled]="deshabilitarItems">
+                                (click)="addItems()" disabled="deshabilitarItems">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -466,12 +466,12 @@
                                         <td class="text-center">{{d.codigo_bienes}}</td>
                                         <td>
                                             <textarea class="form-control form-control-sm" [(ngModel)]="d.description"
-                                                placeholder="Ingrese descripción" [disabled]="ingresoDisabled" rows="1">
+                                                placeholder="Ingrese descripción" disabled="ingresoDisabled" rows="1">
                                            </textarea>
                                         </td>
                                         <td>
                                             <ng-select style="width: 150px;" class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="d.centro_costo"
-                                                [disabled]="ingresoDisabled">
+                                                disabled="ingresoDisabled">
                                                     <ng-option [value]="0" disabled>Seleccione... </ng-option>
                                                     <ng-option *ngFor="let item of centroCosto"
                                                         [value]="item.id" >{{item.nombre}}</ng-option>
@@ -482,14 +482,14 @@
                                                 <input type="text" class="form-control form-control-sm text-right pr-2"
                                                     [(ngModel)]="d.quantity" (keyup)="sumTotal(i)" min="0"
                                                     (keypress)="commonServices.FormatDecimalVal($event)" id="idAmount"
-                                                    [disabled]="ingresoDisabled">
+                                                    disabled="ingresoDisabled">
                                             </div>
                                         </td>
                                         <td>
                                             <div>
                                                 <input currencyMask class="form-control form-control-sm text-right pr-2"
                                                     [(ngModel)]="d.price" (keyup)="sumTotal(i)" min="0"
-                                                    [disabled]="ingresoDisabled">
+                                                    disabled="ingresoDisabled">
                                             </div>
                                         </td>
                                         <td class="text-right pr-3">$ {{d.totalItems | number: '1.2-2'}}</td>
@@ -500,7 +500,7 @@
                                                 <i class="fas fa-eye"></i>
                                             </button>
                                             <button class="btn btn-danger" placement="top" ngbTooltip="Eliminar Items"
-                                                (click)="deleteItems(d)" [disabled]="ingresoDisabled"><i
+                                                (click)="deleteItems(d)" disabled="ingresoDisabled"><i
                                                     class="fa fa-trash-o" aria-hidden="true"></i>
                                             </button>
                                         </td>

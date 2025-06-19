@@ -70,7 +70,7 @@
                     <td>${{ compra.precio_unitario | number:'1.2-2' }}</td>
                     <td>${{ compra.precio_total | number:'1.2-2' }}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" ngbTooltip="Pagado" (click)="setPagado(compra)" [disabled]="compra.pagado"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-sm btn-primary" ngbTooltip="Pagado" (click)="setPagado(compra)" disabled="compra.pagado"><i class="fas fa-check"></i></button>
                     </td>
                 </tr>
             </tbody>

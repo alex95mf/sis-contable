@@ -21,7 +21,7 @@
                                         placeholder="Seleccione un Proveedor" (click)="expandListProveedores()"
                                         [value]="proveedorActive.razon_social">
                                     <button class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom"
-                                        ngbTooltip="Buscar Proveedor" [disabled]="mantenimientoDisabled">
+                                        ngbTooltip="Buscar Proveedor" disabled="mantenimientoDisabled">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </app-cc-input-group-prepend>
@@ -31,14 +31,14 @@
                             <div class="col-12 col-md-3 pt-0 pb-0">
                                 <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
                                     <input type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha"
-                                        [disabled]="mantenimientoDisabled" />
-                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" [disabled]="disabledSubGrupo">Buscar</button> -->
+                                        disabled="mantenimientoDisabled" />
+                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" disabled="disabledSubGrupo">Buscar</button> -->
                                 </app-cc-input-group-prepend>
                             </div>
         
                             <div class="col-12 col-md-3 pt-0 pb-0">
                                 <app-cc-input-group-prepend label="Tipo de póliza" styleSpan="size-span-campo font-weight-bold">
-                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="documento.tipo_poliza" [disabled]="mantenimientoDisabled">
+                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="documento.tipo_poliza" disabled="mantenimientoDisabled">
                                       <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
                                       <ng-option *ngFor="let item of listaCatalogo"  [value]="item">{{item}}</ng-option>
                                     </ng-select>
@@ -48,7 +48,7 @@
                             <!-- <div class="col-3">
                                 <app-cc-input-group-prepend label="Tipo de Poliza" styleSpan="size-span-campo font-weight-bold">
                                     <input  class="form-control form-control-sm" [(ngModel)]="documento.tipo_poliza"
-                                        [disabled]="mantenimientoDisabled" />
+                                        disabled="mantenimientoDisabled" />
                                 </app-cc-input-group-prepend>
                             </div> -->
         
@@ -58,29 +58,29 @@
                             <div class="col-12 col-md-3 pt-0 pb-0">
                                 <app-cc-input-group-prepend label="Numero de Poliza" styleSpan="size-span-campo font-weight-bold">
                                     <input  class="form-control form-control-sm" [(ngModel)]="documento.numero_poliza_contrato"
-                                        [disabled]="mantenimientoDisabled" />
-                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" [disabled]="disabledSubGrupo">Buscar</button> -->
+                                        disabled="mantenimientoDisabled" />
+                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" disabled="disabledSubGrupo">Buscar</button> -->
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12 col-md-3 pt-0 pb-0">
                                 <app-cc-input-group-prepend label="Valor Asegurado" styleSpan="size-span-campo font-weight-bold">
                                     <input currencyMask class="form-control form-control-sm" [(ngModel)]="documento.valor_asegurado"
-                                        [disabled]="mantenimientoDisabled" />
-                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" [disabled]="disabledSubGrupo">Buscar</button> -->
+                                        disabled="mantenimientoDisabled" />
+                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" disabled="disabledSubGrupo">Buscar</button> -->
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12 col-md-3 pt-0 pb-0">
                                 <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo font-weight-bold">
                                     <input type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha_inicio"
-                                        [disabled]="mantenimientoDisabled" />
-                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" [disabled]="disabledSubGrupo">Buscar</button> -->
+                                        disabled="mantenimientoDisabled" />
+                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" disabled="disabledSubGrupo">Buscar</button> -->
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12 col-md-3 pt-0 pb-0">
                                 <app-cc-input-group-prepend label="Fecha Fin" styleSpan="size-span-campo font-weight-bold">
                                     <input type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha_fin"
-                                        [disabled]="mantenimientoDisabled" />
-                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" [disabled]="disabledSubGrupo">Buscar</button> -->
+                                        disabled="mantenimientoDisabled" />
+                                    <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" disabled="disabledSubGrupo">Buscar</button> -->
                                 </app-cc-input-group-prepend>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
 
                                 <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold">
                                     <textarea cols="30" rows="3" maxlength="200" class="form-control form-control-sm"
-                                    [(ngModel)]="documento.observaciones" [disabled]="mantenimientoDisabled"></textarea>
+                                    [(ngModel)]="documento.observaciones" disabled="mantenimientoDisabled"></textarea>
                                 </app-cc-input-group-prepend>
    
                             </div>
@@ -129,19 +129,19 @@
                             <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
                                 <div class="custom-file">
                                     <input type="file" multiple="multiple" class="custom-file-input" id="inputGroupFile01"
-                                        accept=".pdf" (change)="cargaArchivo($event.target.files)" [disabled]="mantenimientoDisabled">
+                                        accept=".pdf" (change)="cargaArchivo($event.target.files)" disabled="mantenimientoDisabled">
                                     <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ?
                                         fileList[0].name : "Seleccione un archivo" }}</label>
-                                    <!-- <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="guardarArchivo()" placement="bottom" ngbTooltip="Guardar Archivo">
+                                    <!-- <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="guardarArchivo()" placement="bottom" ngbTooltip="Guardar Archivo">
                                                Guardar
                                             </button> -->
                                 </div>
                             </app-cc-input-group-prepend>
 
-                            <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled]="anexoDisabled">Cargar</button></div> -->
+                            <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" disabled="anexoDisabled">Cargar</button></div> -->
                         </div>
                         <div class="col-12 col-md-6 pt-0 pb-0">
-                            <app-anexos-list [identifier]="id_registro_poliza" custom1="INV-PRESTAMO-BIENES" [disabled]="mantenimientoDisabled"></app-anexos-list>
+                            <app-anexos-list [identifier]="id_registro_poliza" custom1="INV-PRESTAMO-BIENES" disabled="mantenimientoDisabled"></app-anexos-list>
                         </div>
                     </div>
                 </fieldset>
@@ -157,7 +157,7 @@
                     <div class="row m-0">
                         <div class="col-12 col-md-12 pt-0 pb-0 text-right">
                             <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Agregar productos"
-                            (click)="addProduct()" [disabled]="agregaProduct" [disabled]="mantenimientoDisabled">
+                            (click)="addProduct()" disabled="agregaProduct" disabled="mantenimientoDisabled">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                         </div>
@@ -188,12 +188,12 @@
                                         <td class="text-right">
                                             <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control form-control-sm" maxlength="200"
-                                                    [(ngModel)]="d.observacion" [disabled]="mantenimientoDisabled">
+                                                    [(ngModel)]="d.observacion" disabled="mantenimientoDisabled">
                                             </div>
                                         </td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover producto"
-                                                (click)="removeTitulo(i,d)" [disabled]="productoDisabled"><i
+                                                (click)="removeTitulo(i,d)" disabled="productoDisabled"><i
                                                     class="far fa-trash-alt"></i>
                                             </button>
                                         </td>

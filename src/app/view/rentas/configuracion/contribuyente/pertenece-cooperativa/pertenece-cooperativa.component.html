@@ -1,5 +1,5 @@
 <!-- (opened)="contribuyenteCoo.ta_pertenece_cooperativa = true" (closed)="contribuyenteCoo.ta_pertenece_cooperativa = false" -->
-<mat-expansion-panel class="mt-2"  [disabled]="!validadorNt">
+<mat-expansion-panel class="mt-2"  disabled="!validadorNt">
   <mat-expansion-panel-header>
     <input type="checkbox" [(ngModel)]="contribuyenteCoo.ta_pertenece_cooperativa" (change)="selectedCheck()">
     <mat-panel-title>Pertenece a Cooperativa (Taxis)</mat-panel-title>
@@ -54,12 +54,12 @@
         <div class="col">
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
-              (change)="cargaArchivo($event.target.files)"  [disabled]="anexo?.length > 0">
+              (change)="cargaArchivo($event.target.files)"  disabled="anexo?.length > 0">
             <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name :
                   "Seleccione un archivo" }}</label>
           </div>
         </div>
-        <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled] = 'cargarAnexo'>Cargar</button></div> -->
+        <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" disabled = 'cargarAnexo'>Cargar</button></div> -->
       </div>
       <div class="row">
         <div class="col">

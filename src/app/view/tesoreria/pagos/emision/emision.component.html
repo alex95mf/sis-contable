@@ -30,7 +30,7 @@
                             <div class="input-group-prepend"><span class="input-group-text size-span-campo"
                                     style="width: 155px;">Comprobante de egreso</span></div>
                             <input type="text" class="form-control form-control-sm" [(ngModel)]="documento.comprobante_egreso"
-                            [disabled]="disabledComprobante">
+                            disabled="disabledComprobante">
                         </div>
                     </div>
                     <div class="col-3">
@@ -56,7 +56,7 @@
                             <div class="input-group-prepend"><span class="input-group-text size-span-campo text-white"
                                     style=" background-color: #404A62;">Observaciones</span></div>
                             <textarea cols="30" rows="3" maxlength="200" class="form-control form-control-sm"
-                                [(ngModel)]="documento.observacion" [disabled]=" formReadOnly"></textarea>
+                                [(ngModel)]="documento.observacion" disabled=" formReadOnly"></textarea>
                         </div>
                     </div>
                     <div class="col-6">
@@ -64,7 +64,7 @@
                             <div class="col-11">
                                 <app-cc-input-group-prepend label="Formas de pago" styleSpan="size-span-campo font-weight-bold">
                                     <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                                        [(ngModel)]="documento.forma_pago" [disabled]="formReadOnly"  (change)="formaPagoSelected($event)">
+                                        [(ngModel)]="documento.forma_pago" disabled="formReadOnly"  (change)="formaPagoSelected($event)">
                                         <ng-option [value]="0" disabled>Seleccione una forma de pago</ng-option>
                                         <ng-option *ngFor="let op of formasDePago"
                                             [value]="op.nombre">{{ op.nombre }}</ng-option>
@@ -76,7 +76,7 @@
                             <div class="col-11">
                                 <app-cc-input-group-prepend label="Cuenta" styleSpan="size-span-campo font-weight-bold">
                                     <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                                        [(ngModel)]="cuenta" [disabled]="formValid">
+                                        [(ngModel)]="cuenta" disabled="formValid">
                                         <ng-option [value]="0" disabled>Chosee.. </ng-option>
                                         <ng-option *ngFor="let item of listaCuentas"
                                             [value]="item">{{item.name_banks + ' ' + item.num_cuenta }}</ng-option>
@@ -93,7 +93,7 @@
                         <div class="row">
                             <div class="col-2 mt-2">
                                 <div class="custom-control custom-checkbox custom-switch text-dark align-self-center">
-                                    <input class="custom-control-input" id="anular" type="checkbox" [(ngModel)]="anular" (change)="anulacionSelected($event)"  [disabled]="disabledAnular">
+                                    <input class="custom-control-input" id="anular" type="checkbox" [(ngModel)]="anular" (change)="anulacionSelected($event)"  disabled="disabledAnular">
                                     <label class="custom-control-label" for="anular">
                                         <h6>Anular</h6>
                                     </label>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="row m-0 mb-2" *ngIf="mostrarMovimientos">
                     <div class="col-3">
-                        <button [disabled]="formValid" class="btn btn-success" (click)="expandirModalMovimiento()">
+                        <button disabled="formValid" class="btn btn-success" (click)="expandirModalMovimiento()">
                             Movimientos Bancarios
                         </button>
             
@@ -153,7 +153,7 @@
                             <div class="tab-pane fade" [ngClass]="{'show active': tabActiva === 'nav-ordenes'}"   id="nav-ordenes" role="tabpanel"
                               aria-labelledby="nav-ordenes-tab">
                                 <div class="form-check mt-2">
-                                    <input class="form-check-input" id="flexCheckDefault" type="checkbox" [(ngModel)]="nominaCheck" (ngModelChange)="openNomina($event)" [disabled]="formReadOnly || disabledNomina"/>
+                                    <input class="form-check-input" id="flexCheckDefault" type="checkbox" [(ngModel)]="nominaCheck" (ngModelChange)="openNomina($event)" disabled="formReadOnly || disabledNomina"/>
                                     <label class="form-check-label" for="flexCheckDefault">
                                     Nómina
                                     </label>
@@ -171,7 +171,7 @@
                                                                     id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Período</span>
                                                             </div>
                                                             <p-calendar
-                                                            [disabled]="formReadOnly"
+                                                            disabled="formReadOnly"
                                                                 (ngModelChange)="periodoSelected($event,periodo)"
                                                                 [readonlyInput]="true" 
                                                                 view="year" 
@@ -186,7 +186,7 @@
                                                     </div>
                                                     <div class="col-md-5">
                                                             <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
-                                                                <app-cc-select-meses (ChangeMes)="ChangeMesCierrePeriodos($event)"  mes_actual={{mes_actual}} style="width: 20%;"  [disabled]="formReadOnly">
+                                                                <app-cc-select-meses (ChangeMes)="ChangeMesCierrePeriodos($event)"  mes_actual={{mes_actual}} style="width: 20%;"  disabled="formReadOnly">
                                                                 </app-cc-select-meses>
                                                             </app-cc-input-group-prepend>
                                                     </div>
@@ -195,7 +195,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <app-cc-input-group-prepend label="Tipo de Contratos" styleSpan="size-span-campo font-weight-bold">
-                                                            <ng-select id="tipo_contratos" class="form-control form-control-sm"  [disabled]="formReadOnly" [(ngModel)]="filter.tipo_contrato" [clearable]="true">
+                                                            <ng-select id="tipo_contratos" class="form-control form-control-sm"  disabled="formReadOnly" [(ngModel)]="filter.tipo_contrato" [clearable]="true">
                                                                 <ng-option disabled [value]="0" disabled>Seleccione una tipo</ng-option>
                                                                 <ng-option *ngFor="let tc of tipoContratos" [value]="tc.id_catalogo">{{tc.cat_nombre }}</ng-option>
                                                             </ng-select>
@@ -205,7 +205,7 @@
                                                     <div class="col-md-4">
                                                         <app-cc-input-group-prepend label="Tipo de Desembolso" styleSpan="size-span-campo font-weight-bold">
                                                             <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="tipo_desembolso"
-                                                            [disabled]="formReadOnly">
+                                                            disabled="formReadOnly">
                                                                 <ng-option [value]="0" disabled>Seleccione ... </ng-option>
                                                                 <ng-option *ngFor="let item of listaDesembolso"
                                                                     [value]="item.valor" >{{item.descripcion}}</ng-option>
@@ -225,11 +225,11 @@
                                             </div>
                                             <div class="col text-right">
                                                 <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom"
-                                                    ngbTooltip="Buscar" (click)="cargarOrdenesPagoNomina()"  [disabled]="formReadOnly">
+                                                    ngbTooltip="Buscar" (click)="cargarOrdenesPagoNomina()"  disabled="formReadOnly">
                                                     <i class="fas fa-search"></i> Cargar
                                                 </button>
                                                 <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros"
-                                                    (click)="limpiarFiltros()"  [disabled]="formReadOnly">
+                                                    (click)="limpiarFiltros()"  disabled="formReadOnly">
                                                     <i class="fas fa-eraser"></i>
                                                 </button>
                                             </div>
@@ -271,7 +271,7 @@
                                                                         <div class="input-group input-group-sm">
                                     
                                                                             <input type="text" maxlength="100" class="form-control form-control-sm"
-                                                                                [disabled]="formReadOnly" [(ngModel)]="d.comentario">
+                                                                                disabled="formReadOnly" [(ngModel)]="d.comentario">
                                                                         </div>
                                                                     </td>
                                                                     <td class="text-right">$ {{ d.total | number: '1.2-2'}}</td>
@@ -281,7 +281,7 @@
                                                                             <div class="input-group-prepend"><span
                                                                                     class="input-group-text font-weight-bold">$</span></div>
                                                                             <input currencyMask type="text" maxlength="8" class="form-control form-control-sm text-right"
-                                                                                [disabled]="true" [(ngModel)]="d.cobro"
+                                                                                disabled="true" [(ngModel)]="d.cobro"
                                                                                 (keypress)="onlyNumberDot($event)" (keyup)="restar(d)" (input)="cambioMontoCobro()">
                                                                         </div>
                                                                     </td>
@@ -290,13 +290,13 @@
                                                                             <div class="input-group-prepend"><span
                                                                                     class="input-group-text font-weight-bold">$</span></div>
                                                                             <input type="text" class="form-control form-control-sm text-right"
-                                                                                [disabled]="true" [(ngModel)]="d.nuevo_saldo"
+                                                                                disabled="true" [(ngModel)]="d.nuevo_saldo"
                                                                                 readonly>
                                                                         </div>
                                                                     </td>
                                                                     <td class="text-center">
                                                                         <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título"
-                                                                            [disabled]="formReadOnly" (click)="removeTitulo(i)"><i
+                                                                            disabled="formReadOnly" (click)="removeTitulo(i)"><i
                                                                                 class="far fa-trash-alt"></i>
                                                                         </button>
                                                                     </td>
@@ -321,7 +321,7 @@
                                     <div class="row mt-2 mb-1 align-items-center">
                                         <div class="col text-right">
                                             <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar orden de pago"
-                                                (click)="verificarFormaPago()" [disabled]="formValid">
+                                                (click)="verificarFormaPago()" disabled="formValid">
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         
@@ -362,7 +362,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="d.tipo_desembolso"
-                                                                    [disabled]="titulosDisabled || formReadOnly ?? true">
+                                                                    disabled="titulosDisabled || formReadOnly ?? true">
                                                                         <ng-option [value]="0" disabled>Chosee.. </ng-option>
                                                                         <ng-option *ngFor="let item of listaDesembolso"
                                                                             [value]="item.valor" >{{item.descripcion}}</ng-option>
@@ -391,7 +391,7 @@
                                                                     <div class="input-group input-group-sm">
                                 
                                                                         <input type="text" maxlength="100" class="form-control form-control-sm"
-                                                                            [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">
+                                                                            disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">
                                                                     </div>
                                                                 </td>
                                                                 <td class="text-right">$ {{ d.valor | number: '1.2-2'}}</td>
@@ -401,7 +401,7 @@
                                                                         <div class="input-group-prepend"><span
                                                                                 class="input-group-text font-weight-bold size-span-otro">$</span></div>
                                                                         <input currencyMask [options]="{prefix: ''}" class="form-control form-control-sm"
-                                                                            [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro"
+                                                                            disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro"
                                                                             (keyup)="restar(d)">
                                                                             <!-- (input)="cambioMontoCobro(d)" -->
                                                                     </div>
@@ -411,7 +411,7 @@
                                                                         <div class="input-group-prepend"><span
                                                                                 class="input-group-text font-weight-bold size-span-otro">$</span></div>
                                                                         <input currencyMask type="text" class="form-control form-control-sm text-right"
-                                                                            [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.nuevo_saldo"
+                                                                            disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.nuevo_saldo"
                                                                             readonly>
                                                                     </div>
                                                                 </td>
@@ -423,7 +423,7 @@
                                                                             placement="left" ngbTooltip="Abrir detalle">
                                                                             <span class="material-symbols-outlined">visibility</span>
                                                                         </button>
-                                                                        <button class="btn btn-danger_icon btn-sm mr-1" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"
+                                                                        <button class="btn btn-danger_icon btn-sm mr-1" disabled="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"
                                                                             placement="right" ngbTooltip="Remover Título">
                                                                             <span class="material-symbols-outlined">delete</span>
                                                                         </button>
@@ -506,7 +506,7 @@
                                                         <td class="text-right">$ {{d.devengado | number:'1.2-2'}}</td>
                                                         <td class="text-right">$ {{d.cobrado_pagado | number:'1.2-2'}}</td>
                                                         <td>
-                                                            <button class="btn btn-sm btn-secondary ml-1" (click)="expandCambioCuenta(d, i)" [disabled]="!allowEdit">
+                                                            <button class="btn btn-sm btn-secondary ml-1" (click)="expandCambioCuenta(d, i)" disabled="!allowEdit">
                                                                 <i class="fas fa-file-invoice-dollar"></i>
                                                             </button>
                                                             <button class="btn btn-sm btn-info ml-1" (click)="expandCambioCuentaEmi(d, i)" [ngClass]="{'d-none': filter.tipo_cierre != 'EMI'}">
@@ -554,7 +554,7 @@
                                                     <td *ngIf="f.tipo != 'T'">
                                                         <input style="width: 150px;" placeholder="codigo cuenta" [value]="f.account"
                                                             name="detAccounts" [(ngModel)]="f.account"
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm " type="text"
                                                             name="{{f.account}}" />
                                                     </td>
@@ -562,19 +562,19 @@
                                                     <td *ngIf="f.tipo != 'T'">
                                                         <input style="width: 250px;" placeholder="cuenta" [value]="f.name" name="detName"
                                                             [(ngModel)]="f.name"
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm " type="text"
                                                             name="{{f.name}}" />
                                                     </td>
                                                     <td>
                                                         <input currencyMask  style="width: 120px;" [(ngModel)]="f.debit" placeholder="0.00"
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm pr-1 text-right"
                                                             name="{{f.debit}}" />
                                                     </td>
                                                     <td >
                                                         <input currencyMask style="width: 120px;" [(ngModel)]="f.credit" placeholder="0.00"
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm pr-1 text-right"
                                                             name="{{f.credit}}" />
                                                         
@@ -582,43 +582,43 @@
                                                     
                                                     <td *ngIf="f.tipo != 'T'" style="width: 180px;">
                                                         <input style="width: 180px;" [(ngModel)]="f.codpresupuesto"  
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm pr-1 text-right" type="text"
                                                             name="{{f.codpresupuesto}}" />
                                                     </td>
                                                 
                                                     <td *ngIf="f.tipo != 'T'" >
                                                         <input style="width: 250px;" [(ngModel)]="f.presupuesto"  
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm pr-1 text-right" type="text"
                                                             name="{{f.presupuesto}}" />
                                                     </td>
                                                     <td>
                                                         <input currencyMask [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " style="width: 150px;" [(ngModel)]="f.valor_presupuesto" placeholder="0.00"
-                                                            [disabled]="true" class="form-control form-control-sm pr-1 text-right" name="{{f.valor_presupuesto}}" />
+                                                            disabled="true" class="form-control form-control-sm pr-1 text-right" name="{{f.valor_presupuesto}}" />
                                                         
                                                     </td>
                                                     <td *ngIf="f.tipo != 'T'" >
                                                         <input style="width: 150px;" [(ngModel)]="f.tipo_presupuesto"  
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm pr-1 text-right" type="text"
                                                             name="{{f.tipo_presupuesto}}" />
                                                     </td>
                                                     <td *ngIf="f.tipo != 'T'" >
                                                         <input style="width: 150px;" [(ngModel)]="f.tipo_afectacion"  
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm pr-1 text-right" type="text"
                                                             name="{{f.tipo_afectacion}}" />
                                                     </td>
                                                     <td *ngIf="f.tipo != 'T'" >
                                                         <input style="width: 150px;" [(ngModel)]="f.devengado"  
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm pr-1 text-right" type="text"
                                                             name="{{f.devengado}}" />
                                                     </td>
                                                     <td *ngIf="f.tipo != 'T'" >
                                                         <input style="width: 150px;" [(ngModel)]="f.cobrado_pagado"  
-                                                            [disabled]="true"
+                                                            disabled="true"
                                                             class="form-control form-control-sm pr-1 text-right" type="text"
                                                             name="{{f.cobrado_pagado}}" />
                                                     </td>
@@ -629,13 +629,13 @@
                                                 <td class="text-right font-weight-bold" colspan="2">TOTALES</td>
                                                 <td>
                                                     <input currencyMask [ngClass]="{'TotalizadoTablaScroll': g.tipo == 'T'} "  style="width: 120px;" [(ngModel)]="g.debit" placeholder="0.00"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         type="text" name="{{g.debit}}" />
                                                 </td>
                                                 <td >
                                                     <input currencyMask [ngClass]="{'TotalizadoTablaScroll': g.tipo == 'T'} " style="width: 120px;" [(ngModel)]="g.credit" placeholder="0.00"
-                                                        [disabled]="true"
+                                                        disabled="true"
                                                         class="form-control form-control-sm pr-1 text-right"
                                                         type="text"
                                                         name="{{g.credit}}" />
@@ -718,7 +718,7 @@
                                                     <td class="text-center">$ {{ d.valor | number:'1.2-2' }}</td>
                                        
                                                     <!-- <td class="text-center">
-                                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="d.id_documento_detalle !=0"  (click)="removeActivosFinancieros(i)"><i class="far fa-trash-alt"></i></button>
+                                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" disabled="d.id_documento_detalle !=0"  (click)="removeActivosFinancieros(i)"><i class="far fa-trash-alt"></i></button>
                                                     </td> -->
                                                 </tr>
                                             </ng-container>
@@ -835,7 +835,7 @@
                                 style="width: 155px">Observaciones</span></div>
                         <textarea cols="30" rows="3" maxlength="200" class="form-control form-control-sm"
                             [(ngModel)]="documento.observacion"
-                            [disabled]="titulosDisabled || formReadOnly ?? true"></textarea>
+                            disabled="titulosDisabled || formReadOnly ?? true"></textarea>
                     </div>
                 </div>
             </div>

@@ -6,9 +6,9 @@
             <div class="col-6">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Contribuyente</span></div>
-                    <input type="text" class="form-control form-control-sm bg-white" [disabled]="formReadOnly" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
+                    <input type="text" class="form-control form-control-sm bg-white" disabled="formReadOnly" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
                     <div class="input-group-append">
-                        <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                        <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -17,9 +17,9 @@
             <div class="col-6">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Orden de Inspección</span></div>
-                    <input type="text" class="form-control form-control-sm" [class]="!ordenDisabled ? 'bg-white' : ''" readonly [disabled]="formReadOnly || ordenDisabled" placeholder="Seleccione una Orden de Inspección" (click)="expandInspecciones()" [value]="ordenActive.numero_orden">
+                    <input type="text" class="form-control form-control-sm" [class]="!ordenDisabled ? 'bg-white' : ''" readonly disabled="formReadOnly || ordenDisabled" placeholder="Seleccione una Orden de Inspección" (click)="expandInspecciones()" [value]="ordenActive.numero_orden">
                     <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" [disabled]="formReadOnly || ordenDisabled" (click)="expandInspecciones()" placement="bottom" ngbTooltip="Buscar Ordenes de Inspección">
+                        <button class="btn btn-primary btn-sm" disabled="formReadOnly || ordenDisabled" (click)="expandInspecciones()" placement="bottom" ngbTooltip="Buscar Ordenes de Inspección">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -138,7 +138,7 @@
                 <h5 class="mb-0 text-dark">Conceptos</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto" [disabled]="formReadOnly || conceptosDisabled" (click)="expandImpuestos()">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto" disabled="formReadOnly || conceptosDisabled" (click)="expandImpuestos()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -167,7 +167,7 @@
                                     <td>{{ d.nombre_detalle }}</td>
                                     <td class="text-right">
                                         <div class="input-group input-group-sm">
-                                            <input type="text" maxlength="50" class="form-control form-control-sm" [disabled]="formReadOnly || conceptosDisabled" [(ngModel)]="d.comentario" [readonly]="formReadOnly" > 
+                                            <input type="text" maxlength="50" class="form-control form-control-sm" disabled="formReadOnly || conceptosDisabled" [(ngModel)]="d.comentario" [readonly]="formReadOnly" > 
                                         </div>
                                     </td>
                                     <td class="text-right">
@@ -177,7 +177,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Concepto" [disabled]="formReadOnly || conceptosDisabled" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
+                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Concepto" disabled="formReadOnly || conceptosDisabled" (click)="removeConcepto(i)"><i class="far fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                             </ng-container>
@@ -199,7 +199,7 @@
         <div class="row mt-2 mb-1 align-items-center">
             <div class="col">
                 <span class="h5 mb-0">Exoneraciones</span>
-                <button class="btn btn-success btn-sm ml-1 float-right" placement="left" ngbTooltip="Agregar Exoneración" [disabled]="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
+                <button class="btn btn-success btn-sm ml-1 float-right" placement="left" ngbTooltip="Agregar Exoneración" disabled="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -236,7 +236,7 @@
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
                                 <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly || exoneracionDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly || exoneracionDisabled" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>

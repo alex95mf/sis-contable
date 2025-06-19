@@ -61,7 +61,7 @@
                 </td>
             </tr>
             <tr *ngFor="let item of listaSolicitudesAtribucion" [ngClass]="{'table-success': item.estado == 'R', 'table-secondary': item.estado == 'I'}">
-                <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal()" [disabled]="item.estado == 'I'" /></td>
+                <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal()" disabled="item.estado == 'I'" /></td>
                 <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
                 <td class="text-center">{{item.departamento?.valor}}</td>
                 <td class="text-center">{{item.fk_atribucion?.catalogo?.valor}}</td>
@@ -79,7 +79,7 @@
                 </td>
                 <!-- Reforma -->
                 <td class="text-center">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="item.cantidad_reforma" (blur)="calcularValorTotal()" [disabled]="search" [readonly]="item.estado == 'I'">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="item.cantidad_reforma" (blur)="calcularValorTotal()" disabled="search" [readonly]="item.estado == 'I'">
                 </td>
                 <td class="text-center" >
                     <app-cc-input-group-prepend label="$" styleSpan="font-weight-bold">
@@ -91,7 +91,7 @@
                         <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.costo_total_reforma" [readonly]="item.estado == 'I'">
                     </app-cc-input-group-prepend>
                 </td>
-                <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)" [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)" disabled="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
             </tr>
         </tbody>
     </table>

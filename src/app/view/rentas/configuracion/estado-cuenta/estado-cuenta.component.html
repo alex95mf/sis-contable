@@ -105,15 +105,15 @@
                 <h5 class="mb-0 text-dark">Deudas</h5>
             </div>
             <div class="col text-right">
-                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Recargar deudas"  (click)="recargarDeudas()" [disabled]="!hayContribuyente">
+                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Recargar deudas"  (click)="recargarDeudas()" disabled="!hayContribuyente">
                     <i class="fas fa-undo"></i>
                 </button>
-                <!-- <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()" [disabled]="conceptosDisabled || formReadOnly">
+                <!-- <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()" disabled="conceptosDisabled || formReadOnly">
                     <i class="fas fa-plus"></i>
                 </button> -->
             </div>
         </div>
-        <fieldset class="border px-2 pb-2" [disabled]="disabledFilter">
+        <fieldset class="border px-2 pb-2" disabled="disabledFilter">
             <legend class="w-auto bg-dark">Filtros</legend>
             <div class="container-fluid">
                 <div class="row">
@@ -121,14 +121,14 @@
                         <div class="row">
                             <div class="col">
                                 <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-otro font-weight-bold">
-                                    <ng-select [disabled]="disabledFilter" [(ngModel)]="filter.concepto"  class="form-control" [clearable]="true">
+                                    <ng-select disabled="disabledFilter" [(ngModel)]="filter.concepto"  class="form-control" [clearable]="true">
                                         <ng-option *ngFor="let tipo of conceptosList" [value]="tipo.id_concepto">{{ tipo.codigo }} - {{ tipo.nombre }}</ng-option>
                                     </ng-select>
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col">
                                 <app-cc-input-group-prepend label="Estado" styleSpan="size-span-otro font-weight-bold">
-                                    <ng-select [disabled]="disabledFilter" [(ngModel)]="filter.estado"  class="form-control" [clearable]="true">
+                                    <ng-select disabled="disabledFilter" [(ngModel)]="filter.estado"  class="form-control" [clearable]="true">
                                         <ng-option *ngFor="let est of listEstados" [value]="est.value">{{ est.label }} </ng-option>
                                     </ng-select>
                                 </app-cc-input-group-prepend>

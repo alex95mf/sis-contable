@@ -38,7 +38,7 @@ icono="fas fa-exchange"
                     <p class="h6">No hay productos.</p>
                 </td>
             </tr>
-            <tr *ngFor="let prod of productos" [disabled]="prod == producto">
+            <tr *ngFor="let prod of productos" disabled="prod == producto">
                 <td>{{ prod.codigoproducto }}</td>
                 <td>{{ prod.nombre }}</td>
                 <td>{{ prod.stock }}</td>

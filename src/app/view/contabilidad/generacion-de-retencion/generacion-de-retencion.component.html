@@ -31,7 +31,7 @@
                             disabled
                             [(ngModel)]="mes_actual">
 
-                            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                            <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                 {{item.name}}
                             </ng-option>
                         </ng-select>
@@ -147,7 +147,7 @@
                                     <ng-template pTemplate="body" let-item>
                                         <tr style="font-size: 11px;">
                                             <td style="width: 3rem" pFrozenColumn>
-                                                <p-tableCheckbox [value]="item" [disabled]="isOutOfStock(item)" ></p-tableCheckbox>
+                                                <p-tableCheckbox [value]="item" disabled="isOutOfStock(item)" ></p-tableCheckbox>
                                             </td>
                                             <td>
                                                 <div class="flex flex-row flex-wrap card-container blue-container">

@@ -8,7 +8,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estados cheques</span>
                     </div>
                     <select [(ngModel)]="filter" class="form-control form-control-sm custom-select"
-                        (ngModelChange)="rerender()" [disabled]="flag">
+                        (ngModelChange)="rerender()" disabled="flag">
                         <option *ngFor="let d of arrayFilters" [value]="d.key">{{d.name}}</option>
                     </select>
                 </div>
@@ -16,14 +16,14 @@
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo">
                     <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control" name="dateFrom"
-                        format='yyyy-MM-dd' (ngModelChange)="rerender()" [disabled]="flag">
+                        format='yyyy-MM-dd' (ngModelChange)="rerender()" disabled="flag">
                     </ejs-datepicker>
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo">
                     <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control" name="dateFrom" format='yyyy-MM-dd'
-                        (ngModelChange)="rerender()" [disabled]="flag">
+                        (ngModelChange)="rerender()" disabled="flag">
                     </ejs-datepicker>
                 </app-cc-input-group-prepend>
             </div>
@@ -62,7 +62,7 @@
                                 </td>
                                 <td style="text-align: center;">
                                     <button class="btn btn-primary btn-xs" (click)="changeFechCobro(dt)"
-                                        [disabled]="dt.status != 'Girado' || flag"><i class="fas fa-edit"></i></button>
+                                        disabled="dt.status != 'Girado' || flag"><i class="fas fa-edit"></i></button>
                                 </td>
                             </tr>
                         </tbody>

@@ -54,7 +54,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                             <button class="btn btn-sm btn-secondary" (click)="expandCuentaAjuste()">
                                 <i class="fas fa-search"></i>
                             </button>
-                            <button class="btn btn-sm btn-outline-success" (click)="agregarCuenta()" [disabled]="btnAggCuentaAjusteDisabled">
+                            <button class="btn btn-sm btn-outline-success" (click)="agregarCuenta()" disabled="btnAggCuentaAjusteDisabled">
                                 <i class="fas fa-plus"></i> Agregar
                             </button>
                         </div>
@@ -72,7 +72,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                 </div>
                 <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento != 'PAGADO_TERCEROS' ">
                     <app-cc-input-group-prepend label="Tipo de Pago" styleSpan="size-span-campo font-weight-bold">
-                        <ng-select id="tipo_pago" class="form-control form-control-sm" [(ngModel)]="tipoPago" [clearable]="true" [disabled]="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'"> <!--(change)="getCuentaContableTipoPago()" -->
+                        <ng-select id="tipo_pago" class="form-control form-control-sm" [(ngModel)]="tipoPago" [clearable]="true" disabled="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'"> <!--(change)="getCuentaContableTipoPago()" -->
                             <ng-option disabled [value]="0" disabled>Seleccione un tipo de Pago</ng-option>
                             <ng-option *ngFor="let tp of tipoPagoSueldo" [value]="tp.value">{{tp.label }}</ng-option>
                         </ng-select>
@@ -80,7 +80,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                 </div>
                 <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento != 'PAGADO_TERCEROS' ">
                     <app-cc-input-group-prepend label="Tipo de Contrato" styleSpan="size-span-campo font-weight-bold">
-                        <ng-select id="tipo_contratos" class="form-control form-control-sm" [(ngModel)]="filter.tipo_contrato" [clearable]="true" (change)="geNumControl($event)" [disabled]="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'">
+                        <ng-select id="tipo_contratos" class="form-control form-control-sm" [(ngModel)]="filter.tipo_contrato" [clearable]="true" (change)="geNumControl($event)" disabled="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'">
                             <ng-option disabled [value]="0" disabled>Seleccione un tipo de Contrato</ng-option>
                             <ng-option *ngFor="let tc of tipoContratoList" [value]="tc.id_catalogo">{{tc.cat_nombre }}</ng-option>
                         </ng-select>
@@ -92,7 +92,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                         <input class="form-control" [(ngModel)]="codigo_cuenta_contable" type="text" readonly/>
                         <button class="btn btn-primary btn-sm" 
                                 (click)="modalCuentaContable()" 
-                                [disabled]="validacion || formReadOnly || cuentaDisabled || filter.tipo_asiento == 'PAGADO_NOMINA' ||
+                                disabled="validacion || formReadOnly || cuentaDisabled || filter.tipo_asiento == 'PAGADO_NOMINA' ||
                                  filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'" > 
                                  Consultar
                         </button>
@@ -107,7 +107,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                 </div>
                 <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento != 'PAGADO_TERCEROS' ">
                     <app-cc-input-group-prepend label="Número de Control" styleSpan="size-span-campo font-weight-bold">
-                        <ng-select id="num_control" class="form-control form-control-sm" [(ngModel)]="filter.id_num_control" [clearable]="true" [disabled]="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'">
+                        <ng-select id="num_control" class="form-control form-control-sm" [(ngModel)]="filter.id_num_control" [clearable]="true" disabled="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'">
                             <ng-option disabled [value]="0" disabled>Seleccione un tipo de Contrato</ng-option>
                             <ng-option *ngFor="let nc of numeros_control" [value]="nc.id">{{nc.num_documento}}</ng-option>
                         </ng-select>
@@ -129,7 +129,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                   
                     <app-cc-input-group-prepend label="Cuenta Bancaria" styleSpan="size-span-campo font-weight-bold">
                         <ng-select class="form-control custom" appendTo="body" [searchable]="true"
-                            [(ngModel)]="cuentaBanco" [disabled]="formValid" >
+                            [(ngModel)]="cuentaBanco" disabled="formValid" >
                             <ng-option [value]="0" disabled>Chosee.. </ng-option>
                             <ng-option *ngFor="let item of listaCuentas"
                                 [value]="item">{{item.name_banks + ' ' + item.num_cuenta }}</ng-option>
@@ -201,7 +201,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right btn-add">
                     <div class="top_table_header">
                         <button type="button" class="btn btn-success btn-sm btn_add_detalle"
-                            [disabled]="formReadOnly"
+                            disabled="formReadOnly"
                             title="Inserte nuevo registro" (click)="addFields()">
                             <i class="fa fa-plus"></i>
                         </button>
@@ -257,12 +257,12 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                             <button type="button" (click)="expandCuentasContables(i)"
-                                                [disabled]="permissions.agregar == '0'"
+                                                disabled="permissions.agregar == '0'"
                                                 class="btn btn-success btn-sm tooltip-test mt-2 ml-1"
                                                 title="Agregar Cuenta">
                                                 <i class="far fa-search"></i>
                                             </button>
-                                            <!-- <button type="button" [disabled]="!f.auxiliar" 
+                                            <!-- <button type="button" disabled="!f.auxiliar" 
                                                 (click)="onClicConsultaAuxiliar(i)"
                                                 class="btn btn-warning btn-sm mt-2 ml-1"
                                                 matTooltip="Seleccionar Auxiliar">
@@ -302,7 +302,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                                         <td class="text-right">$ {{d.devengado | number:'1.2-2'}}</td>
                                         <td class="text-right">$ {{d.cobrado_pagado | number:'1.2-2'}}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-secondary ml-1" (click)="expandCambioCuenta(d, i)" [disabled]="!allowEdit">
+                                            <button class="btn btn-sm btn-secondary ml-1" (click)="expandCambioCuenta(d, i)" disabled="!allowEdit">
                                                 <i class="fas fa-file-invoice-dollar"></i>
                                             </button>
                                             <button class="btn btn-sm btn-info ml-1" (click)="expandCambioCuentaEmi(d, i)" [ngClass]="{'d-none': filter.tipo_cierre != 'EMI'}">
@@ -363,7 +363,7 @@ filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGl
                     <ng-template pTemplate="body" let-rowData  let-columns="columns">
                         <tr style="font-size: 12px;height: 45px;"  [ngClass]="{'table-danger': rowData.total_diferencia <= 0 }">
                             <td class="text-center">
-                                <input class="d-none"  *ngIf="rowData.linea!= 'TOTAL'" [(ngModel)]="rowData.aprobar" type="checkbox" (change)="handleRowCheck($event, rowData)" [disabled]="rowData.tiene_control">
+                                <input class="d-none"  *ngIf="rowData.linea!= 'TOTAL'" [(ngModel)]="rowData.aprobar" type="checkbox" (change)="handleRowCheck($event, rowData)" disabled="rowData.tiene_control">
                             </td>
                           
                             <td [ngStyle]="{'font-size':'11px',

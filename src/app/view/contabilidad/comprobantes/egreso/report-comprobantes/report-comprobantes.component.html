@@ -10,7 +10,7 @@
         </div> 
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="N° Documento" styleSpan="size-span-campo"> 
-                <ng-select  class="form-control custom" appendTo="body" [searchable]="true" [disabled]="inDocumento" [clearable]="false" [(ngModel)]="documento" (ngModelChange)="filterDocumento($event)">
+                <ng-select  class="form-control custom" appendTo="body" [searchable]="true" disabled="inDocumento" [clearable]="false" [(ngModel)]="documento" (ngModelChange)="filterDocumento($event)">
                 <ng-option *ngFor="let d of arrayEgreso" [value]="d.secuencial">
                     {{d.fk_empresa.toString().padStart(3, 0)}}-{{d.fk_sucursal.toString().padStart(3, 0)}}-{{d.secuencial.toString().padStart(10, 0)}}</ng-option>
                 </ng-select>
@@ -18,7 +18,7 @@
         </div> 
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo"> 
-                <ng-select  class="form-control custom" appendTo="body" [searchable]="true"  [disabled]="inBeneficiario" [clearable]="false" [(ngModel)]="beneficiario" (ngModelChange)="filterBeneficiario($event)">
+                <ng-select  class="form-control custom" appendTo="body" [searchable]="true"  disabled="inBeneficiario" [clearable]="false" [(ngModel)]="beneficiario" (ngModelChange)="filterBeneficiario($event)">
                 <ng-option *ngFor="let d of arrayEgreso" [value]="d.beneficiario" >
                     {{d.beneficiario}}</ng-option>
                 </ng-select>
@@ -42,7 +42,7 @@
         </div> 
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="N° Transaccion" styleSpan="size-span-campo"> 
-                <ng-select  class="form-control custom" appendTo="body" [searchable]="true" id="idTransaccion" [clearable]="false" [(ngModel)]="transaccion" (ngModelChange)="filterTransaccion($event)" [disabled]="inTransaccion" >
+                <ng-select  class="form-control custom" appendTo="body" [searchable]="true" id="idTransaccion" [clearable]="false" [(ngModel)]="transaccion" (ngModelChange)="filterTransaccion($event)" disabled="inTransaccion" >
                     <ng-option  *ngFor="let d of arraytx" [value]="d.num_tx">{{d.num_tx}}</ng-option>
                 </ng-select> 
             </app-cc-input-group-prepend>

@@ -7,13 +7,13 @@
                 <div class="col-6">
                     <app-cc-input-group-prepend label="Monto" styleSpan="size-span-campo">
                         <input type="number" class="form-control form-control-sm text-right pr-1" placeholder="$ {{ repoAux.monto }}"
-                            [disabled]="true" >
+                            disabled="true" >
                     </app-cc-input-group-prepend>
                 </div>
                 <div class="col-6">
                     <app-cc-input-group-prepend label="Saldo" styleSpan="size-span-campo">
                         <input type="number" class="form-control form-control-sm text-right pr-1" placeholder="$ {{ repoAux.saldo }}"
-                            [disabled]="true">
+                            disabled="true">
                     </app-cc-input-group-prepend>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col-6">
                     <app-cc-input-group-prepend label="Reposición" styleSpan="size-span-campo">
                         <input type="number" class="form-control form-control-sm text-right pr-1"
-                            placeholder="$ {{ repoAux.reposition }}" [disabled]="true">
+                            placeholder="$ {{ repoAux.reposition }}" disabled="true">
                     </app-cc-input-group-prepend>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="col-6">
                     <app-cc-input-group-prepend label="No. Trx/cheque" styleSpan="size-span-campo">
                         <input type="text" class="form-control form-control-sm" placeholder="No. Documento"
-                            [(ngModel)]="repoAux.num_doc_tx" id="idTrx"><!-- [disabled]="!isTxNumber" -->
+                            [(ngModel)]="repoAux.num_doc_tx" id="idTrx"><!-- disabled="!isTxNumber" -->
                     </app-cc-input-group-prepend>
                 </div>
             </div>

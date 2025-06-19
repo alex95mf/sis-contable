@@ -33,7 +33,7 @@
                                 <input type="text" class="form-control form-control-sm" disabled
                                     placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()"
                                     [(ngModel)]="contribuyenteActive.razon_social" [value]="contribuyenteActive.razon_social">
-                                <button [disabled]="deshabilitarCont" class="btn btn-primary btn-sm"
+                                <button disabled="deshabilitarCont" class="btn btn-primary btn-sm"
                                     (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -71,7 +71,7 @@
                         </div>
                         <div *ngIf="habilitarAjuste"  class="col-12 col-md-2 pt-0 pb-0">
                             <div class="form-check">
-                                <input class="form-check-input"  type="checkbox" [(ngModel)]="ajustar" (change)="ajusteSelected($event)" [disabled]="documento.total < 0"/>
+                                <input class="form-check-input"  type="checkbox" [(ngModel)]="ajustar" (change)="ajusteSelected($event)" disabled="documento.total < 0"/>
                                 <label class="form-check-label">
                                 <h6>Ajustar</h6>
                                 </label>
@@ -92,7 +92,7 @@
                     <legend class="w-auto card-legend">ICP Nómina</legend>
                     <div class="row m-0">
                         <div class="col-12 col-md-12 pt-0 pb-0 text-left">
-                            <button class="btn btn-success" (click)="modalSolicitud()" [disabled]="titulosDisabled || formReadOnly">
+                            <button class="btn btn-success" (click)="modalSolicitud()" disabled="titulosDisabled || formReadOnly">
                                 Cargar ICP
                             </button>
                         </div>
@@ -136,7 +136,7 @@
                                                     <span *ngIf="d.estado == 'D'">Devengado</span>
                                                 </td>
                                                  <td class="text-center mx-auto">
-                                                        <button class="btn btn-sm btn-danger_icon" [disabled]="titulosDisabled || formReadOnly"  (click)="removeIcp(i)" ngbTooltip="Remover Presupuesto">
+                                                        <button class="btn btn-sm btn-danger_icon" disabled="titulosDisabled || formReadOnly"  (click)="removeIcp(i)" ngbTooltip="Remover Presupuesto">
                                                                 <span class="material-symbols-outlined">delete</span>
                                                         </button>
                                                 </td>
@@ -197,10 +197,10 @@
                                                     <input currencyMask
                                                         [options]="{ max: d.saldo, allowNegative: false, inputMode: Natural }"
                                                         class="form-control form-control-sm" [(ngModel)]="d.ajuste"
-                                                        (keyup)="totalSolicitudAjuste()" (click)="$event.target.select()" [disabled]="!ajustar">
+                                                        (keyup)="totalSolicitudAjuste()" (click)="$event.target.select()" disabled="!ajustar">
                                                 </td>
                                                 <!-- <td class="text-center mx-auto">
-                                                        <button class="btn btn-sm btn-danger_icon" [disabled]="titulosDisabled || formReadOnly" (click)="removePresupuesto(i)" ngbTooltip="Remover Presupuesto">
+                                                        <button class="btn btn-sm btn-danger_icon" disabled="titulosDisabled || formReadOnly" (click)="removePresupuesto(i)" ngbTooltip="Remover Presupuesto">
                                                                 <span class="material-symbols-outlined">delete</span>
                                                         </button>
                                                 </td> -->
@@ -336,7 +336,7 @@
                     <div class="input-group input-group-lg input-group-subtotal">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
                                 style="width: 200px;">Monto $</span></div>
-                        <input [disabled]="formReadOnly" id="cobroTotal" type="text"
+                        <input disabled="formReadOnly" id="cobroTotal" type="text"
                             class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="totalCobro"
                             (keypress)="onlyNumberDot($event)">
                     </div>

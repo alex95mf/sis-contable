@@ -17,14 +17,14 @@
                         <span class="input-group-text size-span-campo">Archivos</span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xlsx" (change)="onFileChange($event)" [disabled]="fileValid">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xlsx" (change)="onFileChange($event)" disabled="fileValid">
                         <label class="custom-file-label" for="inputGroupFile01">{{ file ? file.name : "Seleccione un archivo" }}</label>
                     </div>
                 </div>
             </div>
             <div class="col-sm-2 text-center">
                 <div class="input-group input-group-sm">                    
-                    <button [disabled]="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Presupuesto</button>
+                    <button disabled="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Presupuesto</button>
                 </div>
             </div> 
             <div class="col-sm-2 ">
@@ -72,7 +72,7 @@
             </div>
             <div class="col-sm-3">
                 <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo size-span-campo">
-                    <ng-select id="estado" class="form-control" [(ngModel)]="estado" maxlength="1" [disabled]="true">
+                    <ng-select id="estado" class="form-control" [(ngModel)]="estado" maxlength="1" disabled="true">
                         <ng-option disabled [value]="0">Seleccione un estado</ng-option>
                         <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
                     </ng-select>
@@ -147,7 +147,7 @@
                                 </td>
                                 
                                 <!-- <td class="text-center">
-                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" disabled="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
                                 </td> -->
                             </tr>
                             <tr>

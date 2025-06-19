@@ -55,7 +55,7 @@
                         <tr *ngFor="let item of listaActivos, let i = index" >
                             <td class="text-center">{{item.periodo}}</td>
                             <td class="text-center">
-                                <input class="form-control form-control-sm" type="date" [(ngModel)]="item.fecha" [disabled]="item.variable_declara"/>
+                                <input class="form-control form-control-sm" type="date" [(ngModel)]="item.fecha" disabled="item.variable_declara"/>
                             </td>
                             <td class="text-center" >
                                 <ng-select class="form-control" [(ngModel)]="item.tipo" (ngModelChange)="cambioTipo($event, item)" appendTo="body">
@@ -64,23 +64,23 @@
                                 </ng-select>
                             </td>
                             <td class="text-center">
-                                <ng-select class="form-control" [(ngModel)]="item.declarativa"  [disabled]="item.variable_declara" appendTo="body">
+                                <ng-select class="form-control" [(ngModel)]="item.declarativa"  disabled="item.variable_declara" appendTo="body">
                                     <ng-option [value]="0" disabled>Escoga un tipo... </ng-option>
                                     <ng-option *ngFor="let c of declara_e" [value]="c">{{c}}</ng-option>
                                 </ng-select>
                             </td>
                             <td class="text-center"><input type="text" class="form-control form-control-sm" [(ngModel)]="item.observacion"/></td>
                             <td class="text-center" style="width: 150px;">
-                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.activos" (blur)="handleActivo(item)" [disabled]="item.variable">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.activos" (blur)="handleActivo(item)" disabled="item.variable">
                             </td>
                             <td class="text-center" style="width: 150px;">
-                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos_corrientes" [disabled]="item.variable">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos_corrientes" disabled="item.variable">
                             </td>
                             <td class="text-center" style="width: 150px;">
-                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos_contingentes" [disabled]="item.variable">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos_contingentes" disabled="item.variable">
                             </td>
                             <td class="text-center" style="width: 150px;">
-                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos" (blur)="handlePasivo(item)" [disabled]="item.variable"> 
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos" (blur)="handlePasivo(item)" disabled="item.variable"> 
                             </td>
                             <td class="text-center" *ngIf="!item.variable">
                                 <!-- <input readonly type="number" class="form-control form-control-sm"  [(ngModel)]="item.patrimonio"> -->
@@ -91,11 +91,11 @@
                                 <!-- $ {{item.patrimonio | number: '1.2-2'}} -->
                             </td>
                             <td class="text-center" style="width: 150px;">
-                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.ingresos"  (blur)="handleEgreso(item)" [disabled]="item.variable">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.ingresos"  (blur)="handleEgreso(item)" disabled="item.variable">
                             </td> 
                             <!-- (keyup)="handleIngreso(item)" -->
                             <td class="text-center" style="width: 150px;">
-                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.egresos" (blur)="handleEgreso(item)" [disabled]="item.variable">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.egresos" (blur)="handleEgreso(item)" disabled="item.variable">
                             </td>
                             <td class="text-center" style="width: 150px;">
                                 <!-- <input type="number" class="form-control form-control-sm"  [(ngModel)]="item.resultado" readonly> -->

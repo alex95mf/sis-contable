@@ -5,7 +5,7 @@
     <ng-select [clearable]="false" (change)="onSelectMessage()" class="form-control form-control-sm custom-select"
         (clear)="onClearLang()" [(ngModel)]="ngModelCcHijoArea"
         style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;">
-        <ng-option value="0" [disabled]="true" aria-selected="true" aria-placeholder="">{{ optionDefault }}</ng-option>
+        <ng-option value="0" disabled="true" aria-selected="true" aria-placeholder="">{{ optionDefault }}</ng-option>
         <ng-option *ngFor="let area of areas" [value]="area.id_area">{{area.are_nombre}}</ng-option>
     </ng-select>
 

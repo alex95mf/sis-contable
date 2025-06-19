@@ -32,7 +32,7 @@
     <div class="col">
       <app-cc-input-group-prepend label="Notificador" styleSpan="size-span-campo font-weight-bold">
         <ng-select class="form-control" [clearable]="false" [(ngModel)]="data.notificador" [readonly]="validacionDetalles">
-          <ng-option *ngFor="let notif of notificadores" [disabled]="notif.value == 0" [value]="notif.label">{{ notif.label }}</ng-option>
+          <ng-option *ngFor="let notif of notificadores" disabled="notif.value == 0" [value]="notif.label">{{ notif.label }}</ng-option>
         </ng-select>
       </app-cc-input-group-prepend>
 

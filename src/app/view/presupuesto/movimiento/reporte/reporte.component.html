@@ -24,14 +24,14 @@
             
             <!--<div class="col-lg-4">
                 <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-otro font-weight-bold">
-                    <ng-select [disabled]="formReadOnly || conceptosDisabled" [(ngModel)]="filter.selectedConcepto" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
+                    <ng-select disabled="formReadOnly || conceptosDisabled" [(ngModel)]="filter.selectedConcepto" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
                         <ng-option *ngFor="let tipo of conceptos" [value]="tipo.nombre">{{ tipo.codigo }} - {{ tipo.nombre }}</ng-option>
                     </ng-select>
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-lg-3">
                 <app-cc-input-group-prepend label="Caja" styleSpan="size-span-otro font-weight-bold">
-                    <ng-select [disabled]="formReadOnly || cajasDisabled" [(ngModel)]="filter.selectedCaja" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
+                    <ng-select disabled="formReadOnly || cajasDisabled" [(ngModel)]="filter.selectedCaja" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
 
                         <ng-option *ngFor="let caja of cajas" [value]="caja.id_caja">{{ caja.nombre }}</ng-option>
                     </ng-select>
@@ -45,12 +45,12 @@
         <!--<div class="row justify-content-md-center"> 
             <div class="col-lg-4" >
                 <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-otro font-weight-bold">
-                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde" [disabled]="formReadOnly || fechaDesdeDisabled">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde" disabled="formReadOnly || fechaDesdeDisabled">
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-lg-4">
                 <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-otro font-weight-bold">
-                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" [disabled]="formReadOnly || fechaHastaDisabled">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" disabled="formReadOnly || fechaHastaDisabled">
                 </app-cc-input-group-prepend>
             </div>
         </div>-->

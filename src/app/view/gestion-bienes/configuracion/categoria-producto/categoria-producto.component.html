@@ -9,14 +9,14 @@
         <div class="row">
             <div class="col-6">
                 <app-cc-input-group-prepend label="Codigo grupo producto" styleSpan="size-span-campo font-weight-bold">
-                    <input class="form-control" [(ngModel)]="grupo.codigo_grupo_producto" type="text" [disabled]="validacion"/>
+                    <input class="form-control" [(ngModel)]="grupo.codigo_grupo_producto" type="text" disabled="validacion"/>
                 </app-cc-input-group-prepend>
 
             </div>
 
             <div class="col-6">
                 <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
-                    <input class="form-control" [(ngModel)]="grupo.descripcion" type="text" [disabled]="validacion"/>
+                    <input class="form-control" [(ngModel)]="grupo.descripcion" type="text" disabled="validacion"/>
                 </app-cc-input-group-prepend>
             </div>
 
@@ -26,7 +26,7 @@
             <div class="col-6">
                 <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
                     <input class="form-control" [(ngModel)]="grupo.codigo_cuenta_contable" type="text" readonly/>
-                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable()" [disabled]="validacion"> Consultar</button>
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable()" disabled="validacion"> Consultar</button>
                 </app-cc-input-group-prepend>
             </div>
 
@@ -40,7 +40,7 @@
             <div class="col-6">
                 <app-cc-input-group-prepend label="Codigo presupuesto" styleSpan="size-span-campo font-weight-bold">
                     <input class="form-control" [(ngModel)]="grupo.codigo_presupuesto" type="text" readonly/>
-                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" [disabled]="validacion"> Consultar</button>
+                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" disabled="validacion"> Consultar</button>
                 </app-cc-input-group-prepend>
 
             </div>
@@ -59,7 +59,7 @@
 
             <div class="col-6">
                 <app-cc-input-group-prepend label="Tipo de bienes" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="grupo.tipo_bien"  [disabled]="validacion">
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="grupo.tipo_bien"  disabled="validacion">
                           <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
                           <ng-option *ngFor="let item of catalog"  [value]="item.valor">{{item.descripcion}}</ng-option>
                         </ng-select>
@@ -69,7 +69,7 @@
             
             <div class="col-6">
                 <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="grupo.estado"  [disabled]="validacion">
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="grupo.estado"  disabled="validacion">
                           <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
                           <ng-option *ngFor="let item of estado"  [value]="item.valor">{{item.descripcion}}</ng-option>
                         </ng-select>

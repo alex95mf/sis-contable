@@ -5,7 +5,7 @@
     <ng-select [clearable]="false" (change)="onSelectMessage()" class="form-control form-control-sm custom-select"
         (clear)="onClearLang()" [estado]="" [(ngModel)]="ngModelCcPeriodo"  
         style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;">
-        <ng-option value="0" [disabled]="true" aria-selected="true" aria-placeholder="">{{ optionDefault }}</ng-option>
+        <ng-option value="0" disabled="true" aria-selected="true" aria-placeholder="">{{ optionDefault }}</ng-option>
         <ng-option *ngFor="let periodo of periodos" [value]="periodo.id_periodos">{{periodo.anio}}</ng-option>
     </ng-select>
 

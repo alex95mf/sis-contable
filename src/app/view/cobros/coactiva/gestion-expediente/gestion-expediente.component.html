@@ -124,14 +124,14 @@
                     <button class="btn btn-sm btn-warning" (click)="modalDetalles(expediente)" matTooltip="Ver Detalles">
                       <i class="fas fa-eye"></i>
                     </button>
-                    <button class="btn btn-sm btn-primary" (click)="modalEditDetalles(expediente)" matTooltip="Editar Detalles" [disabled]="expediente.estado == 'X'">
+                    <button class="btn btn-sm btn-primary" (click)="modalEditDetalles(expediente)" matTooltip="Editar Detalles" disabled="expediente.estado == 'X'">
                       <i class="fas fa-envelope-open"></i>
                     </button>
-                    <button class="btn btn-sm btn-danger" (click)="descargarReporte(expediente)" matTooltip="Descargar Notificacion" [disabled]="expediente.estado == 'X'">
+                    <button class="btn btn-sm btn-danger" (click)="descargarReporte(expediente)" matTooltip="Descargar Notificacion" disabled="expediente.estado == 'X'">
                       <i class="fas fa-file-pdf"></i>
                     </button>
                   </div>
-                  <button class="btn btn-sm btn-outline-danger ml-1" (click)="anularExpediente(expediente)" matTooltip="Anular Expediente" [disabled]="expediente.estado == 'X'">
+                  <button class="btn btn-sm btn-outline-danger ml-1" (click)="anularExpediente(expediente)" matTooltip="Anular Expediente" disabled="expediente.estado == 'X'">
                     <i class="fas fa-trash-alt"></i>
                   </button>
                 </td>

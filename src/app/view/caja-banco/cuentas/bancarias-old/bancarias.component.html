@@ -12,7 +12,7 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="País moneda" styleSpan="size-span-campo">
                 <ng-select id="IdRolesUsersDoc" class="form-control form-control-sm" appendTo="body" [searchable]="true"
-                    [disabled]="permisions.editar == '0' " [clearable]="false" [(ngModel)]="banco.fk_pais_moneda"
+                    disabled="permisions.editar == '0' " [clearable]="false" [(ngModel)]="banco.fk_pais_moneda"
                     (ngModelChange)="getCountry($event)">
                     <ng-option [value]="0">Seleccione país de la moneda</ng-option>
                     <ng-option *ngFor="let d of arrayCountrys" [value]="d.id">{{d.nom_pais}}</ng-option>
@@ -31,7 +31,7 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Tipo cuenta" styleSpan="size-span-campo">
                 <select [(ngModel)]="banco.tipo_cuenta" class="form-control form-control-sm custom-select"
-                    [disabled]="permisions.editar == '0'">
+                    disabled="permisions.editar == '0'">
                     <option [value]="0">Seleccione tipo cuenta</option>
                     <option *ngFor="let d of arrayTipAcc" [value]="d.valor">{{d.valor}}</option>
                 </select>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Moneda" styleSpan="size-span-campo">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.moneda" [disabled]="true">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.moneda" disabled="true">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-4">
@@ -61,7 +61,7 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Cuenta contable" styleSpan="size-span-campo">
                 <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.cuenta_contable"
-                    id="idcuentacontable" [disabled]="true" placeholder="Cuenta contable banco">
+                    id="idcuentacontable" disabled="true" placeholder="Cuenta contable banco">
                 <div class="input-group-prepend">
                     <button class="btn btn-primary btn-sm"  id="inputLabel-prepend" (click)="showAccounts()"
                     matTooltip="Seleccione cuenta">
@@ -73,7 +73,7 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Saldo" styleSpan="size-span-campo">
                 <input type="text" class="form-control form-control-sm text-right" placeholder="$ {{banco.saldo_cuenta}}"
-                    id="idsaldo" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                    id="idsaldo" min="0" (keypress)="commonServices.FormatDecimalVal($event)" disabled="true">
             </app-cc-input-group-prepend>
         </div>
     </div>
@@ -82,7 +82,7 @@
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
                 <select [(ngModel)]="banco.status" class="form-control form-control-sm custom-select"
-                    [disabled]="permisions.editar == '0'">
+                    disabled="permisions.editar == '0'">
                     <option [value]="1">Activo</option>
                     <option [value]="0">Inactivo</option>
                 </select>
@@ -90,7 +90,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Nombre cuenta" styleSpan="size-span-campo">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.name_acc" [disabled]="true"
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.name_acc" disabled="true"
                     placeholder="Nombre cuenta contable">
             </app-cc-input-group-prepend>
         </div>

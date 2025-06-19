@@ -113,7 +113,7 @@
                                             <button type="button" class="btn btn-xs" 
                                                 style="background-color: #f3000c; color: white; border-radius: 4px"
                                                 placement="left" ngbTooltip="Eliminar Retención"
-                                                (click)="deleteRtenecion(dt)" [disabled]="dt.isactive == 0">
+                                                (click)="deleteRtenecion(dt)" disabled="dt.isactive == 0">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </td>
@@ -183,7 +183,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text size-span-campo">Agente</span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                    <input type="text" class="form-control form-control-sm" disabled="true"
                                         [value]="dtInformacion.agente">
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text size-span-campo">Empresa</span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                    <input type="text" class="form-control form-control-sm" disabled="true"
                                         [value]="dtInformacion.empresa | uppercase">
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text size-span-campo">Autorización</span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                    <input type="text" class="form-control form-control-sm" disabled="true"
                                         [value]="dtInformacion.autorizacion">
                                 </div>
                             </div>
@@ -214,7 +214,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text size-span-campo">Estado</span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                    <input type="text" class="form-control form-control-sm" disabled="true"
                                         [value]="dtInformacion.estado">
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text size-span-campo">Total</span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm text-right" [disabled]="true"
+                                    <input type="text" class="form-control form-control-sm text-right" disabled="true"
                                         [value]="'$ ' + formatNumber(dtInformacion.total)">
                                 </div>
                             </div>

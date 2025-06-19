@@ -1098,7 +1098,7 @@
               <div class="input-group input-group-sm">
                   <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Consultar Lotes</span></div>
                   <input type="text" class="form-control form-control-sm bg-white" [readonly]="disabledLotes" placeholder="Seleccione un Lote" (click)="expandListLotes()" [value]="contriLoteActive">
-                  <button class="btn btn-primary btn-sm" [disabled]=" disabledLotes" (click)="expandListLotes()" placement="bottom" ngbTooltip="Buscar Lote">
+                  <button class="btn btn-primary btn-sm" disabled=" disabledLotes" (click)="expandListLotes()" placement="bottom" ngbTooltip="Buscar Lote">
                       <i class="fas fa-search"></i>
                   </button>
               </div>
@@ -1107,34 +1107,34 @@
           <div class="row">
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Cod. Catastral" styleSpan="size-span-campo font-weight-bold">
-                <input class="form-control" type="text" [(ngModel)]="lote.cod_catastral" [disabled]="true" />
+                <input class="form-control" type="text" [(ngModel)]="lote.cod_catastral" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Código anterior" styleSpan="size-span-campo font-weight-bold">
-                <input class="form-control" type="text" [(ngModel)]="lote.cod_catastral_anterior" [disabled]="true" />
+                <input class="form-control" type="text" [(ngModel)]="lote.cod_catastral_anterior" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Zona" styleSpan="size-span-campo font-weight-bold">
-                <input class="form-control" type="text" [(ngModel)]="lote.zona" [disabled]="true" />
+                <input class="form-control" type="text" [(ngModel)]="lote.zona" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Sector" styleSpan="size-span-campo font-weight-bold">
-                <input class="form-control" type="text" [(ngModel)]="lote.sector" [disabled]="true" />
+                <input class="form-control" type="text" [(ngModel)]="lote.sector" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Manzana" styleSpan="size-span-campo font-weight-bold">
-                <input class="form-control" type="text" [(ngModel)]="lote.manzana" [disabled]="true" />
+                <input class="form-control" type="text" [(ngModel)]="lote.manzana" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Solar" styleSpan="size-span-campo font-weight-bold">
-                <input class="form-control" type="text" [(ngModel)]="lote.solar" [disabled]="true" />
+                <input class="form-control" type="text" [(ngModel)]="lote.solar" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
           </div>
@@ -1142,41 +1142,41 @@
           <div class="row">
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Área" styleSpan="size-span-campo font-weight-bold">
-                <input class="form-control" type="text" [(ngModel)]="lote.area" [disabled]="true" />
+                <input class="form-control" type="text" [(ngModel)]="lote.area" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Valor mt2" styleSpan="size-span-campo font-weight-bold">
-                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_metro_cuadrado" [disabled]="true" />
+                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_metro_cuadrado" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Valor del solar" styleSpan="size-span-campo font-weight-bold">
-                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_solar" [disabled]="true" />
+                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_solar" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Valor de edificación" styleSpan="size-span-campo font-weight-bold">
-                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_edificacion" [disabled]="true" />
+                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_edificacion" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Valor comercial" styleSpan="size-span-campo font-weight-bold">
-                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_comercial" [disabled]="true" />
+                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_comercial" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Valor hipoteca" styleSpan="size-span-campo font-weight-bold">
-                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_hipoteca" [disabled]="true" />
+                <input currencyMask class="form-control" type="text" [(ngModel)]="lote.valor_hipoteca" disabled="true" />
               </app-cc-input-group-prepend>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-4">
               <app-cc-input-group-prepend label="Relacion" styleSpan="size-span-campo font-weight-bold">
-                  <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="lote.tipo_relacion" [clearable]="true" [disabled]=" disabledLotes">
+                  <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="lote.tipo_relacion" [clearable]="true" disabled=" disabledLotes">
                       <ng-option disabled [value]="0" disabled>Seleccione un tipo relación</ng-option>
                       <ng-option *ngFor="let op of catalog.tipo_relacion" [value]="op.valor">{{ op.valor }}</ng-option>
                   </ng-select>
@@ -1188,7 +1188,7 @@
           <div class="row justify-content-end pt-2 mr-2">
             <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
                 <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Guardar Lote"
-                    (click)="validarLote()" [disabled]=" disabledLotes">
+                    (click)="validarLote()" disabled=" disabledLotes">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
             </div>
@@ -1287,7 +1287,7 @@
           <fieldset class="border pb-2 px-2 ">
             <legend class="w-auto ml-1 bg-dark">Relaciones</legend>
             <div class="text-right m-2">
-              <button class="btn btn-success" (click)="guardarRelaciones()" [disabled]="disabledRelacion">
+              <button class="btn btn-success" (click)="guardarRelaciones()" disabled="disabledRelacion">
                   Guardar
               </button>
             </div>
@@ -1296,7 +1296,7 @@
                   <div class="input-group input-group-sm">
                       <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Contribuyente</span></div>
                       <input type="text" class="form-control form-control-sm bg-white" [readonly]=" disabledRelacion" placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contriRelacionActive.razon_social">
-                      <button class="btn btn-primary btn-sm" [disabled]=" disabledRelacion " (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                      <button class="btn btn-primary btn-sm" disabled=" disabledRelacion " (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                           <i class="fas fa-search"></i>
                       </button>
                   </div>
@@ -1310,12 +1310,12 @@
               <div class="row">
                 <div class="col-sm-6">
                   <app-cc-input-group-prepend label="Nombres" styleSpan="size-span-campo font-weight-bold">
-                    <input class="form-control" type="text" [(ngModel)]="relacion.nombre_contribuyente" [disabled]="true" />
+                    <input class="form-control" type="text" [(ngModel)]="relacion.nombre_contribuyente" disabled="true" />
                   </app-cc-input-group-prepend>
                 </div>
                 <div class="col-sm-6">
                   <app-cc-input-group-prepend label="Relacion" styleSpan="size-span-campo font-weight-bold">
-                      <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="relacion.tipo_relacion" [clearable]="true" [disabled]="disabledRelacion">
+                      <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="relacion.tipo_relacion" [clearable]="true" disabled="disabledRelacion">
                           <ng-option disabled [value]="0" disabled>Seleccione un tipo relación</ng-option>
                           <ng-option *ngFor="let op of catalog.tipo_relacion" [value]="op.valor">{{ op.valor }}</ng-option>
                       </ng-select>
@@ -1325,7 +1325,7 @@
               <div class="row">
                 <div class="col-sm-6">
                   <app-cc-input-group-prepend label="Discapacidad" styleSpan="size-span-campo font-weight-bold">
-                      <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="relacion.discapacidad" [clearable]="true" [disabled]=" disabledRelacion">
+                      <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="relacion.discapacidad" [clearable]="true" disabled=" disabledRelacion">
                           <ng-option disabled [value]="0" disabled>Seleccione discapacidad</ng-option>
                           <ng-option *ngFor="let op of discapacidad" [value]="op.value">{{ op.label }}</ng-option>
                       </ng-select>
@@ -1334,7 +1334,7 @@
                 <div class="col-sm-6 mt-1">
                   <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">% Porcentaje de Discapacidad</span></div>
-                    <input currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }" class="form-control form-control-sm" [disabled]=" (relacion.discapacidad == 'N' ? true : false) || disabledRelacion"
+                    <input currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }" class="form-control form-control-sm" disabled=" (relacion.discapacidad == 'N' ? true : false) || disabledRelacion"
                     [(ngModel)]="relacion.porcentaje_discapacidad" >                      
                   </div>
                 </div>
@@ -1345,7 +1345,7 @@
             <div class="row justify-content-end pt-2">
               <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
                   <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Añadir Items"
-                      (click)="validarRelacion()" [disabled]="disabledRelacion">
+                      (click)="validarRelacion()" disabled="disabledRelacion">
                       <i class="fa fa-plus" aria-hidden="true"></i>
                   </button>
               </div>
@@ -1656,7 +1656,7 @@
                   </tr>
                   <tr *ngFor="let d of deudas">
                     <td class="text-center"><input type="checkbox" [(ngModel)]="d.Check"
-                        (ngModelChange)="calculoChecks()" [disabled]="d.estado == 'X' || d.numero_documento?.split('-')[0] == 'AN'"/></td>
+                        (ngModelChange)="calculoChecks()" disabled="d.estado == 'X' || d.numero_documento?.split('-')[0] == 'AN'"/></td>
                     <td class="col-nombre">
                       {{ d.concepto ? d.concepto.nombre : 'NA' }}<br>
                       <small class="text-muted">{{ d.numero_documento }}</small>
@@ -2232,7 +2232,7 @@
                   </tr>
                   <tr *ngFor="let d of deudasAnuladas">
                     <td class="text-center"><input type="checkbox" [(ngModel)]="d.Check"
-                        (ngModelChange)="calculoChecks()" [disabled]="d.estado == 'X' || d.numero_documento?.split('-')[0] == 'AN'"/></td>
+                        (ngModelChange)="calculoChecks()" disabled="d.estado == 'X' || d.numero_documento?.split('-')[0] == 'AN'"/></td>
                     <td>
                       <div class="row">
                         <div class="col">{{ d.concepto ? d.concepto.nombre : 'NA' }}</div>

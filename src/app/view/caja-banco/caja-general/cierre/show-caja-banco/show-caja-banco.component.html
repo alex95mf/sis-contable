@@ -11,7 +11,7 @@
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total</span>
                             </div>
                             <input  type="text" class="form-control form-control-sm"
-                                [(ngModel)]="total" [disabled]="true" min="0"
+                                [(ngModel)]="total" disabled="true" min="0"
                                 (keypress)="commonServices.FormatDecimalVal($event)">
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                                 <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo</span>
                             </div>
                             <input  type="text" class="form-control form-control-sm"
-                                [(ngModel)]="saldo" [disabled]="true" min="0"
+                                [(ngModel)]="saldo" disabled="true" min="0"
                                 (keypress)="commonServices.FormatDecimalVal($event)">
                         </div>
                     </div>

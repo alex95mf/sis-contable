@@ -10,7 +10,7 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
-                    <input type="date" [disabled]="constDisabled" class="form-control" [(ngModel)]="fecha">
+                    <input type="date" disabled="constDisabled" class="form-control" [(ngModel)]="fecha">
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
@@ -21,7 +21,7 @@
             <div class="col-sm-8 mt-1">
                 <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
                     <textarea cols="30" rows="2" class="form-control form-control-sm" 
-                     [(ngModel)]="observacion" maxlength="200" [disabled]="constDisabled"></textarea>
+                     [(ngModel)]="observacion" maxlength="200" disabled="constDisabled"></textarea>
                 </app-cc-input-group-prepend>
             </div>
             
@@ -34,7 +34,7 @@
         <div class="row my-2">
             <div class="col-sm-5">
                 <app-cc-input-group-prepend label="Tipo de Amortizacion" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select class="form-control" appendTo="body" [disabled]="constDisabled" [clearable]="false"
+                    <ng-select class="form-control" appendTo="body" disabled="constDisabled" [clearable]="false"
                         [items]="cmb_tipo_amortizacion" bindValue="value" bindLabel="label" [(ngModel)]="selectTipo">
                     </ng-select>
                 </app-cc-input-group-prepend>
@@ -44,24 +44,24 @@
             <div class="col-sm-4">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Monto Total</span></div>
-                    <input currencyMask class="form-control form-control-sm" [(ngModel)]="monto_total" [disabled]="constDisabled">
+                    <input currencyMask class="form-control form-control-sm" [(ngModel)]="monto_total" disabled="constDisabled">
                 </div>
             </div>
             <div class="col-sm">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text  size-span-campo font-weight-bold">No. Cuotas Mensual</span></div>
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="no_cuotas" [disabled]="constDisabled">
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="no_cuotas" disabled="constDisabled">
                 </div>
             </div>
             <div class="col-sm">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Interes Mensual</span></div>
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="interes" [disabled]="constDisabled">
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="interes" disabled="constDisabled">
                     <div class="input-group-append"><span class="input-group-text font-weight-bold">%</span></div>
                 </div>
             </div>
                 <div class="col-sm text-right">
-                    <button [disabled]=" calculoDisabled" class="btn btn-sm btn-warning" matTooltip="Calcular cuotas" (click)="calcularCronograma()"><i class="fas fa-calculator"></i></button>
+                    <button disabled=" calculoDisabled" class="btn btn-sm btn-warning" matTooltip="Calcular cuotas" (click)="calcularCronograma()"><i class="fas fa-calculator"></i></button>
                 </div>
 
         </div>
@@ -107,7 +107,7 @@
                                     <td class="text-center">{{ d.fecha }}</td> 
                                     <td style="text-align: center;padding-top: 2px;">
                                         <div class="text-center">
-                                            <button class="btn btn-primary btn-sm" [disabled]="botonDisabled || d.estado == 'Pagado'" (click)="changeDetail(d)"
+                                            <button class="btn btn-primary btn-sm" disabled="botonDisabled || d.estado == 'Pagado'" (click)="changeDetail(d)"
                                                 placement="top" ngbTooltip="Cambiar estado" id="btnasing">
                                                 <i class="fas fa-clipboard-check"></i>
                                             </button>

@@ -156,7 +156,7 @@
                             <div class="input-group-prepend">
                                 <span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Estado</span>
                             </div>
-                            <ng-select id="estado" class="form-control form-control-sm" [disabled]="deshabilitar" [(ngModel)]="gestOrden.estado" maxlength="5">
+                            <ng-select id="estado" class="form-control form-control-sm" disabled="deshabilitar" [(ngModel)]="gestOrden.estado" maxlength="5">
                                 <ng-option disabled [value]="0">Seleccione un Estado</ng-option>
                                 <ng-option *ngFor="let op of estadoList" [value]="op.value">
                                 <i
@@ -172,7 +172,7 @@
                         <div class="input-group input-group-sm mt-2 ">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Usuario de Gestión</span></div>
-                                <input type="text" class="form-control form-control-sm" [disabled]="deshabilitar" value=" {{ gestOrden.usuarioGestion | titlecase }}">
+                                <input type="text" class="form-control form-control-sm" disabled="deshabilitar" value=" {{ gestOrden.usuarioGestion | titlecase }}">
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                         <div class="input-group input-group-sm mt-2 ">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Fecha Gestíon</span></div>
-                                <input type="text" class="form-control form-control-sm" [disabled]="deshabilitar" value=" {{ gestOrden.fecha_gestion | date:'dd/MM/yyyy'}}">
+                                <input type="text" class="form-control form-control-sm" disabled="deshabilitar" value=" {{ gestOrden.fecha_gestion | date:'dd/MM/yyyy'}}">
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Observación</span>
                             </div>
-                            <textarea  id="observacion" type="text" class="form-control form-control-sm" [disabled]="deshabilitar" placeholder="Observación" [(ngModel)]="gestOrden.observacion_gestion" maxlength="300"></textarea>
+                            <textarea  id="observacion" type="text" class="form-control form-control-sm" disabled="deshabilitar" placeholder="Observación" [(ngModel)]="gestOrden.observacion_gestion" maxlength="300"></textarea>
                         </div>
                     </div>
                 </div>

@@ -65,7 +65,7 @@
                 <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
                     <input type="text" class="form-control" readonly placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social" (click)="expandContribuyentes()">
                     <div class="input-group-append">
-                        <button class="btn btn-info" [disabled]="formReadOnly" placement="bottom" ngbTooltip="Buscar Contribuyente" (click)="expandContribuyentes()">
+                        <button class="btn btn-info" disabled="formReadOnly" placement="bottom" ngbTooltip="Buscar Contribuyente" (click)="expandContribuyentes()">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -77,11 +77,11 @@
                         <input type="text" class="form-control" readonly [ngModel]="propiedadActive.cod_catastral">
                     </ng-container>
                     <ng-template #readProperty>
-                        <ng-select id="codigo_catastral" [clearable]="false" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad()">
+                        <ng-select id="codigo_catastral" [clearable]="false" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad()">
                             <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                         </ng-select>
                     </ng-template>
-                    <!-- <ng-select *ngIf="!formReadOnly" class="form-control" [clearable]="false" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" [(ngModel)]="propiedadActive" [disabled]="codCastDisabled || formReadOnly" (change)="selectPropiedad()">
+                    <!-- <ng-select *ngIf="!formReadOnly" class="form-control" [clearable]="false" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" [(ngModel)]="propiedadActive" disabled="codCastDisabled || formReadOnly" (change)="selectPropiedad()">
                         <ng-option disabled="disabled">Seleccione una Propiedad</ng-option>
                         <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                     </ng-select> -->
@@ -165,7 +165,7 @@
                 <h5 class="mb-0 text-dark">Conceptos</h5>
             </div>
             <!-- <div class="col text-right">
-                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema" [disabled]="exoneracionDisabled || formReadOnly" (click)="reestablecerConceptos()">
+                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Restablecer calculos de sistema" disabled="exoneracionDisabled || formReadOnly" (click)="reestablecerConceptos()">
                     <i class="fas fa-undo"></i>
                 </button>
             </div> -->
@@ -227,7 +227,7 @@
                                 <!-- Fin Valor -->
                                 <ng-container *ngIf="multiplesPropietarios">
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" matTooltip="Agregar Exoneraciones" [disabled]="formReadOnly" (click)="exoneracionPara(d.codigo_detalle, d.valor)">
+                                    <button class="btn btn-sm btn-danger" matTooltip="Agregar Exoneraciones" disabled="formReadOnly" (click)="exoneracionPara(d.codigo_detalle, d.valor)">
                                         <i class="far fa-percent"></i>
                                     </button>
                                 </td>
@@ -260,7 +260,7 @@
             <div class="col">
                 <h5 class="mb-0 text-dark">Exoneraciones</h5>
                 <ng-container *ngIf="!multiplesPropietarios">
-                <button class="btn btn-success btn-sm float-right" matTooltip="Agregar Exoneración" [disabled]="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
+                <button class="btn btn-success btn-sm float-right" matTooltip="Agregar Exoneración" disabled="exoneracionDisabled || formReadOnly" (click)="expandExoneracion()">
                     <i class="fas fa-plus"></i>
                 </button>
                 </ng-container>
@@ -307,7 +307,7 @@
                                 </td>
                                 <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" disabled="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -508,7 +508,7 @@
                 <div class="col-12">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text">Propiedad</span></div>
-                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" disabled="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
                             <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
                         </ng-select>
                     </div>

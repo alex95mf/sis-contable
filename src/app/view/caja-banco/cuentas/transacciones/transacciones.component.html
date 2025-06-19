@@ -6,7 +6,7 @@ filtroBoton="btnTrsBov" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="No. Transferencia" styleSpan="size-span-campo">
-                <input type="text" class="form-control form-control-sm" [disabled]="true" placeholder="{{document}}">
+                <input type="text" class="form-control form-control-sm" disabled="true" placeholder="{{document}}">
             </app-cc-input-group-prepend> 
         </div>
         <div class="col-sm-5">
@@ -16,7 +16,7 @@ filtroBoton="btnTrsBov" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal
         </div>
         <div class="col-sm-3">
             <app-cc-input-group-prepend label="Saldo Actual" styleSpan="size-span-campo">
-                <input type="text" class="form-control form-control-sm text-right" [disabled]="true" placeholder="$ 0.00" [(ngModel)]="tranf.saldo">
+                <input type="text" class="form-control form-control-sm text-right" disabled="true" placeholder="$ 0.00" [(ngModel)]="tranf.saldo">
             </app-cc-input-group-prepend>  
         </div>
     </div>
@@ -24,7 +24,7 @@ filtroBoton="btnTrsBov" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Banco Origen" styleSpan="size-span-campo">
-                <select [(ngModel)]="tranf.bankone" class="form-control form-control-sm custom-select" [disabled]="permisions.editar == '0'" (ngModelChange)="getBankDestino($event)">
+                <select [(ngModel)]="tranf.bankone" class="form-control form-control-sm custom-select" disabled="permisions.editar == '0'" (ngModelChange)="getBankDestino($event)">
                     <option [value]="0">Seleccione banco</option>
                     <option *ngFor="let d of arrayBanks" [value]="d.id_banks">{{d.name_banks}}</option>
                 </select>                
@@ -37,7 +37,7 @@ filtroBoton="btnTrsBov" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal
         </div>
         <div class="col-sm-3">
             <app-cc-input-group-prepend label="Monto" styleSpan="size-span-campo">
-                <input type="number" placeholder="$ 0.00" class="form-control form-control-sm text-right" (keyup)="validateValue()" [disabled]="tranf.bankone == 0" 
+                <input type="number" placeholder="$ 0.00" class="form-control form-control-sm text-right" (keyup)="validateValue()" disabled="tranf.bankone == 0" 
                 [(ngModel)]="tranf.valor" (keypress)="commonServices.FormatDecimalVal($event)" id="idmonto">
             </app-cc-input-group-prepend>  
         </div>
@@ -46,7 +46,7 @@ filtroBoton="btnTrsBov" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Banco Destino" styleSpan="size-span-campo">
-                <select [(ngModel)]="tranf.banktwo" class="form-control form-control-sm custom-select" [disabled]="tranf.bankone == 0" (ngModelChange)="getNameBankTwo($event)">
+                <select [(ngModel)]="tranf.banktwo" class="form-control form-control-sm custom-select" disabled="tranf.bankone == 0" (ngModelChange)="getNameBankTwo($event)">
                     <option [value]="0">Seleccione banco</option>
                     <option *ngFor="let d of arrayBanks" [value]="d.id_banks">{{d.name_banks}}</option>
                 </select>                

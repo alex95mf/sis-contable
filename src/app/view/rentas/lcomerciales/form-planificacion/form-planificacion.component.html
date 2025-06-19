@@ -79,7 +79,7 @@
                                     <span class="input-group-text font-weight-bold size-span-campo"  id="inputGroup-sizing-sm">Resultado</span>
                                 </div>
                                 <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
-                                    <input type="checkbox" class="custom-control-input" id="aprueba" [disabled]="formReadOnly" [(ngModel)]="aprueba">
+                                    <input type="checkbox" class="custom-control-input" id="aprueba" disabled="formReadOnly" [(ngModel)]="aprueba">
                                     <label class="custom-control-label" for="aprueba"></label>
                                 </div>
                                 <input type="text" class="form-control form-control-sm" [class]="!formReadOnly?'bg-white':''" disabled [value]="aprueba ? 'FACTIBLE' : 'NO FACTIBLE'">
@@ -87,7 +87,7 @@
         
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Próxima Inspección</span></div>
-                                <input type="date" class="form-control form-control-sm" [disabled]="aprueba || formReadOnly" [(ngModel)]="inspeccion.fecha_proxima_visita">
+                                <input type="date" class="form-control form-control-sm" disabled="aprueba || formReadOnly" [(ngModel)]="inspeccion.fecha_proxima_visita">
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo size-span-campo">Fotos</span></div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple [disabled]="formReadOnly" (change)="cargaFoto($event.target.files)">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple disabled="formReadOnly" (change)="cargaFoto($event.target.files)">
                                         <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a subir" }}</label>
                                     </div>
                                 </div>
@@ -187,7 +187,7 @@
                                         <span  class="input-group-text font-weight-bold size-span-campo size-span-campo">Archivos</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input [disabled]="formReadOnly" type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                                        <input disabled="formReadOnly" type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf" (change)="cargaArchivo($event.target.files)">
                                         <label class="custom-file-label" for="inputGroupFile02">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@
                                 <h5 class="mb-0 text-dark">Letreros</h5>
                             </div>
                             <div class="col text-right">
-                                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Letrero" [disabled]="formReadOnly" (click)="addLetrero()">
+                                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Letrero" disabled="formReadOnly" (click)="addLetrero()">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -241,7 +241,7 @@
                                                     {{ i + 1 }}
                                                 </td>
                                                 <td class="text-right">
-                                                    <ng-select class="form-control form-control-sm" [(ngModel)]="le.p_rot_tipo" [disabled]="formReadOnly" appendTo="body">
+                                                    <ng-select class="form-control form-control-sm" [(ngModel)]="le.p_rot_tipo" disabled="formReadOnly" appendTo="body">
                                                         <ng-option value="0" disabled>Seleccione un Tipo</ng-option>
                                                         <ng-option *ngFor="let t of catalogos.tipo_letrero" [value]="t.descripcion">{{ t.descripcion + " - " + t.valor }}</ng-option>
                                                     </ng-select>
@@ -274,7 +274,7 @@
                                                 <td class="text-right">
                                                     <div class="input-group input-group-sm input-group-custom-switch">
                                                         <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
-                                                            <input type="checkbox" [disabled]="formReadOnly" class="custom-control-input" [id]="i + '-factibilidad1'" [(ngModel)]="le.p_rot_factible_1">
+                                                            <input type="checkbox" disabled="formReadOnly" class="custom-control-input" [id]="i + '-factibilidad1'" [(ngModel)]="le.p_rot_factible_1">
                                                             <label class="custom-control-label" [for]="i + '-factibilidad1'"></label>
                                                         </div>
                                                         <input type="text" class="form-control form-control-sm" [class]="!formReadOnly ? 'bg-white' : ''" disabled [value]="le.p_rot_factible_1 ? 'SI' : 'NO'">
@@ -283,14 +283,14 @@
                                                 <td class="text-right">
                                                     <div class="input-group input-group-sm input-group-custom-switch">
                                                         <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
-                                                            <input type="checkbox"  [disabled]="formReadOnly" class="custom-control-input" [id]="i + '-factibilidad2'" [(ngModel)]="le.p_rot_factible_2">
+                                                            <input type="checkbox"  disabled="formReadOnly" class="custom-control-input" [id]="i + '-factibilidad2'" [(ngModel)]="le.p_rot_factible_2">
                                                             <label class="custom-control-label" [for]="i + '-factibilidad2'"></label>
                                                         </div>
                                                         <input type="text" class="form-control form-control-sm" [class]="!formReadOnly ? 'bg-white' : ''" disabled [value]="le.p_rot_factible_2 ? 'SI' : 'NO'">
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <button class="btn btn-sm mx-1 btn-danger_icon btn-outline btn-outline_danger" placement="left" ngbTooltip="Remover Letrero" [disabled]="formReadOnly" (click)="removeLetrero(i)">
+                                                    <button class="btn btn-sm mx-1 btn-danger_icon btn-outline btn-outline_danger" placement="left" ngbTooltip="Remover Letrero" disabled="formReadOnly" (click)="removeLetrero(i)">
                                                         <!-- <i class="far fa-trash-alt"></i> -->
                                                         <span class="material-symbols-outlined">delete</span>
                                                     </button>
@@ -333,7 +333,7 @@
                                                 <td class="text-right">
                                                     <div class="input-group input-group-sm input-group-custom-switch">
                                                         <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
-                                                            <input type="checkbox" class="custom-control-input"  [disabled]="formReadOnly" [id]="i + '-p_vp_aplica'" [(ngModel)]="v.p_vp_aplica" (change)="changeAplica(i)" >
+                                                            <input type="checkbox" class="custom-control-input"  disabled="formReadOnly" [id]="i + '-p_vp_aplica'" [(ngModel)]="v.p_vp_aplica" (change)="changeAplica(i)" >
                                                             <label class="custom-control-label" [for]="i + '-p_vp_aplica'"></label>
                                                         </div>
                                                         <input type="text" class="form-control form-control-sm" [class]="!(formReadOnly) ? 'bg-white' : ''" disabled [value]="v.p_vp_aplica ? 'SI' : 'NO'">
@@ -389,7 +389,7 @@
 
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend"><span class="input-group-text">Próxima Inspección</span></div>
-                                    <input type="date" class="form-control form-control-sm" [disabled]="aprueba" [(ngModel)]="inspeccion.fecha_proxima_visita">
+                                    <input type="date" class="form-control form-control-sm" disabled="aprueba" [(ngModel)]="inspeccion.fecha_proxima_visita">
                                 </div>
                             </div>
                         </div>-->

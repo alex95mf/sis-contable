@@ -10,8 +10,8 @@ icono="fas fa-tasks" filtroBoton="btnsCompaContrata" [groupButton]="vmButtons" (
 
                 <div class="col-12 col-md-6 pt-0 pb-0">
                     <app-cc-input-group-prepend label="ICP a asignar" styleSpan="size-span-campo font-weight-bold">
-                        <input class="form-control" [disabled]="true" [(ngModel)]="aprobacion.icp" type="text"/>
-                        <button class="btn btn-primary btn-sm mr-1" (click)="asignarIcp()" [disabled]="disabledBotonIcp"  ngbTooltip="Asignar ICP">
+                        <input class="form-control" disabled="true" [(ngModel)]="aprobacion.icp" type="text"/>
+                        <button class="btn btn-primary btn-sm mr-1" (click)="asignarIcp()" disabled="disabledBotonIcp"  ngbTooltip="Asignar ICP">
                             <i class="fas fa-hand-point-up"></i>
                         </button>
                     </app-cc-input-group-prepend>

@@ -55,7 +55,7 @@
                           #nameInputSearchEmpleado>
                        
                         <div class="input-group-append">
-                          <button (click)="onClicConsultaEmpleados(content)" [disabled]="disableBtnConsultaEmpleados"
+                          <button (click)="onClicConsultaEmpleados(content)" disabled="disableBtnConsultaEmpleados"
                             class="btn btn-default btn-action" type="button">
                             <i class="fa fa-search"></i>
                           </button>
@@ -81,7 +81,7 @@
                         <img *ngIf="imageBase64" [src]="imageBase64" class="image img-employee">
                       </div>
                       <div class="d-flex flex-column gap-2 align-items-center">
-                        <button pRipple type="button" [disabled]="disableBtnDescargarFoto"
+                        <button pRipple type="button" disabled="disableBtnDescargarFoto"
                             (click)="descargarFotoPerfil()"
                             class="btn-k btn-outline btn-outline_action w-200">
                             <span class="material-symbols-rounded">download</span>
@@ -89,7 +89,7 @@
                         </button>
                         <button pRipple type="button"
                             onclick="document.getElementById('getFile').click()"
-                            [disabled]="disableBtnSubirFoto"
+                            disabled="disableBtnSubirFoto"
                             class="btn-k btn-outline btn-outline_danger w-200">
                             <span class="material-symbols-rounded">upload</span>
                             Subir Foto
@@ -242,7 +242,7 @@
                           <app-cc-input-group-prepend label="Fecha de Cese"
                               styleSpan="size-span-campo font-weight-bold">
                               <input type="date" class="form-control"
-                                  [disabled]="disable_fecha_cese" [(ngModel)]="emp_fecha_cese"
+                                  disabled="disable_fecha_cese" [(ngModel)]="emp_fecha_cese"
                                   #nameFechaCese formControlName="lgFechaCese">
                           </app-cc-input-group-prepend>
                         </div>
@@ -261,7 +261,7 @@
                         <div class="col"></div>
                         <div class="col">
                           <div class="text-right m-2">
-                            <button class="btn btn-success" (click)="generarContrato()" [disabled]="readonlyButtonContrato">
+                            <button class="btn btn-success" (click)="generarContrato()" disabled="readonlyButtonContrato">
                               Generar Contrato
                             </button>
                           </div>
@@ -363,7 +363,7 @@
                                            formControlName="lgEntidad" 
                                            #nameEntidad
                                            [readonly]="readonlyInputEntidad"
-                                           [disabled]="isDisableTipoPago">
+                                           disabled="isDisableTipoPago">
                                     <ng-option [value]="0">Seleccione entidad</ng-option>
                                     <ng-option *ngFor="let d of cmb_entidad" [value]="d.valor">{{
                                         d.descripcion
@@ -385,7 +385,7 @@
                                              formControlName="lgTipoCuenta" 
                                              #nameTipoCuenta
                                              [readonly]="readonlyInputTipoCuenta"
-                                             [disabled]="isDisableTipoPago">
+                                             disabled="isDisableTipoPago">
                                       <ng-option [value]="0">Seleccione tipo cuenta</ng-option>
                                       <ng-option *ngFor="let d of cmb_tipo_cuenta" [value]="d.valor">
                                           {{d.valor }}
@@ -404,7 +404,7 @@
                                       formControlName="lgNumeroCuenta" #nameNumeroCuenta
                                       [readonly]="readonlyInputNumeroCuenta"
                                       placeholder="Número Cuenta" (keypress)="onlyNumber($event)"
-                                      [disabled]="isDisableTipoPago">
+                                      disabled="isDisableTipoPago">
                               </app-cc-input-group-prepend>
                           </div>
                         </div>
@@ -445,7 +445,7 @@
                                 #nameDepartamentoInput [id_departamento]=0 (change)="onClicConsultaDepartamentos(content)">
                               <div class="input-group-append">
                                 <button class="btn btn-default btn-action" type="button"
-                                  [disabled]="disableBtnConsultaDepartamento" (click)="onClicConsultaDepartamentos(content)">
+                                  disabled="disableBtnConsultaDepartamento" (click)="onClicConsultaDepartamentos(content)">
                                   <i class="fa fa-search"></i>
                                 </button>
                               </div>
@@ -470,13 +470,13 @@
                                 <span class="input-group-text font-weight-bold size-span-campo "
                                   style="width: 180px;">Cargos</span>
                               </div>
-                              <ng-select [disabled]="isDisabled" [clearable]="false" loadingText="Cargando.."
+                              <ng-select disabled="isDisabled" [clearable]="false" loadingText="Cargando.."
                                 [loading]="LoadOpcionCargo" formControlName="lgSelectCargo"
                                 class="form-control form-control-sm custom-select" (clear)="onClearLang()"
                                 placeholder="Seleccionar opción" [(ngModel)]="idCargoEmpl"
                                 [ngClass]="{ 'is-invalid': submittedEmp && fEmp.lgSelectCargo.errors }"
                                 style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;">
-                                <ng-option value="0" [disabled]="true" aria-selected="true" aria-placeholder="">Seleccionar opción
+                                <ng-option value="0" disabled="true" aria-selected="true" aria-placeholder="">Seleccionar opción
                                 </ng-option>
                                 <ng-option *ngFor="let cargo of arrayCargos" [value]="cargo.id_cargo">
                                   {{cargo.car_nombre}}</ng-option>
@@ -504,7 +504,7 @@
                                     placeholder="Descripcion Jornada">
                                 <div class="input-group-append">
                                     <button class="btn btn-default btn-action"
-                                        [disabled]="disableBtnConsultaJornada"
+                                        disabled="disableBtnConsultaJornada"
                                         (click)="onClicConsultaJornadas(content)" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
@@ -601,7 +601,7 @@
                                     placeholder="Descripcion sueldo">
                                 <div class="input-group-append">
                                     <button class="btn btn-default btn-action"
-                                        [disabled]="disableBtnConsultaSueldo"
+                                        disabled="disableBtnConsultaSueldo"
                                         (click)="onClicConsultaSueldo()" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
@@ -636,7 +636,7 @@
                                 styleSpan="size-span-campo">
                                 <input currencyMask class="form-control form-control-sm"
                                     #nameSalarioMinimo [readonly]="readonlyInpusalarioMinimo"
-                                    formControlName="lgSalarioMinimo" [disabled]="true"
+                                    formControlName="lgSalarioMinimo" disabled="true"
                                     placeholder="Salario mínimo">
                             </app-cc-input-group-prepend>
                           </div> 
@@ -672,7 +672,7 @@
                                 <input class="form-control form-control-sm" #nameCodigoBiometrico
                                     [readonly]="readonlyInpuCodigoBiometrico"
                                     [(ngModel)]="codigo_biometrico"
-                                    formControlName="lgCodigoBiometrico" [disabled]="true"
+                                    formControlName="lgCodigoBiometrico" disabled="true"
                                     placeholder="Código Biométrico">
                             </app-cc-input-group-prepend>
                           </div>
@@ -847,7 +847,7 @@
                             <app-cc-input-group-prepend label="Fecha Jubilacion"
                                   styleSpan="size-span-campo">
                                   <input type="date" class="form-control form-control-sm" [(ngModel)]="fechajubilacion" #nameFechaJubilacion
-                            formControlName="lgFechaJubilacion"  max="2050-01-01" [readonly]="tienejubilacion !== 'SI'" [disabled]="tienejubilacion !== 'SI'" >
+                            formControlName="lgFechaJubilacion"  max="2050-01-01" [readonly]="tienejubilacion !== 'SI'" disabled="tienejubilacion !== 'SI'" >
                             </app-cc-input-group-prepend>
                           </div>
                         </div>
@@ -872,7 +872,7 @@
                                 <button pButton pRipple icon="pi pi-plus" title="Agregar"
                                   style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                                   class="p-button-success p-button-sm mr-2" (click)=onAddNewEducacionEmpleado()
-                                  [disabled]="btnNewEducacionEmpleado || empleadoForm.id_empleado == 0"></button>
+                                  disabled="btnNewEducacionEmpleado || empleadoForm.id_empleado == 0"></button>
                               </div>
                             </ng-template>
                             <ng-template pTemplate="header">
@@ -910,7 +910,7 @@
                                     <ng-template pTemplate="input">
                                       <select [(ngModel)]="detalle_educacion.cat_nombre"
                                         (change)="onSelectOptionNivelEducacion($event, detalle_educacion)">
-                                        <option value="0" selected="selected" [disabled]="true" aria-selected="true"
+                                        <option value="0" selected="selected" disabled="true" aria-selected="true"
                                           aria-placeholder="">Seleccione
                                           opción</option>
                                         <option *ngFor="let catNE of catalogosNE" 
@@ -997,7 +997,7 @@
                                                             style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                                                             class="p-button-success p-button-sm mr-2"
                                                             (click)=onAddNewEducacionEmpleado()
-                                                            [disabled]="btnNewEducacionEmpleado || empleadoForm.id_empleado == 0"></button>
+                                                            disabled="btnNewEducacionEmpleado || empleadoForm.id_empleado == 0"></button>
                                                     </div>
                                                 </ng-template>
                                                 <ng-template pTemplate="header">
@@ -1037,7 +1037,7 @@
                                                                     <select [(ngModel)]="detalle_educacion.cat_nombre"
                                                                         (change)="onSelectOptionNivelEducacion($event, detalle_educacion)">
                                                                         <option value="0" selected="selected"
-                                                                            [disabled]="true" aria-selected="true"
+                                                                            disabled="true" aria-selected="true"
                                                                             aria-placeholder="">Seleccione
                                                                             opción</option>
                                                                         <option *ngFor="let catNE of catalogosNE"
@@ -1158,7 +1158,7 @@
                                 <button pButton pRipple icon="pi pi-plus" title="Agregar"
                                   style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                                   class="p-button-success p-button-sm mr-2" (click)=onAddNewReferenciaEmpleado()
-                                  [disabled]="btnNewReferenciaEmpleado || empleadoForm.id_empleado == 0"></button>
+                                  disabled="btnNewReferenciaEmpleado || empleadoForm.id_empleado == 0"></button>
                               </div>
                             </ng-template>
                             <ng-template pTemplate="header">
@@ -1195,7 +1195,7 @@
                                     <ng-template pTemplate="input">
                                       <select [(ngModel)]="detalle_referencia.cat_nombre"
                                         (change)="onSelectOptionTipoReferencia($event, detalle_referencia)">
-                                        <option value="0" selected="selected" [disabled]="true" aria-selected="true"
+                                        <option value="0" selected="selected" disabled="true" aria-selected="true"
                                           aria-placeholder="">Seleccione
                                           opción</option>
                                         <option *ngFor="let catalogo of catalogos" [value]="catalogo.id_catalogo">
@@ -1281,7 +1281,7 @@
                               title="Agregar Familiares"
                               style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                               class="p-button-success p-button-sm mr-2" (click)="modalFamiliar()"
-                              [disabled]="readonlyInputIdentificacion || empleadoForm.id_empleado == 0">
+                              disabled="readonlyInputIdentificacion || empleadoForm.id_empleado == 0">
                             </button>
                           </div>
                         </ng-template>
@@ -1364,7 +1364,7 @@
                                 <ng-template pTemplate="input">
                                   <select [(ngModel)]="detalle_carga_familiar.cat_nombre"
                                     (change)="onSelectOptionRelacionCarga($event, detalle_carga_familiar)">
-                                    <option value="0" selected="selected" [disabled]="true" aria-selected="true"
+                                    <option value="0" selected="selected" disabled="true" aria-selected="true"
                                       aria-placeholder="">Seleccione
                                       opción</option>
                                     <option *ngFor="let catRECA of catalogosRECA" [value]="catRECA.cat_nombre">
@@ -1414,7 +1414,7 @@
               <div class="row m-0 mb-1">
                 <div class="col-12 col-md-6 pt-0 pb-0">
                   <app-cc-input-group-prepend label="Tipo de Archivo" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select class="form-control" [clearable]="false" [disabled]="empleadoForm.id_empleado == 0"
+                    <ng-select class="form-control" [clearable]="false" disabled="empleadoForm.id_empleado == 0"
                       (change)="handleSelectTipoArchivo($event)" [items]="lst_tipo_archivo" bindValue="id_catalogo"
                       bindLabel="cat_nombre" [(ngModel)]="id_tipo_archivo_selected">
                     </ng-select>
@@ -1430,7 +1430,7 @@
                     <input type="text" class="form-control" readonly [ngModel]="folderDigitalForm.nombre_archivo">
                     <div class="input-group-append">
                       <button class="btn btn-action" onclick="document.querySelector('#folderFile').click()"
-                        [disabled]="empleadoForm.id_empleado == 0">
+                        disabled="empleadoForm.id_empleado == 0">
                         <i class="far fa-file-upload"></i> Seleccionar Archivo
                       </button>
                       <input type="file" class="d-none" id="folderFile"
@@ -1589,7 +1589,7 @@
                         <button pButton pRipple icon="pi pi-plus" title="Agregar Retencion Judicial"
                                   style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                                   class="p-button-success p-button-sm mr-2" (click)="modalRetencionJudicial()"
-                                  [disabled]="btnNewReferenciaEmpleado || empleadoForm.id_empleado == 0"></button>
+                                  disabled="btnNewReferenciaEmpleado || empleadoForm.id_empleado == 0"></button>
                       </div>
                     </ng-template>
                     <ng-template pTemplate="header">
@@ -1707,7 +1707,7 @@
                           #nameInputSearchEmpleado>
                         
                         <div class="input-group-append">
-                          <button (click)="onClicConsultaEmpleados(content)" [disabled]="disableBtnConsultaEmpleados"
+                          <button (click)="onClicConsultaEmpleados(content)" disabled="disableBtnConsultaEmpleados"
                             class="btn btn-default btn-primary" type="button">
                             <i class="fa fa-search"></i>
                           </button>
@@ -1729,7 +1729,7 @@
                         <div class="input-group input-group-sm ">
                           <button style="padding-top:-2px;height:20px;width:100%; margin: 5px; font-size: 11px;" pButton
                             pRipple type="button" icon="pi pi-download" label="Descargar Imagen"
-                            [disabled]="disableBtnDescargarFoto" (click)="descargarFotoPerfil()"
+                            disabled="disableBtnDescargarFoto" (click)="descargarFotoPerfil()"
                             class="p-button-rounded p-button-danger">
                           </button>
                         </div>
@@ -1738,7 +1738,7 @@
                         <div class="input-group input-group-sm ">
                           <button style="padding-top:-2px;height:20px; width:100%; margin: 5px; font-size: 11px;" pButton
                             pRipple type="button" onclick="document.getElementById('getFile').click()"
-                            [disabled]="disableBtnSubirFoto" icon="pi pi-upload" label="Subir Imagen"
+                            disabled="disableBtnSubirFoto" icon="pi pi-upload" label="Subir Imagen"
                             class="p-button-rounded"></button>
                           <input #Image (change)="handleFileInput($event.target.files)" accept="image/*" type='file'
                             id="getFile" style="display:none">
@@ -1928,7 +1928,7 @@
                         <span class="input-group-text font-weight-bold size-span-campo " id="inputGroup-sizing-sm"
                           style="width: 180px;">Fecha de Cese</span>
                       </div>
-                      <input type="date" class="form-control" [disabled]="disable_fecha_cese" [(ngModel)]="emp_fecha_cese"
+                      <input type="date" class="form-control" disabled="disable_fecha_cese" [(ngModel)]="emp_fecha_cese"
                         #nameFechaCese formControlName="lgFechaCese">
                     </div>
                     
@@ -1968,7 +1968,7 @@
                   <div class="col"></div>
                   <div class="col">
                     <div class="text-right m-2">
-                      <button class="btn btn-success" (click)="generarContrato()" [disabled]="readonlyButtonContrato">
+                      <button class="btn btn-success" (click)="generarContrato()" disabled="readonlyButtonContrato">
                         Generar Contrato
                       </button>
                     </div>
@@ -2078,7 +2078,7 @@
                       </div>
                       <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="entidad"
                         formControlName="lgEntidad" #nameEntidad [readonly]="readonlyInputEntidad"
-                        [disabled]="isDisableTipoPago">
+                        disabled="isDisableTipoPago">
                         <ng-option [value]="0">Seleccione entidad</ng-option>
                         <ng-option *ngFor="let d of cmb_entidad" [value]="d.valor">{{ d.descripcion }}
                         </ng-option>
@@ -2097,7 +2097,7 @@
                       </div>
                       <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="tipo_cuenta"
                         formControlName="lgTipoCuenta" #nameTipoCuenta [readonly]="readonlyInputTipoCuenta"
-                        [disabled]="isDisableTipoPago">
+                        disabled="isDisableTipoPago">
                         <ng-option [value]="0">Seleccione tipo cuenta</ng-option>
                         <ng-option *ngFor="let d of cmb_tipo_cuenta" [value]="d.valor">{{ d.valor }}
                         </ng-option>
@@ -2117,7 +2117,7 @@
                       <input type="text" class="form-control custom" appendTo="body" [searchable]="true"
                         [(ngModel)]="numero_cuenta" formControlName="lgNumeroCuenta" #nameNumeroCuenta
                         [readonly]="readonlyInputNumeroCuenta" placeholder="Número Cuenta" (keypress)="onlyNumber($event)"
-                        [disabled]="isDisableTipoPago">
+                        disabled="isDisableTipoPago">
                     </div>
                 
                   </div>
@@ -2166,7 +2166,7 @@
                     
                       <div class="input-group-append">
                         <button class="btn btn-default btn-primary" type="button"
-                          [disabled]="disableBtnConsultaDepartamento" (click)="onClicConsultaDepartamentos(content)">
+                          disabled="disableBtnConsultaDepartamento" (click)="onClicConsultaDepartamentos(content)">
                           <i class="fa fa-search"></i>
                         </button>
                        
@@ -2200,13 +2200,13 @@
                         <span class="input-group-text font-weight-bold size-span-campo "
                           style="width: 180px;">Cargos</span>
                       </div>
-                      <ng-select [disabled]="isDisabled" [clearable]="false" loadingText="Cargando.."
+                      <ng-select disabled="isDisabled" [clearable]="false" loadingText="Cargando.."
                         [loading]="LoadOpcionCargo" formControlName="lgSelectCargo"
                         class="form-control form-control-sm custom-select" (clear)="onClearLang()"
                         placeholder="Seleccionar opción" [(ngModel)]="idCargoEmpl"
                         [ngClass]="{ 'is-invalid': submittedEmp && fEmp.lgSelectCargo.errors }"
                         style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;">
-                        <ng-option value="0" [disabled]="true" aria-selected="true" aria-placeholder="">Seleccionar opción
+                        <ng-option value="0" disabled="true" aria-selected="true" aria-placeholder="">Seleccionar opción
                         </ng-option>
                         <ng-option *ngFor="let cargo of arrayCargos" [value]="cargo.id_cargo">
                           {{cargo.car_nombre}}</ng-option>
@@ -2229,7 +2229,7 @@
                         [readonly]="readonlyInputSearchJornada" type="text" class="form-control form-control-sm"
                         placeholder="Descripcion Jornada">
                       <div class="input-group-append">
-                        <button class="btn btn-default btn-primary" [disabled]="disableBtnConsultaJornada"
+                        <button class="btn btn-default btn-primary" disabled="disableBtnConsultaJornada"
                           (click)="onClicConsultaJornadas(content)" type="button">
                           <i class="fa fa-search"></i>
                         </button>
@@ -2332,7 +2332,7 @@
                         [readonly]="readonlyInputSueldo" placeholder="Descripcion sueldo">
                       
                       <div class="input-group-append">
-                        <button class="btn btn-default btn-primary" [disabled]="disableBtnConsultaSueldo"
+                        <button class="btn btn-default btn-primary" disabled="disableBtnConsultaSueldo"
                           (click)="onClicConsultaSueldo()" type="button">
                           <i class="fa fa-search"></i>
                         </button>
@@ -2382,7 +2382,7 @@
                           style="width: 180px;">Salario mínimo</span>
                       </div>
                       <input currencyMask class="form-control form-control-sm" #nameSalarioMinimo
-                        [readonly]="readonlyInpusalarioMinimo" formControlName="lgSalarioMinimo" [disabled]="true"
+                        [readonly]="readonlyInpusalarioMinimo" formControlName="lgSalarioMinimo" disabled="true"
                         placeholder="Salario mínimo">
                     </div>
                     
@@ -2430,7 +2430,7 @@
                       </div>
                       <input class="form-control form-control-sm" #nameCodigoBiometrico
                         [readonly]="readonlyInpuCodigoBiometrico" [(ngModel)]="codigo_biometrico"
-                        formControlName="lgCodigoBiometrico" [disabled]="true" placeholder="Código Biométrico">
+                        formControlName="lgCodigoBiometrico" disabled="true" placeholder="Código Biométrico">
                     </div>
                    
                   </div>
@@ -2595,7 +2595,7 @@
                           style="width: 180px;">Fecha Jubilacion</span>
                       </div>
                       <input type="date" class="form-control" [(ngModel)]="fechajubilacion" #nameFechaJubilacion
-                      formControlName="lgFechaJubilacion"  max="2050-01-01" [readonly]="tienejubilacion !== 'SI'" [disabled]="tienejubilacion !== 'SI'" >
+                      formControlName="lgFechaJubilacion"  max="2050-01-01" [readonly]="tienejubilacion !== 'SI'" disabled="tienejubilacion !== 'SI'" >
                     </div>
                   </div>
                 </div>
@@ -2621,7 +2621,7 @@
                         <button pButton pRipple icon="pi pi-plus-circle" title="Agregar"
                           style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                           class="p-button-rounded p-button-success p-button-sm mr-2" (click)=onAddNewEducacionEmpleado()
-                          [disabled]="btnNewEducacionEmpleado || empleadoForm.id_empleado == 0"></button>
+                          disabled="btnNewEducacionEmpleado || empleadoForm.id_empleado == 0"></button>
                       </div>
                     </ng-template>
                     <ng-template pTemplate="header">
@@ -2655,7 +2655,7 @@
                             <ng-template pTemplate="input">
                               <select [(ngModel)]="detalle_educacion.cat_nombre"
                                 (change)="onSelectOptionNivelEducacion($event, detalle_educacion)">
-                                <option value="0" selected="selected" [disabled]="true" aria-selected="true"
+                                <option value="0" selected="selected" disabled="true" aria-selected="true"
                                   aria-placeholder="">Seleccione
                                   opción</option>
                                 <option *ngFor="let catNE of catalogosNE" [value]="catNE.id_catalogo">{{catNE.cat_nombre}}
@@ -2756,7 +2756,7 @@
                         <button pButton pRipple icon="pi pi-plus-circle" title="Agregar"
                           style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                           class="p-button-rounded p-button-success p-button-sm mr-2" (click)=onAddNewReferenciaEmpleado()
-                          [disabled]="btnNewReferenciaEmpleado || empleadoForm.id_empleado == 0"></button>
+                          disabled="btnNewReferenciaEmpleado || empleadoForm.id_empleado == 0"></button>
                       </div>
                     </ng-template>
                     <ng-template pTemplate="header">
@@ -2791,7 +2791,7 @@
 
                               <select [(ngModel)]="detalle_referencia.cat_nombre"
                                 (change)="onSelectOptionTipoReferencia($event, detalle_referencia)">
-                                <option value="0" selected="selected" [disabled]="true" aria-selected="true"
+                                <option value="0" selected="selected" disabled="true" aria-selected="true"
                                   aria-placeholder="">Seleccione
                                   opción</option>
                                 <option *ngFor="let catalogo of catalogos" [value]="catalogo.id_catalogo">
@@ -2877,7 +2877,7 @@
                         <button pButton pRipple icon="pi pi-plus-circle" title="Agregar Familiares"
                           style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                           class="p-button-rounded p-button-success p-button-sm mr-2" (click)="modalFamiliar()"
-                          [disabled]="readonlyInputIdentificacion || empleadoForm.id_empleado == 0"></button>
+                          disabled="readonlyInputIdentificacion || empleadoForm.id_empleado == 0"></button>
                       </div>
                     </ng-template>
                     <ng-template pTemplate="header">
@@ -2940,7 +2940,7 @@
                             <ng-template pTemplate="input">
                               <select [(ngModel)]="detalle_carga_familiar.cat_nombre"
                                 (change)="onSelectOptionRelacionCarga($event, detalle_carga_familiar)">
-                                <option value="0" selected="selected" [disabled]="true" aria-selected="true"
+                                <option value="0" selected="selected" disabled="true" aria-selected="true"
                                   aria-placeholder="">Seleccione
                                   opción</option>
                                 <option *ngFor="let catRECA of catalogosRECA" [value]="catRECA.cat_nombre">
@@ -2990,7 +2990,7 @@
             <div class="row">
               <div class="col-6">
                 <app-cc-input-group-prepend label="Tipo de Archivo" styleSpan="size-span-campo font-weight-bold">
-                  <ng-select class="form-control" [clearable]="false" [disabled]="empleadoForm.id_empleado == 0"
+                  <ng-select class="form-control" [clearable]="false" disabled="empleadoForm.id_empleado == 0"
                     (change)="handleSelectTipoArchivo($event)" [items]="lst_tipo_archivo" bindValue="id_catalogo"
                     bindLabel="cat_nombre" [(ngModel)]="id_tipo_archivo_selected">
                   </ng-select>
@@ -3006,7 +3006,7 @@
                   <input type="text" class="form-control" readonly [ngModel]="folderDigitalForm.nombre_archivo">
                   <div class="input-group-append">
                     <button class="btn btn-primary" onclick="document.querySelector('#folderFile').click()"
-                      [disabled]="empleadoForm.id_empleado == 0">
+                      disabled="empleadoForm.id_empleado == 0">
                       <i class="far fa-file-upload"></i> Seleccionar Archivo
                     </button>
                     <input type="file" class="d-none" id="folderFile"
@@ -3138,7 +3138,7 @@
                     <button pButton pRipple icon="pi pi-plus-circle" title="Agregar Retencion Judicial"
                       style="width: calc(0.875 * 2.357rem); height: calc(0.875 * 2.357rem);"
                       class="p-button-rounded p-button-success p-button-sm mr-2" (click)="modalRetencionJudicial()"
-                      [disabled]="readonlyInputIdentificacion || empleadoForm.id_empleado == 0">
+                      disabled="readonlyInputIdentificacion || empleadoForm.id_empleado == 0">
                     </button>
                   </div>
                 </ng-template>

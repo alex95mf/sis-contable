@@ -49,9 +49,9 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.tipo_identificacion">
-                                            <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+                                            <ng-option [value]="" disabled="true">Seleccione</ng-option>
 
-                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                            <ng-option [value]="item.valor" disabled="item.disabled"
                                                 *ngFor="let item of lista_tipo_documentos">
                                                 {{item.valor}}
                                             </ng-option>
@@ -102,8 +102,8 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.genero">
-                                            <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
-                                            <ng-option [value]="item.codigo" [disabled]="item.disabled"
+                                            <ng-option [value]="" disabled="true">Seleccione</ng-option>
+                                            <ng-option [value]="item.codigo" disabled="item.disabled"
                                                 *ngFor="let item of lista_generos">
                                                 {{item.descripcion}}
                                             </ng-option>
@@ -118,7 +118,7 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.estado_civil">
-                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                            <ng-option [value]="item.valor" disabled="item.disabled"
                                                 *ngFor="let item of lista_estado_civil">
                                                 {{item.valor}}
                                             </ng-option>
@@ -140,7 +140,7 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.nivel_educativo">
-                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                            <ng-option [value]="item.valor" disabled="item.disabled"
                                                 *ngFor="let item of lista_nivel_educativo">
                                                 {{item.valor}}
                                             </ng-option>
@@ -163,8 +163,8 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.segmentacion">
-                                            <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
-                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                            <ng-option [value]="" disabled="true">Seleccione</ng-option>
+                                            <ng-option [value]="item.valor" disabled="item.disabled"
                                                 *ngFor="let item of lista_segmentacion">
                                                 {{item.valor}}
                                             </ng-option>
@@ -177,8 +177,8 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.medio_contacto">
-                                            <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
-                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                            <ng-option [value]="" disabled="true">Seleccione</ng-option>
+                                            <ng-option [value]="item.valor" disabled="item.disabled"
                                                 *ngFor="let item of lista_medio_contacto">
                                                 {{item.valor}}
                                             </ng-option>
@@ -200,7 +200,7 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.estado">
-                                            <ng-option [value]="item.estado" [disabled]="item.disabled"
+                                            <ng-option [value]="item.estado" disabled="item.disabled"
                                                 *ngFor="let item of lista_estados">
                                                 {{item.descripcion}}
                                             </ng-option>
@@ -277,7 +277,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.tipo_identificador_contacto">
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of lista_tipo_identificador">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -299,11 +299,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeContacto(i)" [disabled]="d.estado=='I'">
+                                                            (click)="removeContacto(i)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarContacto(i)" [disabled]="d.estado=='A'">
+                                                        (click)="activarContacto(i)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -382,7 +382,7 @@
                                                 class="input-group-text font-weight-bold">Fotos</span></div>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                accept="image/*" multiple [disabled]="
+                                                accept="image/*" multiple disabled="
                                             !disabledProduct" (change)="cargaFoto($event.target.files)">
                                             <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0
                                                 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a
@@ -394,7 +394,7 @@
                                             <img [src]="foto.recurso" (click)="expandirVistaFotos(i)"
                                                 class="img-thumbnail">
                                             <button *ngIf="!formReadOnly"
-                                                [disabled]="permisions.editar == '0' || !disabledProduct"
+                                                disabled="permisions.editar == '0' || !disabledProduct"
                                                 class="btn btn-sm btn-danger" placement="top" ngbTooltip="Eliminar Foto"
                                                 (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button>
                                         </div>
@@ -458,7 +458,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.tipo_direccion">
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of lista_tipo_direccion">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -469,7 +469,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.tipo_identificador">
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of lista_tipo_identificador">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -487,7 +487,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.provincia" (ngModelChange)="cargarCiudad($event,i)" >
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of lista_provincias">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -499,7 +499,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.ciudad">
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of d.ciudades">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -518,11 +518,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeDireccion(i)" [disabled]="d.estado=='I'">
+                                                            (click)="removeDireccion(i)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarDireccion(i)" [disabled]="d.estado=='A'">
+                                                        (click)="activarDireccion(i)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -600,7 +600,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.provincia" (ngModelChange)="cargarCiudad2($event,i)" >
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of lista_provincias">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -612,7 +612,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.ciudad">
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of d.ciudades">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -640,11 +640,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeReferencia(i)" [disabled]="d.estado=='I'">
+                                                            (click)="removeReferencia(i)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarReferencia(i)" [disabled]="d.estado=='A'">
+                                                        (click)="activarReferencia(i)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -745,11 +745,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeInfoFinanciera(i)" [disabled]="d.estado=='I'">
+                                                            (click)="removeInfoFinanciera(i)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarInfoFinanciera(i)" [disabled]="d.estado=='A'">
+                                                        (click)="activarInfoFinanciera(i)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -781,7 +781,7 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.fk_asesor">
-                                            <ng-option [value]="item.id_usuario" [disabled]="item.disabled"
+                                            <ng-option [value]="item.id_usuario" disabled="item.disabled"
                                                 *ngFor="let item of lista_asesores">
                                                 {{item.nombre}}
                                             </ng-option>
@@ -797,7 +797,7 @@
                                         <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                             [(ngModel)]="cliente.fk_oficial_credito">
-                                            <ng-option [value]="item.id_usuario" [disabled]="item.disabled"
+                                            <ng-option [value]="item.id_usuario" disabled="item.disabled"
                                                 *ngFor="let item of lista_oficial_credito">
                                                 {{item.nombre}}
                                             </ng-option>
@@ -839,7 +839,7 @@
                                             <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
                                                 appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                 [(ngModel)]="cliente.plazo">
-                                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                <ng-option [value]="item.valor" disabled="item.disabled"
                                                     *ngFor="let item of lista_plazo">
                                                     {{item.descripcion}}
                                                 </ng-option>
@@ -859,7 +859,7 @@
                                             <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
                                                 appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                 [(ngModel)]="cliente.forma_pago">
-                                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                <ng-option [value]="item.valor" disabled="item.disabled"
                                                     *ngFor="let item of lista_forma_pago">
                                                     {{item.descripcion}}
                                                 </ng-option>
@@ -941,7 +941,7 @@
                                                                 <ng-select class="form-control"  placeholder="-Todos-"
                                                                 appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                                 [(ngModel)]="d.fk_archivo_1">
-                                                                <ng-option [value]="item.id_cliente_archivo" [disabled]="item.disabled"
+                                                                <ng-option [value]="item.id_cliente_archivo" disabled="item.disabled"
                                                                     *ngFor="let item of cliente.archivos">
                                                                     {{item.descripcion}}
                                                                 </ng-option>
@@ -950,7 +950,7 @@
                                                                     <ng-select class="form-control"  placeholder="-Todos-"
                                                                     appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                                     [(ngModel)]="d.fk_archivo_2">
-                                                                    <ng-option [value]="item.id_cliente_archivo" [disabled]="item.disabled"
+                                                                    <ng-option [value]="item.id_cliente_archivo" disabled="item.disabled"
                                                                         *ngFor="let item of cliente.archivos">
                                                                         {{item.descripcion}}
                                                                     </ng-option>
@@ -960,7 +960,7 @@
                                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                                         [(ngModel)]="d.fk_archivo_3">
-                                                                        <ng-option [value]="item.id_cliente_archivo" [disabled]="item.disabled"
+                                                                        <ng-option [value]="item.id_cliente_archivo" disabled="item.disabled"
                                                                             *ngFor="let item of cliente.archivos">
                                                                             {{item.descripcion}}
                                                                         </ng-option>
@@ -969,7 +969,7 @@
                                                                             <ng-select class="form-control"  placeholder="-Todos-"
                                                                             appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                                             [(ngModel)]="d.fk_archivo_4">
-                                                                            <ng-option [value]="item.id_cliente_archivo" [disabled]="item.disabled"
+                                                                            <ng-option [value]="item.id_cliente_archivo" disabled="item.disabled"
                                                                                 *ngFor="let item of cliente.archivos">
                                                                                 {{item.descripcion}}
                                                                             </ng-option>
@@ -985,11 +985,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeInfoCredito(i)" [disabled]="d.estado=='I'">
+                                                            (click)="removeInfoCredito(i)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarInfoCredito(i)" [disabled]="d.estado=='A'">
+                                                        (click)="activarInfoCredito(i)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -1088,11 +1088,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeCliente(i)" [disabled]="d.estado=='I'">
+                                                            (click)="removeCliente(i)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarCliente(i)" [disabled]="d.estado=='A'">
+                                                        (click)="activarCliente(i)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -1174,7 +1174,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.provincia" (ngModelChange)="cargarCiudad3($event,i)" >
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of lista_provincias">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -1186,7 +1186,7 @@
                                                         <ng-select class="form-control"  placeholder="-Todos-"
                                                         appendTo="body" [clearable]="true" [searchable]="true" disabled
                                                         [(ngModel)]="d.ciudad">
-                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                        <ng-option [value]="item.valor" disabled="item.disabled"
                                                             *ngFor="let item of d.ciudades">
                                                             {{item.valor}}
                                                         </ng-option>
@@ -1224,11 +1224,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeInfoEntrega(i)" [disabled]="d.estado=='I'">
+                                                            (click)="removeInfoEntrega(i)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarInfoEntrega(i)" [disabled]="d.estado=='A'">
+                                                        (click)="activarInfoEntrega(i)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -1428,11 +1428,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='I'">
+                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='A'">
+                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -1536,11 +1536,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='I'">
+                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='A'">
+                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -1644,11 +1644,11 @@
 
                                                     <td class="text-center">
                                                         <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
-                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='I'">
+                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" disabled="d.estado=='I'">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         <button class="btn btn-success mr-1" ngbTooltip="Activar"
-                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='A'">
+                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" disabled="d.estado=='A'">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     </td>
@@ -1715,9 +1715,9 @@
                             <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
                                 appendTo="body" [clearable]="true" [searchable]="true" disabled
                                 [(ngModel)]="cliente.tipo_identificacion">
-                                <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+                                <ng-option [value]="" disabled="true">Seleccione</ng-option>
 
-                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                <ng-option [value]="item.valor" disabled="item.disabled"
                                     *ngFor="let item of lista_tipo_documentos">
                                     {{item.valor}}
                                 </ng-option>
@@ -1770,8 +1770,8 @@
                             <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
                                 appendTo="body" [clearable]="true" [searchable]="true" disabled
                                 [(ngModel)]="cliente.segmentacion">
-                                <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
-                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                <ng-option [value]="" disabled="true">Seleccione</ng-option>
+                                <ng-option [value]="item.valor" disabled="item.disabled"
                                     *ngFor="let item of lista_segmentacion">
                                     {{item.valor}}
                                 </ng-option>
@@ -1784,8 +1784,8 @@
                             <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
                                 appendTo="body" [clearable]="true" [searchable]="true" disabled
                                 [(ngModel)]="cliente.medio_contacto">
-                                <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
-                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                <ng-option [value]="" disabled="true">Seleccione</ng-option>
+                                <ng-option [value]="item.valor" disabled="item.disabled"
                                     *ngFor="let item of lista_medio_contacto">
                                     {{item.valor}}
                                 </ng-option>

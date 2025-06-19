@@ -29,7 +29,7 @@
                             disabled
                             [(ngModel)]="mes_actual">
 
-                            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                            <ng-option [value]="item.id" disabled="item.disabled" *ngFor="let item of arrayMes">
                                 {{item.name}}
                             </ng-option>
                         </ng-select>
@@ -70,10 +70,10 @@
                             <!-- <td [ngClass]="{'text-bold text-success': item.estate == 'A' , 'text-bold text-danger': item.estate == 'C' }"   style="padding-left: 25px;text-align: start;">{{ item.estado }}</td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-primary" (click)="cambiarEstado(item, 'A')" [disabled]="item.estate == 'A'">
+                                    <button class="btn btn-sm btn-primary" (click)="cambiarEstado(item, 'A')" disabled="item.estate == 'A'">
                                         <i class="fas fa-print"></i> Aperturar
                                     </button>
-                                    <button class="btn btn-sm btn-outline-danger" (click)="cambiarEstado(item, 'C')" [disabled]="item.estate == 'C'">
+                                    <button class="btn btn-sm btn-outline-danger" (click)="cambiarEstado(item, 'C')" disabled="item.estate == 'C'">
                                         <i class="fas fa-file-pdf"></i> Cerrar
                                     </button>
                                 </div>

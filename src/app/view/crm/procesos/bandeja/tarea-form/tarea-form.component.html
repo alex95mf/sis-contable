@@ -31,7 +31,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                             disabled
                             [(ngModel)]="tarea.nombre_tarea">
 
-                            <ng-option [value]="item.valor" [disabled]="item.disabled" *ngFor="let item of lista_tipo_tareas">
+                            <ng-option [value]="item.valor" disabled="item.disabled" *ngFor="let item of lista_tipo_tareas">
                                 {{item.valor}}
                             </ng-option>
                         </ng-select>
@@ -54,7 +54,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                             disabled
                             [(ngModel)]="tarea.perfil_responsable">
 
-                            <ng-option [value]="item.valor" [disabled]="item.disabled" *ngFor="let item of lista_responsables">
+                            <ng-option [value]="item.valor" disabled="item.disabled" *ngFor="let item of lista_responsables">
                                 {{item.valor}}
                             </ng-option>
                         </ng-select>
@@ -75,7 +75,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                             disabled
                             [(ngModel)]="tarea.estado">
 
-                            <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados">
+                            <ng-option [value]="item.estado" disabled="item.disabled" *ngFor="let item of lista_estados">
                                 {{item.descripcion}}
                             </ng-option>
                         </ng-select>
@@ -126,7 +126,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                                 disabled
                                 [(ngModel)]="tarea.nombre_tarea_siguiente_paso">
 
-                                <ng-option [value]="item.valor" [disabled]="item.disabled" *ngFor="let item of lista_tipo_tareas">
+                                <ng-option [value]="item.valor" disabled="item.disabled" *ngFor="let item of lista_tipo_tareas">
                                     {{item.valor}}
                                 </ng-option>
                             </ng-select>
@@ -148,7 +148,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                                 disabled
                                 [(ngModel)]="tarea.perfil_siguiente_paso">
 
-                                <ng-option [value]="item.valor" [disabled]="item.disabled" *ngFor="let item of lista_responsables">
+                                <ng-option [value]="item.valor" disabled="item.disabled" *ngFor="let item of lista_responsables">
                                     {{item.valor}}
                                 </ng-option>
                             </ng-select>
@@ -169,7 +169,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                                 disabled
                                 [(ngModel)]="tarea.estado_revision">
 
-                                <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados_revision">
+                                <ng-option [value]="item.estado" disabled="item.disabled" *ngFor="let item of lista_estados_revision">
                                     {{item.descripcion}}
                                 </ng-option>
                             </ng-select>

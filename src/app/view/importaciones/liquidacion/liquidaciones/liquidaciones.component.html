@@ -17,7 +17,7 @@
                             </button>
                             <button class="btn btn-info boton btn-xs button_margin" (click)="validateUpdatedLiqImp()"
                                 *ngIf="dsbGlb && !valCierre" matTooltip="Actualizar liquidación"
-                                [disabled]="importPed.total_seguro == 0 || importPed.total_transp == 0 "
+                                disabled="importPed.total_seguro == 0 || importPed.total_transp == 0 "
                                 [hidden]="importPed.estado == 'Liquidado' ">
                                 <i class="fa fa-floppy-o" aria-hidden="true"></i> ACTUALIZAR LIQUIDACIÓN
                             </button>
@@ -27,7 +27,7 @@
                                 <i class="fa fa-floppy-o" aria-hidden="true"></i> CERRAR LIQUIDACIÓN
                             </button>
                             <button class="btn boton btn-xs button_margin btn-primary" (click)="showLiquidaciones()"
-                                matTooltip="Ver liquidaciones" [disabled]="secGlobal == undefined ">
+                                matTooltip="Ver liquidaciones" disabled="secGlobal == undefined ">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i> LIQUIDACIONES EN PROCESO
                             </button>
                             <button class="btn btn-danger boton btn-cancel btn-xs button_margin" (click)="cancel()"
@@ -62,7 +62,7 @@
                         </div>
                         <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
                             style="padding-left: 7px;font-size: 13px;" [(ngModel)]="importPed.fk_pais"
-                            [clearable]="false" [disabled]="dsbGlb" (ngModelChange)="changeFlag()">
+                            [clearable]="false" disabled="dsbGlb" (ngModelChange)="changeFlag()">
                             <ng-option [value]="0">Seleccione país</ng-option>
                             <ng-option *ngFor="let d of arrayCountrys" [value]="d.id">
                                 {{d.nom_pais}}</ng-option>
@@ -78,7 +78,7 @@
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Puerto
                                 salida</span>
                         </div>
-                        <input type="text" placeholder="Ingrese puerto de salida" [disabled]="dsbGlb"
+                        <input type="text" placeholder="Ingrese puerto de salida" disabled="dsbGlb"
                             [(ngModel)]="importPed.puerto_salida" id="idprtSalida" class="form-control form-control-sm">
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                                 llegada</span>
                         </div>
                         <input type="text" placeholder="Ingrese puerto de llegada" class="form-control form-control-sm"
-                            [(ngModel)]="importPed.prt_llegada" id="idPrtll" [disabled]="dsbGlb">
+                            [(ngModel)]="importPed.prt_llegada" id="idPrtll" disabled="dsbGlb">
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                                 transporte</span>
                         </div>
                         <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.tip_transp"
-                            [disabled]="dsbGlb">
+                            disabled="dsbGlb">
                             <option value="0">Seleccione transporte</option>
                             <option value="Aereo">Aéreo</option>
                             <option value="Terrestre">Terrestre</option>
@@ -116,7 +116,7 @@
                                 transporte</span>
                         </div>
                         <input type="text" placeholder="Ingrese nombre transporte" class="form-control form-control-sm"
-                            [(ngModel)]="importPed.name_transp" id="idNametrp" [disabled]="dsbGlb">
+                            [(ngModel)]="importPed.name_transp" id="idNametrp" disabled="dsbGlb">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -125,7 +125,7 @@
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo carga</span>
                         </div>
                         <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.tipo_carga"
-                            [disabled]="dsbGlb" (ngModelChange)="changeContainer($event)">
+                            disabled="dsbGlb" (ngModelChange)="changeContainer($event)">
                             <option value="0">Seleccione tipo carga</option>
                             <option value="FCL">Full Load Container</option>
                             <option value="LCL">Low Container Load</option>
@@ -141,7 +141,7 @@
                         </div>
                         <input type="number" placeholder="Ingrese cantidad de contenedores"
                             class="form-control form-control-sm" [(ngModel)]="importPed.contenedor_cat" id="idCtdCtn"
-                            [disabled]="dsbGlb || importPed.tipo_carga == 'FCL' ">
+                            disabled="dsbGlb || importPed.tipo_carga == 'FCL' ">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -151,7 +151,7 @@
                         </div>
                         <input type="text" [(ngModel)]="importPed.cap_peso" min="0" class="form-control form-control-sm"
                             placeholder="Ingrese capacidad del peso en kilogramos" id="idCpcPeso"
-                            (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="dsbGlb">
+                            (keypress)="commonServices.FormatDecimalVal($event)" disabled="dsbGlb">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -163,7 +163,7 @@
                         <input type="text" [(ngModel)]="importPed.cap_vol" min="0" id="idCpcVol"
                             class="form-control form-control-sm"
                             placeholder="Ingrese capacidad del volumen en metros cúbicos"
-                            (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="dsbGlb">
+                            (keypress)="commonServices.FormatDecimalVal($event)" disabled="dsbGlb">
                     </div>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No.
                                 inspección</span>
                         </div>
-                        <input type="text" placeholder="Inspección" [disabled]="dsbGlb"
+                        <input type="text" placeholder="Inspección" disabled="dsbGlb"
                             class="form-control form-control-sm" [(ngModel)]="importPed.inspeccion" id="idImpec" min="0"
                             (keypress)="commonServices.FormatDecimalVal($event)">
                     </div>
@@ -186,7 +186,7 @@
                         </div>
                         <input type="text" placeholder="Número Dai" min="0" class="form-control form-control-sm"
                             (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="importPed.num_dai"
-                            id="idnumDai" [disabled]="dsbGlb">
+                            id="idnumDai" disabled="dsbGlb">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -194,7 +194,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. B/L</span>
                         </div>
-                        <input type="text" placeholder="Número B/L" [(ngModel)]="importPed.bl" [disabled]="dsbGlb"
+                        <input type="text" placeholder="Número B/L" [(ngModel)]="importPed.bl" disabled="dsbGlb"
                             id="idbl" min="0" class="form-control form-control-sm"
                             (keypress)="commonServices.FormatDecimalVal($event)">
                     </div>
@@ -207,7 +207,7 @@
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Items</span>
                         </div>
                         <input type="text" [(ngModel)]="importPed.total_items" class="form-control form-control-sm"
-                            [disabled]="true">
+                            disabled="true">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -218,7 +218,7 @@
                         </div>
                         <input type="number" class="form-control form-control-sm"
                             placeholder="$ {{commonServices.formatNumber(totalesXProductosCierre.total_arancel)}}"
-                            id="idArancel" [disabled]="true">
+                            id="idArancel" disabled="true">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -235,7 +235,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Gasto</span>
                         </div>
-                        <input type="text" placeholder="Gastos del pedido" [disabled]="true"
+                        <input type="text" placeholder="Gastos del pedido" disabled="true"
                             class="form-control form-control-sm"
                             placeholder="$ {{commonServices.formatNumber(totalesViews.tgt)}}">
                     </div>
@@ -248,7 +248,7 @@
                         </div>
                         <input type="text" class="form-control form-control-sm"
                             placeholder="$ {{commonServices.formatNumber(totalesViews.total_transp)}}"
-                            [disabled]="true">
+                            disabled="true">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -265,7 +265,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Seguro</span>
                         </div>
-                        <input type="text" [disabled]="true" class="form-control form-control-sm"
+                        <input type="text" disabled="true" class="form-control form-control-sm"
                             placeholder="$ {{commonServices.formatNumber(totalesViews.ts)}}">
                     </div>
                 </div>
@@ -275,7 +275,7 @@
                             <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Fob</span>
                         </div>
                         <input type="text" class="form-control form-control-sm"
-                            placeholder="$ {{commonServices.formatNumber(totalesViews.tf)}}" [disabled]="true">
+                            placeholder="$ {{commonServices.formatNumber(totalesViews.tf)}}" disabled="true">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -283,7 +283,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Observación</span>
                         </div>
-                        <textarea class="form-control" aria-label="With textarea" [disabled]="dsbGlb"
+                        <textarea class="form-control" aria-label="With textarea" disabled="dsbGlb"
                             placeholder="Ingrese una observación" [(ngModel)]="importPed.observacion"></textarea>
                     </div>
                 </div>
@@ -312,7 +312,7 @@
                             <div class="row justify-content-end">
                                 <div class="col-9 pr-0">
                                     <select class="form-control form-control-sm custom-select " [(ngModel)]="pedido"
-                                        [disabled]="dsbGlb">
+                                        disabled="dsbGlb">
                                         <option [value]="0">Seleccione pedido</option>
                                         <option [value]="d.id" *ngFor="let d of arrayPedidos">
                                             {{d.num_doc.toString().padStart(10,
@@ -321,11 +321,11 @@
                                     </select>
                                 </div>
                                 <div class="col-3 ">
-                                    <button class="btn btn-success btn-sm" [disabled]="pedido == '0' "
+                                    <button class="btn btn-success btn-sm" disabled="pedido == '0' "
                                         (click)="addPedido()">
                                         <i class="fas fa-plus"></i>
                                     </button>
-                                    <button class="btn btn-danger btn-sm" [disabled]="pedido == '0' "
+                                    <button class="btn btn-danger btn-sm" disabled="pedido == '0' "
                                         (click)="deletePedido()">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
@@ -427,7 +427,7 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-12 p-0">
                     <button class="btn  btn-block" type="button" data-toggle="collapse"
-                        data-target="#collapseTransporte" [disabled]="!dsbGlb" (click)="changeStatusTr()"
+                        data-target="#collapseTransporte" disabled="!dsbGlb" (click)="changeStatusTr()"
                         aria-expanded="false" aria-controls="collapseExample" style="height: 25px;
                                                                                  color: white;
                                                                                  padding: 0px;
@@ -450,7 +450,7 @@
                                 </div>
                                 <div class="col-md-12 mt-0">
                                     <select class="form-control form-control-sm custom-select"
-                                        [(ngModel)]="factor_transp" [disabled]="valUdp"
+                                        [(ngModel)]="factor_transp" disabled="valUdp"
                                         (ngModelChange)="calculated($event)">
                                         <option value="0">Seleccione costear por:</option>
                                         <option value="Valor">Valor</option>
@@ -468,7 +468,7 @@
                                 <div class="col-md-12 mt-0">
                                     <input type="text"
                                         placeholder="$ {{commonServices.formatNumber(totalesViews.total_transp)}}"
-                                        [disabled]="true" style="border: none;">
+                                        disabled="true" style="border: none;">
                                 </div>
                             </div>
                         </div>
@@ -480,7 +480,7 @@
                                 <div class="col-md-12 mt-0">
                                     <input type="text"
                                         placeholder="{{commonServices.formatNumber(base_transp)}} {{(prefijo)}}"
-                                        [disabled]="true" style="border: none;">
+                                        disabled="true" style="border: none;">
                                 </div>
                             </div>
                         </div>
@@ -603,7 +603,7 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-12 p-0">
                     <button class="btn  btn-block" type="button" data-toggle="collapse"
-                        data-target="#collapseDetalleGasto" [disabled]="!dsbGlb || !valCierre"
+                        data-target="#collapseDetalleGasto" disabled="!dsbGlb || !valCierre"
                         (click)="changeStatusDet()" aria-expanded="false" aria-controls="collapseExample" style="height: 25px;
                                                                                  color: white;
                                                                                  padding: 0px;
@@ -712,7 +712,7 @@
             <div class="row justify-content-center mt-4 mb-2">
                 <div class="col-12 p-0">
                     <button class="btn  btn-block" type="button" data-toggle="collapse" data-target="#collapseCierre"
-                        [disabled]="!dsbGlb || !valCierre" (click)="changeStatusCiere()" aria-expanded="false"
+                        disabled="!dsbGlb || !valCierre" (click)="changeStatusCiere()" aria-expanded="false"
                         aria-controls="collapseExample" style="height: 25px;
                                                                                  color: white;
                                                                                  padding: 0px;
@@ -778,7 +778,7 @@
                                                 <input type="text" [(ngModel)]="d.partida_cod" min="0"
                                                     (ngModelChange)="changePartida(i,$event)" style="text-align: left;padding-left: 10px;"
                                                     (keypress)="commonServices.FormatDecimalVal($event)"
-                                                    id="{{'id_partida' + i}}" [disabled]="valLiquiCerrada">
+                                                    id="{{'id_partida' + i}}" disabled="valLiquiCerrada">
                                             </div>
                                         </td>
                                         <td>

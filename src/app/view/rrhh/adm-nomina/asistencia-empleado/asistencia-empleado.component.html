@@ -29,7 +29,7 @@
                         <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
                             <input type="text" class="form-control" readonly [value]="fileName">
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-sm btn-primary" [disabled]="btnSubirArchivo" onclick="document.getElementById('getExcelAsistencia').click()">
+                                <button type="button" class="btn btn-sm btn-primary" disabled="btnSubirArchivo" onclick="document.getElementById('getExcelAsistencia').click()">
                                     <i class="far fa-file-excel"></i>
                                 </button>
                                 <input type="file" class="d-none" id="getExcelAsistencia" #fileUpload (change)="handleFileInputPlantillaAsistenciasDiasTrabajados($event.target.files, $event)" type='file' accept=".xls, .xlsx">
@@ -96,7 +96,7 @@
                                  <!-- <th style="width: 3rem"></th> -->
                                  <th style="width: 3rem" pFrozenColumn>
                                      <p-tableHeaderCheckbox
-                                     [disabled]="disableHeaderCheckbox"
+                                     disabled="disableHeaderCheckbox"
                                      ></p-tableHeaderCheckbox>
                                      <!-- <p-checkbox (click)="selectRow(e.checked)" #e></p-checkbox> -->
                                  </th>
@@ -146,7 +146,7 @@
                                      <td *ngIf="(det_dia_trabajado.estado_generacion != 'generada');else noDisponibleCheckBox">
                                          <p-tableCheckbox (click)="selectRow(det_dia_trabajado,$event)"
                                           [value]="det_dia_trabajado"
-                                          [disabled]="det_dia_trabajado.estado_generacion == 'generada'"
+                                          disabled="det_dia_trabajado.estado_generacion == 'generada'"
                                           ></p-tableCheckbox>
                 
                                      </td>
@@ -175,7 +175,7 @@
                                      <td *ngIf="(det_dia_trabajado.estado_generacion != 'generada')">
                                          <p-tableCheckbox (click)="selectRow(det_dia_trabajado,$event)"
                                          [value]="det_dia_trabajado"
-                                         [disabled]="det_dia_trabajado.estado_generacion == 'generada'"
+                                         disabled="det_dia_trabajado.estado_generacion == 'generada'"
                                          ></p-tableCheckbox>
                                      </td>
                                  </ng-template> -->
@@ -199,7 +199,7 @@
                                      <td pFrozenColumn *ngIf="(cargaExcel == true || cargaExcel == false);">
                                          <p-tableCheckbox (click)="selectRow(det_dia_trabajado,$event)"
                                          [value]="det_dia_trabajado"
-                                         [disabled]="det_dia_trabajado.estado_generacion == 'generada' 
+                                         disabled="det_dia_trabajado.estado_generacion == 'generada' 
                                          ||(cargaExcel == true && det_dia_trabajado.ditr_modo_generacion == 'Automática' )"
                                          ></p-tableCheckbox>
                                      </td>
@@ -423,7 +423,7 @@
                         <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
                             <input type="text" class="form-control" readonly [value]="fileName">
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-sm btn-primary" [disabled]="btnSubirArchivoHorasExtra" onclick="document.getElementById('getExcelHorasExtra').click()">
+                                <button type="button" class="btn btn-sm btn-primary" disabled="btnSubirArchivoHorasExtra" onclick="document.getElementById('getExcelHorasExtra').click()">
                                     <i class="far fa-file-excel"></i>
                                 </button>
                                 <input type="file" class="d-none" id="getExcelHorasExtra" #fileUpload (change)="handleFileInputPlantillaAsHorasExtra($event.target.files, $event)" type='file' accept=".xls, .xlsx">

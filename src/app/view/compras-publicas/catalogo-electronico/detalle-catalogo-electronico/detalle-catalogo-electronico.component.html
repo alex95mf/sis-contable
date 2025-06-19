@@ -239,12 +239,12 @@
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
                                                     (change)="cargaArchivo($event.target.files)"
-                                                    [disabled]="disabledCampo">
+                                                    disabled="disabledCampo">
                                                 <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ?
                                                     fileList[0].name : "Seleccione un archivo" }}</label>
                                                 
                                             </div>
-                                            <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled]='disabledCampo'>Cargar</button></div>
+                                            <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" disabled='disabledCampo'>Cargar</button></div>
                                        
                                         </app-cc-input-group-prepend>
 
@@ -275,7 +275,7 @@
                     <legend class="w-auto card-legend">Detalle de la Solicitud</legend>
                     <div class="row m-0">
                         <div class="col-12 text-right">
-                            <button class="btn btn-primary" (click)="validaDetallesCatElec()" [disabled]="disabledDetalle">
+                            <button class="btn btn-primary" (click)="validaDetallesCatElec()" disabled="disabledDetalle">
                                 Guardar Detalle
                             </button>
                         </div>

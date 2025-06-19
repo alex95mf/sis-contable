@@ -6,13 +6,13 @@
             <div class="col-12">
                 <app-cc-input-group-prepend label="Período" styleSpan="size-span-campo font-weight-bold">
                     <ng-select class="form-control" appendTo="body" [clearable]="false"  [(ngModel)]="cuantia.periodo" 
-                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" [disabled]="!esNuevo">
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" disabled="!esNuevo">
                     </ng-select>
                 </app-cc-input-group-prepend>
             </div>
             <div class="col-12">
                 <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select id="tipo" class="form-control form-control-sm"   [(ngModel)]="cuantia.tipo" [clearable]="false" [disabled]="!esNuevo">
+                    <ng-select id="tipo" class="form-control form-control-sm"   [(ngModel)]="cuantia.tipo" [clearable]="false" disabled="!esNuevo">
                         <ng-option disabled [value]="0" disabled>Seleccione tipo</ng-option>
                         <ng-option *ngFor="let d of tipoList" [value]="d.value">{{ d.label }}</ng-option>
                     </ng-select>

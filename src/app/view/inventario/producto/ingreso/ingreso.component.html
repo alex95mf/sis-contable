@@ -5,7 +5,7 @@
             <div class="row" *ngIf="permisions?.length > 0">
                 <div class="col-sm-3">
                     <app-cc-input-group-prepend label="Clase" styleSpan="size-span-campo">
-                        <select class="form-control form-control-sm custom-select" [(ngModel)]="claseSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledClaseServicio" (ngModelChange)="generaActionRawMaterial($event)">
+                        <select class="form-control form-control-sm custom-select" [(ngModel)]="claseSelect" disabled="permisions[0].editar == '0' || !disabledProduct || disabledClaseServicio" (ngModelChange)="generaActionRawMaterial($event)">
                             <option [value]="0">Seleccione Clase</option>
                             <option *ngFor="let d of dataProServicio" [value]="d.id">{{d.nombre}}
                         </option>
@@ -20,7 +20,7 @@
                                     <div class="onoffswitch">
                                         <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
                                             id="myonoffswitch" checked [(ngModel)]="checkAuth" (click)="tabSelection()"
-                                            [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledModSearch || disabledFormula ">
+                                            disabled="permisions[0].agregar == '0' || !disabledProduct || disabledModSearch || disabledFormula ">
                                         <label class="onoffswitch-label" for="myonoffswitch">
                                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>
@@ -34,7 +34,7 @@
 <div class="col-sm-3">
     <app-cc-input-group-prepend label="Materia Prima" styleSpan="size-span-campo">
         <div class="input-group-text mr-5" style="height: 40px;">
-            <input type="checkbox" id="idMateriaPrima" [(ngModel)]="materiaPrima" data-toggle="tooltip" data-placement="top" title="Producto de tipo materia prima" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima || dAction">
+            <input type="checkbox" id="idMateriaPrima" [(ngModel)]="materiaPrima" data-toggle="tooltip" data-placement="top" title="Producto de tipo materia prima" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima || dAction">
         </div>
     </app-cc-input-group-prepend>
 </div>
@@ -42,7 +42,7 @@
 <div class="col-sm-3">
     <app-cc-input-group-prepend label="En Venta" styleSpan="size-span-campo">
         <div class="input-group-text" style="height: 40px;">
-            <input type="checkbox" #EnVen="ngModel" data-toggle="tooltip" title="Aplicar venta" name="EnVen" id="idEnVenta" [(ngModel)]="enVentaData" [disabled]="permisions[0].editar == '0' || !disabledProduct">
+            <input type="checkbox" #EnVen="ngModel" data-toggle="tooltip" title="Aplicar venta" name="EnVen" id="idEnVenta" [(ngModel)]="enVentaData" disabled="permisions[0].editar == '0' || !disabledProduct">
         </div>
     </app-cc-input-group-prepend>
 </div>
@@ -51,15 +51,15 @@
 <div class="row" *ngIf="permisions?.length > 0">
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Código/Generar" styleSpan="size-span-campo">
-            <input type="text" class="form-control form-control-sm " #cod="ngModel" name="cod" id="idCodigo" [(ngModel)]="codigoData" placeholder="Ingrese código" [disabled]="permisions[0].editar == '0' || !disabledProduct || editCode || editSelectCode">
+            <input type="text" class="form-control form-control-sm " #cod="ngModel" name="cod" id="idCodigo" [(ngModel)]="codigoData" placeholder="Ingrese código" disabled="permisions[0].editar == '0' || !disabledProduct || editCode || editSelectCode">
             <div class="input-group-text btn" id="inputLabel-prepend">
-                <input type="checkbox" #chCod="ngModel" name="chCod" id="idChCod" [(ngModel)]="checkCodigo" data-toggle="tooltip" data-placement="top" title="Generar código automaticamente" [disabled]="permisions[0].editar == '0' || !disabledProduct || editCode" (click)="rand_code('todotek2021',10)">
+                <input type="checkbox" #chCod="ngModel" name="chCod" id="idChCod" [(ngModel)]="checkCodigo" data-toggle="tooltip" data-placement="top" title="Generar código automaticamente" disabled="permisions[0].editar == '0' || !disabledProduct || editCode" (click)="rand_code('todotek2021',10)">
             </div>
         </app-cc-input-group-prepend>
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Código Barra" styleSpan="size-span-campo">
-            <input type="text" class="form-control form-control-sm" #codBa="ngModel" name="codBa" placeholder="Ingrese código de barra" id="idCB" [(ngModel)]="codigoData" [disabled]="true">
+            <input type="text" class="form-control form-control-sm" #codBa="ngModel" name="codBa" placeholder="Ingrese código de barra" id="idCB" [(ngModel)]="codigoData" disabled="true">
             <div class="input-group-text btn qr-code" id="inputLabel-prepend" data-toggle="tooltip" data-placement="top" title="Ver código Qr" (click)="presentarCodBarra()" [hidden]="!dbQr">
                 <i class="fa fa-qrcode" aria-hidden="true"></i>
             </div>
@@ -67,12 +67,12 @@
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Número de Parte" styleSpan="size-span-campo">
-            <input type="text" class="form-control form-control-sm" #numPar="ngModel" name="numPar" placeholder="Ingrese número de parte" id="idnumPar" [(ngModel)]="NumParteData" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
+            <input type="text" class="form-control form-control-sm" #numPar="ngModel" name="numPar" placeholder="Ingrese número de parte" id="idnumPar" [(ngModel)]="NumParteData" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
         </app-cc-input-group-prepend>
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Origen" styleSpan="size-span-campo">
-            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="origenData" id="idOrigen" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="origenData" id="idOrigen" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
                 <ng-option [value]="0">Seleccione Origen</ng-option>
                 <ng-option *ngFor="let d of arrayCountrys" [value]="d.nom_pais">{{d.nom_pais}}
                 </ng-option>
@@ -83,31 +83,31 @@
 <div class="row" *ngIf="permisions?.length > 0">
     <div class="col-sm-6">
         <app-cc-input-group-prepend label="Nombre Producto" styleSpan="size-span-campo">
-            <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam" placeholder="Ingrese un nombre" id="idname" [(ngModel)]="nameData" [disabled]="permisions[0].editar == '0' || !disabledProduct">
+            <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam" placeholder="Ingrese un nombre" id="idname" [(ngModel)]="nameData" disabled="permisions[0].editar == '0' || !disabledProduct">
         </app-cc-input-group-prepend>
     </div>
     <div class="col-sm-6">
         <app-cc-input-group-prepend label="Genérico" styleSpan="size-span-campo">
-            <input type="text" class="form-control form-control-sm" #gene="ngModel" name="gene" placeholder="Ingrese nombre genérico" id="idGenerico" [(ngModel)]="genericoData" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
+            <input type="text" class="form-control form-control-sm" #gene="ngModel" name="gene" placeholder="Ingrese nombre genérico" id="idGenerico" [(ngModel)]="genericoData" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
         </app-cc-input-group-prepend>
     </div>
 </div>
 <div class="row" *ngIf="permisions?.length > 0">
     <div class="col-sm-6">
         <app-cc-input-group-prepend label="Presentación" styleSpan="size-span-campo">
-            <input type="text" class="form-control form-control-sm" #idPrese="ngModel" name="idPrese" id="idPreseentacion" [(ngModel)]="presentacionData" placeholder="Ingrese presentación del producto" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
+            <input type="text" class="form-control form-control-sm" #idPrese="ngModel" name="idPrese" id="idPreseentacion" [(ngModel)]="presentacionData" placeholder="Ingrese presentación del producto" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
         </app-cc-input-group-prepend>
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Marca" styleSpan="size-span-campo">
-            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="marcaSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idMarcaSelect" (ngModelChange)="selectedModels($event)">
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="marcaSelect" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idMarcaSelect" (ngModelChange)="selectedModels($event)">
                 <ng-option [value]="0">Seleccione Marca
                 </ng-option>
                 <ng-option *ngFor="let d of dataMarcas" [value]="d.valor">{{d.valor}}
                 </ng-option>
             </ng-select>
             <div class="input-group-append">
-                <button class="btn btn-success" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima" data-toggle="tooltip" data-placement="top" title="Crear marca" (click)="setCatalogoTitle('Ingreso de nueva marca','MARCAS','Marca')"
+                <button class="btn btn-success" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima" data-toggle="tooltip" data-placement="top" title="Crear marca" (click)="setCatalogoTitle('Ingreso de nueva marca','MARCAS','Marca')"
                     class="btn btn-primary" >
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
@@ -117,7 +117,7 @@
 
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo">
-            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="grupoSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct " id="idGrupo">
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="grupoSelect" disabled="permisions[0].editar == '0' || !disabledProduct " id="idGrupo">
                 <ng-option [value]="0">Seleccione Grupo
                 </ng-option>
                 <ng-option *ngFor="let d of dataGrupo" [value]="d.id_grupo">{{d.nombre}}
@@ -129,7 +129,7 @@
 <div class="row" *ngIf="permisions?.length > 0">
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="UDM Compra" styleSpan="size-span-campo">
-            <ng-select class="form-control custom" appendTo="body" [searchable]="false" [clearable]="false" [(ngModel)]="udmcSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idUDMC">
+            <ng-select class="form-control custom" appendTo="body" [searchable]="false" [clearable]="false" [(ngModel)]="udmcSelect" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idUDMC">
                 <ng-option [value]="0">Seleccione UDM Compra
                 </ng-option>
                 <ng-option *ngFor="let d of dataUDM" [value]="d.valor">{{d.valor}}
@@ -139,7 +139,7 @@
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="UDM Venta" styleSpan="size-span-campo">
-            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="udmvSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idUDMV">
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="udmvSelect" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idUDMV">
                 <ng-option [value]="0">Seleccione UDM Venta
                 </ng-option>
                 <ng-option *ngFor="let d of dataUDM" [value]="d.valor">{{d.valor}}
@@ -149,14 +149,14 @@
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Modelo" styleSpan="size-span-campo">
-            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="modeloSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima || disableMarca" id="idModeloSelect">
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="modeloSelect" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima || disableMarca" id="idModeloSelect">
                 <ng-option [value]="0">Seleccione Modelo
                 </ng-option>
                 <ng-option *ngFor="let d of dataModelos" [value]="d.valor">{{d.valor}}
                 </ng-option>
             </ng-select>
             <div class="input-group-append">
-                <button class="btn btn-success" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima" data-toggle="tooltip" data-placement="top" title="Crear modelo" (click)="setCatalogoTitle('Ingreso de nuevo modelo','MODELOS','Modelo')"
+                <button class="btn btn-success" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima" data-toggle="tooltip" data-placement="top" title="Crear modelo" (click)="setCatalogoTitle('Ingreso de nuevo modelo','MODELOS','Modelo')"
                     class="btn btn-primary"  >
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
@@ -165,14 +165,14 @@
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Color" styleSpan="size-span-campo">
-            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="colorSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idColorSelect">
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="colorSelect" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idColorSelect">
                 <ng-option [value]="0">Seleccione Color
                 </ng-option>
                 <ng-option *ngFor="let d of dataColores" [value]="d.valor">{{d.valor}}
                 </ng-option>
             </ng-select>
             <div class="input-group-append">
-                <button class="btn btn-success" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima" data-toggle="tooltip" data-placement="top" title="Crear color" (click)="setCatalogoTitle('Ingreso de nuevo color','COLORES','Color')"
+                <button class="btn btn-success" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima" data-toggle="tooltip" data-placement="top" title="Crear color" (click)="setCatalogoTitle('Ingreso de nuevo color','COLORES','Color')"
                     class="btn btn-primary"  >
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
@@ -183,7 +183,7 @@
 <div class="row" *ngIf="permisions?.length > 0">
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Tipo Compra" styleSpan="size-span-campo">
-            <select class="form-control form-control-sm custom-select" [(ngModel)]="TipoCompraSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idTipoCompra">
+            <select class="form-control form-control-sm custom-select" [(ngModel)]="TipoCompraSelect" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima" id="idTipoCompra">
                 <option [value]="0">Seleccione Tipo Compra
                 </option>
             <option *ngFor="let d of dataTipoCompra" [value]="d.id">{{d.nombre}}
@@ -193,7 +193,7 @@
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Método de Costo" styleSpan="size-span-campo">
-            <select class="form-control form-control-sm custom-select" [(ngModel)]="metCostoSelect" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledForCheck || disabledMateriaPrima " id="idMetodoCosto" (ngModelChange)="metodoCosto($event)">
+            <select class="form-control form-control-sm custom-select" [(ngModel)]="metCostoSelect" disabled="permisions[0].editar == '0' || !disabledProduct || disabledForCheck || disabledMateriaPrima " id="idMetodoCosto" (ngModelChange)="metodoCosto($event)">
                 <option [value]="0">Seleccione Método Costo
                 </option>
                 <option *ngFor="let d of dataMetodoCosto" [value]="d.id">{{d.nombre}}
@@ -203,7 +203,7 @@
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Costo" styleSpan="size-span-campo">
-            <input type="number" class="form-control form-control-sm text-right" #cost="ngModel" name="cost" placeholder="Ingrese costo" id="idCost" [(ngModel)]="costoData" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledForCheck || disabledCostor">
+            <input type="number" class="form-control form-control-sm text-right" #cost="ngModel" name="cost" placeholder="Ingrese costo" id="idCost" [(ngModel)]="costoData" min="0" (keypress)="commonServices.FormatDecimalVal($event)" disabled="permisions[0].editar == '0' || !disabledProduct || disabledForCheck || disabledCostor">
         </app-cc-input-group-prepend>
     </div>
 </div>
@@ -211,22 +211,22 @@
 <div class="row" *ngIf="permisions?.length > 0">
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Stock Minimo" styleSpan="size-span-campo">
-            <input type="number" class="form-control form-control-sm" #SMi="ngModel" name="SMi" placeholder="Ingrese Stock mínimo" id="idSMinimo" [(ngModel)]="minimoData" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
+            <input type="number" class="form-control form-control-sm" #SMi="ngModel" name="SMi" placeholder="Ingrese Stock mínimo" id="idSMinimo" [(ngModel)]="minimoData" min="0" (keypress)="commonServices.FormatDecimalVal($event)" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
         </app-cc-input-group-prepend>
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Stock Máximo" styleSpan="size-span-campo">
-            <input type="number" class="form-control form-control-sm" #SMA="ngModel" name="SMA" placeholder="Ingrese Stock máximo" id="idSMaximo" [(ngModel)]="maximoData" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
+            <input type="number" class="form-control form-control-sm" #SMA="ngModel" name="SMA" placeholder="Ingrese Stock máximo" id="idSMaximo" [(ngModel)]="maximoData" min="0" (keypress)="commonServices.FormatDecimalVal($event)" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
         </app-cc-input-group-prepend>
     </div>
     <div class="col-sm-3">
         <app-cc-input-group-prepend label="Stock Surgerido" styleSpan="size-span-campo">
-            <input type="number" class="form-control form-control-sm text-right" #SSuger="ngModel" name="SSuger" placeholder="ingrese stock sugerido" id="idSSugerido" [(ngModel)]="sugeridoData" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
+            <input type="number" class="form-control form-control-sm text-right" #SSuger="ngModel" name="SSuger" placeholder="ingrese stock sugerido" id="idSSugerido" [(ngModel)]="sugeridoData" min="0" (keypress)="commonServices.FormatDecimalVal($event)" disabled="permisions[0].editar == '0' || !disabledProduct || disabledMateriaPrima">
         </app-cc-input-group-prepend>
     </div>
     <div class="col-sm-3" *ngIf="stockActualData">
         <app-cc-input-group-prepend label="Stock Actual" styleSpan="size-span-campo">
-            <input type="text" class="form-control form-control-sm text-right" #stockd="ngModel" name="stockd" id="idstockaData" [(ngModel)]="stockaData" min="0" [disabled]="true">
+            <input type="text" class="form-control form-control-sm text-right" #stockd="ngModel" name="stockd" id="idstockaData" [(ngModel)]="stockaData" min="0" disabled="true">
         </app-cc-input-group-prepend>
     </div>
 </div>
@@ -237,7 +237,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" style="background-color: #404a63; color: white;">Nota</span>
             </div>
-            <textarea name="observation" class="form-control form-control-sm cls-textarea" rows="4" placeholder="Observaciones" [disabled]="permisions[0].agregar == '0' || !disabledProduct" [(ngModel)]="observation"></textarea>
+            <textarea name="observation" class="form-control form-control-sm cls-textarea" rows="4" placeholder="Observaciones" disabled="permisions[0].agregar == '0' || !disabledProduct" [(ngModel)]="observation"></textarea>
         </div>
     </div>
 </div>
@@ -248,7 +248,7 @@
     <div class="row" *ngIf="permisions?.length > 0">
         <div class="col-sm-3">
             <app-cc-input-group-prepend label="UDM Peso" styleSpan="size-span-campo">
-                <select id="inpMasa" class="form-control form-control-sm" [(ngModel)]="values.fk_unidad_masa" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
+                <select id="inpMasa" class="form-control form-control-sm" [(ngModel)]="values.fk_unidad_masa" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
             <option hidden disabled selected [value]=" 0">Elegir una opción</option>
             <option *ngFor="let el of masa; let i = index" [value]="el.udm_ini">
                 {{ el.udm_ini }}
@@ -258,7 +258,7 @@
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend>
-                <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="values.masa" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
+                <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="values.masa" (keypress)="commonServices.FormatDecimalVal($event)" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-4">
@@ -266,25 +266,25 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tarifas Arancelarias</span>
                 </div>
-                <button class="btn btn-sm btn-info" (click)="presentarAranceles()" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
+                <button class="btn btn-sm btn-info" (click)="presentarAranceles()" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
                     <i class="fas fa-balance-scale"></i>
                 </button>
                 <div class="input-group-append">
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="values.code" [disabled]="true">
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="values.code" disabled="true">
                 </div>
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="'%' + values.porcentaje " [disabled]="true">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="'%' + values.porcentaje " disabled="true">
             </div>
         </div>
         <div class="col-sm-3">
             <app-cc-input-group-prepend>
-                <textarea class="form-control form-control-sm cls-textarea" [(ngModel)]="values.nombre" [disabled]="true"></textarea>
+                <textarea class="form-control form-control-sm cls-textarea" [(ngModel)]="values.nombre" disabled="true"></textarea>
             </app-cc-input-group-prepend>
         </div>
     </div>
     <div class="row" *ngIf="permisions?.length > 0">
         <div class="col-sm-3">
             <app-cc-input-group-prepend label="UDM Volumen" styleSpan="size-span-campo">
-                <select id="inpLong" class="form-control form-control-sm" [(ngModel)]="values.fk_unidad_longitud" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
+                <select id="inpLong" class="form-control form-control-sm" [(ngModel)]="values.fk_unidad_longitud" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
             <option hidden disabled selected [value]="0">Elegir una opción</option>
             <option *ngFor="let el of long; let i = index" [value]="el.udm_ini">
                 {{ el.udm_ini }}
@@ -294,17 +294,17 @@
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="altura" styleSpan="size-span-campo">
-                <input type="number" min="0" class="form-control form-control-sm text-right" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="values.longitud_1" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
+                <input type="number" min="0" class="form-control form-control-sm text-right" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="values.longitud_1" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="largo" styleSpan="size-span-campo">
-                <input type="number" min="0" class="form-control form-control-sm text-right" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="values.longitud_2" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
+                <input type="number" min="0" class="form-control form-control-sm text-right" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="values.longitud_2" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-2">
             <app-cc-input-group-prepend label="ancho" styleSpan="size-span-campo">
-                <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="values.longitud_3" [disabled]="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
+                <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="values.longitud_3" disabled="permisions[0].agregar == '0' || !disabledProduct || disabledMateriaPrima">
             </app-cc-input-group-prepend>
         </div>
     </div>
@@ -334,12 +334,12 @@
 
                         <div class="col-sm-12 mt-1">
                             <app-cc-input-group-prepend label="{{valueLabel}}" styleSpan="size-span-campo">
-                                <input type="text" #valueCata="ngModel" name="valueCata" style="box-shadow: unset;outline: unset;" class="form-control form-control-sm" [(ngModel)]="valorCatalogo" placeholder="Ingrese valor" [disabled]="permisions[0].editar == '0' " id="IdValorCatalogo">
+                                <input type="text" #valueCata="ngModel" name="valueCata" style="box-shadow: unset;outline: unset;" class="form-control form-control-sm" [(ngModel)]="valorCatalogo" placeholder="Ingrese valor" disabled="permisions[0].editar == '0' " id="IdValorCatalogo">
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm-12 mt-1">
                             <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo">
-                                <textarea name="descripcion" cols="40" rows="1" #causa="ngModel" name="causa" class="form-control form-control-sm" [(ngModel)]="description" placeholder="Ingrese Descripción" style="box-shadow: unset;outline: unset;" [disabled]="permisions[0].editar == '0' "
+                                <textarea name="descripcion" cols="40" rows="1" #causa="ngModel" name="causa" class="form-control form-control-sm" [(ngModel)]="description" placeholder="Ingrese Descripción" style="box-shadow: unset;outline: unset;" disabled="permisions[0].editar == '0' "
                                     id="Idcausa">
                             </textarea>
                             </app-cc-input-group-prepend>

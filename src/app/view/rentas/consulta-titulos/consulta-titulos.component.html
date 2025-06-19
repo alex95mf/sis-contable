@@ -59,7 +59,7 @@
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Tasas</span></div>
                                 <input type="text" class="form-control form-control-sm"  readonly [(ngModel)]="filter.tasa" maxlength="20" placeholder="Tasas">
-                                <button [disabled]=""  class="btn btn-primary btn-sm" ngbTooltip="Buscar Tasas" (click)="expandTasas()"><i class="fas fa-search"></i> Buscar</button>
+                                <button disabled=""  class="btn btn-primary btn-sm" ngbTooltip="Buscar Tasas" (click)="expandTasas()"><i class="fas fa-search"></i> Buscar</button>
                             </div>
                         </div>
                     </div>
@@ -126,10 +126,10 @@
                             <td style="width: 200px;">{{d?.nombre_presupuesto}}</td>
                             <td style="width: 100px;">
                                 <div>
-                                    <button class="btn btn-sm btn-warning mx-1" ngbTooltip="Ver resolución tercera edad" [disabled]="d.storage==null" (click)="verAnexo(d)">
+                                    <button class="btn btn-sm btn-warning mx-1" ngbTooltip="Ver resolución tercera edad" disabled="d.storage==null" (click)="verAnexo(d)">
                                         <i class="far fa-eye"></i>
                                     </button>
-                                    <!-- <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(d)" ngbTooltip="Descargar resolución tercera edad" [disabled]="d.storage==null">
+                                    <!-- <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(d)" ngbTooltip="Descargar resolución tercera edad" disabled="d.storage==null">
                                         <i class="far fa-download"></i>
                                     </button> -->
                                 </div>

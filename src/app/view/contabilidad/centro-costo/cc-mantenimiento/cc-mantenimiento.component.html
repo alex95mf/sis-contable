@@ -52,7 +52,7 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <app-cc-input-group-prepend label="Tipo"styleSpan="size-span-campo">
-                            <select [(ngModel)]="costo.tipo" class="form-control form-control-sm custom-select" id="IdTipo" [disabled]="permisions.editar == '0' || !actions.dComponet">
+                            <select [(ngModel)]="costo.tipo" class="form-control form-control-sm custom-select" id="IdTipo" disabled="permisions.editar == '0' || !actions.dComponet">
                                 <option value="Proyecto">Proyecto</option>
                                 <option value="Centro de Costo">Centro de Costo</option>
                             </select>
@@ -61,7 +61,7 @@
         
                     <div class="col-sm-3">
                         <app-cc-input-group-prepend label="Departamento"styleSpan="size-span-campo">
-                            <select [(ngModel)]="costo.departamento" class="form-control form-control-sm custom-select" id="IdDepartamento" [disabled]="permisions.editar == '0' || !actions.dComponet">
+                            <select [(ngModel)]="costo.departamento" class="form-control form-control-sm custom-select" id="IdDepartamento" disabled="permisions.editar == '0' || !actions.dComponet">
                                 <option *ngFor="let d of departamentos"
                                     [value]="d.id_grupo"> {{ d.nombre_grupo }}</option>
                             </select>
@@ -70,7 +70,7 @@
 
                     <div class="col-sm-3">
                         <app-cc-input-group-prepend label="Provincia"styleSpan="size-span-campo">
-                            <select id="idProvincia" class="form-control form-control-sm" [(ngModel)]="costo.provincias"  (ngModelChange)="searchCities(costo.provincias)" [disabled]="permissions.editar == '0' || !actions.dComponet">
+                            <select id="idProvincia" class="form-control form-control-sm" [(ngModel)]="costo.provincias"  (ngModelChange)="searchCities(costo.provincias)" disabled="permissions.editar == '0' || !actions.dComponet">
                                 <option *ngFor="let d of catalog.province"
                                     [value]="d.valor">{{ d.valor }}
                                 </option>
@@ -80,7 +80,7 @@
 
                     <div class="col-sm-3">
                         <app-cc-input-group-prepend label="Ciudad"styleSpan="size-span-campo">
-                            <select [(ngModel)]="costo.ciudad" class="form-control form-control-sm custom-select" id="IdCiudad" [disabled]="permisions.editar == '0' || costo.provincias == undefined ">
+                            <select [(ngModel)]="costo.ciudad" class="form-control form-control-sm custom-select" id="IdCiudad" disabled="permisions.editar == '0' || costo.provincias == undefined ">
                                 <option *ngFor="let d of catalog.city"
                                     [value]="d.valor">{{ d.valor }}
                                 </option>
@@ -109,7 +109,7 @@
 
                     <div class="col-sm-4">
                         <app-cc-input-group-prepend label="Estados"styleSpan="size-span-campo">
-                            <select [(ngModel)]="costo.estado" class="form-control form-control-sm custom-select" id="IdEstado" [disabled]="permisions.editar == '0'  || !actions.dComponet ">
+                            <select [(ngModel)]="costo.estado" class="form-control form-control-sm custom-select" id="IdEstado" disabled="permisions.editar == '0'  || !actions.dComponet ">
                                 <option value="A">ACTIVO</option>
                                 <option value="I">ELIMINADO</option>
                                 <option value="En Proceso">EN PROCESO</option>
@@ -125,7 +125,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <app-cc-input-group-prepend label="Nombre"styleSpan="size-span-campo">
-                            <input type="text" [(ngModel)]="costo.nombre" id="Idnombre" class="form-control"    aria-label="Small" [disabled]="permisions.editar == '0' || !actions.dComponet">
+                            <input type="text" [(ngModel)]="costo.nombre" id="Idnombre" class="form-control"    aria-label="Small" disabled="permisions.editar == '0' || !actions.dComponet">
                         </app-cc-input-group-prepend>
                     </div>
 
@@ -133,7 +133,7 @@
                         <app-cc-input-group-prepend label="Presupuesto"styleSpan="size-span-campo">
                             <input type="text" [(ngModel)]="costo.presupuesto"  class="form-control text-right"    aria-label="Small"
                             (blur)="costo.presupuesto=validaciones.roundNumber(costo.presupuesto,2);"
-                            (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="permisions.editar == '0' || !actions.dComponet" id="IdPresupuesto">
+                            (keypress)="commonServices.FormatDecimalVal($event)" disabled="permisions.editar == '0' || !actions.dComponet" id="IdPresupuesto">
                         </app-cc-input-group-prepend>
                     </div>
 
@@ -142,11 +142,11 @@
 
                             <div class="input-group-prepend"> 
                                 <span class="input-group-text btn"  > 
-                                    <input type="checkbox"  class="input-group-text"   [(ngModel)]="costo.alertaVencim" (change)="checkVencimiento()" [disabled]="permisions.editar == '0' || !actions.dComponet">
+                                    <input type="checkbox"  class="input-group-text"   [(ngModel)]="costo.alertaVencim" (change)="checkVencimiento()" disabled="permisions.editar == '0' || !actions.dComponet">
                                 </span>
                             </div>
                             
-                            <input type="date" class="form-control"  name="dp" max="2050-01-01" [(ngModel)]="toDatePickerVencimiento" id="idFechaVencimiento" container="body" [disabled]="permisions.editar == '0' || costo.alertaVencim == undefined  ||  !disableVencim"/>
+                            <input type="date" class="form-control"  name="dp" max="2050-01-01" [(ngModel)]="toDatePickerVencimiento" id="idFechaVencimiento" container="body" disabled="permisions.editar == '0' || costo.alertaVencim == undefined  ||  !disableVencim"/>
                             
                         </app-cc-input-group-prepend> 
 
@@ -159,14 +159,14 @@
                     <div class="col-sm-6">
                         <app-cc-input-group-prepend label="Fecha Incial"styleSpan="size-span-campo"> 
                             <input type="date" class="form-control"  name="dp" max="2050-01-01" [(ngModel)]="fromDatePicker"
-                                    id="idInicio" container="body" [disabled]="permisions.editar == '0'  || !actions.dComponet "/>
+                                    id="idInicio" container="body" disabled="permisions.editar == '0'  || !actions.dComponet "/>
                         </app-cc-input-group-prepend> 
                     </div>
 
                     <div class="col-sm-6">
                         <app-cc-input-group-prepend label="Fecha Final"styleSpan="size-span-campo">
                             <input type="date" class="form-control"  name="dp" max="2050-01-01" [(ngModel)]="toDatePicker"
-                                    id="idFin" container="body" [disabled]="permisions.editar == '0'  || !actions.dComponet "/>
+                                    id="idFin" container="body" disabled="permisions.editar == '0'  || !actions.dComponet "/>
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                     <div class="col-sm-6">
                         <app-cc-input-group-prepend label="Descripción"styleSpan="size-span-campo">
                             <textarea [(ngModel)]="costo.descripcion" id="idDescripcion" class="form-control"  rows="1"
-                            aria-label="Small" [disabled]="permisions.editar == '0'  || !actions.dComponet "> </textarea>
+                            aria-label="Small" disabled="permisions.editar == '0'  || !actions.dComponet "> </textarea>
                         </app-cc-input-group-prepend>
                     </div>
                     <div class="col-sm-4">
@@ -183,11 +183,11 @@
 
                             <div class="input-group-prepend"> 
                                 <span class="input-group-text btn"  > 
-                                    <input type="checkbox" class="input-group-text" [(ngModel)]="costo.alertaMonto" [disabled]="permisions.editar == '0'  || !actions.dComponet " (change)="checkCumplimiento()">
+                                    <input type="checkbox" class="input-group-text" [(ngModel)]="costo.alertaMonto" disabled="permisions.editar == '0'  || !actions.dComponet " (change)="checkCumplimiento()">
                                 </span>
                             </div>
                             <input type="text" [(ngModel)]="costo.montoCumplimiento" (blur)="costo.montoCumplimiento=validaciones.roundNumber(costo.montoCumplimiento,2);" class="form-control text-right" id="idalertaMonto" (keypress)="commonServices.FormatDecimalVal($event)"
-                            [disabled]="permisions.editar == '0'  || costo.alertaMonto == undefined ||  !disabledMonto">
+                            disabled="permisions.editar == '0'  || costo.alertaMonto == undefined ||  !disabledMonto">
                         </app-cc-input-group-prepend> 
                     </div>
                     <div class="col-sm-2"></div>

@@ -9,7 +9,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
                     </div>
                     <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
-                        [disabled]="actions.dComponet || dataProducto.length > 1"
+                        disabled="actions.dComponet || dataProducto.length > 1"
                         style="padding-left: 7px;font-size: 13px;" [(ngModel)]="customerSelect" [clearable]="false"
                         (keyup)="getCustomerFilter($event.target.value)" (ngModelChange)="getCustomer($event)">
                         <ng-option [value]="0">Seleccione razón social</ng-option>
@@ -24,7 +24,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo crédito</span>
                     </div>
                     <input placeholder="cupo crédito" type="text" class="form-control form-control-sm text-right pr-1"
-                        id="idCupoCre" [disabled]="true" [(ngModel)]="customer.cupo_credito">
+                        id="idCupoCre" disabled="true" [(ngModel)]="customer.cupo_credito">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -32,7 +32,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Vendedor:</span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                    <input type="text" class="form-control form-control-sm" disabled="true"
                         [(ngModel)]="dataUser.nombre">
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ruc</span>
                     </div>
-                    <input placeholder="Ruc cliente" type="text" class="form-control form-control-sm" [disabled]="true"
+                    <input placeholder="Ruc cliente" type="text" class="form-control form-control-sm" disabled="true"
                         [(ngModel)]="customer.num_documento">
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo crédito</span>
                     </div>
                     <input placeholder="saldo crédito" type="text" class="form-control form-control-sm text-right pr-1"
-                        id="idSalCre" [disabled]="true" [(ngModel)]="customer.saldo_credito">
+                        id="idSalCre" disabled="true" [(ngModel)]="customer.saldo_credito">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -62,7 +62,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Asesor</span>
                     </div>
                     <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
-                        id="idAsesor" [disabled]="true" [(ngModel)]="customer['asesor']['nombre']">
+                        id="idAsesor" disabled="true" [(ngModel)]="customer['asesor']['nombre']">
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                     </select>
                     <div class="input-group-append">
                         <button class="btn btn-primary btn-sm" (click)="setNumCuotas()"
-                            style="box-shadow: unset;outline: unset;" id="idbtndifered" [disabled]="!flagBtnDired "
+                            style="box-shadow: unset;outline: unset;" id="idbtndifered" disabled="!flagBtnDired "
                             placement="top" ngbTooltip="Diferir cuotas">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
@@ -121,7 +121,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Factura</span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="num_fac">
+                    <input type="text" class="form-control form-control-sm" disabled="true" [(ngModel)]="num_fac">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -157,7 +157,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Autorización</span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="num_aut">
+                    <input type="text" class="form-control form-control-sm" disabled="true" [(ngModel)]="num_aut">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -196,7 +196,7 @@
                     <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
                         <button class="btn btn-success btn-sm" placement="top"
                             ngbTooltip="Agregar productos a la cotización" (click)="addProduct()"
-                            [disabled]="actions.dComponet || customerSelect == 0">
+                            disabled="actions.dComponet || customerSelect == 0">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -220,27 +220,27 @@
                             <tbody style="width: 100%;">
                                 <tr *ngFor="let d of dataProducto; let i = index">
                                     <td style="width: 18%;" *ngIf="d.action"><input type="text" placeholder="Producto"
-                                            [(ngModel)]="d.nombre" [disabled]="true"></td>
+                                            [(ngModel)]="d.nombre" disabled="true"></td>
                                     <td style="width: 13%;" *ngIf="d.action">
                                         <input type="text" placeholder="Código" [(ngModel)]="d.codigoProducto"
-                                            [disabled]="true">
+                                            disabled="true">
                                     </td>
                                     <td style="width: 10%;" *ngIf="d.action"><input type="text"
-                                            placeholder="$ {{d.precio_normal}}" [disabled]="true"
+                                            placeholder="$ {{d.precio_normal}}" disabled="true"
                                             style="text-align: right !important;"></td>
 
                                     <td style="width: 10%;" *ngIf="d.action"><input type="text"
-                                            placeholder="{{d.porcen_promocion}} %" [disabled]="true"
+                                            placeholder="{{d.porcen_promocion}} %" disabled="true"
                                             style="text-align: right !important;"></td>
 
                                     <td style="width: 7%;" *ngIf="d.action">
                                         <div *ngIf="(d.stock-d.cantidad_reservada) > 0">
                                             <input type="text" placeholder="0.00" style="text-align: right !important;"
                                                 placeholder="{{(d.stock-d.cantidad_reservada).toFixed(2)}}"
-                                                [disabled]="true">
+                                                disabled="true">
                                         </div>
                                         <div *ngIf="(d.stock-d.cantidad_reservada) <= 0">
-                                            <input type="text" placeholder="0.00" [disabled]="true"
+                                            <input type="text" placeholder="0.00" disabled="true"
                                                 style="text-align: right !important;">
                                         </div>
                                     </td>
@@ -250,7 +250,7 @@
                                             style="text-align: right;padding-right: 10px;" [(ngModel)]="d.quantity"
                                             (keyup)="sumTotal(i)" min="0" id="quantyId"
                                             (keypress)="commonServices.FormatDecimalVal($event)"
-                                            [disabled]="actions.dComponet">
+                                            disabled="actions.dComponet">
                                     </td>
 
                                     <td style="width: 10%;" *ngIf="d.action">
@@ -258,16 +258,16 @@
                                             style="text-align: right;padding-right: 10px;" [(ngModel)]="d.price"
                                             (keyup)="sumTotal(i)" min="0"
                                             (keypress)="commonServices.FormatDecimalVal($event)"
-                                            [disabled]="actions.dComponet">
+                                            disabled="actions.dComponet">
                                     </td>
                                     <td style="width: 9%;" *ngIf="d.action">
-                                        <input type="text" placeholder="$ {{d.totalAux}}" [disabled]="true"
+                                        <input type="text" placeholder="$ {{d.totalAux}}" disabled="true"
                                             class="form-control form-control-sm" style="text-align: right !important;">
                                     </td>
                                     <td style="width: 9%;text-align: center;" *ngIf="d.action">
                                         <button class="btn btn-danger btn-sm" placement="top"
                                             ngbTooltip="Eliminar Items" (click)="deleteItems(i)"
-                                            [disabled]="actions.dComponet">
+                                            disabled="actions.dComponet">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </td>
@@ -288,7 +288,7 @@
                                     letras</span>
                             </div>
                             <input placeholder="total en letras" type="text" class="form-control form-control-sm"
-                                id="idtotalsLetras" [disabled]="true" [(ngModel)]="valueLethers">
+                                id="idtotalsLetras" disabled="true" [(ngModel)]="valueLethers">
                         </div>
                     </div>
                 </div>
@@ -302,7 +302,7 @@
                                     Factura</span>
                             </div>
                             <input placeholder="$ {{dataTotales.totalPagado.toFixed(4)}}" type="text"
-                                class="form-control form-control-sm text-right" id="idtotalFacturado" [disabled]="true">
+                                class="form-control form-control-sm text-right" id="idtotalFacturado" disabled="true">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -312,7 +312,7 @@
                                     Recibido</span>
                             </div>
                             <input placeholder="$ {{dataTotales.totalPagado.toFixed(4)}}" type="text"
-                                class="form-control form-control-sm text-right" id="idtotalRecibido" [disabled]="true">
+                                class="form-control form-control-sm text-right" id="idtotalRecibido" disabled="true">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -322,7 +322,7 @@
                                     Cambio</span>
                             </div>
                             <input placeholder="$ {{dataTotales.totalPagado.toFixed(4)}}" type="text"
-                                class="form-control form-control-sm text-right" id="idtotalRecibido" [disabled]="true">
+                                class="form-control form-control-sm text-right" id="idtotalRecibido" disabled="true">
                         </div>
                     </div>
                 </div>

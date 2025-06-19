@@ -41,7 +41,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                             disabled
                             [(ngModel)]="proyecto.fk_programa">
 
-                            <ng-option [value]="item.id_catalogo" [disabled]="item.disabled" *ngFor="let item of programas">
+                            <ng-option [value]="item.id_catalogo" disabled="item.disabled" *ngFor="let item of programas">
                                 {{item.descripcion}}. {{item.valor}}
                             </ng-option>
                         </ng-select>
@@ -62,7 +62,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                             disabled
                             [(ngModel)]="proyecto.estado">
 
-                            <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados">
+                            <ng-option [value]="item.estado" disabled="item.disabled" *ngFor="let item of lista_estados">
                                 {{item.descripcion}}
                             </ng-option>
                         </ng-select>
@@ -86,7 +86,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                         <input type="text" class="form-control form-control-sm"
                             [maxlength]="3"
                             [(ngModel)]="proyecto.secuencia"
-                            [disabled]="true">
+                            disabled="true">
                     </app-cc-input-group-prepend>
 
                 </div>

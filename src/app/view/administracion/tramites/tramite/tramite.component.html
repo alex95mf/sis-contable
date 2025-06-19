@@ -14,7 +14,7 @@
                 <div class="col-12 col-md-4 pt-0 pb-0">
                     
                         <app-cc-input-group-prepend label="Trámite" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.fk_tipo_flujo" [disabled]="disabledCampos" (change)="changeTipoTramite($event)" maxlength="5">
+                            <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.fk_tipo_flujo" disabled="disabledCampos" (change)="changeTipoTramite($event)" maxlength="5">
                                 <ng-option disabled [value]="0">Seleccione un tramite</ng-option>
                                 <ng-option *ngFor="let op of tareas" [value]="op">{{ op.nombre }}</ng-option>
                             </ng-select>
@@ -47,14 +47,14 @@
                 <div class="row m-0">
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="No.Trámite" styleSpan="size-span-campo font-weight-bold">
-                            <input [disabled]="disabledCampos" readonly type="text" class="form-control form-control-sm" [(ngModel)]="ticketNew.nro_tramite">
+                            <input disabled="disabledCampos" readonly type="text" class="form-control form-control-sm" [(ngModel)]="ticketNew.nro_tramite">
                         </app-cc-input-group-prepend>
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
-                            <input [disabled]="disabledCampos" class="form-control" [(ngModel)]="ticketNew.fk_contribuyente"/>
+                            <input disabled="disabledCampos" class="form-control" [(ngModel)]="ticketNew.fk_contribuyente"/>
                             <div>
-                                <button [disabled]="disabledCampos" class="btn btn-primary btn-sm" (click)="modalContirbuyente()"><i class="fas fa-search"></i></button>
+                                <button disabled="disabledCampos" class="btn btn-primary btn-sm" (click)="modalContirbuyente()"><i class="fas fa-search"></i></button>
                             </div>
                         </app-cc-input-group-prepend>
                     </div>
@@ -78,7 +78,7 @@
             <div class="row m-0">
                 <div class="col-12 col-md-12 pt-0 pb-0">
                     <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
-                        <textarea [disabled]="disabledCampos" id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketNew.observacion" [disabled]="deshabilitar" maxlength="300"></textarea>
+                        <textarea disabled="disabledCampos" id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketNew.observacion" disabled="deshabilitar" maxlength="300"></textarea>
                     </app-cc-input-group-prepend>
  
                 </div>
@@ -88,7 +88,7 @@
             <div class="row m-0">
                 <div class="col-12 col-md-12 pt-0 pb-0">
                     <app-cc-input-group-prepend label="Información Adicional" styleSpan="size-span-campo font-weight-bold">
-                        <textarea [disabled]="disabledCampos" id="observacion" type="text" class="form-control form-control-sm" placeholder="Información Adicional" [(ngModel)]="ticketNew.informacion_adicional" [disabled]="deshabilitar" maxlength="300"></textarea>
+                        <textarea disabled="disabledCampos" id="observacion" type="text" class="form-control form-control-sm" placeholder="Información Adicional" [(ngModel)]="ticketNew.informacion_adicional" disabled="deshabilitar" maxlength="300"></textarea>
                     </app-cc-input-group-prepend>
  
                 </div>
@@ -103,7 +103,7 @@
                     <app-cc-input-group-prepend label="Anexos" styleSpan="size-span-campo font-weight-bold">
 
                         <div class="custom-file">
-                            <input [disabled]="disabledCampos" type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                            <input disabled="disabledCampos" type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)">
                             <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
                         </div>
                     </app-cc-input-group-prepend>

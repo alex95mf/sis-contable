@@ -85,7 +85,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Subtotal</span>
                     </div>
                     <input type="text" placeholder="{{subTotalAux}}"
-                        class="form-control form-control-sm text-right pr-1" [disabled]="true">
+                        class="form-control form-control-sm text-right pr-1" disabled="true">
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
                     </select>
                     <div class="input-group-append">
                         <button class="btn btn-primary btn-sm" (click)="setNumCuotas()"
-                            style="box-shadow: unset;outline: unset;" id="idbtndifered" [disabled]=" !flagBtnDired "
+                            style="box-shadow: unset;outline: unset;" id="idbtndifered" disabled=" !flagBtnDired "
                             placement="top" ngbTooltip="Diferir cuotas">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
@@ -131,7 +131,7 @@
                             {{ivaConverter}}%</span>
                     </div>
                     <input type="text" placeholder="{{ivaAux}}" class="form-control form-control-sm text-right pr-1"
-                        [disabled]="true">
+                        disabled="true">
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
                         <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total</span>
                     </div>
                     <input type="text" placeholder="{{totalAux}}" class="form-control form-control-sm text-right pr-1"
-                        [disabled]="true">
+                        disabled="true">
                 </div>
             </div>
         </div>
@@ -181,7 +181,7 @@
                 <div class="row justify-content-end pt-1">
                     <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
                         <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Añadir Items"
-                            (click)="addItems()" [disabled]="importPed.fk_grupo_gasto == 0">
+                            (click)="addItems()" disabled="importPed.fk_grupo_gasto == 0">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -206,7 +206,7 @@
                                     <td>
                                         <select class="form-control form-control-sm custom-select"
                                             [(ngModel)]="dt.fk_rubro_det" id="idAplica"
-                                            [disabled]="importPed.fk_grupo_gasto == 0"
+                                            disabled="importPed.fk_grupo_gasto == 0"
                                             (ngModelChange)="getDetGastos($event,i)">
                                             <option value="0">Seleccione rubro</option>
                                             <option *ngFor="let d of arrayGastosDet" [value]="d.id">
@@ -216,36 +216,36 @@
                                     </td>
                                     <td style="padding-left: 10px;">
                                         <input type="text" placeholder="{{dt.acumula_en}}"
-                                            class="form-control form-control-sm pr-1" [disabled]="true">
+                                            class="form-control form-control-sm pr-1" disabled="true">
                                     </td>
                                     <td *ngIf="dt.obligatorio == 1 " style="padding-left: 10px;">
                                         <input type="text" placeholder="Si" class="form-control form-control-sm pr-1"
-                                            [disabled]="true">
+                                            disabled="true">
                                     </td>
                                     <td *ngIf="dt.obligatorio == 0 " style="padding-left: 10px;">
                                         <input type="text" placeholder="No" class="form-control form-control-sm pr-1"
-                                            [disabled]="true">
+                                            disabled="true">
                                     </td>
 
                                     <td *ngIf="dt.paga_iva == 1 " style="padding-left: 10px;">
                                         <input type="text" placeholder="Si" class="form-control form-control-sm pr-1"
-                                            [disabled]="true">
+                                            disabled="true">
                                     </td>
                                     <td *ngIf="dt.paga_iva == 0 " style="padding-left: 10px;">
                                         <input type="text" placeholder="No" class="form-control form-control-sm pr-1"
-                                            [disabled]="true">
+                                            disabled="true">
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm pr-1"
                                             style="text-align: right;padding-right: 10px !important;"
                                             [(ngModel)]="dt.valor" (keyup)="sumTotal(i)" min="0"
                                             (keypress)="commonServices.FormatDecimalVal($event)"
-                                            [disabled]=" dt.fk_rubro_det == 0" id="value{{i}}" placeholder="0.00">
+                                            disabled=" dt.fk_rubro_det == 0" id="value{{i}}" placeholder="0.00">
                                     </td>
                                     <td style="width: 8%;text-align: center;">
                                         <button class="btn btn-danger btn-sm" placement="top"
                                             ngbTooltip="Eliminar rubro" (click)="deleteItems(i)"
-                                            [disabled]="dt.fk_rubro_det == 0"><i class="fa fa-trash-o"
+                                            disabled="dt.fk_rubro_det == 0"><i class="fa fa-trash-o"
                                                 aria-hidden="true"></i>
                                         </button>
                                     </td>

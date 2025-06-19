@@ -6,7 +6,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Contribuyente</span></div>
             <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes(true)" [value]="contribuyenteActive.razon_social">
-            <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes(true)" placement="bottom" ngbTooltip="Buscar Contribuyente">
+            <button disabled="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes(true)" placement="bottom" ngbTooltip="Buscar Contribuyente">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -31,7 +31,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
     <!-- <div class="col-4">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Concepto</span></div>
-            <ng-select [disabled]=" formReadOnly || conDisabled" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="handleConcepto()">
+            <ng-select disabled=" formReadOnly || conDisabled" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="handleConcepto()">
                 <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
                 <ng-option *ngFor="let c of conceptosList" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
             </ng-select>
@@ -45,7 +45,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Solicitante</span></div>
             <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Solicitante" (click)="expandListContribuyentes(false)" [value]="contribuyenteCActive?.razon_social">
-            <button  class="btn btn-primary btn-sm" (click)="expandListContribuyentes(false)" placement="bottom" ngbTooltip="Buscar Garante" [disabled]=" documento.garante == 'N' || documento.garante == ''? true : false">
+            <button  class="btn btn-primary btn-sm" (click)="expandListContribuyentes(false)" placement="bottom" ngbTooltip="Buscar Garante" disabled=" documento.garante == 'N' || documento.garante == ''? true : false">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -135,10 +135,10 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                 <span class="input-group-text font-weight-bold">Anexos</span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo2($event.target.files, 'final')" [disabled]="titulosDisabled || formReadOnly">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo2($event.target.files, 'final')" disabled="titulosDisabled || formReadOnly">
                 <label class="custom-file-label" for="inputGroupFile01">{{ fileList3 !== undefined ? fileList3[0].name : "Seleccione un archivo" }}</label>
             </div>
-            <!-- <button class="ml-1 btn btn-primary btn-sm" (click)="uploadFile2(documento.id_documento,'final')" [disabled]="escanerDisabled ? false : true ">
+            <!-- <button class="ml-1 btn btn-primary btn-sm" (click)="uploadFile2(documento.id_documento,'final')" disabled="escanerDisabled ? false : true ">
                 Cargar
             </button> -->
         </div>
@@ -176,7 +176,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                 <span class="input-group-text font-weight-bold">Anexos</span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)" [disabled]="deudaDisabled|| formReadOnly">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)" disabled="deudaDisabled|| formReadOnly">
                 <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
             </div>
         </div>
@@ -205,7 +205,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <h5 class="mb-0 text-dark">Detalles de liquidaciones</h5>
     </div>
     <!-- <div class="col text-right">
-        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
+        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" disabled="titulosDisabled || formReadOnly">
             <i class="fas fa-plus"></i>
         </button>
 
@@ -279,7 +279,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <!-- <td class="text-center">
                                 <div class="input-group input-group-sm">
 
-                                    <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                    <input type="text" maxlength="100" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                 </div>
                             </td> -->
                             <!-- <td class="text-right"></td>
@@ -298,7 +298,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td class="text-right">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                    <input currencyMask readonly maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
+                                    <input currencyMask readonly maxlength="8" class="form-control form-control-sm text-right"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
                                 </div>
                             </td>
                             <td class="text-right">
@@ -310,7 +310,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <!-- <td class="text-left"></td> -->
 
                             <!-- <td class="text-center">
-                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
+                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" disabled="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
                             </td> -->
                         </tr>
 
@@ -358,7 +358,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <div class="col-sm-4 ">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">{{'Cuota inicial'+(amortizacion.cuota_inicial>0?' ('+((amortizacion.cuota_inicial/totalCobro*100) | number: '1.2-2')+'%)':'')}}</span></div>
-                    <input currencyMask [disabled]="formReadOnly || titulosDisabled" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">
+                    <input currencyMask disabled="formReadOnly || titulosDisabled" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">
                 </div>
             </div>
             <div class="col-sm-4 ">
@@ -380,13 +380,13 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <div class="col-sm-4 ">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">No. cuotas</span></div>
-                    <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">
+                    <input id="num_cuotas" disabled="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">
                 </div>
             </div>
             <div class="col-sm-4 ">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Interés</span></div>
-                    <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">
+                    <input id="interes" readonly disabled="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">
                 </div>
             </div>
         </div>
@@ -400,7 +400,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         </div>
         <div class="row my-2">
             <div class="col text-right">
-                <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
+                <button disabled="formReadOnly || titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
             </div>
         </div>
     </div>
@@ -408,7 +408,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <div class="col-sm-4">
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px; ">Observaciones de cuotas</span></div>
-                <textarea cols="30" rows="3" class="form-control form-control-sm" [disabled]="cuotasDisabled || formReadOnly" [(ngModel)]="documento.observacion_pdf_2"></textarea>
+                <textarea cols="30" rows="3" class="form-control form-control-sm" disabled="cuotasDisabled || formReadOnly" [(ngModel)]="documento.observacion_pdf_2"></textarea>
             </div>
         </div>
 
@@ -418,7 +418,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                 <span class="input-group-text font-weight-bold">Anexos</span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo2($event.target.files, '')" [disabled]="cuotasDisabled || formReadOnly">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo2($event.target.files, '')" disabled="cuotasDisabled || formReadOnly">
                 <label class="custom-file-label" for="inputGroupFile01">{{ fileList2 !== undefined ? fileList2[0].name : "Seleccione un archivo" }}</label>
             </div>
         </div>
@@ -552,10 +552,10 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                     <h5 class="mb-0 text-dark">Detalles de liquidaciones</h5>
                 </div>
                 <div class="col text-right">
-                    <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
+                    <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" disabled="titulosDisabled || formReadOnly">
                         <i class="fas fa-plus"></i>
                     </button>
-                    <!-- <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()" [disabled]="conceptosDisabled || formReadOnly">
+                    <!-- <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()" disabled="conceptosDisabled || formReadOnly">
                         <i class="fas fa-plus"></i>
                     </button> -->
                 </div>
@@ -595,7 +595,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                         <!-- <td class="text-center">
                                             <div class="input-group input-group-sm">
 
-                                                <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                                <input type="text" maxlength="100" class="form-control form-control-sm"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                             </div>
                                         </td> -->
                                         <td class="text-right">$ {{ d.valor }}</td>
@@ -603,7 +603,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                         <td class="text-right">
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
-                                                <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
+                                                <input type="text" maxlength="8" class="form-control form-control-sm text-right"  disabled="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
                                             </div>
                                         </td>
                                         <td class="text-right">
@@ -614,7 +614,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                         </td>
 
                                         <td class="text-center">
-                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
+                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" disabled="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
 
@@ -654,7 +654,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                         <div class="col-4 ">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">{{'Cuota inicial'+(amortizacion.cuota_inicial>0?' ('+((amortizacion.cuota_inicial/totalCobro*100) | number: '1.2-2')+'%)':'')}}</span></div>
-                                <input id="cuota_inicial" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">
+                                <input id="cuota_inicial" disabled="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">
                             </div>
                         </div>
                         <div class="col-4 ">
@@ -669,13 +669,13 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                         <div class="col-4 ">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">No. cuotas</span></div>
-                                <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">
+                                <input id="num_cuotas" disabled="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">
                             </div>
                         </div>
                         <div class="col-4 ">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Interés</span></div>
-                                <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">
+                                <input id="interes" readonly disabled="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">
                             </div>
                         </div>
                     </div>
@@ -686,7 +686,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                     </div>
                     <div class="row my-2">
                         <div class="col text-right">
-                            <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
+                            <button disabled="formReadOnly || titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
                         </div>
                     </div>
                 </div>

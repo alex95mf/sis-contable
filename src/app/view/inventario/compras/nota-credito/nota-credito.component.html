@@ -29,7 +29,7 @@
 
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="{{ncventa.fk_agente == 0? 'Razón social otro':'Razón social cliente'}}" styleSpan="size-span-campo">
-                <input type="text" class="form-control form-control-sm" placeholder="Ingrese razón social" [(ngModel)]="ncventa.razon_social" id="idrsocial" [disabled]="ncventa.fk_agente != 0 ">
+                <input type="text" class="form-control form-control-sm" placeholder="Ingrese razón social" [(ngModel)]="ncventa.razon_social" id="idrsocial" disabled="ncventa.fk_agente != 0 ">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-sm-4">
@@ -39,7 +39,7 @@
         </div>
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="No. Autorización" styleSpan="size-span-campo">
-                <textarea type="text" class="form-control form-control-sm" placeholder="No. autorización" [(ngModel)]="ncventa.num_aut_doc" rows="1" [disabled]="true"></textarea>
+                <textarea type="text" class="form-control form-control-sm" placeholder="No. autorización" [(ngModel)]="ncventa.num_aut_doc" rows="1" disabled="true"></textarea>
             </app-cc-input-group-prepend>
         </div>
     </div>
@@ -47,13 +47,13 @@
     <div class="row">
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Ruc cliente" styleSpan="size-span-campo">
-                <input type="text" placeholder="Ingrese ruc" [(ngModel)]="ncventa.ruc" id="idruc" class="form-control form-control-sm" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="ncventa.fk_agente != 0 ">
+                <input type="text" placeholder="Ingrese ruc" [(ngModel)]="ncventa.ruc" id="idruc" class="form-control form-control-sm" (keypress)="commonServices.FormatDecimalVal($event)" disabled="ncventa.fk_agente != 0 ">
             </app-cc-input-group-prepend>
         </div>
 
         <div class="col-sm-4">
             <app-cc-input-group-prepend label="Teléfono Cliente" styleSpan="size-span-campo">
-                <input type="text" placeholder="Teléfono" [(ngModel)]="ncventa.telefono" id="idtlf" class="form-control form-control-sm" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="ncventa.fk_agente != 0 ">
+                <input type="text" placeholder="Teléfono" [(ngModel)]="ncventa.telefono" id="idtlf" class="form-control form-control-sm" (keypress)="commonServices.FormatDecimalVal($event)" disabled="ncventa.fk_agente != 0 ">
             </app-cc-input-group-prepend>
         </div>
     </div>

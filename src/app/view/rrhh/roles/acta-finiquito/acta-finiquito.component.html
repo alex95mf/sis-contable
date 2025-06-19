@@ -15,7 +15,7 @@
                             #nameInputSearchEmpleado>
                         <div class="input-group-append">
                             <button (click)="onClicConsultaEmpleados()"
-                            [disabled]="disableBtnConsultaEmpleados"
+                            disabled="disableBtnConsultaEmpleados"
                                 class="btn btn-primary" type="button">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -116,7 +116,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Observación</span>
                     </div>
-                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [disabled]="formReadOnly" [(ngModel)]="acta.observacion" maxlength="500"></textarea>
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" disabled="formReadOnly" [(ngModel)]="acta.observacion" maxlength="500"></textarea>
                 </div>
         </div>
     </div> -->
@@ -148,31 +148,31 @@
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="{  prefix:'',suffix:'' }" [(ngModel)]="dt.cantidad" (ngModelChange)="calculoTotales($event)"  [readonly]="formReadOnly"
-                                    [disabled]="false">
+                                    disabled="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
-                                    [disabled]="false">
+                                    disabled="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }" [(ngModel)]="dt.porcentaje" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
-                                    [disabled]="false">
+                                    disabled="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor_calculado" (ngModelChange)="calculoTotales($event)"  [readonly]="formReadOnly"
-                                    [disabled]="true">
+                                    disabled="true">
                                 </div>
                             </td>
                             <td class="text-right">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.total" (ngModelChange)="sumaTotales($event)"  [readonly]="formReadOnly"
-                                    [disabled]="false">
+                                    disabled="false">
                                 </div>
                             </td>
 
@@ -214,31 +214,31 @@
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="{  prefix:'',suffix:'' }"  [(ngModel)]="dt.cantidad" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
-                                    [disabled]="false">
+                                    disabled="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
-                                    [disabled]="false">
+                                    disabled="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }"  [(ngModel)]="dt.porcentaje" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
-                                    [disabled]="false">
+                                    disabled="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor_calculado" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
-                                    [disabled]="true">
+                                    disabled="true">
                                 </div>
                             </td>
                             <td class="text-right ">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.total"  (ngModelChange)="sumaTotales($event)" [readonly]="formReadOnly"
-                                    [disabled]="false">
+                                    disabled="false">
                                 </div>
                             </td>
                         </tr>
