@@ -1,6 +1,6 @@
 <nav class="navbar">
-    <div id="horizontal-menu" [perfectScrollbar]="psConfig" [disabled]="!settings.fixedSidenavUserContent" >
-        <app-horizontal-menu [menuItemsHori]="menuItemsHori" [menuParentId]="0" *ngIf="presentarFavorito" [class.w-100]="(settings.menuType!='mini')"></app-horizontal-menu> 
+    <div id="horizontal-menu" perfectScrollbar="psConfig" [disabled]="!settings.fixedSidenavUserContent" >
+        <app-horizontal-menu [menuItemsHori]="menuItemsHori" [menuParentId]="0" *ngIf="presentarFavorito" [class.w-100]="(settings.menuType!='mini')"></app-horizontal-menu>
     </div>
 </nav>
 

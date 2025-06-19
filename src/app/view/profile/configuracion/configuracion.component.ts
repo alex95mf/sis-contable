@@ -93,6 +93,7 @@ export class ConfiguracionComponent implements OnInit {
   totalMessageUnread: number = 0;
   totalMessageRecord: number = 0;
   notifications: Array<any> = [];
+  mensajeSpinner: string = "Cargando...";
 
   length: number = 10;
   start: number = 0;

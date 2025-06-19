@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -39,7 +39,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
   imports: [
     CommonModule,
     RouterModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -73,7 +73,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     MatStepperModule
   ],
   exports: [
-    FlexLayoutModule,
+    // FlexLayoutModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,

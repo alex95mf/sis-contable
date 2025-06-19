@@ -1,8 +1,8 @@
 <div class="my-2">
     <app-button-radio-active [titulo]="fTitle" filtroBoton="btnsAgenda" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
-        
-<mat-toolbar color="primary" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="px-2 schedule-toolbar">
-    <div class="cal-arrows">                
+
+<mat-toolbar color="primary" class="d-flex flex-column flex-sm-row justify-content-between align-items-center px-2 schedule-toolbar">
+    <div class="cal-arrows">
         <button mat-icon-button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (click)="getLREvents()">
             <mat-icon *ngIf="!settings.rtl">chevron_left</mat-icon>
             <mat-icon *ngIf="settings.rtl">chevron_right</mat-icon>
@@ -32,9 +32,9 @@
     </div>
 </mat-toolbar>
 
-<div fxLayout="row wrap">
-    <div fxFlex="100"> 
-        <mat-card class="block p-0">  
+<div class="d-flex flex-wrap">
+    <div class="col-12">
+        <mat-card class="block p-0">
             <div [ngSwitch]="view">
                 <mwl-calendar-month-view
                     style="color: black;"
@@ -58,7 +58,7 @@
                     style="color: black;"
                     *ngSwitchCase="'day'"
                     [viewDate]="viewDate"
-                    [events]="events" 
+                    [events]="events"
                     [locale]="locale"
                     [refresh]="refresh">
                 </mwl-calendar-day-view>

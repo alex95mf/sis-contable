@@ -9,10 +9,10 @@
                     <mat-icon>message</mat-icon>
                 </ng-template>
                 <mat-card class="content" perfectScrollbar>
-                  <div fxLayout="column" fxLayoutAlign="none">
+                  <div class="d-flex flex-column">
                       <button mat-button *ngFor="let message of notifications" (click)="actions(message)">
-                          <div fxLayout="column" fxLayoutAlign="none" class="w-100">
-                                <div fxLayout="row" fxLayoutAlign="space-between start">
+                          <div class="d-flex flex-column w-100">
+                                <div class="d-flex justify-content-between align-items-start">
                                     <span><img width = "50" src = "{{message.usuario_notifica?.avatar}}" ></span>
                                     <span class="name"> {{message.usuario_notifica?.nombre}}</span>
                                     <span class="info"><mat-icon>access_time</mat-icon> {{message.fecha}}</span>
@@ -21,10 +21,10 @@
                                 <span class="text secondary-text-color">{{message.accion}}</span>
                           </div>
                       </button>
-                    </div>             
+                    </div>
                 </mat-card>
             </mat-tab> -->
-                
+
             <mat-tab>
                 <ng-template mat-tab-label>
                     <mat-icon>message</mat-icon>
@@ -32,20 +32,20 @@
                 <mat-card class="content" perfectScrollbar>
                     <div  *ngIf="loadingMessages; else showMessages">
                         <div  class="d-flex justify-content-center ">
-                            <p-progressSpinner  [style]="{width: '50px', height: '50px'}" 
-                                 styleClass="custom-spinner" 
-                                 strokeWidth="4" 
+                            <p-progressSpinner  [style]="{width: '50px', height: '50px'}"
+                                 styleClass="custom-spinner"
+                                 strokeWidth="4"
                                  fill="var(--surface-ground)">
                             </p-progressSpinner>
 
                         </div>
                     </div>
                     <ng-template #showMessages>
-                        <div fxLayout="column" fxLayoutAlign="none">
+                        <div class="d-flex flex-column">
                             <button mat-button *ngFor="let message of notifications" (click)="actions(message)">
-                                <img src="{{message.usuario_notifica?.avatar}}" width="50">   
-                                <div fxLayout="column" fxLayoutAlign="none" class="w-100">
-                                    <div fxLayout="row" fxLayoutAlign="space-between start">
+                                <img src="{{message.usuario_notifica?.avatar}}" width="50">
+                                <div class="d-flex flex-column w-100">
+                                    <div class="d-flex justify-content-between align-items-start">
                                         <span class="name">{{message.usuario_notifica?.nombre}}</span>
                                         <span class="info"><mat-icon>access_time</mat-icon> {{message.fecha}}</span>
                                     </div>
@@ -53,15 +53,15 @@
                                     <span class="text secondary-text-color">{{message.accion}}</span>
                                 </div>
                             </button>
-                          </div>             
+                          </div>
                     </ng-template>
                 </mat-card>
                 <!-- <mat-card class="content" perfectScrollbar>
-                  <div fxLayout="column" fxLayoutAlign="none">
+                  <div class="d-flex flex-column">
                       <button mat-button *ngFor="let message of notifications">
-                          <img src="{{message.usuario_notifica?.avatar}}" width="50">   
-                          <div fxLayout="column" fxLayoutAlign="none" class="w-100">
-                              <div fxLayout="row" fxLayoutAlign="space-between start">
+                          <img src="{{message.usuario_notifica?.avatar}}" width="50">
+                          <div class="d-flex flex-column w-100">
+                              <div class="d-flex justify-content-between align-items-start">
                                   <span class="name">{{message.usuario_notifica?.nombre}}</span>
                                   <span class="info"><mat-icon>access_time</mat-icon> {{message.fecha}}</span>
                               </div>
@@ -69,7 +69,7 @@
                               <span class="text secondary-text-color">{{message.accion}}</span>
                           </div>
                       </button>
-                    </div>             
+                    </div>
                 </mat-card> -->
             </mat-tab>
             <!-- <mat-tab>
@@ -77,18 +77,18 @@
                     <mat-icon>event</mat-icon>
                 </ng-template>
                 <mat-card class="content" perfectScrollbar>
-                  <div fxLayout="column" fxLayoutAlign="none">
-                      <button mat-button *ngFor="let meeting of meetings">  
-                          <div fxLayout="column" fxLayoutAlign="center center" class="row-1" [ngClass]="meeting.bgColor">
+                  <div class="d-flex flex-column">
+                      <button mat-button *ngFor="let meeting of meetings">
+                          <div class="d-flex flex-column justify-content-center align-items-center row-1" [ngClass]="meeting.bgColor">
                               <span class="name">{{meeting.day}}</span>
                               <span class="name">{{meeting.month}}</span>
                           </div>
-                          <div fxLayout="column" fxLayoutAlign="none">
+                          <div class="d-flex flex-column">
                               <span class="name">{{meeting.title}}</span>
                               <span class="text secondary-text-color">{{meeting.text}}</span>
                           </div>
                       </button>
-                    </div>             
+                    </div>
                 </mat-card>
             </mat-tab> -->
         </mat-tab-group>

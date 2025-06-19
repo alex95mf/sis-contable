@@ -1,24 +1,24 @@
-<div class="favorites-container" fxLayout="row" fxLayoutAlign="center center">
-    <div *ngIf="favorites" fxLayout="row" fxLayoutAlign="center center" class="">
+<div class="favorites-container d-flex justify-content-center align-items-center">
+    <div *ngIf="favorites" class="d-flex justify-content-center align-items-center">
         <div class="mx-1" *ngFor="let favorite of favorites" [matTooltip]="favorite.title" matTooltipPosition="below">
 
             <a *ngIf="favorite.href" mat-icon-button [attr.href]="favorite.href" [attr.target]="favorite.target">
               <i class='{{favorite.icon}}'></i>
             </a>
-            
+
             <a *ngIf="favorite.routerLink" mat-icon-button [routerLink]="[favorite.routerLink]">
               <i class='{{favorite.icon}}'></i>
             </a>
 
-        </div>        
+        </div>
     </div>
     <mat-form-field matTooltip="Añadir/Remover Favoritos" matTooltipPosition="below">
         <mat-select placeholder="Seleccionar Favorito" [(value)]="favorites" multiple>
             <mat-option *ngFor="let item of menuItems" [value]="item">
-              <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="d-flex justify-content-between align-items-center">
                 <span>{{item.title}}</span>
                   <i class='{{item.icon}}'></i>
-              </div>              
+              </div>
             </mat-option>
         </mat-select>
     </mat-form-field>

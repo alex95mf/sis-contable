@@ -3,18 +3,18 @@
 <div id="main" perfectScrollbar (psScrollY)="onPsScrollY($event)" class="h-100">
 
     <app-button-radio-active-new titulo="Configuración" cstyle="bg-gradient-primary py-3" icono="fas fa-user">
-        
-        <div [perfectScrollbar]="optionsPsConfig">
+
+        <div perfectScrollbar="optionsPsConfig">
             <div class="mb-3">
                 <fieldset class="border card-fieldset">
                     <legend class="w-auto card-legend">Diseño</legend>
-                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span>Fijar Cabecera</span>
                             <mat-slide-toggle [checked]="settings.fixedHeader"
                                 (change)="settings.fixedHeader = !settings.fixedHeader" labelPosition="before">
                             </mat-slide-toggle>
                         </div>
-                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span>Fijar Menú</span>
                             <mat-slide-toggle [checked]="settings.fixedSidenav"
                                 (change)="settings.fixedSidenav = !settings.fixedSidenav" labelPosition="before"
@@ -85,13 +85,13 @@
             <div class="mb-3">
                 <fieldset class="border card-fieldset">
                     <legend class="w-auto card-legend">Opciones Menú</legend>
-                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="d-flex justify-content-between align-items-center">
                         <span>Menu Abierto</span>
                         <mat-slide-toggle [checked]="settings.sidenavIsOpened"
                             (change)="settings.sidenavIsOpened = !settings.sidenavIsOpened" labelPosition="before">
                         </mat-slide-toggle>
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="d-flex justify-content-between align-items-center">
                         <span>Menú Fijado</span>
                         <mat-slide-toggle [checked]="settings.sidenavIsPinned"
                             (change)="settings.sidenavIsPinned = !settings.sidenavIsPinned" labelPosition="before">
@@ -103,58 +103,4 @@
     </app-button-radio-active-new>
 </div>
 
-
 <cc-spiner-procesar [ltexto]="mensajeSpinner" lTipo="spUserConfiguracionComponent"></cc-spiner-procesar>
-<!-- <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-
-<div>
-    <app-button-radio-active titulo="Configuración" cstyle="bg-gradient-primary py-3" icono="fas fa-user">
-        <div class="mb-3">
-            <fieldset class="border card-fieldset">
-                <legend class="w-auto card-legend">Elegir menú</legend>
-                  
-                  
-                <div>
-                    <label>
-                        <input type="radio" name="radio-button" value="css" checked />
-                        <span>Vertical</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="radio-button" value="no" />
-                        <span>Horizontal</span>
-                    </label>
-                </div>
-            </fieldset>
-        </div>
-        <div class="mb-3">
-            <fieldset class="border card-fieldset">
-                <legend class="w-auto card-legend">Elegir tema</legend>
-                <div class="skin-flex">
-                    <div class="skin-box">
-                        <div class="skin skin-dark"></div>
-                        <span>Oscuro</span>
-                        <div class="skin-check">
-                            <span class="material-symbols-rounded">check</span>
-                        </div>
-                    </div>
-                    <div class="skin-box">
-                        <div class="skin skin-blue"></div>
-                        <span>Azul</span>
-                        <div class="skin-check hidden">
-                            <span class="material-symbols-rounded">check</span>
-                        </div>
-                    </div>
-                    <div class="skin-box">
-                        <div class="skin skin-white"></div>
-                        <span>Blanco</span>
-                        <div class="skin-check hidden">
-                            <span class="material-symbols-rounded">check</span>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </app-button-radio-active>
-</div>
-<cc-spiner-procesar [ltexto]="mensajeSpinner" lTipo="spUserConfiguracionComponent"></cc-spiner-procesar> -->
