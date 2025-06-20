@@ -9,7 +9,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as myVarGlobals from 'src/app/global';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultaDetComponent } from './multa-det/multa-det.component';
-import { BREAKPOINT } from '@angular/flex-layout';
 import { environment } from 'src/environments/environment';
 import { NgxPrintDirective } from 'ngx-print';
 
