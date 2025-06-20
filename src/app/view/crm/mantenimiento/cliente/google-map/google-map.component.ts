@@ -30,13 +30,21 @@ export class GoogleMapComponent implements OnInit, OnChanges {
   }
 
   private loadGoogleMapsScript() {
+    if (document.getElementById('google-maps-script')) {
+      this.initializeMap();
+      return;
+    }
+
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Az-fACp3ukURt5H5bUoz5bI-g0Ax5V4&callback=initMap`;
+    script.id = 'google-maps-script';
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Az-fACp3ukURt5H5bUoz5bI-g0Ax5V4`;
     script.async = true;
     script.defer = true;
+
     script.addEventListener('load', () => {
       this.initializeMap();
     });
+
     document.body.appendChild(script);
   }
 
