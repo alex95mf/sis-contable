@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
@@ -14,10 +14,46 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 import * as myVarGlobals from 'src/app/global';
 import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-dialog/confirmation-dialog.service';
 import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc-mantenimiento/vista-archivo/vista-archivo.component';
-import { Chart } from 'chart.js';
+
+// Importaciones requeridas para Chart.js v4
+import {
+  Chart,
+  ChartConfiguration,
+  ChartType,
+  BarController,
+  LineController,
+  PieController,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+} from 'chart.js';
+
+// Registrar los componentes necesarios para Chart.js v4
+Chart.register(
+  BarController,
+  LineController,
+  PieController,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-reportes-graficos',
   templateUrl: './reportes-graficos.component.html',
   styleUrls: ['./reportes-graficos.component.scss']
@@ -49,7 +85,7 @@ export class ReportesGraficosComponent implements OnInit {
   hasta: Date = new Date();
   chartLine1: Chart;
   chartLine2: Chart;
-  // chartLine11: Chart;
+
   constructor(
     private apiService: ReportesGraficosService,
     private toastr: ToastrService,
@@ -60,24 +96,10 @@ export class ReportesGraficosComponent implements OnInit {
     private elementRef: ElementRef
   ) {
 
-   }
+  }
 
   ngOnInit(): void {
-    this.vmButtons = [
-
-
-      // {
-      //   orig: "btnsConsultaTitulos",
-      //   paramAccion: "",
-      //   boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
-      //   permiso: true,
-      //   showtxt: true,
-      //   showimg: true,
-      //   showbadge: false,
-      //   clase: "btn btn-success boton btn-sm",
-      //   habilitar: false
-      // },
-    ];
+    this.vmButtons = [];
 
     this.filterMeses = {
       desde: moment().startOf('month').format('YYYY-MM-DD'),
@@ -96,67 +118,52 @@ export class ReportesGraficosComponent implements OnInit {
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case "PDF":
-       // this.mostrarReporte()
+        // this.mostrarReporte()
         break;
       case "EXCEL":
-      //this.btnExportarExcel()
+        //this.btnExportarExcel()
         break;
       default:
         break;
     }
   }
 
-  getDataAnios(){
-
+  getDataAnios() {
     let dat = {
       date_desde: Number(this.desde.getFullYear()),
       date_hasta: Number(this.hasta.getFullYear()),
-
     }
-
-    // let data = {
-    //   periodo: Number(this.periodo.getFullYear()),
-    //   mes: Number(this.mes_actual)
-    // }
-
 
     console.log(dat);
     this.apiService.getDataRecAnios(dat).subscribe(
-      (res)=>{
+      (res) => {
         console.log(res);
         if (this.chartLine1 != undefined) {
           this.chartLine1.clear()
           this.chartLine1.destroy()
           console.log('ejecuta1');
         }
-        // if (this.chartLine11 != undefined) {
-        //   this.chartLine11.clear()
-        //   this.chartLine11.destroy()
-        //   console.log('ejecuta1');
-        // }
+
         this.recaudacionAnio = undefined
         this.recaudacionAnio = res['data']['recaudacionanio']['grafico2'];
-        let {anios: recaAnio, valores: recaanioVal} = this.recaudacionAnio;
+        let { anios: recaAnio, valores: recaanioVal } = this.recaudacionAnio;
         let tipo = 'Años';
 
-         setTimeout(() => {
-          this.chartLine1 = this.chartBar("chartLine1", "bar", recaAnio, recaanioVal,tipo);
-          // this.chartLine11 = this.chartBar("chartLine11", "bar", recaAnio, recaanioVal,tipo);
+        setTimeout(() => {
+          this.chartLine1 = this.chartBar("chartLine1", "bar", recaAnio, recaanioVal, tipo);
           console.log(this.chartLine1);
         }, 50);
-
       }
     )
   }
-  getDataMeses(){
 
+  getDataMeses() {
     let dat = {
       date: Number(this.periodo.getFullYear()),
-
     }
 
     this.apiService.getDataRecMeses(dat).subscribe(
-      (res)=>{
+      (res) => {
         console.log(res);
         if (this.chartLine2 != undefined) {
           this.chartLine2.clear()
@@ -166,34 +173,33 @@ export class ReportesGraficosComponent implements OnInit {
 
         this.recaudacionMes = undefined
         this.recaudacionMes = res['data']['recaudacion']['grafico1'];
-        let {meses: recaMes, valores: recaVal} = this.recaudacionMes;
+        let { meses: recaMes, valores: recaVal } = this.recaudacionMes;
         let tipo = 'Meses';
 
         setTimeout(() => {
-          this.chartLine2 = this.chartBar("chartLine2", "bar", recaMes, recaVal,tipo);
+          this.chartLine2 = this.chartBar("chartLine2", "bar", recaMes, recaVal, tipo);
           console.log(this.chartLine2);
         }, 50);
       }
     )
   }
+
   limpiarFiltrosAnios() {
-    this.filterAnios= {
+    this.filterAnios = {
       desde: moment().startOf('month').format('YYYY-MM-DD'),
       hasta: moment().endOf('month').format('YYYY-MM-DD'),
     }
-
   }
+
   limpiarFiltrosMeses() {
-    this.filterMeses= {
+    this.filterMeses = {
       periodo: moment().startOf('month').format('YYYY-MM-DD'),
     }
-
   }
 
-  chart(name:string, tipo:string, label: string[], data: number[]){
-
-    return  new Chart(name, {
-      type: tipo as any,
+  chart(name: string, tipo: string, label: string[], data: number[]): Chart {
+    const config: ChartConfiguration = {
+      type: tipo as ChartType,
       data: {
         labels: label,
         datasets: [{
@@ -243,126 +249,76 @@ export class ReportesGraficosComponent implements OnInit {
             'rgba(212, 132, 17, 0.52)',
             'rgba(212, 17, 68, 0.52)'
           ],
-          // backgroundColor: [
-          //   '#0F2FD0',//azul
-          //   '#D00F19',//rojo
-          //   '#0DB415',//verde
-          //   '#0DA3B4',//azul claro
-          //   '#E97C10',//naranja
-          //   '#6A738A',//gris
-          //   '#5805D5',//violeta
-          //   '#D5057B',//fucsia
-          //   '#05D54E',//verde claro
-          //   '#05D2D5',//aqua
-          //   '#F7F704',//amarillo
-          //   '#02626D',//plomo
-          //   '#FC3E0F', //rojo
-          //   '#7BF70E',//verde
-          //   '#F9CA6B',//naranja claro
-          //   '#5973D1',//azul claro
-
-          // ],
-
-          // borderColor: [
-          //   '#0F2FD0',//azul
-          //   '#D00F19',//rojo
-          //   '#0DB415',//verde
-          //   '#0DA3B4',//azul claro
-          //   '#E97C10',//naranja
-          //   '#6A738A',//gris
-          //   '#5805D5',//violeta
-          //   '#D5057B',//fucsia
-          //   '#05D54E',//verde claro
-          //   '#05D2D5',//aqua
-          //   '#F7F704',//amarillo
-          //   '#02626D',//plomo
-          //   '#FC3E0F', //rojo
-          //   '#7BF70E',//verde
-          //   '#F9CA6B',//naranja claro
-          //   '#5973D1',//azul claro
-
-          // ],
           borderWidth: 1
         }]
       },
       options: {
-        // plugins: {
-        //   tooltip: {
-        //     callbacks: {
-        //       title: (ttItem) => (ttItem[0].dataset.label)
-        //     }
-        //   }
-        // },
-
-        legend: {
-          display: false
+        plugins: {
+          legend: {
+            display: false
+          }
         },
-
-
         scales: {
-          x:{
-            beginAtZero: true,
-            ticks:{
+          x: {
+            type: 'category',
+            // beginAtZero: true,
+            ticks: {
               font: {
                 size: 10,
-                style: 'bold'
+                weight: 'bold'
               },
               padding: 0,
-              fontColor: '#505050',
-              fontStyle: 'bold',
+              color: '#505050',
               minRotation: 45,
-              callback: function(value:any, index, values) {
-                if(parseInt(value) >= 1000){
+              callback: function (value: any, index, values) {
+                if (parseInt(value) >= 1000) {
                   return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 } else {
                   return '$' + value;
                 }
               }
-
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Monto',
+              text: 'Monto',
               font: {
                 size: 10,
-                style: 'bold'
+                weight: 'bold'
               },
-              fontColor: '#000000',
+              color: '#000000',
             }
-
           },
           y: {
+            type: 'linear',
             beginAtZero: true,
             ticks: {
-             font: {
-              size: 11,
-              style: 'bold'
-            },
+              font: {
+                size: 11,
+                weight: 'bold'
+              },
               padding: 0,
-              //fontColor: '#000',
-              fontStyle: 'bold',
-              fontColor: '#000000',
-
+              color: '#000000',
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Meses',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: 'Meses',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000',
             }
-
           }
-        },
-
-
+        }
       }
-    });
-  }
-  chartLine(name:string, tipo:string, label: string[], data: number[]){
+    };
 
-    return  new Chart(name, {
-      type: tipo as any,
+    return new Chart(name, config);
+  }
+
+  chartLine(name: string, tipo: string, label: string[], data: number[]): Chart {
+    const config: ChartConfiguration = {
+      type: tipo as ChartType,
       data: {
         labels: label,
         datasets: [{
@@ -385,92 +341,84 @@ export class ReportesGraficosComponent implements OnInit {
           pointRadius: 1,
           pointHitRadius: 10,
           data: data,
-
           borderWidth: 1
         }]
       },
       options: {
-        // plugins: {
-        //   tooltip: {
-        //     callbacks: {
-        //       title: (ttItem) => (ttItem[0].dataset.label)
-        //     }
-        //   }
-        // },
-
-        legend: {
-          display: false
+        plugins: {
+          legend: {
+            display: false
+          }
         },
-
-
         scales: {
-          x:{
-            beginAtZero: true,
-            ticks:{
-             font: {
+          x: {
+            type: 'category',
+            // beginAtZero: true,
+            ticks: {
+              font: {
                 size: 10,
-                style: 'bold'
+                weight: 'bold'
               },
               padding: 0,
-              fontColor: '#000000',
-              fontStyle: 'bold',
+              color: '#000000',
               minRotation: 45
-
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Meses',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: 'Meses',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000',
             }
-
           },
           y: {
+            type: 'linear',
             beginAtZero: true,
             ticks: {
-             font: {
+              font: {
                 size: 10,
-                style: 'bold'
+                weight: 'bold'
               },
               padding: 0,
-              //fontColor: '#000',
-              fontStyle: 'bold',
-              callback: function(value:any, index, values) {
-                if(parseInt(value) >= 1000){
+              color: '#000000',
+              callback: function (value: any, index, values) {
+                if (parseInt(value) >= 1000) {
                   return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 } else {
                   return '$' + value;
                 }
               }
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Monto',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: 'Monto',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000',
             }
-
           }
         }
       }
-    });
+    };
+
+    return new Chart(name, config);
   }
-  chartBar(name:string, tipo:string, label: string[], data: number[],tipo_grafico: string){
+
+  chartBar(name: string, tipo: string, label: string[], data: number[], tipo_grafico: string): Chart {
     let htmlRef = undefined
-    if(name == 'chartLine1'){
+    if (name == 'chartLine1') {
       htmlRef = this.elementRef.nativeElement.querySelector(`#chartLine1`);
     }
-    // if(name == 'chartLine11'){
-    //   htmlRef = this.elementRef.nativeElement.querySelector(`#chartLine11`);
-    // }
-    if(name == 'chartLine2'){
+    if (name == 'chartLine2') {
       htmlRef = this.elementRef.nativeElement.querySelector(`#chartLine2`);
     }
 
-     return  new Chart(htmlRef, {
-      type: tipo as any,
+    const config: ChartConfiguration = {
+      type: tipo as ChartType,
       data: {
         labels: label,
         datasets: [{
@@ -520,121 +468,76 @@ export class ReportesGraficosComponent implements OnInit {
             'rgba(212, 132, 17, 0.52)',
             'rgba(212, 17, 68, 0.52)'
           ],
-          // backgroundColor: [
-          //   '#0F2FD0',//azul
-          //   '#D00F19',//rojo
-          //   '#0DB415',//verde
-          //   '#0DA3B4',//azul claro
-          //   '#E97C10',//naranja
-          //   '#6A738A',//gris
-          //   '#5805D5',//violeta
-          //   '#D5057B',//fucsia
-          //   '#05D54E',//verde claro
-          //   '#05D2D5',//aqua
-          //   '#F7F704',//amarillo
-          //   '#02626D',//plomo
-          //   '#FC3E0F', //rojo
-          //   '#7BF70E',//verde
-          //   '#F9CA6B',//naranja claro
-          //   '#5973D1',//azul claro
-
-          // ],
-
-          // borderColor: [
-          //   '#0F2FD0',//azul
-          //   '#D00F19',//rojo
-          //   '#0DB415',//verde
-          //   '#0DA3B4',//azul claro
-          //   '#E97C10',//naranja
-          //   '#6A738A',//gris
-          //   '#5805D5',//violeta
-          //   '#D5057B',//fucsia
-          //   '#05D54E',//verde claro
-          //   '#05D2D5',//aqua
-          //   '#F7F704',//amarillo
-          //   '#02626D',//plomo
-          //   '#FC3E0F', //rojo
-          //   '#7BF70E',//verde
-          //   '#F9CA6B',//naranja claro
-          //   '#5973D1',//azul claro
-
-          // ],
           borderWidth: 1
         }]
       },
       options: {
-        // plugins: {
-        //   tooltip: {
-        //     callbacks: {
-        //       title: (ttItem) => (ttItem[0].dataset.label)
-        //     }
-        //   }
-        // },
-
-        legend: {
-          display: false
+        plugins: {
+          legend: {
+            display: false
+          }
         },
-
-
         scales: {
-          x:{
-            beginAtZero: true,
-            ticks:{
-             font: {
+          x: {
+            type: 'category',
+            // beginAtZero: true,
+            ticks: {
+              font: {
                 size: 10,
-                style: 'bold'
+                weight: 'bold'
               },
               padding: 0,
-              fontColor: '#000000',
-              fontStyle: 'bold',
+              color: '#000000',
               minRotation: 45
-
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: tipo_grafico,
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: tipo_grafico,
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000',
             }
-
           },
           y: {
+            type: 'linear',
             beginAtZero: true,
             ticks: {
-             font: {
-              size: 10,
-              style: 'bold'
-            },
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
               padding: 0,
-              //fontColor: '#000',
-              fontStyle: 'bold',
-              callback: function(value:any, index, values) {
-                if(parseInt(value) >= 1000){
+              color: '#000000',
+              callback: function (value: any, index, values) {
+                if (parseInt(value) >= 1000) {
                   return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 } else {
                   return '$' + value;
                 }
               }
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Monto',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: 'Monto',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000',
             }
-
           }
         }
       }
-    });
+    };
+
+    return new Chart(htmlRef, config);
   }
 
-  chartPie(name:string, tipo:string, label: string[], data: number[]){
-
-    return  new Chart(name, {
-      type: tipo as any,
+  chartPie(name: string, tipo: string, label: string[], data: number[]): Chart {
+    const config: ChartConfiguration = {
+      type: tipo as ChartType,
       data: {
         labels: label,
         datasets: [{
@@ -668,7 +571,6 @@ export class ReportesGraficosComponent implements OnInit {
             '#2EF8A0',//verde claro
             '#067D6B',
             '#067D6B'
-
           ],
           borderColor: [
             '#0F2FD0',//azul
@@ -687,39 +589,31 @@ export class ReportesGraficosComponent implements OnInit {
             '#7BF70E',//verde
             '#F9CA6B',//naranja claro
             '#5973D1',//azul claro
-
           ],
           borderWidth: 1
         }]
       },
       options: {
-        // plugins: {
-        //   tooltip: {
-        //     callbacks: {
-        //       title: (ttItem) => (ttItem[0].dataset.label)
-        //     }
-        //   }
-        // },
-        legend: {
-          display: true
+        plugins: {
+          legend: {
+            display: true
+          }
         },
         scales: {
-          x:{
+          x: {
             display: false,
-            grid:{
+            grid: {
               display: false
             },
             beginAtZero: true,
-            ticks:{
+            ticks: {
               font: {
                 size: 10,
-                style: 'bold'
+                weight: 'bold'
               },
               padding: 0,
-              fontColor: '#000',
-              fontStyle: 'bold',
+              color: '#000',
               minRotation: 45
-
             },
           },
           y: {
@@ -728,23 +622,19 @@ export class ReportesGraficosComponent implements OnInit {
               display: false
             },
             beginAtZero: true,
-            ticks:{
+            ticks: {
               font: {
                 size: 10,
-                style: 'bold'
+                weight: 'bold'
               },
               padding: 0,
-              fontColor: '#000',
-              fontStyle: 'bold',
-
-
+              color: '#000',
             },
           },
-
         }
       }
-    });
+    };
+
+    return new Chart(name, config);
   }
-
-
 }

@@ -23,11 +23,36 @@ import { SweetAlertResult } from 'sweetalert2';
 import { ModalReclamosComponent } from './modal-reclamos/modal-reclamos.component';
 import { IReclamo } from './modal-reclamos/IReclamos';
 import { ModalUdmComponent } from './modal-udm/modal-udm.component';
-import { Chart } from 'chart.js';
+import {
+  Chart,
+  ChartConfiguration,
+  ChartType,
+  BarController,
+  LineController,
+  BarElement,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
 //import { ConsoleReporter } from 'jasmine';
 import { NgxCurrencyDirective } from "ngx-currency";
 declare const $: any;
-
+Chart.register(
+  BarController,
+  LineController,
+  BarElement,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend
+);
 interface Costo {
   id?: number;
   fecha: string;
@@ -2745,145 +2770,133 @@ console.log(response)
    }
 
 
-  chart(name: string, tipo: any, label: string[], data: number[], tendencia: number[]) {
-
+  chart(name: string, tipo: any, label: string[], data: number[], tendencia: number[]): Chart {
     let htmlRef = this.elementRef.nativeElement.querySelector(`#chart1`);
 
     console.log(data);
-    console.log(tendencia)
-        return new Chart(htmlRef, {
-         type: tipo as any,
-          data: {
-            labels: label,
-            datasets: [{
-              label: '# Mensual',
-              data: data,
-              type:'bar',
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(146, 79, 44, 0.8)',
-                'rgba(144, 169, 26, 0.8)',
-                'rgba(26, 169, 120, 0.8)',
-                'rgba(6, 117, 134, 0.8)',
-                'rgba(109, 47, 127, 0.8)',
-                'rgba(119, 37, 103, 0.8)',
-                'rgba(37, 77, 119, 0.8)',
-                'rgba(245, 39, 145, 0.17)',
-                'rgba(165, 39, 245, 0.17)',
-                'rgba(39, 245, 71, 0.17)',
-                'rgba(8, 104, 23, 0.52)',
-                'rgba(121, 183, 3, 0.52)',
-                'rgba(183, 143, 3, 0.52)',
-                'rgba(212, 132, 17, 0.52)',
-                'rgba(212, 17, 68, 0.52)'
-              ],
-              borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(144, 169, 26, 0.8)',
-                'rgba(26, 169, 120, 0.8)',
-                'rgba(6, 117, 134, 0.8)',
-                'rgba(109, 47, 127, 0.8)',
-                'rgba(119, 37, 103, 0.8)',
-                'rgba(37, 77, 119, 0.8)',
-                'rgba(245, 39, 145, 0.17)',
-                'rgba(165, 39, 245, 0.17)',
-                'rgba(39, 245, 71, 0.17)',
-                'rgba(8, 104, 23, 0.52)',
-                'rgba(121, 183, 3, 0.52)',
-                'rgba(183, 143, 3, 0.52)',
-                'rgba(212, 132, 17, 0.52)',
-                'rgba(212, 17, 68, 0.52)'
-              ],
-              borderWidth: 1
-            },
-            {
-              label: 'Tendencia',
-              data:tendencia ,
-              type:'line',
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(146, 79, 44, 0.8)',
-                'rgba(144, 169, 26, 0.8)',
-                'rgba(26, 169, 120, 0.8)',
-                'rgba(6, 117, 134, 0.8)',
-                'rgba(109, 47, 127, 0.8)',
-                'rgba(119, 37, 103, 0.8)',
-                'rgba(37, 77, 119, 0.8)',
-                'rgba(245, 39, 145, 0.17)',
-                'rgba(165, 39, 245, 0.17)',
-                'rgba(39, 245, 71, 0.17)',
-                'rgba(8, 104, 23, 0.52)',
-                'rgba(121, 183, 3, 0.52)',
-                'rgba(183, 143, 3, 0.52)',
-                'rgba(212, 132, 17, 0.52)',
-                'rgba(212, 17, 68, 0.52)'
-              ],
-              borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(144, 169, 26, 0.8)',
-                'rgba(26, 169, 120, 0.8)',
-                'rgba(6, 117, 134, 0.8)',
-                'rgba(109, 47, 127, 0.8)',
-                'rgba(119, 37, 103, 0.8)',
-                'rgba(37, 77, 119, 0.8)',
-                'rgba(245, 39, 145, 0.17)',
-                'rgba(165, 39, 245, 0.17)',
-                'rgba(39, 245, 71, 0.17)',
-                'rgba(8, 104, 23, 0.52)',
-                'rgba(121, 183, 3, 0.52)',
-                'rgba(183, 143, 3, 0.52)',
-                'rgba(212, 132, 17, 0.52)',
-                'rgba(212, 17, 68, 0.52)'
-              ],
+    console.log(tendencia);
 
-              borderWidth: 1
-            },
-
-          ]
+    const config: ChartConfiguration = {
+      type: tipo as ChartType,
+      data: {
+        labels: label,
+        datasets: [{
+          label: '# Mensual',
+          data: data,
+          type: 'bar',
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(146, 79, 44, 0.8)',
+            'rgba(144, 169, 26, 0.8)',
+            'rgba(26, 169, 120, 0.8)',
+            'rgba(6, 117, 134, 0.8)',
+            'rgba(109, 47, 127, 0.8)',
+            'rgba(119, 37, 103, 0.8)',
+            'rgba(37, 77, 119, 0.8)',
+            'rgba(245, 39, 145, 0.17)',
+            'rgba(165, 39, 245, 0.17)',
+            'rgba(39, 245, 71, 0.17)',
+            'rgba(8, 104, 23, 0.52)',
+            'rgba(121, 183, 3, 0.52)',
+            'rgba(183, 143, 3, 0.52)',
+            'rgba(212, 132, 17, 0.52)',
+            'rgba(212, 17, 68, 0.52)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(144, 169, 26, 0.8)',
+            'rgba(26, 169, 120, 0.8)',
+            'rgba(6, 117, 134, 0.8)',
+            'rgba(109, 47, 127, 0.8)',
+            'rgba(119, 37, 103, 0.8)',
+            'rgba(37, 77, 119, 0.8)',
+            'rgba(245, 39, 145, 0.17)',
+            'rgba(165, 39, 245, 0.17)',
+            'rgba(39, 245, 71, 0.17)',
+            'rgba(8, 104, 23, 0.52)',
+            'rgba(121, 183, 3, 0.52)',
+            'rgba(183, 143, 3, 0.52)',
+            'rgba(212, 132, 17, 0.52)',
+            'rgba(212, 17, 68, 0.52)'
+          ],
+          borderWidth: 1
+        },
+        {
+          label: 'Tendencia',
+          data: tendencia,
+          type: 'line',
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(146, 79, 44, 0.8)',
+            'rgba(144, 169, 26, 0.8)',
+            'rgba(26, 169, 120, 0.8)',
+            'rgba(6, 117, 134, 0.8)',
+            'rgba(109, 47, 127, 0.8)',
+            'rgba(119, 37, 103, 0.8)',
+            'rgba(37, 77, 119, 0.8)',
+            'rgba(245, 39, 145, 0.17)',
+            'rgba(165, 39, 245, 0.17)',
+            'rgba(39, 245, 71, 0.17)',
+            'rgba(8, 104, 23, 0.52)',
+            'rgba(121, 183, 3, 0.52)',
+            'rgba(183, 143, 3, 0.52)',
+            'rgba(212, 132, 17, 0.52)',
+            'rgba(212, 17, 68, 0.52)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(144, 169, 26, 0.8)',
+            'rgba(26, 169, 120, 0.8)',
+            'rgba(6, 117, 134, 0.8)',
+            'rgba(109, 47, 127, 0.8)',
+            'rgba(119, 37, 103, 0.8)',
+            'rgba(37, 77, 119, 0.8)',
+            'rgba(245, 39, 145, 0.17)',
+            'rgba(165, 39, 245, 0.17)',
+            'rgba(39, 245, 71, 0.17)',
+            'rgba(8, 104, 23, 0.52)',
+            'rgba(121, 183, 3, 0.52)',
+            'rgba(183, 143, 3, 0.52)',
+            'rgba(212, 132, 17, 0.52)',
+            'rgba(212, 17, 68, 0.52)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'category',
+            // beginAtZero: true
           },
-          options: {
-            // plugins: {
-            //   tooltip: {
-            //     callbacks: {
-            //       title: (ttItem) => (ttItem[0].dataset.label)
-            //     }
-            //   }
-            // },
-            scales: {
-              xAxes: [{
-                ticks: {
-                  beginAtZero: true
-                },
-
-              }],
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                },
-
-              }]
-            }
+          y: {
+            type: 'linear',
+            beginAtZero: true
           }
-        });
+        }
       }
+    };
+
+    return new Chart(htmlRef, config);
+  }
 
       periodoSelected() {}
 }
