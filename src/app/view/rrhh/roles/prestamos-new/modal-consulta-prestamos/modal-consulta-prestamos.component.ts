@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { PrestamosService } from '../prestamos.service';

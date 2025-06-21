@@ -7,7 +7,7 @@ import { ModalSupervivenciaService } from './modal-supervivencia.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
-import * as moment from 'moment';
+import moment from 'moment';
 @Component({
 standalone: false,
   selector: 'app-modal-supervivencia',

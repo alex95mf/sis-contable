@@ -20,7 +20,7 @@ import { EmployeesAditionalI } from "src/app/models/responseEmployeesAditional.i
 import { TPCTCorreoAditional, TpCtCorreoNom } from "src/app/models/responseTPCTCorreoAditional.interface";
 import { SMTPEmailAditionalResponseI, StmpEmailNom } from "src/app/models/responseSmptEmailAditional.interface";
 import { NuevoTipoContratoComponent } from "./nuevo-tipo-contrato/nuevo-tipo-contrato.component";
-import * as moment from "moment";
+import moment from "moment";
 
 
 @Component({

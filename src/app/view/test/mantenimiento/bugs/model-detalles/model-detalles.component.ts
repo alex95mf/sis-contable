@@ -4,7 +4,7 @@ import { BugsServiceService } from '../bugs-service.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonModule } from '@angular/common';

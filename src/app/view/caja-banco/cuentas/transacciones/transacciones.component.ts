@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { TransaccionesService } from './transacciones.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CommonService } from '../../../../services/commonServices';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';

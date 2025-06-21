@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as myVarGlobals from '../../../../global';
 import { CommonService } from '../../../../services/commonServices';
 import { CommonVarService } from '../../../../services/common-var.services';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import { ToastrService } from 'ngx-toastr';

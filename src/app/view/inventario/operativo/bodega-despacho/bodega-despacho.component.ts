@@ -10,7 +10,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 import * as myVarGlobals from '../../../../global';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BodegaDespachoService } from './bodega-despacho.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ShowInvoiceComponent } from './show-invoice/show-invoice.component';
 import { ConfirmInvoiceComponent } from './confirm-invoice/confirm-invoice.component'
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ToastrService } from 'ngx-toastr';
 import { GeneracionService } from '../generacion/generacion.service';

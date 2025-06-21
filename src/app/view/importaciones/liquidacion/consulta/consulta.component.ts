@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Socket } from '../../../../services/socket.service';
 import { LiquidacionesService } from '../liquidaciones/liquidaciones.service';
 import { ShowLiquidacionesComponent } from '../liquidaciones/show-liquidaciones/show-liquidaciones.component';

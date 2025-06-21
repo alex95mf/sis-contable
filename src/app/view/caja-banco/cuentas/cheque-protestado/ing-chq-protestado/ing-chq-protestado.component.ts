@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 import { ChequeProtestadoService } from '../cheque-protestado.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from "../../../../../global";
 import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-dialog/confirmation-dialog.service';

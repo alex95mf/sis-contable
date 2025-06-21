@@ -10,7 +10,7 @@ import { ToastrService } from "ngx-toastr";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CcSpinerProcesarComponent } from "src/app/config/custom/cc-spiner-procesar.component";
 import Botonera from "src/app/models/IBotonera";
-import * as moment from "moment";
+import moment from "moment";
 import Swal from "sweetalert2";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 

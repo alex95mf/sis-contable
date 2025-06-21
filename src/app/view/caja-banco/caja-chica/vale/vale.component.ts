@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ValeService } from './vale.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ReposicionComponent } from './reposicion/reposicion.component'
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 

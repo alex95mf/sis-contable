@@ -8,7 +8,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import * as myVarGlobals from 'src/app/global';
 import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-dialog/confirmation-dialog.service';
 import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc-mantenimiento/vista-archivo/vista-archivo.component';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { ContratacionService } from '../contratacion.service';
 

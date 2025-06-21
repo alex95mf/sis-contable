@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 import { ExcelService } from 'src/app/services/excel.service';
 @Component({

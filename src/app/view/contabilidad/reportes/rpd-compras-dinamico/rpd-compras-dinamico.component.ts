@@ -11,7 +11,7 @@ import { CcModalTablaProveedoresComponent } from 'src/app/config/custom/cc-modal
 
 import { RptDinamicComprasI } from 'src/app/models/responseRptDinamicCompras.interface';
 
-import * as moment from "moment";
+import moment from "moment";
 
 import { ToastrService } from 'ngx-toastr';
 import * as FileSaver from 'file-saver';

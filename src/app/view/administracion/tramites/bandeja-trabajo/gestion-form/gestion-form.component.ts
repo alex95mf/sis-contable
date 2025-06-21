@@ -7,7 +7,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { BandejaTrabajoService } from '../../../mesa-ayuda/bandeja-trabajo/bandeja-trabajo.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
-import * as moment from 'moment';
+import moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 
 @Component({

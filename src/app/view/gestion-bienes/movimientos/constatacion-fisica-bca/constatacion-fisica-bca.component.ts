@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as myVarGlobals from 'src/app/global';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CommonService } from 'src/app/services/commonServices';
 import { ToastrService } from 'ngx-toastr';
 import * as XLSX from 'xlsx';

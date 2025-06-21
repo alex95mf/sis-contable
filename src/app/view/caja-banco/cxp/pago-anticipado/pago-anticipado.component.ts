@@ -8,7 +8,7 @@ import { PagoAnticipadoService } from './pago-anticipado.service';
 import * as myVarGlobals from "../../../../global";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BusqProveedorComponent } from './busq-proveedor/busq-proveedor.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subject } from 'rxjs';
 import { GeneraPagoComponent } from './genera-pago/genera-pago.component';
 import { ImprimirComponent } from './imprimir/imprimir.component';

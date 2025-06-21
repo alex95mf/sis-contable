@@ -10,7 +10,7 @@ import { CommonService } from "../../../../services/commonServices";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
-import * as moment from "moment";
+import moment from "moment";
 import { PersonalComponent } from "./personal/personal.component";
 import { ViewComponent } from './view/view.component';
 import { CcSpinerProcesarComponent } from "../../../../config/custom/cc-spiner-procesar.component";

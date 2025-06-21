@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 import { ExcelService } from 'src/app/services/excel.service';
-import * as moment from 'moment'
+import moment from 'moment'
 
 import { environment } from 'src/environments/environment';
 

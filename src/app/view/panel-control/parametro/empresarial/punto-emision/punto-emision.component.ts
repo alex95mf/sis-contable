@@ -4,7 +4,7 @@ import { CommonVarService } from "../../../../../services/common-var.services";
 import { ToastrService } from "ngx-toastr";
 import * as myVarGlobals from "../../../../../global";
 import { Router } from "@angular/router";
-import * as moment from "moment";
+import moment from "moment";
 import "moment/locale/es";
 import { PuntodeEmisionService } from "../../empresarial/punto-emision/punto-emision.services";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";

@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CcModalTableRubroComponent } from 'src/app/config/custom/modal-component/cc-modal-table-rubro/cc-modal-table-rubro.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as XLSX from 'xlsx';
 import { RubrosResponseI } from 'src/app/models/responseRubro.interface';

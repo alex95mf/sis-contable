@@ -9,7 +9,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { CreateRetencionService } from './create-retencion.service'

@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Socket } from '../../../../services/socket.service';
 import { ShowGastosComponent } from './show-gastos/show-gastos.component';
 import { DiferedCuotasComponent } from './difered-cuotas/difered-cuotas.component';

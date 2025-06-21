@@ -16,7 +16,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CcModalPreviewRetencionesComponent } from 'src/app/config/custom/cc-modal-preview-retenciones/cc-modal-preview-retenciones.component';
 import { CcModalEditarImpuestosComprasComponent } from 'src/app/config/custom/cc-modal-editar-impuestos-compras/cc-modal-editar-impuestos-compras.component';
 
-import * as moment from 'moment'
+import moment from 'moment'
 import { DatePipe } from '@angular/common';
 
 import { environment } from 'src/environments/environment';

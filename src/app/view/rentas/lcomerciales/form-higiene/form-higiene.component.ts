@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as myVarGlobals from 'src/app/global';
-import * as moment from 'moment';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';

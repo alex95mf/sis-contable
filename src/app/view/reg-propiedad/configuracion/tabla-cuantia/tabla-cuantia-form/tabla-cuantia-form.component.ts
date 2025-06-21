@@ -5,7 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { TablaCuantiaService } from '../tabla-cuantia.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import * as moment from "moment";
+import moment from "moment";
 
 @Component({
 standalone: false,

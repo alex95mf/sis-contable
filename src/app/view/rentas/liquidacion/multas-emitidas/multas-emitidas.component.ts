@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonService } from 'src/app/services/commonServices';
 import { MultasEmitidasService } from './multas-emitidas.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as myVarGlobals from 'src/app/global';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

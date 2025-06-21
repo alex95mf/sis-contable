@@ -14,7 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 import { XlsExportService } from 'src/app/services/xls-export.service';
 
 import { environment } from 'src/environments/environment';
-import * as moment from 'moment'
+import moment from 'moment'
 
 @Component({
 standalone: false,

@@ -7,7 +7,7 @@ import { CommonService } from "../../../../../services/commonServices";
 import { CommonVarService } from "../../../../../services/common-var.services";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
-import * as moment from "moment";
+import moment from "moment";
 import * as myVarGlobals from "../../../../../global";
 import "sweetalert2/src/sweetalert2.scss";
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 import { ConfirmationDialogService } from '../../../../../config/custom/confirmation-dialog/confirmation-dialog.service';
 import { MspreguntaComponent } from '../../../../../config/custom/mspregunta/mspregunta.component';

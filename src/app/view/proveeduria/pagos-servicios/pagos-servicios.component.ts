@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr';
 import * as myVarGlobals from '../../../global';

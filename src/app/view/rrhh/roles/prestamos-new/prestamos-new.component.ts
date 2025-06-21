@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { SweetAlertResult } from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ModalBuscaPrestamoComponent } from './modal-busca-prestamo/modal-busca-prestamo.component';

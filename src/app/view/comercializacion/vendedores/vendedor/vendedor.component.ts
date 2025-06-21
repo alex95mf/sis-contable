@@ -11,7 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ShowVendedorComponent } from "./show-vendedor/show-vendedor.component";
 import { ModalProductComponent } from "./modal-product/modal-product.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import * as moment from 'moment';
+import moment from 'moment';
 @Component({
 standalone: false,
   selector: "app-vendedor",

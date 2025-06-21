@@ -6,7 +6,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { ListBusquedaPrestamoComponent } from './list-busqueda-prestamo/list-busqueda-prestamo.component';
 import { MantenimientoService } from './mantenimiento.service';
 import { ModalProveedoresComponent } from 'src/app/config/custom/modal-proveedores/modal-proveedores.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';

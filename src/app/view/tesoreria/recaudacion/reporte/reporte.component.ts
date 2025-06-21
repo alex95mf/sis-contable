@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { environment } from 'src/environments/environment';
 import { ButtonRadioActiveComponent } from '../../../../config/custom/cc-panel-buttons/button-radio-active.component';
 import { ExcelService } from 'src/app/services/excel.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ReporteService } from './reporte.service';
 import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { PrimeNG } from 'primeng/config';

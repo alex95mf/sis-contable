@@ -7,7 +7,7 @@ import { FormHigieneService } from '../form-higiene/form-higiene.service';
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as myVarGlobals from 'src/app/global';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ModalInspeccionesComponent } from './modal-inspecciones/modal-inspecciones.component';
 import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.component';
 import { CommonService } from 'src/app/services/commonServices';

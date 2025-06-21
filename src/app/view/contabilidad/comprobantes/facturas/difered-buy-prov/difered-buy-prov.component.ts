@@ -3,7 +3,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 //import Swal from "sweetalert2";
 
 import { ChangeDetectorRef } from '@angular/core';

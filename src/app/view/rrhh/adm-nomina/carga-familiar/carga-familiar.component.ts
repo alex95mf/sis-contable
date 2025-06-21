@@ -12,7 +12,7 @@ import { CommonService } from "../../../../services/commonServices";
 import { CargaFamiliarService } from "./carga-familiar.service";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-import * as moment from "moment";
+import moment from "moment";
 declare const $: any;
 @Component({
 standalone: false,

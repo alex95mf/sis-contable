@@ -4,7 +4,7 @@ import { ConsultaService } from './consulta.service';
 import * as myVarGlobals from '../../../../global';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from '../../../../../app/services/commonServices';
 import { CommonVarService } from '../../../../../app/services/common-var.services';

@@ -34,7 +34,7 @@ import { LazyLoadEvent, MessageService } from 'primeng/api';
 
 import { RhfolderDigitalEmpleadoService } from "../folder-digital-empleado/rhfolder-digital-empleado.service";
 import { AccionPErsonalResponseI } from "src/app/models/responseAccionPersonal.interface";
-import * as moment from 'moment';
+import moment from 'moment';
 import { ModalConsultaSubrogacionComponent } from "./modal-consulta-subrogacion/modal-consulta-subrogacion.component";
 import { CierreMesService } from "src/app/view/presupuesto/configuracion/cierre-de-mes/cierre-mes.service";
 

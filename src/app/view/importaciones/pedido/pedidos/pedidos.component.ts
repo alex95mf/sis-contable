@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DiferedCuotesComponent } from './difered-cuotes/difered-cuotes.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Socket } from '../../../../services/socket.service';
 import { ShowPedidosComponent } from './show-pedidos/show-pedidos.component';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';

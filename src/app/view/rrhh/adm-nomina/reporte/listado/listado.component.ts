@@ -13,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProgramaComponent } from 'src/app/view/rrhh/beneficios/rol-general/modal-programa/modal-programa.component';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ExcelService } from 'src/app/services/excel.service';
 @Component({
 standalone: false,

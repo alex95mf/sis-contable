@@ -9,7 +9,7 @@ import { ChequesPostService } from './cheques-post.service';
 import * as myVarGlobals from '../../../../global';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({

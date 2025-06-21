@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 import { ArriendoterrenoService } from '../arriendoterreno.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
 standalone: false,

@@ -22,7 +22,7 @@ import { ModalPagosDetComponent } from "./modal-pagos-det/modal-pagos-det.compon
 import { ConsultaLotesComponent } from "./consulta-lotes/consulta-lotes.component";
 import { DetalleInteresesComponent } from "./detalle-intereses/detalle-intereses.component";
 import { takeUntil } from "rxjs/operators";
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
 standalone: false,

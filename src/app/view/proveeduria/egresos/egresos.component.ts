@@ -7,7 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';
 import { ValidacionesFactory } from '../../../config/custom/utils/ValidacionesFactory';
 

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';

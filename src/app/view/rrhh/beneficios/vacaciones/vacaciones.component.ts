@@ -16,7 +16,7 @@ import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 import { PrimeNG } from 'primeng/config';
 import { Empleado } from 'src/app/models/responseEmployeesAditional.interface';
 import { VacacionAditionalResponseI, Vacaciones } from 'src/app/models/responseVacationAditional.interfase';
-import * as moment from 'moment';
+import moment from 'moment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({

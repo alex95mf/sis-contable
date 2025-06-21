@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { environment } from 'src/environments/environment';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { ButtonRadioActiveComponent } from '../../../../config/custom/cc-panel-buttons/button-radio-active.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ReporteService } from './reporte.service';
 import * as myVarGlobals from 'src/app/global';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

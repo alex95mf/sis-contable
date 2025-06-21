@@ -6,7 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { PuestoMercadoService } from './puesto-mercado.service';
 import * as myVarGlobals from "../../../../global";
 
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { PuestoMercadoFormComponent } from './puesto-mercado-form/puesto-mercado-form.component';
 import { CommonService } from 'src/app/services/commonServices';

@@ -7,7 +7,7 @@ import { CommonService } from '../../../../services/commonServices'
 import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
-import * as moment from 'moment';
+import moment from 'moment';
 declare const $: any;
 import { Socket } from '../../../../services/socket.service';
 

@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 import { DepartemtAditionalI } from "src/app/models/responseDepartemtAditional.interface";
 
-import * as moment from 'moment'
+import moment from 'moment'
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 
 @Component({

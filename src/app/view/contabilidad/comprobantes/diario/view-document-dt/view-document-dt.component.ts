@@ -6,7 +6,7 @@ import { DiarioService } from "../../../comprobantes/diario/diario.service";
 import { CommonVarService } from '../../../../../services/common-var.services';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 import { Router } from "@angular/router";
-import * as moment from "moment";
+import moment from "moment";
 import * as myVarGlobals from "../../../../../global";
 import "sweetalert2/src/sweetalert2.scss";
 import Swal from 'sweetalert2';

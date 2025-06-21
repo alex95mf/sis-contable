@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { QuotesService } from './quotes.service'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProductComponent } from './modal-product/modal-product.component'
-import * as moment from 'moment';
+import moment from 'moment';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
 import { Socket } from '../../../../services/socket.service';

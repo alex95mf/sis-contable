@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 import { LiquidacionService } from '../liquidacion.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import Botonera from 'src/app/models/IBotonera';
 

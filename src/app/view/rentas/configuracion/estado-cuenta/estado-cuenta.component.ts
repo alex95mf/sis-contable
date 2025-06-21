@@ -6,7 +6,7 @@ import { CommonService } from "src/app/services/commonServices";
 import { CommonVarService } from "src/app/services/common-var.services";
 import { ToastrService } from "ngx-toastr";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import * as moment from 'moment';
+import moment from 'moment';
 //import { ModalContribuyentesComponent } from "src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component";
 import { ModalContribuyentesComponent } from "./modal-contribuyentes/modal-contribuyentes.component";
 import { DetalleInteresesComponent } from "./detalle-intereses/detalle-intereses.component";

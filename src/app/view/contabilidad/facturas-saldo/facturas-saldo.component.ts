@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Botonera from 'src/app/models/IBotonera';
 import { FacturasSaldoService } from './facturas-saldo.service';
 import { CierreMesService } from '../ciclos-contables/cierre-de-mes/cierre-mes.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';

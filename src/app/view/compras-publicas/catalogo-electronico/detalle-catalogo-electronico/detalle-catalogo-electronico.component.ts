@@ -14,7 +14,7 @@ import { EncargadoComponent } from 'src/app/config/custom/encargado/encargado.co
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 
 
 

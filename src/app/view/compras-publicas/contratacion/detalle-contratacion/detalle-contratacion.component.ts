@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalCondicionesComponent } from '../modal-condiciones/modal-condiciones.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ContratacionService } from '../contratacion.service';

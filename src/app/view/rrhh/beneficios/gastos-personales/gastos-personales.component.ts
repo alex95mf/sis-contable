@@ -34,7 +34,7 @@ import { DatatableLanguage } from "src/app/models/es-ES";
 import Botonera from "src/app/models/IBotonera";
 import { ExcelService } from "src/app/services/excel.service";
 import { MatTabChangeEvent } from "@angular/material/tabs";
-import * as moment from "moment";
+import moment from "moment";
 import { EmpleadosComponent } from "./empleados/empleados.component";
 
 

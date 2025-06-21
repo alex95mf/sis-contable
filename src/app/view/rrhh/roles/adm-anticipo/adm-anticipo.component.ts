@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import * as moment from "moment";
+import moment from "moment";
 import { CcSpinerProcesarComponent } from "../../../../config/custom/cc-spiner-procesar.component";
 import { ConfirmationDialogService } from "../../../../config/custom/confirmation-dialog/confirmation-dialog.service";
 import { MspreguntaComponent } from "../../../../config/custom/mspregunta/mspregunta.component";

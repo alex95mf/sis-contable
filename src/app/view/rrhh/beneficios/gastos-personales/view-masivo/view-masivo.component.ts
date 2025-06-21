@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { BenefGastosPersonalesService } from '../benef-gastos-personales.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatTableDataSource } from '@angular/material/table';

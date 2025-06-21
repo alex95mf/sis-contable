@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { DocElecService } from './doc-elec.service';
 import Botonera from 'src/app/models/IBotonera';
-import * as moment from 'moment';
+import moment from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { environment } from 'src/environments/environment';

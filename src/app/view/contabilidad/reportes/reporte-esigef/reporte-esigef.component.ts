@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { EasigefService } from './reporte-esigef.service';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment'
+import moment from 'moment'
 
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CustomersConsultModule } from 'src/app/view/cartera/customers/customers-consult/customers-consult.module';

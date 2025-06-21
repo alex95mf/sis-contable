@@ -5,7 +5,7 @@ import { CommonService } from '../../../../../app/services/commonServices';
 import * as myVarGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import moment from 'moment';
 import { FacturaCompraService } from './factura-compra.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';

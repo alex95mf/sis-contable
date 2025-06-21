@@ -13,7 +13,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from "src/app/services/common-var.services";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import * as myVarGlobals from 'src/app/global';
-import * as moment from 'moment';
+import moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 import { Socket } from 'src/app/services/socket.service';

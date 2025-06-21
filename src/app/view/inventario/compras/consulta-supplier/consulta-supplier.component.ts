@@ -10,7 +10,7 @@ import * as myVarGlobals from '../../../../global';
 import { CommonService } from '../../../../services/commonServices';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowSupplierComponent } from './show-supplier/show-supplier.component';
-import * as moment from "moment";
+import moment from "moment";
 
 
 @Component({

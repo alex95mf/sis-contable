@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { EmpleadoService } from '../empleado.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
 standalone: false,

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BancariasService } from './bancarias.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import moment from 'moment';
 import * as myVarGlobals from '../../../../global';
 import { CommonService } from '../../../../../app/services/commonServices';
 import { CommonVarService } from '../../../../../app/services/common-var.services';

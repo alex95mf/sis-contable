@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 import { DocFicha, DocFichaAditionalResponseI } from 'src/app/models/responseDocFichaAditional.interfase';
 import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { event } from 'jquery';
-import * as moment from 'moment';
+import moment from 'moment';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 
 @Component({

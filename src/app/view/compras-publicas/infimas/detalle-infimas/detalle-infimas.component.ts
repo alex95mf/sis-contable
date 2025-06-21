@@ -8,7 +8,7 @@ import * as myVarGlobals from "../../../../global";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 import { InfimasService } from '../infimas.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import { environment } from 'src/environments/environment';

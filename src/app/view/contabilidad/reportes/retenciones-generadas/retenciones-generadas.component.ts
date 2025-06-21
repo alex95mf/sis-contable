@@ -4,7 +4,7 @@ import Swal from "sweetalert2";;
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import * as myVarGlobals from '../../../../global';
 
-import * as moment from "moment";
+import moment from "moment";
 
 import { ToastrService } from 'ngx-toastr';
 import { ReportRetencionGeneradasService } from './retenciones-generadas.service';

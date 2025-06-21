@@ -9,7 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 import { ModalAnexosComponent } from '../../bandeja-trabajo/seguimiento-form/modal-anexos/modal-anexos.component';
 import { TramitesService } from '../../tramites.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 import { Socket } from '../../../../../services/socket.service';
 @Component({

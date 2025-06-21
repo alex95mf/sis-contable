@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import * as moment from 'moment';
+import moment from 'moment';
 import { GeneracionIcpNominaService } from '../generacion-icp-nomina.service'; 
 import { ToastrService } from 'ngx-toastr';
 // import { OrdenService } from '../orden.service';

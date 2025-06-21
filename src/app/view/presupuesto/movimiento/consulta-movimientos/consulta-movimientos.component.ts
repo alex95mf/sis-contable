@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ConsultaMovimientosService } from './consulta-movimientos.service'
 import { CommonVarService } from 'src/app/services/common-var.services';
-import * as moment from 'moment';
+import moment from 'moment';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 
 @Component({

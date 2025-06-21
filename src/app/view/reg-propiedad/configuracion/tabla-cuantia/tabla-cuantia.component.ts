@@ -9,7 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { TablaCuantiaFormComponent } from './tabla-cuantia-form/tabla-cuantia-form.component';
 import { TablaCuantiaService } from './tabla-cuantia.service';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import * as moment from "moment";
+import moment from "moment";
 
 @Component({
 standalone: false,

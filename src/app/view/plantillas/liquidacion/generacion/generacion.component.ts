@@ -14,7 +14,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from "src/app/services/common-var.services";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import * as myVarGlobals from 'src/app/global';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 
 @Component({

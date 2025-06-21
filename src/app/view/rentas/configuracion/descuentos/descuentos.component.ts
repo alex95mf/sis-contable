@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
 import Botonera from 'src/app/models/IBotonera';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { ModalDescuentosComponent } from './modal-descuentos/modal-descuentos.component';
 

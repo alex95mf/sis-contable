@@ -8,7 +8,7 @@ import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-di
 import { VistaClientesComponent } from 'src/app/view/comercializacion/facturacion/fac-electronica/vista-clientes/vista-clientes.component';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import * as moment from "moment";
+import moment from "moment";
 import { IngChqProtestadoComponent } from './ing-chq-protestado/ing-chq-protestado.component';
 import { InfoClienteComponent } from './info-cliente/info-cliente.component';
 import { ImprimirCheProComponent } from './imprimir/imprimir.component';

@@ -8,7 +8,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { BodegaComprasService } from './bodega-compras.service';
 import { CommonService } from '../../../../services/commonServices'
 import { ConfirmPurchaseWineryComponent } from '../../../commons/modals/confirm-purchase-winery/confirm-purchase-winery.component'
-import * as moment from "moment";
+import moment from "moment";
 import { CommonVarService } from '../../../../services/common-var.services';
 import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';

@@ -11,7 +11,7 @@ import { SeguridadService } from '../../../panel-control/accesos/seguridad/segur
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalTableComponent } from '../../../commons/modals/global-table/global-table.component';
 import { Socket } from '../../../../services/socket.service';
-import * as moment from "moment";
+import moment from "moment";
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 @Component({
 standalone: false,

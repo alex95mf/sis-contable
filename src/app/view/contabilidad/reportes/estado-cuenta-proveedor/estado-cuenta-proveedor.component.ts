@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 
 import * as myVarGlobals from '../../../../global';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { EstadoCuentaProveedorService } from './estado-cuenta-proveedor.service';
 
 @Component({

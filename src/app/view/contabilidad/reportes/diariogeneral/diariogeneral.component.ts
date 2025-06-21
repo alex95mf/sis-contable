@@ -7,7 +7,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DiarioGeneralService } from './diariogeneral.service';
 
-import * as moment from "moment";
+import moment from "moment";
 import { environment } from 'src/environments/environment';
 import { IAuxuliar, IOption, IPaginate } from '../../auxiliares/IAuxiliares';
 

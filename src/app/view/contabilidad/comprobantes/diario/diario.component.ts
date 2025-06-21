@@ -9,7 +9,7 @@ import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../../services/commonServices'
 import { CommonVarService } from '../../../../services/common-var.services';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ExcelService } from '../../../../services/excel.service';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from "sweetalert2";;

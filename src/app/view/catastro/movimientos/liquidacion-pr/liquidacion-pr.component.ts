@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalContribuyenteComponent } from './modal-contribuyente/modal-contribuyente.component';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ModalConceptosComponent } from './modal-conceptos/modal-conceptos.component';
 import Swal from 'sweetalert2';
 import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervivencia/modal-supervivencia.component';

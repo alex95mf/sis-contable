@@ -9,7 +9,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ComprasService } from './compras.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiferedBuyProvComponent } from './difered-buy-prov/difered-buy-prov.component';
 import { ShowInvoicesComponent } from './show-invoices/show-invoices.component';

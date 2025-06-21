@@ -10,7 +10,7 @@ import * as myVarGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DepositoService } from './deposito.service'
-import * as moment from "moment";
+import moment from "moment";
 
 @Component({
 standalone: false,

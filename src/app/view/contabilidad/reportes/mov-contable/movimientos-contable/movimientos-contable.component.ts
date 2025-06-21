@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import * as myVarGlobals from '../../../../../global'; 
 import { MovimientosContablesService } from './movimientos-contables.service'
-import * as moment from "moment";
+import moment from "moment";
 import { CommonService } from '../../../../../services/commonServices';
 @Component({
 standalone: false,

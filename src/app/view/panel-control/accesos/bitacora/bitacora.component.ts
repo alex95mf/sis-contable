@@ -7,7 +7,7 @@ import { CommonService } from '../../../../services/commonServices'
 import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';
 import flatpickr from 'flatpickr';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 import { ExcelService } from 'src/app/services/excel.service';

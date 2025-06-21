@@ -5,7 +5,7 @@ import { SeguridadService } from '../../../panel-control/accesos/seguridad/segur
 import { ToastrService } from 'ngx-toastr';
 import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import moment from 'moment';
 import { OrdenesService } from './ordenes.service';
 import { AnexosDocComponent } from '../../../commons/modals/anexos-doc/anexos-doc.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

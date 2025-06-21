@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotaDebitoService } from './nota-debito.service';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ShowNotasDebitoComponent } from './show-notas-debito/show-notas-debito.component';
 import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';

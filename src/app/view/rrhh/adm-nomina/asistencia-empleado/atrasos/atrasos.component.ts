@@ -4,7 +4,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { HttpEventType } from '@angular/common/http';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2';
 import { Subject } from 'rxjs';
 

@@ -4,7 +4,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { RevisionCierreService } from './revision-cierre.service';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
 standalone: false,

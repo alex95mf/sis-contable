@@ -9,7 +9,7 @@ import { RecepcionService } from '../recepcion.service';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
 import { Socket } from '../../../../../services/socket.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({

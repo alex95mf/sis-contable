@@ -5,7 +5,7 @@ import { CommonService } from "../../../../services/commonServices";
 import * as myVarGlobals from "../../../../global";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-import * as moment from "moment";
+import moment from "moment";
 import { CcSpinerProcesarComponent } from "../../../../config/custom/cc-spiner-procesar.component";
 import { ValidacionesFactory } from "../../../../config/custom/utils/ValidacionesFactory";
 import { DocumentosService } from "./documentos.service";

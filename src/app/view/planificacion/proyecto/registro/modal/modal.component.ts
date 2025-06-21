@@ -6,7 +6,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ToastrService } from 'ngx-toastr';
 
 import { RegistroService } from '../registro.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
 standalone: false,

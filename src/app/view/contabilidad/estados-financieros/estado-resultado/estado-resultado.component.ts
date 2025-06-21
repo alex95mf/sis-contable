@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { ExcelService } from '../../../../services/excel.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { HttpHeaders, HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
-import * as moment from "moment";
+import moment from "moment";
 import { environment } from 'src/environments/environment';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 

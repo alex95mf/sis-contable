@@ -5,7 +5,7 @@ import { CommonService } from "../../../../../services/commonServices";
 import { KardexService } from "../kardex.service";
 import { CommonVarService } from '../../../../../services/common-var.services';
 import { Router } from "@angular/router";
-import * as moment from "moment";
+import moment from "moment";
 import * as myVarGlobals from "../../../../../global";
 import "sweetalert2/src/sweetalert2.scss";
 import Swal from 'sweetalert2';

@@ -7,7 +7,7 @@ import * as myVarGlobals from 'src/app/global';
 
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 
 declare const $: any;
 

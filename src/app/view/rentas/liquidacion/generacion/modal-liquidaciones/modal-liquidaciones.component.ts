@@ -5,7 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { GeneracionService } from '../generacion.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
 standalone: false,

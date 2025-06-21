@@ -9,7 +9,7 @@ import { ShowCuentasComponent } from './show-cuentas/show-cuentas.component';
 import { NotaCreditoService } from './nota-credito.service';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ShowNotasCreditoComponent } from './show-notas-credito/show-notas-credito.component';
 import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';

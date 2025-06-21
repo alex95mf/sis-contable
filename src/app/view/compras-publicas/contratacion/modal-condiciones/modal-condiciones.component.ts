@@ -5,7 +5,7 @@ import { ContratacionService } from '../contratacion.service';
 import { ToastrService } from 'ngx-toastr';
 import * as myVarGlobals from "../../../../global";
 import { CommonService } from 'src/app/services/commonServices';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';

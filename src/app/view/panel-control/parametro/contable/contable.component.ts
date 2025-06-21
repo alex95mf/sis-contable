@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, NgZone  } from '@angular/core';
 import { Subject } from "rxjs";
-import * as moment from "moment";
+import moment from "moment";
 import { Router } from "@angular/router";
 import "moment/locale/es";
 import "sweetalert2/src/sweetalert2.scss";

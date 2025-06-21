@@ -5,7 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { AprobacionService } from '../aprobacion.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
 standalone: false,

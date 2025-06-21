@@ -7,7 +7,7 @@ import { CommonService } from '../../../../../services/commonServices'
 import { CommonVarService } from '../../../../../services/common-var.services'
 import { OrdenesService } from '../ordenes.service'
 import * as myVarGlobals from '../../../../../global';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ConsultaEstadoClienteComponent } from '../../../../cartera/customers/consulta-estado-cliente/consulta-estado-cliente.component';
 
 

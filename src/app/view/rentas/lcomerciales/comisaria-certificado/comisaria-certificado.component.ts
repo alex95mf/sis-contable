@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { environment } from 'src/environments/environment';
 import { ButtonRadioActiveComponent } from '../../../../config/custom/cc-panel-buttons/button-radio-active.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ComisariaCertificadoService } from './comisaria-certificado.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 

@@ -9,7 +9,7 @@ import { CommonVarService } from "../../../../services/common-var.services";
 import { CommonService } from "../../../../services/commonServices";
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
-import * as moment from "moment";
+import moment from "moment";
 import { environment } from "../../../../../environments/environment";
 import { IngresoService } from "../../../inventario/producto/ingreso/ingreso.service";
 import { CcSpinerProcesarComponent } from "../../../../config/custom/cc-spiner-procesar.component";

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit ,EventEmitter,Output} from '@angular/core';
-import * as moment from 'moment'
+import moment from 'moment'
 import * as internal from 'stream';
 
 @Component({

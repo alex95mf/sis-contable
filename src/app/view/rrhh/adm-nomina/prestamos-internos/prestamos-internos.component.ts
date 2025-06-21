@@ -18,7 +18,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { PerFaltasYPermisosService } from '../faltas-y-permisos/per-faltas-y-permisos.service';
 // import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2';
 import { VacacionesService } from '../../beneficios/vacaciones/vacaciones.services';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';

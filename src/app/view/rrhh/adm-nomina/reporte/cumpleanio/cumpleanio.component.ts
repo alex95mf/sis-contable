@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import moment from 'moment';
 @Component({
 standalone: false,
   selector: 'app-cumpleanio',

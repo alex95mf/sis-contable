@@ -6,7 +6,7 @@ import { ConsultaEstadoClienteService } from '../consulta-estado-cliente.service
 import { ToastrService } from "ngx-toastr";
 import * as myVarGlobals from "../../../../../global";
 import { Router } from "@angular/router";
-import * as moment from "moment";
+import moment from "moment";
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({

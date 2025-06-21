@@ -3,7 +3,7 @@ import { DevolucionesService } from './devoluciones.service'
 import * as myVarGlobals from '../../../../global';
 import { CommonService } from '../../../../services/commonServices';
 import { CommonVarService } from '../../../../services/common-var.services';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

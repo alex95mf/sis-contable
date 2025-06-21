@@ -9,7 +9,7 @@ import { CommonVarService } from "src/app/services/common-var.services";
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import * as myVarGlobals from 'src/app/global';
-import * as moment from 'moment';
+import moment from 'moment';
 import { LiquidacionService } from './liquidacion.service';
 import { ListLiquidacionesComponent } from './list-liquidaciones/list-liquidaciones.component';
 import { ModalContribuyentesCompradorComponent } from './modal-contribuyentes-comprador/modal-contribuyentes-comprador.component';

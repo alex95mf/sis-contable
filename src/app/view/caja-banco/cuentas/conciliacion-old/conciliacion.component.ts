@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ConciliacionService } from './conciliacion.service';
 import { CommonService } from '../../../../services/commonServices';
 import 'sweetalert2/src/sweetalert2.scss';

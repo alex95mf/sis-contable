@@ -9,7 +9,7 @@ import { ShowCuentasComponent } from './show-cuentas/show-cuentas.component';
 import { EgresoService } from './egreso.service';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ShowComprobantesComponent } from './show-comprobantes/show-comprobantes.component';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component'
 import { ReportComprobantesComponent } from './report-comprobantes/report-comprobantes.component';

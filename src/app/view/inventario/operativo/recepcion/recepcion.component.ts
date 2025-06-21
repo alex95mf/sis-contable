@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Socket } from '../../../../services/socket.service';
 import { ShowRecepcionComponent } from './show-recepcion/show-recepcion.component';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component'

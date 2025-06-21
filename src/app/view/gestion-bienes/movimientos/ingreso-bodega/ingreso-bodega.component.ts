@@ -5,7 +5,7 @@ import { SeguridadService } from '../../../panel-control/accesos/seguridad/segur
 import { ToastrService } from 'ngx-toastr';
 import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import moment from 'moment';
 import { IngresoBodegaService } from './ingreso-bodega.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import { AnexosDocComponent } from '../../../commons/modals/anexos-doc/anexos-doc.component';

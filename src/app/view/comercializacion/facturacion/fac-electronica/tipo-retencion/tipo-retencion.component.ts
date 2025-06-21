@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subject } from 'rxjs';
 import { MspreguntaComponent } from 'src/app/config/custom/mspregunta/mspregunta.component';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';

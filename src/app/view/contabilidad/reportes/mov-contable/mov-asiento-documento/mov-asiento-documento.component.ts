@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
-import * as moment from "moment";
+import moment from "moment";
 import "sweetalert2/src/sweetalert2.scss";
 import { ToastrService } from "ngx-toastr";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";

@@ -8,7 +8,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { XlsExportService } from 'src/app/services/xls-export.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 //import { element } from 'angular';
 @Component({

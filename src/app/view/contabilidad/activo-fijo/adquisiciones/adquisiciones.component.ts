@@ -4,7 +4,7 @@ import { CommonService } from '../../../../../app/services/commonServices';
 import { CommonVarService } from '../../../../../app/services/common-var.services';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AdquisicionesService } from './adquisiciones.service';
 import { DataTableDirective } from 'angular-datatables';

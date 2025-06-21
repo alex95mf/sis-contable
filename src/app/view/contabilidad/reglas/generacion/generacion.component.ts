@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild,EventEmitter,Output } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GeneracionService } from './generacion.service';
 import * as myVarGlobals from '../../../../global';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CommonService } from '../../../../services/commonServices'
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ToastrService } from 'ngx-toastr';

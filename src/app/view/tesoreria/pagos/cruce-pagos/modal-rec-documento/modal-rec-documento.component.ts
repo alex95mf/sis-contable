@@ -9,7 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 import { CrucePagosService } from '../cruce-pagos.service';
-import * as moment from 'moment';
+import moment from 'moment';
 @Component({
 standalone: false,
   selector: 'app-modal-rec-documento',

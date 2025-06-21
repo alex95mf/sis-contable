@@ -7,7 +7,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 
 import * as myVarGlobals from 'src/app/global';
 import { GestionExpedienteService } from '../gestion-expediente.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({

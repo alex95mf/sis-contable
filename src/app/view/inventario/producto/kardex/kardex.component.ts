@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Subject } from "rxjs";
-import * as moment from "moment";
+import moment from "moment";
 import { Router } from "@angular/router";
 import "sweetalert2/src/sweetalert2.scss";
 import { ToastrService } from "ngx-toastr";

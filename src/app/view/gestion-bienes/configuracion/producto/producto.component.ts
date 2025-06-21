@@ -15,7 +15,7 @@ import { ListDocumentosComponent } from './list-documentos/list-documentos.compo
 import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ModalGruposComponent } from './modal-grupos/modal-grupos.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.component';
 import { ModalNuevoComponent } from './modal-nuevo/modal-nuevo.component';
 import { ModalBodegaComponent } from './modal-bodega/modal-bodega.component';

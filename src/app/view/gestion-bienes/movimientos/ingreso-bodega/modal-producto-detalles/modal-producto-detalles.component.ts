@@ -5,7 +5,7 @@ import { IngresoBodegaService } from '../ingreso-bodega.service';
 import { NgxCurrencyInputMode  } from 'ngx-currency';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ProductoDetalle } from './IProductoDetalles';
 
 @Component({

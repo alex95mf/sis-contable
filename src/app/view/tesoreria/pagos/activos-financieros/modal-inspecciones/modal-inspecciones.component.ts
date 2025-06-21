@@ -6,7 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 
 import * as myVarGlobals from 'src/app/global';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ActivosFinancierosService } from '../activos-financieros.service';
 // import { GarantiaService } from '../garantia.service';

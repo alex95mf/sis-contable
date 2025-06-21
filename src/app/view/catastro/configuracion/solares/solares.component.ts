@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import { ConsultaLotesComponent } from './consulta-lotes/consulta-lotes.component';
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
-import * as moment from 'moment';
+import moment from 'moment';
 
 
 

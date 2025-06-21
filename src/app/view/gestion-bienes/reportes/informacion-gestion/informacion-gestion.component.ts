@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { environment } from 'src/environments/environment';
 import { ButtonRadioActiveComponent } from 'src/app/config/custom/cc-panel-buttons/button-radio-active.component';
 import { InformacionGestionServices } from './informacion-gestion.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import Botonera from 'src/app/models/IBotonera';
 import { ExcelService } from 'src/app/services/excel.service';

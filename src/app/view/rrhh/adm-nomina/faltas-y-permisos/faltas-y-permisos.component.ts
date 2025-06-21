@@ -10,7 +10,7 @@ import { EmployeesResponseI } from 'src/app/models/responseEmployee.interface';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import moment from 'moment';
 //import { FaltaAndPermisoAditionalResponseI, FaltaPermiso } from 'src/app/Models/responseFaltasAndPermisosAditional.interface';
 import { FaltaAndPermisoAditionalResponseI, FaltaPermiso } from 'src/app/models/responseFaltasAndPermisosAditional.interfase';
 import { LazyLoadEvent, MessageService } from 'primeng/api';

@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 import { LiquidacionService } from '../liquidacion.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({

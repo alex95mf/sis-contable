@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import 'sweetalert2/src/sweetalert2.scss';
 import * as myVarGlobals from '../../../../global';

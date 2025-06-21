@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { environment } from 'src/environments/environment';
 import { ButtonRadioActiveComponent } from '../../../../config/custom/cc-panel-buttons/button-radio-active.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ActaFiniquitoService } from '../acta-finiquito/acta-finiquito.service';
 import { Table } from 'primeng/table';
 import { LazyLoadEvent, MessageService } from 'primeng/api';

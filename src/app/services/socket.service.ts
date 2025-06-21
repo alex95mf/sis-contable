@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 //import * as io from 'socket.io-client';
 import io from 'socket.io-client';
 //import { io } from 'socket.io-client';

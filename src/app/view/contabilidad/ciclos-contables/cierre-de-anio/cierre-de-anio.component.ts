@@ -8,7 +8,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 
 import Swal from 'sweetalert2';
 
-import * as moment from 'moment'
+import moment from 'moment'
 
 @Component({
 standalone: false,

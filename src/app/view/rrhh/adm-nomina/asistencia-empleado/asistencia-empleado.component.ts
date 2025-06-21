@@ -9,7 +9,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 
 import { environment } from 'src/environments/environment';
 
-import * as moment from 'moment'
+import moment from 'moment'
 import Swal from "sweetalert2";
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

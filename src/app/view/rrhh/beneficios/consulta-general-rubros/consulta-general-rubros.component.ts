@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ApiServiceService } from './api-service.service';
 import Botonera from 'src/app/models/IBotonera';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { ExcelService } from 'src/app/services/excel.service';
 

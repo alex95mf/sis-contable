@@ -141,7 +141,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ToastrService } from 'ngx-toastr';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
