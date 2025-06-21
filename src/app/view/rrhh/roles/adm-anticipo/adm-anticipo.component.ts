@@ -10,6 +10,7 @@ import { EmpleadoService } from "../../adm-nomina/empleado/empleado.service";
 import { ImprimirRolComponent } from "../adm-rol-pago/imprimir-rol/imprimir-rol.component";
 import * as myVarGlobals from "../../../../global";
 import { AdmAnticipoService } from "./adm-anticipo.service";
+import { evaluate } from 'mathjs';
 
 @Component({
 standalone: false,
@@ -322,7 +323,7 @@ export class AdmAnticipoComponent implements OnInit {
           let sueldoBase: any = Number(element.sueldoBase);
           let cantidad_unificado: any = Number(valores.cantidad_unificado);
           if (valores.tipo_calculo == "S") {
-            valores.valor_cantidad = eval(valores.formula);
+            valores.valor_cantidad = evaluate(valores.formula);
             element.datoRubro.push(valores);
           }
           if (valores.tipo_calculo == "N") {
@@ -350,7 +351,7 @@ export class AdmAnticipoComponent implements OnInit {
           let sueldoBase: any = Number(element.sueldoBase);
           let cantidad_unificado: any = Number(valores.cantidad_unificado);
           if (valores.tipo_calculo == "S") {
-            valores.valor_cantidad = eval(valores.formula);
+            valores.valor_cantidad = evaluate(valores.formula);
             element.datoRubroEgr.push(valores);
           }
           if (valores.tipo_calculo == "N") {

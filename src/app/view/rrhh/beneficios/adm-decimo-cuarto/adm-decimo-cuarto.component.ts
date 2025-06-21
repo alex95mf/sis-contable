@@ -14,6 +14,7 @@ import { MspreguntaComponent } from "../../../../config/custom/mspregunta/mspreg
 import { DepartemtAditionalI } from "src/app/models/responseDepartemtAditional.interface";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ModalProgramaComponent } from "./modal-programa/modal-programa.component";
+import { evaluate } from 'mathjs';
 
 import { ToastrService } from 'ngx-toastr';
 import Botonera from "src/app/models/IBotonera";
@@ -624,7 +625,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
           }
 
           if (valores.tipo_calculo == "S") {
-            valores.valor_cantidad = eval(valores.formula);
+            valores.valor_cantidad = evaluate(valores.formula);
             element.datoRubro.push(valores);
           }
           if (valores.tipo_calculo == "N") {
@@ -643,7 +644,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
           let sueldoBase: any = Number(element.sueldoBase);
           let cantidad_unificado: any = Number(valores.cantidad_unificado);
           if (valores.tipo_calculo == "S") {
-            valores.valor_cantidad = eval(valores.formula);
+            valores.valor_cantidad = evaluate(valores.formula);
             element.datoRubroEgr.push(valores);
           }
           if (valores.tipo_calculo == "N") {

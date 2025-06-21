@@ -10,6 +10,7 @@ import {
 } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Botones, cbtn } from "../cc-buttons/buttons.componente";
+import { evaluate } from 'mathjs';
 
 @Component({
 standalone: false,
@@ -60,14 +61,14 @@ export class ButtonRadioActiveNewComponent implements OnInit {
 
   validateData() {
     this.filtrado = this.filtroBoton;
-    this.pp = eval(this.pparams);
+    this.pp = evaluate(this.pparams);
     if (this.filtrado != null && this.filtrado != undefined) {
       this.groupButton.forEach((element) => {
         if (element.permiso) {
           var b: any = {};
           b = element;
           if (b.boton.datoBadge != undefined) {
-            b.pDatoBagde = eval("pp." + b.boton.datoBadge);
+            b.pDatoBagde = evaluate("pp." + b.boton.datoBadge);
           } else {
             b.pDatoBagde = "C";
           }

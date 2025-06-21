@@ -11,6 +11,7 @@ import { CommonService } from "../../../../services/commonServices";
 import { Router } from "@angular/router";
 import { MspreguntaComponent } from "../../../../config/custom/mspregunta/mspregunta.component";
 import { ImprimirRolComponent } from "./imprimir-rol/imprimir-rol.component";
+import { evaluate } from 'mathjs';
 
 @Component({
 standalone: false,
@@ -333,18 +334,18 @@ export class AdmRolPagoComponent implements OnInit {
           if (valores.tipo_calculo == "S") {
             if (valores.id_parametro == 10) {
               if (valores.afiliado) {
-                valores.valor_cantidad = eval(valores.formula);
+                valores.valor_cantidad = evaluate(valores.formula);
               }
             }else if (valores.id_parametro == 3) {
               if (element.decimo_cuarto == "N") {
-                valores.valor_cantidad = eval(valores.formula);
+                valores.valor_cantidad = evaluate(valores.formula);
               }
             }else if (valores.id_parametro == 4) {
               if (element.decimo_tercero == "N") {
-                valores.valor_cantidad = eval(valores.formula);
+                valores.valor_cantidad = evaluate(valores.formula);
               }
             } else {
-              valores.valor_cantidad = eval(valores.formula);
+              valores.valor_cantidad = evaluate(valores.formula);
             }
             element.datoRubro.push(valores);
           }
@@ -373,18 +374,18 @@ export class AdmRolPagoComponent implements OnInit {
           if (valores.tipo_calculo == "S") {
             if (valores.id_parametro == 10) {
               if (valores.afiliado) {
-                valores.valor_cantidad = eval(valores.formula);
+                valores.valor_cantidad = evaluate(valores.formula);
               }
             }else if (valores.id_parametro == 3) {
               if (element.decimo_cuarto == "N") {
-                valores.valor_cantidad = eval(valores.formula);
+                valores.valor_cantidad = evaluate(valores.formula);
               }
             }else if (valores.id_parametro == 4) {
               if (element.decimo_tercero == "N") {
-                valores.valor_cantidad = eval(valores.formula);
+                valores.valor_cantidad = evaluate(valores.formula);
               }
             } else {
-              valores.valor_cantidad = eval(valores.formula);
+              valores.valor_cantidad = evaluate(valores.formula);
             }
             element.datoRubroEgr.push(valores);
           }

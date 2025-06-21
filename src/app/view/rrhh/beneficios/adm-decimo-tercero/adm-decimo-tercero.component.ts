@@ -16,7 +16,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProgramaComponent } from './modal-programa/modal-programa.component';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-
+import { evaluate } from 'mathjs';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -786,7 +786,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
           }
 
           if (valores.tipo_calculo == "S") {
-            valores.valor_cantidad = eval(valores.formula);
+            valores.valor_cantidad = evaluate(valores.formula);
             element.datoRubro.push(valores);
           }
           if (valores.tipo_calculo == "N") {
@@ -805,7 +805,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
           let sueldoBase: any = Number(element.sueldoBase);
           let cantidad_unificado: any = Number(valores.cantidad_unificado);
           if (valores.tipo_calculo == "S") {
-            valores.valor_cantidad = eval(valores.formula);
+            valores.valor_cantidad = evaluate(valores.formula);
             element.datoRubroEgr.push(valores);
           }
           if (valores.tipo_calculo == "N") {
