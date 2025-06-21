@@ -323,7 +323,7 @@ export class AdmAnticipoComponent implements OnInit {
           let sueldoBase: any = Number(element.sueldoBase);
           let cantidad_unificado: any = Number(valores.cantidad_unificado);
           if (valores.tipo_calculo == "S") {
-            valores.valor_cantidad = evaluate(valores.formula);
+            valores.valor_cantidad = eval(valores.formula);
             element.datoRubro.push(valores);
           }
           if (valores.tipo_calculo == "N") {
@@ -351,7 +351,7 @@ export class AdmAnticipoComponent implements OnInit {
           let sueldoBase: any = Number(element.sueldoBase);
           let cantidad_unificado: any = Number(valores.cantidad_unificado);
           if (valores.tipo_calculo == "S") {
-            valores.valor_cantidad = evaluate(valores.formula);
+            valores.valor_cantidad = eval(valores.formula);
             element.datoRubroEgr.push(valores);
           }
           if (valores.tipo_calculo == "N") {

@@ -56,14 +56,14 @@ export class ButtonActiveComponent implements OnInit {
 
   validateData() {
     this.filtrado = this.filtroBoton;
-    this.pp = evaluate(this.pparams);
+    this.pp = eval(this.pparams);
     if (this.filtrado != null && this.filtrado != undefined) {
       this.groupButton.forEach((element) => {
         if (element.permiso) {
           var b: any = {};
           b = element;
           if (b.boton.datoBadge != undefined) {
-            b.pDatoBagde = evaluate("pp." + b.boton.datoBadge);
+            b.pDatoBagde = eval("pp." + b.boton.datoBadge);
           } else {
             b.pDatoBagde = "C";
           }

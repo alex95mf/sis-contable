@@ -60,7 +60,7 @@ body {
 
 .page-wrapper.mat-drawer-container{
     z-index: unset;
-    margin-top: #{$top-toolbar-height};
+    margin-top: 0;
     //min-height: calc(100vh - (#{$top-toolbar-height} + #{$footer-toolbar-height}));
     .mat-drawer-content{
         overflow: hidden;
@@ -83,23 +83,23 @@ body {
 
 .logo{
     font-weight: 700;
-    text-decoration: none;    
+    text-decoration: none;
     min-width: calc(#{$sidenav-width} - 16px);
-    color: #fff; 
+    color: #fff;
     img{
-        width: 34px;  
+        width: 34px;
     }
     &.mobile{
-        min-width: calc(#{$mini-sidenav-width} - 16px); 
+        min-width: calc(#{$mini-sidenav-width} - 16px);
         span{
             display: none;
-        } 
-    }     
+        }
+    }
 }
 
 .sidenav .mat-drawer-inner-container{
-    overflow: hidden; 
-} 
+    overflow: hidden;
+}
 
 .app{
     height: 100%;
@@ -108,7 +108,7 @@ body {
         .page-wrapper.mat-drawer-container{
             //top: 0;
             padding-bottom: $footer-toolbar-height;
-            min-height: calc(100vh - #{$top-toolbar-height}); 
+            min-height: calc(100vh - #{$top-toolbar-height});
         }
         .header{
             position: fixed;
@@ -146,7 +146,7 @@ body {
                 &.full-width{
                     width: 100%;
                 }
-            }            
+            }
         }
         &.mini{
             .footer{
@@ -154,7 +154,7 @@ body {
                 &.full-width{
                     width: 100%;
                 }
-            }            
+            }
         }
     }
     &.fixed-footer{
@@ -177,23 +177,23 @@ body {
         }
     }
     &.compact{
-        .logo{   
-            min-width: calc(#{$compact-sidenav-width} - 16px);    
+        .logo{
+            min-width: calc(#{$compact-sidenav-width} - 16px);
         }
         .sidenav{
             width: $compact-sidenav-width;
-        }  
+        }
         .user-block{
             img{
                 width: 90px;
                 height: 90px;
             }
-        }          
+        }
         .menu-item{
             .mat-button{
                 font-size: 14px;
                 padding-top: 8px;
-                padding-bottom: 8px;                
+                padding-bottom: 8px;
                 .menu-icon{
                     margin: 0;
                 }
@@ -218,11 +218,11 @@ body {
         }
     }
     &.mini{
-        .logo{   
-            min-width: calc(#{$mini-sidenav-width} - 16px); 
+        .logo{
+            min-width: calc(#{$mini-sidenav-width} - 16px);
             span{
                 display: none;
-            }   
+            }
         }
         .sidenav{
             width: $mini-sidenav-width;
@@ -254,7 +254,7 @@ body {
             .menu-title{
                 display: none;
             }
-        }        
+        }
         .menu-expand-icon{
             top: 14px;
             right: -4px;
@@ -267,11 +267,11 @@ body {
     }
     &.horizontal-menu{
         &.compact{
-            .logo{   
-                min-width: calc(#{$sidenav-width} - 16px); 
+            .logo{
+                min-width: calc(#{$sidenav-width} - 16px);
                 span{
                     display: block;
-                }   
+                }
             }
             .horizontal-menu-item{
                 .mat-button{
@@ -310,11 +310,11 @@ body {
             }
         }
         &.mini{
-            .logo{   
-                min-width: calc(#{$sidenav-width} - 16px); 
+            .logo{
+                min-width: calc(#{$sidenav-width} - 16px);
                 span{
                     display: block;
-                }   
+                }
             }
             .horizontal-menu-item{
                 .mat-button{
@@ -357,8 +357,8 @@ body {
         }
     }
 }
-.mat-list .mat-list-item, 
-.mat-nav-list .mat-list-item, 
+.mat-list .mat-list-item,
+.mat-nav-list .mat-list-item,
 .mat-selection-list .mat-list-item,
 .mat-menu-item{
     font-size: 14px !important;
@@ -448,7 +448,7 @@ body {
         background: #cccccc;
     }
     &:active{
-        background: #888888; 
+        background: #888888;
     }
 }
 ::-webkit-scrollbar-track {
@@ -459,7 +459,7 @@ body {
         background: #666666;
     }
     &:active{
-        background: #333333; 
+        background: #333333;
     }
 }
 ::-webkit-scrollbar-corner {
