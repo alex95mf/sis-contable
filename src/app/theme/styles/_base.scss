@@ -57,10 +57,13 @@ body {
     cursor: -moz-grab;
     cursor: -webkit-grab;
 }
+.mat-drawer-container{
+  margin-top: 0px !important;
+}
 
 .page-wrapper.mat-drawer-container{
     z-index: unset;
-    margin-top: 0;
+    margin-top: #{$top-toolbar-height};
     //min-height: calc(100vh - (#{$top-toolbar-height} + #{$footer-toolbar-height}));
     .mat-drawer-content{
         overflow: hidden;
